@@ -1,0 +1,41 @@
+{
+    "time": "2025-06-20 04:00:45",
+    "function": "detect_project_request",
+    "method": "GET",
+    "query": {
+        "ajax": "1"
+    },
+    "server": {
+        "DOCUMENT_ROOT": "R:\\Adev\\200  -  test\\AdminLicence-4.5.1\\public",
+        "REMOTE_ADDR": "127.0.0.1",
+        "REMOTE_PORT": "61402",
+        "SERVER_SOFTWARE": "PHP 8.2.12 Development Server",
+        "SERVER_PROTOCOL": "HTTP\/1.1",
+        "SERVER_NAME": "127.0.0.1",
+        "SERVER_PORT": "8000",
+        "REQUEST_URI": "\/install\/ajax\/detect_project.php?ajax=1",
+        "REQUEST_METHOD": "GET",
+        "SCRIPT_NAME": "\/install\/ajax\/detect_project.php",
+        "SCRIPT_FILENAME": "R:\\Adev\\200  -  test\\AdminLicence-4.5.1\\public\\install\\ajax\\detect_project.php",
+        "PHP_SELF": "\/install\/ajax\/detect_project.php",
+        "QUERY_STRING": "ajax=1",
+        "HTTP_HOST": "127.0.0.1:8000",
+        "HTTP_CONNECTION": "keep-alive",
+        "HTTP_SEC_CH_UA_PLATFORM": "\"Windows\"",
+        "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
+        "HTTP_USER_AGENT": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/134.0.0.0 Safari\/537.36 OPR\/119.0.0.0 (Edition std-1)",
+        "HTTP_ACCEPT": "application\/json, text\/javascript, *\/*; q=0.01",
+        "HTTP_SEC_CH_UA": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Opera GX\";v=\"119\"",
+        "HTTP_SEC_CH_UA_MOBILE": "?0",
+        "HTTP_SEC_FETCH_SITE": "same-origin",
+        "HTTP_SEC_FETCH_MODE": "cors",
+        "HTTP_SEC_FETCH_DEST": "empty",
+        "HTTP_REFERER": "http:\/\/127.0.0.1:8000\/install\/index.php?step=2",
+        "HTTP_ACCEPT_ENCODING": "gzip, deflate, br, zstd",
+        "HTTP_ACCEPT_LANGUAGE": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
+        "HTTP_COOKIE": "PHPSESSID=136rei8taoan5mpsacdhd619b5; __next_hmr_refresh_hash__=1186; locale=eyJpdiI6IlFaUWRibzl0MkxWQ3NOYklQY0pGOEE9PSIsInZhbHVlIjoiUkt2amQrSzBWMm9BeWltMWdjblk0aGdtRkJyVmFjTmhGTmNBUEU4L2dsMUxKZmpBOXN3S3A0bFNXM3ZianNjTiIsIm1hYyI6IjE0NTA2NjhiMDJkOTUxMjYwYTA5M2I2Y2M5ZjI1ZjYzMmUxYTI2OGYzZWJlYmEwNmQ3ZmFkN2Q5ZGRhMGQ2NDciLCJ0YWciOiIifQ%3D%3D",
+        "REQUEST_TIME_FLOAT": 1750384845.937232,
+        "REQUEST_TIME": 1750384845
+    }
+}
+

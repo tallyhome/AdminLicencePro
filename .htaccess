@@ -1,0 +1,28 @@
+RewriteEngine On
+
+# Permettre l'accès direct aux scripts d'installation
+<FilesMatch "install\.php$">
+    Require all granted
+    SetHandler application/x-httpd-php
+</FilesMatch>
+
+# Rediriger toutes les requêtes vers public
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ public/$1 [L,QSA]
+
+# Protection des fichiers sensibles
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Désactiver l'affichage du contenu des répertoires
+Options -Indexes
+
+# Protection XSS
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

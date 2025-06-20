@@ -1,0 +1,439 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\SerialKey;
+use App\Models\Setting;
+use App\Services\LicenceService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
+
+class LicenseController extends Controller
+{
+    /**
+     * Service de licence
+     *
+     * @var LicenceService
+     */
+    protected $licenceService;
+
+    /**
+     * Constructeur
+     *
+     * @param LicenceService $licenceService
+     */
+    public function __construct(LicenceService $licenceService)
+    {
+        $this->licenceService = $licenceService;
+    }
+
+    /**
+     * Afficher la page d'informations de licence
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        // Récupérer la clé de licence actuelle depuis le fichier .env
+        $licenseKey = env('INSTALLATION_LICENSE_KEY');
+        
+        // Récupérer la fréquence de vérification
+        $checkFrequency = Setting::get('license_check_frequency', 5);
+        $lastCheck = Setting::get('last_license_check');
+        
+        // Vérifier la validité de la licence directement avec le serveur distant
+        try {
+            // Forcer la validation de la licence si nécessaire ou si la session est vide
+            if (empty(session('license_details')) || empty($lastCheck)) {
+                // Vérifier la licence avec le serveur distant
+                $licenseDetails = $this->verifyLicenseWithServer($licenseKey);
+                $isValid = $licenseDetails['valid'] ?? false;
+            } else {
+                // Utiliser les données en cache
+                $isValid = Setting::get('license_valid', false);
+                $licenseDetails = session('license_details', []);
+            }
+        } catch (\Exception $e) {
+            // En cas d'erreur, utiliser les informations déjà en cache
+            Log::error('Erreur lors de la vérification de la licence: ' . $e->getMessage());
+            $isValid = Setting::get('license_valid', false);
+            $licenseDetails = [];
+        }
+        
+        return view('admin.settings.license', [
+            'licenseKey' => $licenseKey,
+            'checkFrequency' => $checkFrequency,
+            'lastCheck' => $lastCheck,
+            'isValid' => $isValid,
+            'licenseDetails' => $licenseDetails
+        ]);
+    }
+
+    /**
+     * Mettre à jour les paramètres de licence
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateSettings(Request $request)
+    {
+        // Valider les données
+        $validated = $request->validate([
+            'license_key' => 'nullable|string|max:100',
+            'license_check_frequency' => 'required|integer|min:1|max:30'
+        ]);
+        
+        // Récupérer les valeurs
+        $licenseKey = $validated['license_key'];
+        $checkFrequency = $validated['license_check_frequency'];
+        
+        try {
+            // Mettre à jour la fréquence de vérification
+            Setting::set('license_check_frequency', $checkFrequency);
+            
+            // Mettre à jour la clé dans le fichier .env si elle a changé
+            $currentKey = env('INSTALLATION_LICENSE_KEY');
+            if ($licenseKey !== $currentKey) {
+                $this->updateEnvFile('INSTALLATION_LICENSE_KEY', $licenseKey);
+                
+                // Vider tous les caches
+                $this->clearCache();
+                
+                // Recharger les variables d'environnement
+                $this->reloadEnv();
+            }
+            
+            // Vérifier la validité de la licence
+            $licenseDetails = $this->verifyLicenseWithServer($licenseKey);
+            $isValid = $licenseDetails['valid'] ?? false;
+            
+            // Définir le message de retour en fonction de la validité
+            if ($isValid) {
+                return redirect()->route('admin.settings.license')
+                    ->with('success', 'Les paramètres ont été mis à jour avec succès et la licence est valide.');
+            } else {
+                $message = $licenseDetails['message'] ?? 'Clé de licence non valide';
+                return redirect()->route('admin.settings.license')
+                    ->with('warning', 'Les paramètres ont été mis à jour mais la licence n\'est pas valide: ' . $message);
+            }
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la validation de la licence: ' . $e->getMessage());
+            
+            return redirect()->route('admin.settings.license')
+                ->with('error', 'La clé a été enregistrée mais une erreur est survenue lors de sa validation: ' . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Forcer la vérification de licence
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function forceCheck()
+    {
+        try {
+            // Vider tous les caches de licence
+            $this->clearCache();
+            
+            // Forcer le rechargement des variables d'environnement
+            $this->reloadEnv();
+            
+            // Récupérer la clé de licence actuelle
+            $licenseKey = env('INSTALLATION_LICENSE_KEY');
+            
+            if (empty($licenseKey)) {
+                return redirect()->route('admin.settings.license')
+                    ->with('error', 'Aucune clé de licence n\'est configurée.');
+            }
+            
+            // Vider les sessions
+            session()->forget('license_check_session_' . session()->getId());
+            session()->forget('license_check_result');
+            session()->forget('license_details');
+            
+            // Valider avec le serveur distant
+            $domain = request()->getHost();
+            $ipAddress = $_SERVER['SERVER_ADDR'] ?? $_SERVER['REMOTE_ADDR'] ?? gethostbyname(gethostname());
+            
+            // Forcer une validation fraîche
+            $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
+            $isValid = isset($result['valid']) && $result['valid'] === true;
+            
+            // Mettre à jour les settings
+            Setting::set('license_valid', $isValid);
+            Setting::set('license_status', $result['status'] ?? ($isValid ? 'active' : 'invalid'));
+            Setting::set('last_license_check', now()->toDateTimeString());
+            
+            if (isset($result['expires_at'])) {
+                Setting::set('license_expires_at', $result['expires_at']);
+            }
+            
+            // Stocker les détails dans la session
+            session(['license_details' => [
+                'key' => $licenseKey,
+                'status' => $result['status'] ?? ($isValid ? 'active' : 'invalid'),
+                'expires_at' => $result['expires_at'] ?? null,
+                'domain' => $result['domain'] ?? $domain,
+                'ip_address' => $result['ip_address'] ?? $ipAddress,
+                'valid' => $isValid,
+                'message' => $result['message'] ?? '',
+                'last_check' => now()->toDateTimeString()
+            ]]);
+            session(['license_valid' => $isValid]);
+            session(['license_status' => $result['status'] ?? ($isValid ? 'active' : 'invalid')]);
+            
+            // Vider tous les caches une seconde fois pour s'assurer que les valeurs mises à jour sont utilisées
+            Artisan::call('config:clear');
+            Cache::flush();
+            
+            // Message de réussite ou d'erreur selon le résultat
+            if ($isValid) {
+                return redirect()->route('admin.settings.license')
+                    ->with('success', 'La licence a été vérifiée avec succès.');
+            } else {
+                return redirect()->route('admin.settings.license')
+                    ->with('warning', 'La licence n\'est pas valide: ' . ($result['message'] ?? 'Raison inconnue'));
+            }
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la vérification de licence: ' . $e->getMessage());
+            
+            return redirect()->route('admin.settings.license')
+                ->with('error', 'Une erreur est survenue lors de la vérification de la licence: ' . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Mettre à jour le fichier .env
+     *
+     * @param string $key
+     * @param string $value
+     * @return bool
+     */
+    private function updateEnvFile($key, $value)
+    {
+        $path = base_path('.env');
+        
+        if (File::exists($path)) {
+            $content = File::get($path);
+            
+            // Si la clé existe déjà
+            if (strpos($content, $key . '=') !== false) {
+                $content = preg_replace('/^' . $key . '=.*$/m', $key . '=' . $value, $content);
+            } else {
+                $content .= "\n" . $key . '=' . $value;
+            }
+            
+            File::put($path, $content);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Vider tous les caches (configuration, application, etc.)
+     *
+     * @return void
+     */
+    private function clearCache()
+    {
+        // Vider le cache de l'application
+        Artisan::call('cache:clear');
+        
+        // Vider le cache de configuration
+        Artisan::call('config:clear');
+        
+        // Vider le cache de route
+        Artisan::call('route:clear');
+        
+        // Vider le cache de vue
+        Artisan::call('view:clear');
+        
+        // Vider le cache OPcache si disponible
+        if (function_exists('opcache_reset')) {
+            opcache_reset();
+        }
+        
+        // Vider le cache de licence
+        Cache::forget('license_validation');
+        Cache::forget('license_check_session_' . session()->getId());
+    }
+    
+    /**
+     * Forcer le rechargement des variables d'environnement
+     *
+     * @return void
+     */
+    private function reloadEnv()
+    {
+        // Clear config cache
+        Artisan::call('config:clear');
+        
+        // Reload environment variables
+        $dotenv = \Dotenv\Dotenv::createImmutable(base_path());
+        $dotenv->load();
+    }
+    
+    /**
+     * Récupérer les détails d'une licence depuis le serveur distant
+     *
+     * @param string $licenseKey
+     * @return array
+     */
+    private function getLicenseDetails($licenseKey)
+    {
+        if (empty($licenseKey)) {
+            return [
+                'valid' => false,
+                'status' => 'missing',
+                'message' => 'Aucune clé de licence configurée'
+            ];
+        }
+        
+        $domain = request()->getHost();
+        $ipAddress = $_SERVER['SERVER_ADDR'] ?? $_SERVER['REMOTE_ADDR'] ?? gethostbyname(gethostname());
+        
+        // Valider avec le service de licence
+        $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
+        $isValid = isset($result['valid']) && $result['valid'] === true;
+        
+        return [
+            'key' => $licenseKey,
+            'valid' => $isValid,
+            'status' => $result['status'] ?? ($isValid ? 'active' : 'invalid'),
+            'message' => $result['message'] ?? '',
+            'domain' => $result['domain'] ?? $domain,
+            'ip_address' => $result['ip_address'] ?? $ipAddress,
+            'expires_at' => $result['expires_at'] ?? null
+        ];
+    }
+    
+    /**
+     * Vérifie une clé de licence avec le serveur distant et met à jour les settings
+     * 
+     * @param string $licenseKey
+     * @param bool $updateSettings Mettre à jour les settings avec les résultats
+     * @return array Détails de la licence et statut
+     */
+    private function verifyLicenseWithServer($licenseKey, $updateSettings = true)
+    {
+        if (empty($licenseKey)) {
+            return [
+                'valid' => false,
+                'status' => 'missing',
+                'message' => 'Aucune clé de licence configurée'
+            ];
+        }
+        
+        // Récupérer les détails depuis l'API
+        $licenseDetails = $this->getLicenseDetails($licenseKey);
+        $isValid = $licenseDetails['valid'] ?? false;
+        
+        if ($updateSettings) {
+            // Mettre à jour les settings
+            Setting::set('license_valid', $isValid);
+            Setting::set('license_status', $licenseDetails['status'] ?? 'invalid');
+            Setting::set('last_license_check', now()->toDateTimeString());
+            
+            if (isset($licenseDetails['expires_at'])) {
+                Setting::set('license_expires_at', $licenseDetails['expires_at']);
+            }
+            
+            // Stocker les détails dans la session
+            session(['license_details' => $licenseDetails]);
+            session(['license_valid' => $isValid]);
+            session(['license_status' => $licenseDetails['status'] ?? 'invalid']);
+        }
+        
+        return $licenseDetails;
+    }
+    
+    /**
+     * Afficher la page de recherche de clés de licence
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $results = null;
+        
+        if ($query) {
+            $results = SerialKey::where('serial_key', 'like', "%{$query}%")
+                ->with('project')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+        
+        return view('admin.license-search', compact('results'));
+    }
+    
+    /**
+     * Afficher les détails d'une clé de licence (pour l'affichage modal)
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function details($id)
+    {
+        $key = SerialKey::with(['project', 'histories' => function($query) {
+            $query->orderBy('created_at', 'desc')->limit(10);
+        }])->findOrFail($id);
+        
+        return View::make('admin.partials.license-details', compact('key'))->render();
+    }
+    
+    /**
+     * Suspendre une clé de licence
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function suspend($id)
+    {
+        $key = SerialKey::findOrFail($id);
+        $this->licenceService->suspendKey($key);
+        
+        return redirect()->back()->with('success', 'La clé de licence a été suspendue avec succès.');
+    }
+    
+    /**
+     * Révoquer une clé de licence
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function revoke($id)
+    {
+        $key = SerialKey::findOrFail($id);
+        $this->licenceService->revokeKey($key);
+        
+        return redirect()->back()->with('success', 'La clé de licence a été révoquée avec succès.');
+    }
+    
+    /**
+     * Activer une clé de licence
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function activate($id)
+    {
+        $key = SerialKey::findOrFail($id);
+        $result = $this->licenceService->activateKey($key);
+        
+        if ($result) {
+            return redirect()->back()->with('success', 'La clé de licence a été activée avec succès.');
+        } else {
+            return redirect()->back()->with('error', 'Impossible d\'activer une clé révoquée.');
+        }
+    }
+}
