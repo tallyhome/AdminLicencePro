@@ -40,54 +40,8 @@ if (session('license_details')) {
 
     <div class="row">
         <div class="col-12">
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
-                    <div class="alert-message">{!! nl2br(e(session('success'))) !!}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorAlert">
-                    <div class="alert-message">{!! nl2br(e(session('error'))) !!}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            
-            @if(session('success') || session('error') || session('warning'))
-                <script>
-                    // Affichage immédiat des alertes
-                    document.addEventListener('DOMContentLoaded', function() {
-                        console.log('Initialisation des alertes');
-                        
-                        // Afficher les alertes immédiatement
-                        var alerts = document.querySelectorAll('.alert');
-                        console.log('Nombre d\'alertes trouvées:', alerts.length);
-                        
-                        alerts.forEach(function(alert) {
-                            // S'assurer que l'alerte est visible
-                            alert.style.display = 'block';
-                            alert.classList.add('show');
-                            console.log('Alerte affichée:', alert.textContent);
-                        });
-                        
-                        // Auto-fermeture après 8 secondes
-                        if (alerts.length > 0) {
-                            setTimeout(function() {
-                                alerts.forEach(function(alert) {
-                                    try {
-                                        var bsAlert = new bootstrap.Alert(alert);
-                                        bsAlert.close();
-                                        console.log('Alerte fermée automatiquement');
-                                    } catch (e) {
-                                        console.error('Erreur lors de la fermeture de l\'alerte:', e);
-                                    }
-                                });
-                            }, 8000);
-                        }
-                    });
-                </script>
-            @endif
+            {{-- Les alertes de session sont gérées par le layout principal app.blade.php --}}
+            {{-- Suppression des alertes dupliquées pour éviter l'affichage double --}}
 
             <div class="card">
                 <div class="card-header">
@@ -479,16 +433,8 @@ if (session('license_details')) {
             console.log('Navigation libre - Bypass activé ou licence valide');
         }
 
-        // Auto-dismiss pour les alertes de succès après 5 secondes
-        const successAlerts = document.querySelectorAll('.alert-success');
-        if (successAlerts.length > 0) {
-            setTimeout(function() {
-                successAlerts.forEach(function(alert) {
-                    const bsAlert = new bootstrap.Alert(alert);
-                    bsAlert.close();
-                });
-            }, 5000); // 5000ms = 5 secondes
-        }
+        // Les alertes de session sont déjà gérées par le script précédent
+        // Pas besoin d'auto-dismiss supplémentaire pour éviter les doublons
         
         // Initialiser les tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

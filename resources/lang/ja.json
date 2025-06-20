@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "キーで検索"
+        "title": "シリアルキー",
+        "create_key": "キーを作成",
+        "search_by_key": "キーで検索",
+        "status": "ステータス",
+        "project": "プロジェクト",
+        "key_usage": "使用状況"
+    },
+    "settings_license": {
+        "license": {
+            "title": "ライセンス管理",
+            "info_title": "ライセンス情報",
+            "installation_key": "インストールライセンスキー",
+            "copy_key": "キーをコピー",
+            "status": "ライセンスステータス",
+            "status_label": "ステータス",
+            "valid": "有効",
+            "invalid": "無効",
+            "expiry_date": "有効期限",
+            "expiry_date_label": "有効期限",
+            "key_label": "ライセンスキー",
+            "expires_on": "期限切れ",
+            "last_check": "最終チェック",
+            "never": "なし",
+            "check_now": "今すぐチェック",
+            "details": "ライセンス詳細",
+            "domain": "ドメイン",
+            "ip_address": "IPアドレス",
+            "not_defined": "未定義",
+            "status_active": "アクティブ",
+            "status_suspended": "停止中",
+            "status_revoked": "取り消し済み",
+            "no_details": "このライセンスキーの詳細情報は利用できません。",
+            "configuration": "ライセンス設定",
+            "key_saved_in_env": "このキーはアプリケーションの.envファイルに保存されます。",
+            "env_not_exists": ".envファイルがまだ存在しません。自動的に作成されます。",
+            "save_settings": "設定を保存",
+            "manual_verification": "手動検証",
+            "manual_verification_desc": "インストールライセンスの即座チェックを強制実行できます。これにより有効性ステータスと関連情報が更新されます。",
+            "debug_info": "デバッグ情報",
+            "detected_value": "検出された値",
+            "not_found": "見つかりません",
+            "http_code": "HTTPコード",
+            "raw_api_response": "生のAPIレスポンス",
+            "no_response": "レスポンスなし",
+            "unviewable_format": "表示不可能な形式",
+            "auto_dismiss_alerts": "5秒後にアラートを自動的に閉じる",
+            "copied": "コピーしました！",
+            "blocked_navigation": "ナビゲーションがブロックされました"
+        }
     }
 }

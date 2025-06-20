@@ -1033,7 +1033,8 @@
             "no_response": "Aucune réponse",
             "unviewable_format": "Format non affichable",
             "auto_dismiss_alerts": "Auto-dismiss des alertes après 5 secondes",
-            "copied": "Copié !"
+            "copied": "Copié !",
+            "key_label": "Clé de licence"
         }
     },
     "support": {

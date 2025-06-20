@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "Ricerca per chiave"
+        "title": "Chiavi seriali",
+        "create_key": "Crea chiave",
+        "search_by_key": "Ricerca per chiave",
+        "status": "Stato",
+        "project": "Progetto",
+        "key_usage": "Utilizzo"
+    },
+    "settings_license": {
+        "license": {
+            "title": "Gestione licenze",
+            "info_title": "Informazioni licenza",
+            "installation_key": "Chiave di licenza di installazione",
+            "copy_key": "Copia chiave",
+            "status": "Stato licenza",
+            "status_label": "Stato",
+            "valid": "Valida",
+            "invalid": "Non valida",
+            "expiry_date": "Data di scadenza",
+            "expiry_date_label": "Data di scadenza",
+            "key_label": "Chiave di licenza",
+            "expires_on": "Scade il",
+            "last_check": "Ultimo controllo",
+            "never": "Mai",
+            "check_now": "Controlla ora",
+            "details": "Dettagli licenza",
+            "domain": "Dominio",
+            "ip_address": "Indirizzo IP",
+            "not_defined": "Non definito",
+            "status_active": "Attivo",
+            "status_suspended": "Sospeso",
+            "status_revoked": "Revocato",
+            "no_details": "Nessuna informazione dettagliata disponibile per questa chiave di licenza.",
+            "configuration": "Configurazione licenza",
+            "key_saved_in_env": "Questa chiave verrà salvata nel file .env della tua applicazione.",
+            "env_not_exists": "Il file .env non esiste ancora. Verrà creato automaticamente.",
+            "save_settings": "Salva impostazioni",
+            "manual_verification": "Verifica manuale",
+            "manual_verification_desc": "Puoi forzare una verifica immediata della licenza di installazione. Questo aggiornerà lo stato di validità e le informazioni associate.",
+            "debug_info": "Informazioni di debug",
+            "detected_value": "Valore rilevato",
+            "not_found": "Non trovato",
+            "http_code": "Codice HTTP",
+            "raw_api_response": "Risposta API grezza",
+            "no_response": "Nessuna risposta",
+            "unviewable_format": "Formato non visualizzabile",
+            "auto_dismiss_alerts": "Chiudi automaticamente gli avvisi dopo 5 secondi",
+            "copied": "Copiato!",
+            "blocked_navigation": "Navigazione bloccata"
+        }
     }
 }

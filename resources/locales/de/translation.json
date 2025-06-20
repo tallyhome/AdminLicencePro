@@ -729,7 +729,8 @@
             "api_valid_service_invalid": "Die API zeigt an, dass die Lizenz gültig ist, aber der Lizenzdienst betrachtet sie als ungültig. Mögliches Konfigurationsproblem.",
             "license_invalid_with_api_message": "Die Lizenz ist laut API und Dienst nicht gültig. API-Nachricht: :message",
             "license_details_header": "Lizenzdetails:",
-            "verification_error": "Bei der Überprüfung der Lizenz ist ein Fehler aufgetreten: :error"
+            "verification_error": "Bei der Überprüfung der Lizenz ist ein Fehler aufgetreten: :error",
+            "key_label": "Lizenzschlüssel"
         }
     },
     "optimization": {

@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "Zoeken op sleutel"
+        "title": "Seriesleutels",
+        "create_key": "Sleutel maken",
+        "search_by_key": "Zoeken op sleutel",
+        "status": "Status",
+        "project": "Project",
+        "key_usage": "Gebruik"
+    },
+    "settings_license": {
+        "license": {
+            "title": "Licentiebeheer",
+            "info_title": "Licentie-informatie",
+            "installation_key": "Installatie licentiesleutel",
+            "copy_key": "Sleutel kopiëren",
+            "status": "Licentiestatus",
+            "status_label": "Status",
+            "valid": "Geldig",
+            "invalid": "Ongeldig",
+            "expiry_date": "Vervaldatum",
+            "expiry_date_label": "Vervaldatum",
+            "key_label": "Licentiesleutel",
+            "expires_on": "Verloopt op",
+            "last_check": "Laatste controle",
+            "never": "Nooit",
+            "check_now": "Nu controleren",
+            "details": "Licentiedetails",
+            "domain": "Domein",
+            "ip_address": "IP-adres",
+            "not_defined": "Niet gedefinieerd",
+            "status_active": "Actief",
+            "status_suspended": "Opgeschort",
+            "status_revoked": "Ingetrokken",
+            "no_details": "Geen gedetailleerde informatie beschikbaar voor deze licentiesleutel.",
+            "configuration": "Licentieconfiguratie",
+            "key_saved_in_env": "Deze sleutel wordt opgeslagen in het .env-bestand van uw applicatie.",
+            "env_not_exists": "Het .env-bestand bestaat nog niet. Het wordt automatisch aangemaakt.",
+            "save_settings": "Instellingen opslaan",
+            "manual_verification": "Handmatige verificatie",
+            "manual_verification_desc": "U kunt een onmiddellijke verificatie van de installatielicentie forceren. Dit zal de geldigheidsstatusn en bijbehorende informatie bijwerken.",
+            "debug_info": "Debug-informatie",
+            "detected_value": "Gedetecteerde waarde",
+            "not_found": "Niet gevonden",
+            "http_code": "HTTP-code",
+            "raw_api_response": "Ruwe API-respons",
+            "no_response": "Geen respons",
+            "unviewable_format": "Niet-zichtbaar formaat",
+            "auto_dismiss_alerts": "Waarschuwingen automatisch sluiten na 5 seconden",
+            "copied": "Gekopieerd!",
+            "blocked_navigation": "Navigatie geblokkeerd"
+        }
     }
 }

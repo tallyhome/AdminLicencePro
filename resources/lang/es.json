@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "Búsqueda por clave"
+        "title": "Claves de serie",
+        "create_key": "Crear clave",
+        "search_by_key": "Búsqueda por clave",
+        "status": "Estado",
+        "project": "Proyecto",
+        "key_usage": "Uso"
+    },
+    "settings_license": {
+        "license": {
+            "title": "Gestión de licencias",
+            "info_title": "Información de licencia",
+            "installation_key": "Clave de licencia de instalación",
+            "copy_key": "Copiar clave",
+            "status": "Estado de la licencia",
+            "status_label": "Estado",
+            "valid": "Válida",
+            "invalid": "No válida",
+            "expiry_date": "Fecha de expiración",
+            "expiry_date_label": "Fecha de expiración",
+            "key_label": "Clave de licencia",
+            "expires_on": "Expira el",
+            "last_check": "Última verificación",
+            "never": "Nunca",
+            "check_now": "Verificar ahora",
+            "details": "Detalles de la licencia",
+            "domain": "Dominio",
+            "ip_address": "Dirección IP",
+            "not_defined": "No definido",
+            "status_active": "Activo",
+            "status_suspended": "Suspendido",
+            "status_revoked": "Revocado",
+            "no_details": "No hay información detallada disponible para esta clave de licencia.",
+            "configuration": "Configuración de licencia",
+            "key_saved_in_env": "Esta clave se guardará en el archivo .env de su aplicación.",
+            "env_not_exists": "El archivo .env aún no existe. Se creará automáticamente.",
+            "save_settings": "Guardar configuración",
+            "manual_verification": "Verificación manual",
+            "manual_verification_desc": "Puede forzar una verificación inmediata de la licencia de instalación. Esto actualizará el estado de validez y la información asociada.",
+            "debug_info": "Información de depuración",
+            "detected_value": "Valor detectado",
+            "not_found": "No encontrado",
+            "http_code": "Código HTTP",
+            "raw_api_response": "Respuesta API sin procesar",
+            "no_response": "Sin respuesta",
+            "unviewable_format": "Formato no visualizable",
+            "auto_dismiss_alerts": "Descartar alertas automáticamente después de 5 segundos",
+            "copied": "¡Copiado!",
+            "blocked_navigation": "Navegación bloqueada"
+        }
     }
 }

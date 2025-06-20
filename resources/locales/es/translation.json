@@ -750,7 +750,8 @@
             "api_valid_service_invalid": "La API indica que la licencia es válida, pero el servicio de licencias la considera inválida. Posible problema de configuración.",
             "license_invalid_with_api_message": "La licencia no es válida según la API y el servicio. Mensaje de la API: :message",
             "license_details_header": "Detalles de la licencia:",
-            "verification_error": "Se produjo un error al verificar la licencia: :error"
+            "verification_error": "Se produjo un error al verificar la licencia: :error",
+            "key_label": "Clave de licencia"
         }
     },
     "optimization": {

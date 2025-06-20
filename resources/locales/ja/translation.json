@@ -301,7 +301,8 @@
       "no_response": "応答なし",
       "unviewable_format": "表示不可能な形式",
       "auto_dismiss_alerts": "5秒後にアラートを自動的に閉じる",
-      "copied": "コピーしました！"
+      "copied": "コピーしました！",
+      "key_label": "ライセンスキー"
     }
   },
   "optimization": {

@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "Поиск по ключу"
+        "title": "Серийные ключи",
+        "create_key": "Создать ключ",
+        "search_by_key": "Поиск по ключу",
+        "status": "Статус",
+        "project": "Проект",
+        "key_usage": "Использование"
+    },
+    "settings_license": {
+        "license": {
+            "title": "Управление лицензиями",
+            "info_title": "Информация о лицензии",
+            "installation_key": "Ключ лицензии установки",
+            "copy_key": "Копировать ключ",
+            "status": "Статус лицензии",
+            "status_label": "Статус",
+            "valid": "Действительна",
+            "invalid": "Недействительна",
+            "expiry_date": "Дата истечения",
+            "expiry_date_label": "Дата истечения",
+            "key_label": "Лицензионный ключ",
+            "expires_on": "Истекает",
+            "last_check": "Последняя проверка",
+            "never": "Никогда",
+            "check_now": "Проверить сейчас",
+            "details": "Детали лицензии",
+            "domain": "Домен",
+            "ip_address": "IP-адрес",
+            "not_defined": "Не определено",
+            "status_active": "Активна",
+            "status_suspended": "Приостановлена",
+            "status_revoked": "Отозвана",
+            "no_details": "Подробная информация для этого лицензионного ключа недоступна.",
+            "configuration": "Конфигурация лицензии",
+            "key_saved_in_env": "Этот ключ будет сохранен в файле .env вашего приложения.",
+            "env_not_exists": "Файл .env еще не существует. Он будет создан автоматически.",
+            "save_settings": "Сохранить настройки",
+            "manual_verification": "Ручная проверка",
+            "manual_verification_desc": "Вы можете принудительно выполнить немедленную проверку лицензии установки. Это обновит статус действительности и связанную информацию.",
+            "debug_info": "Отладочная информация",
+            "detected_value": "Обнаруженное значение",
+            "not_found": "Не найдено",
+            "http_code": "HTTP-код",
+            "raw_api_response": "Необработанный ответ API",
+            "no_response": "Нет ответа",
+            "unviewable_format": "Непросматриваемый формат",
+            "auto_dismiss_alerts": "Автоматически закрывать предупреждения через 5 секунд",
+            "copied": "Скопировано!",
+            "blocked_navigation": "Навигация заблокирована"
+        }
     }
 }

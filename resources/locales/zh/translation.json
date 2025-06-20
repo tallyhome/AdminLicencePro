@@ -410,7 +410,8 @@
                 "no_response": "无响应",
                 "unviewable_format": "不可查看的格式",
                 "auto_dismiss_alerts": "5秒后自动关闭警报",
-                "copied": "已复制！"
+                "copied": "已复制！",
+                "key_label": "许可证密钥"
             }
         },
         "licence_documentation": "密钥文档",

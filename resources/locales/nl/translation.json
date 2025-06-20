@@ -697,7 +697,8 @@
             "api_valid_service_invalid": "De API geeft aan dat de licentie geldig is, maar de licentieservice beschouwt deze als ongeldig. Mogelijk configuratieprobleem.",
             "license_invalid_with_api_message": "De licentie is niet geldig volgens de API en service. API-bericht: :message",
             "license_details_header": "Licentiedetails:",
-            "verification_error": "Er is een fout opgetreden bij het verifiëren van de licentie: :error"
+            "verification_error": "Er is een fout opgetreden bij het verifiëren van de licentie: :error",
+            "key_label": "Licentiesleutel"
         }
     },
     "optimization": {

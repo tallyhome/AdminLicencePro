@@ -782,7 +782,8 @@
             "no_response": "Нет ответа",
             "unviewable_format": "Неотображаемый формат",
             "auto_dismiss_alerts": "Автоматически закрывать оповещения через 5 секунд",
-            "copied": "Скопировано!"
+            "copied": "Скопировано!",
+            "key_label": "Лицензионный ключ"
         }
     },
     "settings_security": {

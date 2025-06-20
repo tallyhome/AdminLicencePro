@@ -216,6 +216,7 @@
         "invalid": "Non valide",
         "expiry_date": "Date d'expiration",
         "expiry_date_label": "Date d'expiration",
+        "key_label": "Clé de licence",
         "expires_on": "Expire le",
         "last_check": "Dernière vérification",
         "never": "Jamais",

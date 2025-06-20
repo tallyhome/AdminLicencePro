@@ -890,7 +890,8 @@
             "no_response": "No response",
             "unviewable_format": "Unviewable format",
             "auto_dismiss_alerts": "Auto-dismiss alerts after 5 seconds",
-            "copied": "Copied!"
+            "copied": "Copied!",
+            "key_label": "License Key"
         }
     },
     "optimization": {

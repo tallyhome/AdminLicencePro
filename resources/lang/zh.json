@@ -168,8 +168,54 @@
         }
     },
     "serial_keys": {
-        "title": "Serial Keys",
-        "create_key": "Create Key",
-        "search_by_key": "按键搜索"
+        "title": "序列密钥",
+        "create_key": "创建密钥",
+        "search_by_key": "按键搜索",
+        "status": "状态",
+        "project": "项目",
+        "key_usage": "使用情况"
+    },
+    "settings_license": {
+        "license": {
+            "title": "许可证管理",
+            "info_title": "许可证信息",
+            "installation_key": "安装许可证密钥",
+            "copy_key": "复制密钥",
+            "status": "许可证状态",
+            "status_label": "状态",
+            "valid": "有效",
+            "invalid": "无效",
+            "expiry_date": "到期日期",
+            "expiry_date_label": "到期日期",
+            "key_label": "许可证密钥",
+            "expires_on": "到期于",
+            "last_check": "最后检查",
+            "never": "从未",
+            "check_now": "立即检查",
+            "details": "许可证详情",
+            "domain": "域名",
+            "ip_address": "IP地址",
+            "not_defined": "未定义",
+            "status_active": "活跃",
+            "status_suspended": "已暂停",
+            "status_revoked": "已撤销",
+            "no_details": "此许可证密钥的详细信息不可用。",
+            "configuration": "许可证配置",
+            "key_saved_in_env": "此密钥将保存在您应用程序的.env文件中。",
+            "env_not_exists": ".env文件尚不存在。它将自动创建。",
+            "save_settings": "保存设置",
+            "manual_verification": "手动验证",
+            "manual_verification_desc": "您可以强制立即检查安装许可证。这将更新有效性状态和相关信息。",
+            "debug_info": "调试信息",
+            "detected_value": "检测到的值",
+            "not_found": "未找到",
+            "http_code": "HTTP代码",
+            "raw_api_response": "原始API响应",
+            "no_response": "无响应",
+            "unviewable_format": "不可查看的格式",
+            "auto_dismiss_alerts": "5秒后自动关闭警报",
+            "copied": "已复制！",
+            "blocked_navigation": "导航被阻止"
+        }
     }
 }

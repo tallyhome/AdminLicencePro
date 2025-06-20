@@ -42,8 +42,18 @@ class LicenseController extends Controller
      */
     public function index()
     {
-        // Récupérer la clé de licence actuelle
+        // Récupérer la clé de licence actuelle depuis le .env
         $licenseKey = env('INSTALLATION_LICENSE_KEY', '');
+        
+        // Si aucune clé n'est trouvée dans l'environnement, essayer de la récupérer depuis les settings
+        if (empty($licenseKey)) {
+            $licenseKey = Setting::get('license_key', '');
+        }
+        
+        // Si une clé est trouvée dans le .env mais pas dans les settings, la sauvegarder
+        if (!empty($licenseKey) && empty(Setting::get('license_key'))) {
+            Setting::set('license_key', $licenseKey);
+        }
         
         // Récupérer les paramètres liés à la licence
         $licenseValid = (bool) Setting::get('license_valid', false);

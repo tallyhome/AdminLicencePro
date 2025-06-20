@@ -120,4 +120,4 @@
         </div>
     </div>
 </body>
-</html><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views/auth/admin-login.blade.php ENDPATH**/ ?>
+</html><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\auth\admin-login.blade.php ENDPATH**/ ?>

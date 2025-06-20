@@ -252,7 +252,8 @@
       "api_valid_service_invalid": "يشير API إلى أن الترخيص صالح، لكن خدمة الترخيص تعتبره غير صالح. مشكلة تكوين محتملة.",
       "license_invalid_with_api_message": "الترخيص غير صالح وفقًا لـ API والخدمة. رسالة API: :message",
       "license_details_header": "تفاصيل الترخيص:",
-      "verification_error": "حدث خطأ أثناء التحقق من الترخيص: :error"
+      "verification_error": "حدث خطأ أثناء التحقق من الترخيص: :error",
+      "key_label": "مفتاح الترخيص"
     }
   },
   "optimization": {
