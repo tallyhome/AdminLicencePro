@@ -44,7 +44,7 @@ function showError($message, $details = null) {
         echo '<div class="details">' . htmlspecialchars($details) . '</div>';
     }
     
-    echo '<a href="index.php" class="btn">' . t('retry') . '</a>
+    echo '<a href="install_new.php" class="btn">' . t('retry') . '</a>
         </div>
     </body>
     </html>';
@@ -61,75 +61,47 @@ function showError($message, $details = null) {
 function displayInstallationForm($step, $errors = []) {
     $currentLang = getCurrentLanguage();
     
-    header('Content-Type: text/html; charset=utf-8');
-    echo '<!DOCTYPE html>
-    <html lang="' . $currentLang . '">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>' . t('installation_title') . '</title>
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; background: #f4f4f4; }
-            .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-            h1 { color: #2c3e50; margin-bottom: 30px; text-align: center; }
-            .step { text-align: center; margin-bottom: 30px; }
-            .step span { display: inline-block; width: 30px; height: 30px; border-radius: 50%; background: #ddd; color: #666; line-height: 30px; margin: 0 5px; }
-            .step span.active { background: #3498db; color: white; }
-            .step span.completed { background: #2ecc71; color: white; }
-            .form-group { margin-bottom: 20px; }
-            label { display: block; margin-bottom: 5px; color: #666; }
-            input[type="text"], input[type="password"], input[type="email"], select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-            .btn { display: inline-block; background: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; }
-            .btn:hover { background: #2980b9; }
-            .error { background: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-bottom: 20px; }
-            .language-selector { text-align: right; margin-bottom: 20px; }
-            .language-selector a { margin-left: 10px; text-decoration: none; color: #3498db; }
-            .language-selector a.active { font-weight: bold; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="language-selector">
-                ' . getLanguageLinks() . '
-            </div>
-            <h1>' . t('installation_title') . '</h1>
-            
-            <div class="step">
-                <span class="' . ($step >= 1 ? 'active' : '') . '">1</span>
-                <span class="' . ($step >= 2 ? 'active' : '') . '">2</span>
-                <span class="' . ($step >= 3 ? 'active' : '') . '">3</span>
-                <span class="' . ($step >= 4 ? 'active' : '') . '">4</span>
-            </div>';
-            
+    // Inclure le header
+    include 'templates/header.php';
+    
     // Afficher les erreurs s'il y en a
     if (!empty($errors)) {
         foreach ($errors as $error) {
-            echo '<div class="error">' . htmlspecialchars($error) . '</div>';
+            echo '<div class="alert alert-danger">' . htmlspecialchars($error) . '</div>';
         }
     }
     
     // Afficher le formulaire en fonction de l'étape
     switch ($step) {
         case 1: // Sélection de la langue et vérification de la licence
-            echo '<form method="post" action="index.php">
+            echo '<div class="license-info">
+                <h3>' . t('license_verification') . '</h3>
+                <p><strong>' . t('information') . ':</strong> ' . t('license_verification_info') . '</p>
+                <p><strong>' . t('license_api') . ':</strong> <code>https://licence.myvcard.fr</code></p>
+            </div>
+            
+            <form method="post" action="install_new.php">
                 <input type="hidden" name="step" value="1">
                 
                 <div class="form-group">
                     <label for="serial_key">' . t('license_key') . '</label>
                     <input type="text" id="serial_key" name="serial_key" required 
-                           placeholder="XXXX-XXXX-XXXX-XXXX" 
+                           placeholder="FCGI-WC2S-H3PE-QJQG" 
                            pattern="[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}" 
-                           value="' . htmlspecialchars($_POST['serial_key'] ?? '') . '">
+                           value="' . htmlspecialchars($_POST['serial_key'] ?? '') . '"
+                           style="text-transform: uppercase;">
+                    <small style="color: #666; font-size: 0.9em;">' . t('license_key_format_help') . '</small>
                 </div>
                 
-                <div style="text-align: right;">
-                    <button type="submit" class="btn">' . t('next') . '</button>
+                <div class="form-actions">
+                    <div></div>
+                    <button type="submit" class="btn btn-verify">' . t('verify_license') . '</button>
                 </div>
             </form>';
             break;
             
         case 2: // Configuration de la base de données
-            echo '<form method="post" action="index.php">
+            echo '<form method="post" action="install_new.php">
                 <input type="hidden" name="step" value="2">
                 
                 <div class="form-group">
@@ -162,15 +134,15 @@ function displayInstallationForm($step, $errors = []) {
                            value="' . htmlspecialchars($_POST['db_password'] ?? '') . '">
                 </div>
                 
-                <div style="display: flex; justify-content: space-between;">
-                    <a href="index.php" class="btn">' . t('back') . '</a>
+                <div class="form-actions">
+                    <a href="install_new.php" class="btn">' . t('back') . '</a>
                     <button type="submit" class="btn">' . t('next') . '</button>
                 </div>
             </form>';
             break;
             
         case 3: // Configuration du compte admin
-            echo '<form method="post" action="index.php">
+            echo '<form method="post" action="install_new.php">
                 <input type="hidden" name="step" value="3">
                 
                 <div class="form-group">
@@ -195,15 +167,15 @@ function displayInstallationForm($step, $errors = []) {
                     <input type="password" id="admin_password_confirm" name="admin_password_confirm" required>
                 </div>
                 
-                <div style="display: flex; justify-content: space-between;">
-                    <a href="index.php?step=2" class="btn">' . t('back') . '</a>
+                <div class="form-actions">
+                    <a href="install_new.php?step=2" class="btn">' . t('back') . '</a>
                     <button type="submit" class="btn">' . t('next') . '</button>
                 </div>
             </form>';
             break;
             
         case 4: // Installation finale
-            echo '<form method="post" action="index.php">
+            echo '<form method="post" action="install_new.php">
                 <input type="hidden" name="step" value="4">
                 
                 <div style="margin-bottom: 20px;">
@@ -224,17 +196,15 @@ function displayInstallationForm($step, $errors = []) {
                     <p>' . t('installation_warning') . '</p>
                 </div>
                 
-                <div style="display: flex; justify-content: space-between;">
-                    <a href="index.php?step=3" class="btn">' . t('back') . '</a>
+                <div class="form-actions">
+                    <a href="install_new.php?step=3" class="btn">' . t('back') . '</a>
                     <button type="submit" class="btn">' . t('install_now') . '</button>
                 </div>
             </form>';
             break;
     }
     
-    echo '</div>
-    </body>
-    </html>';
+    include 'templates/footer.php';
 }
 
 /**

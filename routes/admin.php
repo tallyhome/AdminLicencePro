@@ -49,7 +49,7 @@ Route::middleware('guest:admin')->group(function () {
 
 // Toutes les routes admin protégées par l'authentification et la vérification de licence
 // Le middleware CheckLicenseMiddleware gère lui-même les exemptions pour les routes de licence et d'auth
-Route::middleware(['auth:admin', \App\Http\Middleware\CheckLicenseMiddleware::class])->group(function () {
+Route::middleware(['auth:admin', 'check.licence'])->group(function () {
     
     // Routes pour la gestion de licence (exemptées dans le middleware)
     Route::get('settings/license', [\App\Http\Controllers\Admin\LicenseController::class, 'index'])->name('admin.settings.license');

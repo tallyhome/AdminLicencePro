@@ -11,6 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Register middleware aliases
+        $middleware->alias([
+            'check.licence' => \App\Http\Middleware\CheckLicence::class,
+        ]);
+        
         // Register the frontend middleware group
         $middleware->group('frontend', [
             \App\Http\Middleware\EncryptCookies::class,

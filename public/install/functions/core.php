@@ -50,44 +50,47 @@ function isLaravelInstalled() {
             return false;
         }
 
-        // Vérifier la connexion à la base de données
+        // Vérifier la connexion à la base de données et les tables requises
         try {
             // Extraire les informations de connexion du fichier .env
-            preg_match('/^DB_HOST=(.*)$/m', $envContent, $dbHost);
-            preg_match('/^DB_PORT=(.*)$/m', $envContent, $dbPort);
-            preg_match('/^DB_DATABASE=(.*)$/m', $envContent, $dbDatabase);
-            preg_match('/^DB_USERNAME=(.*)$/m', $envContent, $dbUsername);
-            preg_match('/^DB_PASSWORD=(.*)$/m', $envContent, $dbPassword);
-
-            $host = $dbHost[1] ?? 'localhost';
-            $port = $dbPort[1] ?? '3306';
-            $database = $dbDatabase[1] ?? '';
-            $username = $dbUsername[1] ?? '';
-            $password = $dbPassword[1] ?? '';
-
-            // Tenter une connexion à la base de données
+            preg_match('/DB_HOST=(.*)/', $envContent, $hostMatch);
+            preg_match('/DB_PORT=(.*)/', $envContent, $portMatch);
+            preg_match('/DB_DATABASE=(.*)/', $envContent, $databaseMatch);
+            preg_match('/DB_USERNAME=(.*)/', $envContent, $usernameMatch);
+            preg_match('/DB_PASSWORD=(.*)/', $envContent, $passwordMatch);
+            
+            $host = trim($hostMatch[1] ?? 'localhost');
+            $port = trim($portMatch[1] ?? '3306');
+            $database = trim($databaseMatch[1] ?? '');
+            $username = trim($usernameMatch[1] ?? '');
+            $password = trim($passwordMatch[1] ?? '');
+            
+            if (empty($database)) {
+                return false;
+            }
+            
             $dsn = "mysql:host={$host};port={$port};dbname={$database}";
             $pdo = new PDO($dsn, $username, $password, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_TIMEOUT => 5
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
-
-            // Vérifier si les tables essentielles existent
-            $requiredTables = ['migrations', 'admins'];
-            $existingTables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
             
+            // Vérifier que les tables essentielles existent
+            $stmt = $pdo->query("SHOW TABLES");
+            $existingTables = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
+            $requiredTables = ['users', 'admins', 'projects', 'serial_keys'];
             foreach ($requiredTables as $table) {
                 if (!in_array($table, $existingTables)) {
                     return false;
                 }
             }
         } catch (Exception $e) {
-            writeToLog("Erreur de connexion à la base de données: " . $e->getMessage(), 'ERROR');
+            writeToLog("Erreur de vérification de la base de données: " . $e->getMessage(), 'ERROR');
             return false;
         }
-
-        // Si toutes les vérifications sont passées, l'application est considérée comme installée
+        
         return true;
+        
     } catch (Exception $e) {
         writeToLog("Erreur lors de la vérification de l'installation: " . $e->getMessage(), 'ERROR');
         return false;
@@ -133,10 +136,11 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
         ];
     }
 
-    // URL de l'API de vérification (utilisation de l'API ultra-simple)
-    $url = "https://licence.myvcard.fr/api/ultra-simple.php";
+    // VÉRIFICATION API RÉELLE - Utilisation du même endpoint que le système principal
+    // URL de l'API de vérification (utilisation de l'API check-serial pour la production)
+    $url = "https://licence.myvcard.fr/api/check-serial.php";
     
-    // Données à envoyer
+    // Données à envoyer (même format que le LicenceService)
     $donnees = [
         'serial_key' => trim(strtoupper($cleSeriale)),
         'domain' => $domaine ?: (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost'),
@@ -144,7 +148,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
     ];
     
     writeToLog("Données envoyées à l'API: " . json_encode($donnees));
-    
+     
     try {
         // Initialiser cURL
         $ch = curl_init($url);
@@ -152,14 +156,23 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
             throw new Exception('Erreur lors de l\'initialisation de la connexion');
         }
         
-        // Configurer cURL
+        // Configurer cURL (même configuration que le LicenceService)
         curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => json_encode($donnees),
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_SSL_VERIFYPEER => false
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_SSL_VERIFYPEER => false, // Désactiver la vérification SSL
+            CURLOPT_SSL_VERIFYHOST => false, // Désactiver la vérification du nom d'hôte
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 3,
+            CURLOPT_USERAGENT => 'AdminLicence/4.5.1 Installation',
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'User-Agent: AdminLicence/4.5.1 Installation'
+            ]
         ]);
         
         // Exécuter la requête
@@ -195,55 +208,74 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
             writeToLog("Erreur API: " . ($resultat['message'] ?? 'non spécifiée'));
             return [
                 'valide' => false,
-                'message' => t('license_key_invalid'),
+                'message' => $resultat['message'] ?? t('license_key_invalid'),
                 'donnees' => null
             ];
         }
         
-        // Vérification adaptée à la structure de réponse actuelle
-        if (!isset($resultat['data']) || empty($resultat['data'])) {
-            writeToLog("Erreur: Données de licence manquantes dans la réponse");
+        // Vérification du statut success et des données (même logique que le LicenceService)
+        if ($resultat['status'] === 'success' && isset($resultat['data'])) {
+            $data = $resultat['data'];
+            
+            // Vérifier si les données essentielles sont présentes (token est requis)
+            if (isset($data['token'])) {
+                $isValid = true;
+                $message = t('license_valid');
+                
+                // Vérifier si la licence n'est pas expirée (si expires_at est fourni)
+                if (!empty($data['expires_at']) && $data['expires_at'] !== null) {
+                    try {
+                        $expirationDate = new DateTime($data['expires_at']);
+                        $currentDate = new DateTime();
+                        if ($currentDate > $expirationDate) {
+                            $isValid = false;
+                            $message = t('license_expired');
+                            writeToLog("Licence expirée - Date d'expiration: " . $data['expires_at']);
+                        }
+                    } catch (Exception $e) {
+                        // Si la date est invalide, on considère la licence comme valide
+                        // mais on log l'erreur
+                        writeToLog("Format de date d'expiration invalide: " . $data['expires_at']);
+                    }
+                }
+                // Si expires_at est null ou vide, on considère que la licence n'expire pas
+                
+                if ($isValid) {
+                    writeToLog("Licence valide - Token: " . substr($data['token'], 0, 10) . "...");
+                    return [
+                        'valide' => true,
+                        'message' => $message,
+                        'donnees' => $data
+                    ];
+                } else {
+                    return [
+                        'valide' => false,
+                        'message' => $message,
+                        'donnees' => null
+                    ];
+                }
+            } else {
+                writeToLog("Erreur: Token de licence manquant");
+                return [
+                    'valide' => false,
+                    'message' => t('license_key_invalid'),
+                    'donnees' => null
+                ];
+            }
+        } else {
+            writeToLog("Erreur: Statut de réponse invalide ou données manquantes");
             return [
                 'valide' => false,
-                'message' => t('license_key_invalid'),
+                'message' => $resultat['message'] ?? t('license_key_invalid'),
                 'donnees' => null
             ];
         }
-        
-        // Vérifier si les champs essentiels sont présents
-        if (!isset($resultat['data']['token']) || !isset($resultat['data']['project']) || !isset($resultat['data']['expires_at'])) {
-            writeToLog("Erreur: Informations de licence incomplètes");
-            return [
-                'valide' => false,
-                'message' => t('license_key_invalid'),
-                'donnees' => null
-            ];
-        }
-        
-        // Vérifier si la licence est expirée
-        $expirationDate = new DateTime($resultat['data']['expires_at']);
-        $currentDate = new DateTime();
-        if ($currentDate > $expirationDate) {
-            writeToLog("Erreur: Licence expirée - Date d'expiration: " . $resultat['data']['expires_at']);
-            return [
-                'valide' => false,
-                'message' => t('license_expired'),
-                'donnees' => null
-            ];
-        }
-
-        // Si toutes les vérifications sont passées, la licence est valide
-        return [
-            'valide' => true,
-            'message' => t('license_valid'),
-            'donnees' => $resultat['data']
-        ];
         
     } catch (Exception $e) {
         writeToLog("Erreur lors de la vérification de licence: " . $e->getMessage());
         return [
             'valide' => false,
-            'message' => $e->getMessage(),
+            'message' => "Erreur de connexion au serveur de licence: " . $e->getMessage(),
             'donnees' => null
         ];
     }

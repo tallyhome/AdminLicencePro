@@ -123,17 +123,62 @@ function getAvailableLanguages() {
  */
 function getLanguageLinks() {
     $currentLang = getCurrentLanguage();
-    $links = [];
     
     // Conserver les paramètres actuels de l'URL
     $params = $_GET;
     unset($params['language']); // Supprimer le paramètre language s'il existe
     $queryString = !empty($params) ? '&' . http_build_query($params) : '';
     
+    $html = '';
+    
     foreach (AVAILABLE_LANGUAGES as $code => $name) {
         $active = $code === $currentLang ? ' class="active"' : '';
-        $links[] = sprintf('<a href="?language=%s%s"%s>%s</a>', $code, $queryString, $active, $name);
+        $html .= sprintf('<a href="?language=%s%s"%s>%s</a>', $code, $queryString, $active, $name);
     }
     
-    return implode(' ', $links);
+    return $html;
+}
+
+/**
+ * Obtenir le nom de la langue actuelle
+ * 
+ * @return string Nom de la langue actuelle
+ */
+function getCurrentLanguageName() {
+    $currentLang = getCurrentLanguage();
+    return AVAILABLE_LANGUAGES[$currentLang] ?? 'Français';
+}
+
+/**
+ * Obtenir le titre de l'étape actuelle
+ * 
+ * @param int $step Numéro de l'étape
+ * @return string Titre de l'étape
+ */
+function getStepTitle($step) {
+    $titles = [
+        1 => t('license_verification'),
+        2 => t('database_configuration'), 
+        3 => t('admin_setup'),
+        4 => t('finalization')
+    ];
+    
+    return $titles[$step] ?? t('installation_step');
+}
+
+/**
+ * Obtenir la description de l'étape actuelle
+ * 
+ * @param int $step Numéro de l'étape
+ * @return string Description de l'étape
+ */
+function getStepDescription($step) {
+    $descriptions = [
+        1 => t('license_verification_description'),
+        2 => t('database_configuration_description'),
+        3 => t('admin_setup_description'), 
+        4 => t('finalization_description')
+    ];
+    
+    return $descriptions[$step] ?? t('installation_step_description');
 }

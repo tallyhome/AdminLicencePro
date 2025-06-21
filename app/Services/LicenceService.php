@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
+use App\Models\Setting;
 
 class LicenceService
 {
@@ -62,134 +64,17 @@ class LicenceService
         ];
 
         try {
-            // Vérifier si le chiffrement est activé
-            $useEncryption = env('SECURITY_ENCRYPT_LICENCE_KEYS', true);
-            
-            // Vérifier d'abord si la clé existe dans la base de données locale
-            // Si le chiffrement est activé, essayer de trouver la clé chiffrée ou non chiffrée
-            if ($useEncryption) {
-                // Essayer de trouver la clé telle quelle (peut-être déjà chiffrée)
-                $key = SerialKey::where('serial_key', $serialKey)->first();
-                
-                // Si non trouvée, essayer de trouver la clé en la chiffrant
-                if (!$key) {
-                    $encryptedKey = $this->encryptionService->encrypt($serialKey);
-                    $key = SerialKey::where('serial_key', $encryptedKey)->first();
-                }
-            } else {
-                // Sans chiffrement, recherche directe
-                $key = SerialKey::where('serial_key', $serialKey)->first();
-            }
-            
-            // Si la clé est trouvée localement, utiliser ces informations
-            if ($key) {
-                // Log uniquement en environnement de développement
-                if (env('APP_ENV') === 'local' || env('APP_DEBUG') === true) {
-                    Log::debug('Clé trouvée dans la base de données locale', ['key' => $serialKey, 'status' => $key->status]);
-                }
-                
-                // Vérifier si la clé est expirée
-                $isExpired = false;
-                if ($key->expires_at) {
-                    $expiryDate = \Carbon\Carbon::parse($key->expires_at);
-                    $isExpired = $expiryDate->isPast();
-                }
-                
-                // Déterminer la validité de la clé
-                $isValid = $key->status === 'active' && !$isExpired;
-                
-                // Mettre à jour le domaine et l'adresse IP si nécessaire
-                if ($isValid && $domain && $ipAddress) {
-                    $key->domain = $domain;
-                    $key->ip_address = $ipAddress;
-                    
-                    // Si le chiffrement est activé et que la clé n'est pas encore chiffrée
-                    if (env('SECURITY_ENCRYPT_LICENCE_KEYS', true) && !$this->encryptionService->isEncrypted($key->serial_key)) {
-                        $key->serial_key = $this->encryptionService->encrypt($key->serial_key);
-                    }
-                    
-                    $key->save();
-                    
-                    // Enregistrer l'utilisation dans l'historique
-                    $this->historyService->logAction($key, 'verify', [
-                        'domain' => $domain,
-                        'ip_address' => $ipAddress,
-                        'timestamp' => now()->toDateTimeString(),
-                        'success' => true
-                    ]);
-                } else {
-                    // Enregistrer l'échec de validation dans l'historique
-                    if ($key) {
-                        $this->historyService->logAction($key, 'verify_failed', [
-                            'domain' => $domain,
-                            'ip_address' => $ipAddress,
-                            'timestamp' => now()->toDateTimeString(),
-                            'reason' => $isExpired ? 'expired' : 'invalid_status',
-                            'success' => false
-                        ]);
-                    }
-                }
-                
-                // Générer le message approprié
-                $message = 'Clé de série ';
-                if ($isExpired) {
-                    $message .= 'expirée';
-                } elseif ($key->status === 'suspended') {
-                    $message .= 'suspendue';
-                } elseif ($key->status === 'revoked') {
-                    $message .= 'révoquée';
-                } elseif ($isValid) {
-                    $message .= 'valide';
-                } else {
-                    $message .= 'invalide';
-                }
-                
-                // Formater la date d'expiration
-                $formattedDate = null;
-                if ($key->expires_at) {
-                    try {
-                        $formattedDate = \Carbon\Carbon::parse($key->expires_at)->format('d/m/Y');
-                    } catch (\Exception $e) {
-                        $formattedDate = $key->expires_at;
-                    }
-                }
-                
-                // Générer un token sécurisé avec HMAC-SHA256 et expiration
-                $token = $this->generateSecureToken($serialKey, $domain, $ipAddress);
-                
-                // Stocker le token dans le cache avec une expiration
-                $tokenExpiry = env('SECURITY_TOKEN_EXPIRY_MINUTES', 60);
-                Cache::put('licence_token_' . $key->id, $token, now()->addMinutes($tokenExpiry));
-                
-                return [
-                    'valid' => $isValid,
-                    'message' => $message,
-                    'token' => $token,
-                    'project' => $key->project ? $key->project->name : 'AdminLicence',
-                    'expires_at' => $formattedDate,
-                    'status' => $key->status,
-                    'is_expired' => $isExpired,
-                    'is_suspended' => $key->status === 'suspended',
-                    'is_revoked' => $key->status === 'revoked',
-                    'status_code' => $isValid ? 200 : 401,
-                    'token_expires_in' => $tokenExpiry * 60 // en secondes
-                ];
-            }
-            
-            // Si la clé n'est pas trouvée localement, essayer avec l'API externe
             // Configuration de l'API de licence depuis les variables d'environnement
             $apiUrl = env('LICENCE_API_URL', 'https://licence.myvcard.fr');
             $apiKey = env('LICENCE_API_KEY', '');
             $apiSecret = env('LICENCE_API_SECRET', '');
-            $endpoint = env('LICENCE_API_ENDPOINT', '/api/check-serial.php'); // Utiliser le même point d'entrée que le script d'installation
+            $endpoint = env('LICENCE_API_ENDPOINT', '/api/check-serial.php');
             
-            // Préparer les données à envoyer
+            // Préparer les données à envoyer (format JSON comme dans l'installation)
             $data = [
-                'serial_key' => $serialKey,
+                'serial_key' => trim(strtoupper($serialKey)),
                 'domain' => $domain,
-                'ip_address' => $ipAddress,
-                'api_key' => $apiKey,
-                'api_secret' => $apiSecret
+                'ip_address' => $ipAddress
             ];
             
             // Logger la requête uniquement en environnement de développement
@@ -203,50 +88,49 @@ class LicenceService
             // Initialiser cURL
             $ch = curl_init($apiUrl . $endpoint);
             
-            // Configurer cURL
+            // Configuration de cURL
             curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => json_encode($data),
-                CURLOPT_HTTPHEADER => [
-                    'Content-Type: application/json',
-                    'Accept: application/json'
-                ],
+                CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_CONNECTTIMEOUT => 10,
-                CURLOPT_SSL_VERIFYPEER => false, // Désactiver complètement la vérification SSL
-                CURLOPT_SSL_VERIFYHOST => 0, // Désactiver complètement la vérification SSL
+                CURLOPT_SSL_VERIFYPEER => false, // Désactiver la vérification SSL
+                CURLOPT_SSL_VERIFYHOST => false, // Désactiver la vérification du nom d'hôte
                 CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_MAXREDIRS => 5
+                CURLOPT_MAXREDIRS => 3,
+                CURLOPT_USERAGENT => 'AdminLicence/4.5.1',
+                CURLOPT_HTTPHEADER => [
+                    'Content-Type: application/json',
+                    'Accept: application/json',
+                    'User-Agent: AdminLicence/4.5.1'
+                ]
             ]);
             
             // Exécuter la requête
             $response = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $error = curl_error($ch);
-            $info = curl_getinfo($ch);
             
-            // Fermer la session cURL
+            // Fermer la connexion cURL
             curl_close($ch);
             
-            // Logger la réponse uniquement en environnement de développement
-            if (env('APP_ENV') === 'local' || env('APP_DEBUG') === true) {
-                Log::debug('Réponse API de licence', [
-                    'http_code' => $httpCode,
-                    'response' => $response,
-                    'error' => $error,
-                    'info' => $info
-                ]);
-            }
+            // Stocker le code HTTP pour le débogage
+            Setting::set('debug_api_http_code', $httpCode);
+            Setting::set('debug_api_response', $response);
             
-            // Vérifier si la requête a échoué
-            if ($response === false) {
-                Log::error('Erreur cURL lors de la vérification de licence: ' . $error);
+            // Vérifier les erreurs cURL
+            if ($response === false || !empty($error)) {
+                Log::error('Erreur cURL lors de la vérification de licence', [
+                    'error' => $error,
+                    'http_code' => $httpCode
+                ]);
+                
                 return [
                     'valid' => false,
                     'message' => 'Erreur de connexion au serveur de licence: ' . $error,
-                    'data' => [],
-                    'api_error' => $error
+                    'status_code' => 500,
+                    'data' => []
                 ];
             }
             
@@ -257,74 +141,125 @@ class LicenceService
             if (json_last_error() !== JSON_ERROR_NONE) {
                 Log::error('Erreur de décodage JSON: ' . json_last_error_msg() . ' - Réponse: ' . substr($response, 0, 1000));
                 
-                // Vérifier si la réponse contient des mots-clés positifs
-                if ($httpCode == 200 && (strpos($response, 'success') !== false || strpos($response, 'valid') !== false)) {
-                    Log::info('Licence valide (réponse non-JSON)!');
-                    
-                    return [
-                        'valid' => true,
-                        'message' => 'Licence valide',
-                        'data' => [
-                            'expiry_date' => date('Y-m-d', strtotime('+1 year')),
-                            'token' => $this->generateSecureToken($serialKey, $domain, $ipAddress),
-                            'project' => 'AdminLicence'
-                        ]
-                    ];
-                }
-                
                 return [
                     'valid' => false,
                     'message' => 'Erreur de décodage de la réponse du serveur de licence',
+                    'status_code' => 500,
                     'data' => []
                 ];
             }
             
-            // Vérifier si la licence est valide selon le format de réponse du script d'installation
-            if ($httpCode == 200 && isset($decoded['status'])) {
-                if ($decoded['status'] === 'success' || $decoded['status'] === true) {
-                    // Log uniquement en environnement de développement ou en cas d'erreur
-                    if (env('APP_ENV') === 'local' || env('APP_DEBUG') === true) {
-                        Log::info('Licence valide!', ['response' => $decoded]);
+            // Vérifier la validité de la licence
+            $isValid = false;
+            $status = 'invalid';
+            $message = 'Licence invalide';
+            
+            // Vérifier le format de réponse de l'API check-serial
+            if (isset($decoded['status'])) {
+                if ($decoded['status'] === 'success' && isset($decoded['data'])) {
+                    // Vérifier si les données essentielles sont présentes (token est requis)
+                    $data = $decoded['data'];
+                    if (isset($data['token'])) {
+                        // Vérifier si la licence n'est pas expirée (si expires_at est fourni)
+                        $isValid = true;
+                        $status = 'active';
+                        $message = 'Licence valide';
+                        
+                        if (!empty($data['expires_at']) && $data['expires_at'] !== null) {
+                            try {
+                                $expirationDate = new \DateTime($data['expires_at']);
+                                $currentDate = new \DateTime();
+                                if ($currentDate > $expirationDate) {
+                                    $isValid = false;
+                                    $message = 'Licence expirée';
+                                    $status = 'expired';
+                                }
+                            } catch (\Exception $e) {
+                                // Si la date est invalide, on considère la licence comme valide
+                                // mais on log l'erreur
+                                Log::warning('Format de date d\'expiration invalide: ' . $data['expires_at']);
+                            }
+                        }
+                        // Si expires_at est null ou vide, on considère que la licence n'expire pas
+                    } else {
+                        $message = 'Token de licence manquant';
                     }
-                    
-                    return [
-                        'valid' => true,
-                        'message' => $decoded['message'] ?? 'Licence valide',
-                        'data' => [
-                            'expiry_date' => $decoded['expiry_date'] ?? ($decoded['data']['expiry_date'] ?? null),
-                            'token' => $decoded['token'] ?? ($decoded['data']['token'] ?? null),
-                            'project' => $decoded['project'] ?? ($decoded['data']['project'] ?? null)
-                        ]
-                    ];
                 } else {
-                    Log::warning('Licence invalide: ' . ($decoded['message'] ?? 'Raison inconnue'));
-                    
-                    return [
-                        'valid' => false,
-                        'message' => $decoded['message'] ?? 'Licence invalide',
-                        'data' => []
-                    ];
+                    $message = $decoded['message'] ?? 'Erreur de validation de licence';
+                    $status = 'error';
                 }
+            } else {
+                $message = 'Format de réponse invalide';
+                $status = 'error';
             }
             
-            // Si on arrive ici, la réponse n'est pas dans un format attendu
-            Log::error('Format de réponse inattendu', ['response' => $decoded]);
-            
-            return [
-                'valid' => false,
-                'message' => 'Format de réponse inattendu du serveur de licence',
-                'data' => []
-            ];
+            // Si la licence est valide, mettre à jour les informations
+            if ($isValid && $status === 'active') {
+                // Mettre à jour les settings
+                Setting::set('license_valid', true);
+                Setting::set('license_status', 'active');
+                Setting::set('license_key', $serialKey);
+                Setting::set('license_domain', $domain);
+                Setting::set('license_ip', $ipAddress);
+                Setting::set('last_license_check', now()->toDateTimeString());
+                
+                if (isset($decoded['data']['expires_at'])) {
+                    Setting::set('license_expires_at', $decoded['data']['expires_at']);
+                }
+                
+                // Stocker les détails dans la session
+                session([
+                    'license_details' => $decoded['data'],
+                    'license_valid' => true,
+                    'license_status' => 'active'
+                ]);
+                
+                return [
+                    'valid' => true,
+                    'message' => $message,
+                    'status_code' => 200,
+                    'status' => 'active',
+                    'token' => $decoded['data']['token'] ?? null,
+                    'expires_at' => $decoded['data']['expires_at'] ?? null,
+                    'domain' => $domain,
+                    'ip_address' => $ipAddress,
+                    'data' => $decoded['data']
+                ];
+            } else {
+                // Mettre à jour les settings pour une licence invalide
+                Setting::set('license_valid', false);
+                Setting::set('license_status', $status);
+                Setting::set('last_license_check', now()->toDateTimeString());
+                
+                // Vider la session
+                session()->forget(['license_details', 'license_valid', 'license_status']);
+                
+                return [
+                    'valid' => false,
+                    'message' => $message,
+                    'status_code' => 401,
+                    'status' => $status,
+                    'data' => $decoded
+                ];
+            }
         } catch (\Exception $e) {
             // Logger l'exception
             Log::error('Exception lors de la vérification de licence: ' . $e->getMessage(), [
                 'exception' => $e->getTraceAsString()
             ]);
             
-            // Retourner une erreur
+            // Mettre à jour les settings pour une erreur
+            Setting::set('license_valid', false);
+            Setting::set('license_status', 'error');
+            Setting::set('last_license_check', now()->toDateTimeString());
+            
+            // Vider la session
+            session()->forget(['license_details', 'license_valid', 'license_status']);
+            
             return [
                 'valid' => false,
                 'message' => 'Erreur lors de la vérification de licence: ' . $e->getMessage(),
+                'status_code' => 500,
                 'data' => []
             ];
         }
@@ -618,6 +553,14 @@ class LicenceService
             // Récupérer le domaine actuel
             $domain = request()->getHost();
             
+            // Si pas de domaine ou domaine par défaut, utiliser 'local' en environnement de développement
+            if (empty($domain) || $domain === 'localhost' || $domain === '127.0.0.1') {
+                $isLocalEnv = (config('app.env') === 'local') || (env('APP_ENV') === 'local') || (config('app.debug') === true);
+                if ($isLocalEnv) {
+                    $domain = 'local';
+                }
+            }
+            
             // Récupérer l'adresse IP du serveur
             $ipAddress = $_SERVER['SERVER_ADDR'] ?? $_SERVER['REMOTE_ADDR'] ?? gethostbyname(gethostname());
             
@@ -636,6 +579,18 @@ class LicenceService
             if (env('APP_ENV') === 'local' && isset($result['api_error'])) {
                 Log::warning('Erreur API en environnement local, licence considérée comme valide', [
                     'error' => $result['api_error']
+                ]);
+                return true;
+            }
+            
+            // Bypass pour les domaines de développement en environnement local
+            $isLocalEnv = (config('app.env') === 'local') || (env('APP_ENV') === 'local') || (config('app.debug') === true);
+            if ($isLocalEnv && in_array($domain, ['localhost', '127.0.0.1', 'local.test', 'local'])) {
+                Log::info('Development bypass activated in verifyInstallationLicense', [
+                    'domain' => $domain,
+                    'license_key' => substr($licenseKey, 0, 4) . '...',
+                    'app_env' => config('app.env'),
+                    'app_debug' => config('app.debug')
                 ]);
                 return true;
             }

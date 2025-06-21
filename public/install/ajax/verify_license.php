@@ -36,8 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Get license key
+// Get license key, domain and IP address
 $licenseKey = isset($_POST['license_key']) ? trim($_POST['license_key']) : '';
+$domain = isset($_POST['domain']) ? trim($_POST['domain']) : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost');
+$ipAddress = isset($_POST['ip_address']) ? trim($_POST['ip_address']) : (isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1'));
 
 if (empty($licenseKey)) {
     echo json_encode([
@@ -56,8 +58,13 @@ $apiSecret = 'sk_3ewgI2dP0zPyLXlHyDT1qYbzQny6H2hb';
 $validator = new LicenceValidator($apiUrl, $apiKey, $apiSecret);
 
 try {
-    // Verify license
-    $result = $validator->verifyLicence($licenseKey);
+    // Verify license with domain and IP address
+    $result = $validator->verifyLicence($licenseKey, $domain, $ipAddress);
+    
+    // Log verification details
+    file_put_contents($logDir . '/license_verification.log', 
+        date('Y-m-d H:i:s') . " - Vérification de licence - Clé: $licenseKey, Domaine: $domain, IP: $ipAddress\n", 
+        FILE_APPEND);
     
     // Log result
     $responseLog = [

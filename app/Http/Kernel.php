@@ -81,7 +81,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'locale' => \App\Http\Middleware\LocaleMiddleware::class,
-        'check.license' => \App\Http\Middleware\CheckLicenseMiddleware::class,
+
         'api.ratelimit' => \App\Http\Middleware\ApiRateLimiter::class,
         'jwt.auth' => \App\Http\Middleware\JwtAuthenticate::class,
         'security.headers' => \App\Http\Middleware\SecurityHeaders::class,

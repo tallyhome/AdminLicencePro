@@ -4,21 +4,28 @@
  */
 return [
     'installation_title' => 'تثبيت AdminLicence',
+    'installation_subtitle' => 'معالج تثبيت AdminLicence',
     
     // Step 1 - License verification
     'license_verification' => 'التحقق من الترخيص',
+    'license_verification_info' => 'يرجى إدخال مفتاح الترخيص للمتابعة مع التثبيت',
+    'verify_license' => 'التحقق من الترخيص',
     'license_key' => 'مفتاح الترخيص',
     'verify' => 'تحقق',
     'next' => 'التالي',
     'previous' => 'السابق',
     'license_valid' => 'الترخيص صالح',
     'license_invalid' => 'الترخيص غير صالح',
+    'license_key_invalid' => 'مفتاح الترخيص غير صالح',
     'license_expired' => 'الترخيص منتهي الصلاحية',
     'license_revoked' => 'تم إلغاء الترخيص',
     'license_suspended' => 'الترخيص معلق',
     'expiry_date' => 'تاريخ انتهاء الصلاحية',
     
-    // Step 2 - Project detection
+    // Step 2 - System requirements
+    'system_requirements' => 'متطلبات النظام',
+    
+    // Step 3 - Project detection
     'project_detection' => 'اكتشاف وإعداد المشروع',
     'project_type' => 'نوع المشروع',
     'php_project' => 'مشروع PHP بسيط',
@@ -33,7 +40,7 @@ return [
     'creating_env' => 'إنشاء ملف .env',
     'run_composer' => 'يرجى تشغيل "composer install" لتثبيت التبعيات',
     
-    // Step 3 - Database configuration
+    // Step 4 - Database configuration
     'database_configuration' => 'إعداد قاعدة البيانات',
     'db_host' => 'مضيف قاعدة البيانات',
     'db_port' => 'المنفذ',
@@ -44,7 +51,9 @@ return [
     'connection_success' => 'تم الاتصال بنجاح',
     'connection_failed' => 'فشل الاتصال',
     
-    // Step 4 - Admin account
+    // Step 5 - Admin setup
+    'admin_setup' => 'إعداد المسؤول',
+    'admin_account' => 'حساب المسؤول',
     'admin_account' => 'حساب المسؤول',
     'project_url' => 'رابط المشروع',
     'admin_email' => 'البريد الإلكتروني للمسؤول',

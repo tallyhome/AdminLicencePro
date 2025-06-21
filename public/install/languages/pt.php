@@ -4,21 +4,28 @@
  */
 return [
     'installation_title' => 'Instalação do AdminLicence',
+    'installation_subtitle' => 'Assistente de instalação AdminLicence',
     
     // Step 1 - License verification
     'license_verification' => 'Verificação de licença',
+    'license_verification_info' => 'Digite sua chave de licença para continuar a instalação',
+    'verify_license' => 'Verificar licença',
     'license_key' => 'Chave de licença',
     'verify' => 'Verificar',
     'next' => 'Próximo',
     'previous' => 'Anterior',
     'license_valid' => 'Licença válida',
     'license_invalid' => 'Licença inválida',
+    'license_key_invalid' => 'Chave de licença inválida',
     'license_expired' => 'Licença expirada',
     'license_revoked' => 'Licença revogada',
     'license_suspended' => 'Licença suspensa',
     'expiry_date' => 'Data de expiração',
     
-    // Step 2 - Project detection
+    // Step 2 - System requirements
+    'system_requirements' => 'Requisitos do sistema',
+    
+    // Step 3 - Project detection
     'project_detection' => 'Detecção e preparação do projeto',
     'project_type' => 'Tipo de projeto',
     'php_project' => 'Projeto PHP simples',
@@ -33,7 +40,7 @@ return [
     'creating_env' => 'Criando arquivo .env',
     'run_composer' => 'Execute "composer install" para instalar as dependências',
     
-    // Step 3 - Database configuration
+    // Step 4 - Database configuration
     'database_configuration' => 'Configuração do banco de dados',
     'db_host' => 'Host do banco de dados',
     'db_port' => 'Porta',
@@ -44,7 +51,9 @@ return [
     'connection_success' => 'Conexão bem-sucedida',
     'connection_failed' => 'Falha na conexão',
     
-    // Step 4 - Admin account
+    // Step 5 - Admin setup
+    'admin_setup' => 'Configuração do administrador',
+    'admin_account' => 'Conta de administrador',
     'admin_account' => 'Conta de administrador',
     'project_url' => 'URL do projeto',
     'admin_email' => 'Email do administrador',

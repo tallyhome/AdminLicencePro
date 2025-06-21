@@ -4,21 +4,28 @@
  */
 return [
     'installation_title' => 'AdminLicence 安装',
+    'installation_subtitle' => 'AdminLicence 安装向导',
     
     // Step 1 - License verification
     'license_verification' => '许可证验证',
+    'license_verification_info' => '请输入您的许可证密钥以继续安装',
+    'verify_license' => '验证许可证',
     'license_key' => '许可证密钥',
     'verify' => '验证',
     'next' => '下一步',
     'previous' => '上一步',
     'license_valid' => '许可证有效',
     'license_invalid' => '许可证无效',
+    'license_key_invalid' => '许可证密钥无效',
     'license_expired' => '许可证已过期',
     'license_revoked' => '许可证已撤销',
     'license_suspended' => '许可证已暂停',
     'expiry_date' => '过期日期',
     
-    // Step 2 - Project detection
+    // Step 2 - System requirements
+    'system_requirements' => '系统要求',
+    
+    // Step 3 - Project detection
     'project_detection' => '项目检测与准备',
     'project_type' => '项目类型',
     'php_project' => '简单PHP项目',
@@ -33,7 +40,7 @@ return [
     'creating_env' => '创建.env文件',
     'run_composer' => '请运行"composer install"安装依赖项',
     
-    // Step 3 - Database configuration
+    // Step 4 - Database configuration
     'database_configuration' => '数据库配置',
     'db_host' => '数据库主机',
     'db_port' => '端口',
@@ -44,7 +51,9 @@ return [
     'connection_success' => '连接成功',
     'connection_failed' => '连接失败',
     
-    // Step 4 - Admin account
+    // Step 5 - Admin setup
+    'admin_setup' => '管理员设置',
+    'admin_account' => '管理员账户',
     'admin_account' => '管理员账户',
     'project_url' => '项目URL',
     'admin_email' => '管理员邮箱',

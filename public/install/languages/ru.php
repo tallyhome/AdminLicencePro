@@ -4,21 +4,28 @@
  */
 return [
     'installation_title' => 'Установка AdminLicence',
+    'installation_subtitle' => 'Мастер установки AdminLicence',
     
     // Step 1 - License verification
     'license_verification' => 'Проверка лицензии',
+    'license_verification_info' => 'Введите лицензионный ключ для продолжения установки',
+    'verify_license' => 'Проверить лицензию',
     'license_key' => 'Лицензионный ключ',
     'verify' => 'Проверить',
     'next' => 'Далее',
     'previous' => 'Назад',
     'license_valid' => 'Лицензия действительна',
     'license_invalid' => 'Лицензия недействительна',
+    'license_key_invalid' => 'Недействительный лицензионный ключ',
     'license_expired' => 'Срок действия лицензии истек',
     'license_revoked' => 'Лицензия отозвана',
     'license_suspended' => 'Лицензия приостановлена',
     'expiry_date' => 'Дата истечения срока',
     
-    // Step 2 - Project detection
+    // Step 2 - System requirements
+    'system_requirements' => 'Системные требования',
+    
+    // Step 3 - Project detection
     'project_detection' => 'Обнаружение и подготовка проекта',
     'project_type' => 'Тип проекта',
     'php_project' => 'Простой PHP проект',
@@ -33,7 +40,7 @@ return [
     'creating_env' => 'Создание файла .env',
     'run_composer' => 'Пожалуйста, выполните "composer install" для установки зависимостей',
     
-    // Step 3 - Database configuration
+    // Step 4 - Database configuration
     'database_configuration' => 'Настройка базы данных',
     'db_host' => 'Хост базы данных',
     'db_port' => 'Порт',
@@ -44,7 +51,9 @@ return [
     'connection_success' => 'Соединение успешно',
     'connection_failed' => 'Ошибка соединения',
     
-    // Step 4 - Admin account
+    // Step 5 - Admin setup
+    'admin_setup' => 'Настройка администратора',
+    'admin_account' => 'Учетная запись администратора',
     'admin_account' => 'Учетная запись администратора',
     'project_url' => 'URL проекта',
     'admin_email' => 'Email администратора',

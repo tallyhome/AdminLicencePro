@@ -217,47 +217,26 @@ class LicenseController extends Controller
             // Mettre à jour le fichier .env avec la nouvelle clé
             $this->updateEnvFile('INSTALLATION_LICENSE_KEY', $licenseKey);
             
-            // Récupérer les détails de la licence
-            $licenseDetails = $this->getLicenseDetails($licenseKey);
-            $isValid = $licenseDetails['valid'] ?? false;
+            // Vérifier la licence avec le serveur distant
+            $domain = request()->getHost();
+            $ipAddress = request()->ip();
+            
+            // Utiliser le LicenceService pour valider la licence
+            $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
+            $isValid = $result['valid'] ?? false;
             
             // Mettre à jour les settings selon la validité
             if ($isValid) {
-                // Licence valide
-                Setting::set('license_valid', true);
-                Setting::set('license_status', 'active');
-                Setting::set('license_expires_at', $licenseDetails['expires_at'] ?? null);
-                Setting::set('last_license_check', now()->toDateTimeString());
-                
-                // Mettre à jour la session
-                session(['bypass_license_check' => true]);
-                session(['license_valid' => true]);
-                session(['license_status' => 'active']);
-                session(['license_details' => $licenseDetails]);
-                
-                // Forcer le statut à 'active' dans les détails
-                $licenseDetails['status'] = 'active';
+                // Licence valide - les settings sont déjà mis à jour par le LicenceService
                 
                 // Message flash de succès
                 return redirect()->route('admin.settings.license')
-                    ->with('success', 'La clé de licence a été validée avec succès.');
+                    ->with('success', 'La clé de licence a été validée avec succès et les informations ont été envoyées au serveur distant.');
             } else {
-                // Licence invalide
-                Setting::set('license_valid', false);
-                Setting::set('license_status', 'invalid');
-                Setting::set('last_license_check', now()->toDateTimeString());
-                
-                // Mettre à jour la session
-                session(['bypass_license_check' => false]);
-                session(['license_valid' => false]);
-                session(['license_status' => 'invalid']);
-                session(['license_details' => $licenseDetails]);
-                
-                // Forcer le statut à 'invalid' dans les détails
-                $licenseDetails['status'] = 'invalid';
+                // Licence invalide - les settings sont déjà mis à jour par le LicenceService
                 
                 // Message flash d'erreur
-                $message = $licenseDetails['message'] ?? 'Clé de licence non valide';
+                $message = $result['message'] ?? 'Clé de licence non valide';
                 return redirect()->route('admin.settings.license')
                     ->with('error', 'La clé de licence est invalide: ' . $message);
             }
@@ -499,38 +478,24 @@ class LicenseController extends Controller
     }
     
     /**
-     * Vider tous les caches du système de manière exhaustive
+     * Vider les caches spécifiques à la licence sans affecter les traductions
      * pour forcer la prise en compte des changements de licence
      *
      * @return void
      */
     private function clearCache()
     {
-        // Vider le cache de l'application
-        Artisan::call('cache:clear');
-        Log::info("Cache application vidé");
-        
-        // Vider le cache de configuration
+        // Vider le cache de configuration (nécessaire pour les variables d'environnement)
         Artisan::call('config:clear');
         Log::info("Cache configuration vidé");
         
-        // Vider le cache de route
+        // Vider le cache de route (nécessaire pour les middlewares)
         Artisan::call('route:clear');
         Log::info("Cache routes vidé");
         
-        // Vider le cache de vue
+        // Vider le cache de vue (nécessaire pour les vues compilées)
         Artisan::call('view:clear');
         Log::info("Cache vues vidé");
-        
-        // Regénérer le cache des assets si applicable
-        try {
-            if (file_exists(base_path('webpack.mix.js')) || file_exists(base_path('vite.config.js'))) {
-                Log::info("Tentative de régénération des assets");
-                @exec('npm run build');
-            }
-        } catch (\Exception $e) {
-            Log::warning("Erreur lors de la tentative de régénération des assets: " . $e->getMessage());
-        }
         
         // Vider le cache OPcache si disponible
         if (function_exists('opcache_reset')) {
@@ -538,17 +503,30 @@ class LicenseController extends Controller
             Log::info("OPCache réinitialisé");
         }
         
-        // Vider toutes les sessions de licence
-        Cache::forget('license_validation');
-        Cache::forget('license_check_session_' . session()->getId());
+        // Vider uniquement les caches spécifiques à la licence (SANS toucher aux traductions)
+        $licenseCacheKeys = [
+            'license_validation',
+            'license_check_session_' . session()->getId(),
+            'license_verification_' . md5(Setting::get('license_key', '')),
+            'last_license_check_' . md5(Setting::get('license_key', '')),
+            'last_verified_license_key'
+        ];
         
-        // Vider d'autres caches spécifiques liés à la licence
-        try {
-            Cache::flush(); // Vider tout le cache
-            Log::info("Tous les caches ont été vidés");
-        } catch (\Exception $e) {
-            Log::warning("Erreur lors du vidage complet du cache: " . $e->getMessage());
+        foreach ($licenseCacheKeys as $key) {
+            Cache::forget($key);
+            Log::info("Cache de licence vidé: {$key}");
         }
+        
+        // Vider les caches de configuration et d'application SANS vider les traductions
+        try {
+            // Vider seulement le cache de l'application Laravel (pas Redis/Memcached global)
+            Artisan::call('cache:clear');
+            Log::info("Cache de l'application vidé (traductions préservées)");
+        } catch (\Exception $e) {
+            Log::warning("Erreur lors du vidage du cache de l'application: " . $e->getMessage());
+        }
+        
+        Log::info("Caches de licence vidés avec succès (traductions préservées)");
     }
     
     /**

@@ -4,14 +4,18 @@
  */
 return [
     'installation_title' => 'AdminLicence Installation',
+    'installation_subtitle' => 'AdminLicence Installation Wizard',
     
     // Step 1 - License verification
     'license_verification' => 'License Verification',
+    'license_verification_info' => 'Please enter your license key to continue the installation',
+    'verify_license' => 'Verify License',
     'license_key' => 'License Key',
     'verify' => 'Verify',
     'next' => 'Next',
     'license_valid' => 'Valid License',
     'license_invalid' => 'Invalid License',
+    'license_key_invalid' => 'Invalid License Key',
     'license_expired' => 'Expired License',
     'license_revoked' => 'Revoked License',
     'license_suspended' => 'Suspended License',
@@ -25,7 +29,10 @@ return [
     'valid_until' => 'Valid Until',
     'not_available' => 'Not Available',
     
-    // Step 2 - Project detection
+    // Step 2 - System requirements
+    'system_requirements' => 'System Requirements',
+    
+    // Step 3 - Project detection
     'project_detection' => 'Project Detection & Preparation',
     'project_type' => 'Project Type',
     'php_project' => 'Simple PHP Project',
@@ -43,11 +50,14 @@ return [
     'creating_env' => 'Creating .env File',
     'run_composer' => 'Please run "composer install" to install dependencies',
     
-    // Step 3 - Database configuration
+    // Step 4 - Database configuration
     'database_configuration' => 'Database Configuration',
     'db_host' => 'Database Host',
     'db_port' => 'Port',
     'db_name' => 'Database Name',
+    
+    // Step 5 - Admin setup
+    'admin_setup' => 'Admin Setup',
     'db_username' => 'Username',
     'db_password' => 'Password',
     'test_connection' => 'Test Connection',

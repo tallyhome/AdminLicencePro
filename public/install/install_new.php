@@ -46,12 +46,34 @@ try {
             case 1: // Vérification de la licence
                 if (empty($_POST['serial_key'])) {
                     $errors[] = t('license_key_required');
+                    writeToLog("Erreur: Clé de licence non fournie", 'ERROR');
+                    // Rester à l'étape 1
+                    $step = 1;
                 } else {
-                    $licenseCheck = verifierLicence($_POST['serial_key']);
+                    // Obtenir le domaine et l'IP pour la vérification
+                    $domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+                    $ipAddress = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : 
+                                 (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
+                    
+                    // Vérifier la licence sur le serveur distant
+                    writeToLog("Vérification de licence pour la clé: " . $_POST['serial_key'] . " - Domaine: " . $domain . " - IP: " . $ipAddress);
+                    
+                    // Appel obligatoire à verifierLicence avec le domaine et l'IP
+                    $licenseCheck = verifierLicence($_POST['serial_key'], $domain, $ipAddress);
+                    
                     if (!$licenseCheck['valide']) {
+                        // Licence invalide - rester à l'étape 1
                         $errors[] = $licenseCheck['message'];
+                        writeToLog("Licence invalide: " . $licenseCheck['message'], 'ERROR');
+                        // Forcer explicitement le maintien à l'étape 1
+                        $step = 1;
                     } else {
+                        // Licence valide, stocker les données et passer à l'étape 2
                         $_SESSION['license_data'] = $licenseCheck['donnees'];
+                        $_SESSION['license_key'] = $_POST['serial_key'];
+                        $_SESSION['license_valid'] = true;
+                        writeToLog("Licence valide - Passage à l'étape 2", 'SUCCESS');
+                        // Passage explicite à l'étape 2
                         $step = 2;
                     }
                 }
