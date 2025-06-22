@@ -26,18 +26,36 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Gestion du changement de langue
+if (isset($_GET['language']) && in_array($_GET['language'], ['fr', 'en'])) {
+    $_SESSION['installer_language'] = $_GET['language'];
+    
+    // Conserver l'étape actuelle lors de la redirection
+    $currentStep = isset($_GET['step']) ? (int)$_GET['step'] : 1;
+    $redirectUrl = 'install_new.php';
+    if ($currentStep > 1) {
+        $redirectUrl .= '?step=' . $currentStep;
+    }
+    
+    header("Location: $redirectUrl");
+    exit;
+}
+
 // Initialiser la langue
 $currentLang = initLanguage();
 
 // Vérifier si Laravel est déjà installé
 if (isLaravelInstalled() && !isset($_GET['force'])) {
-    showError(t('already_installed') . ' <a href="install_new.php?force=1" style="color: #007bff;">Forcer la réinstallation</a>');
+    showError('Application déjà installée' . ' <a href="install_new.php?force=1" style="color: #007bff;">Forcer la réinstallation</a>');
     exit;
 }
 
 // Gérer les étapes d'installation
 $step = isset($_POST['step']) ? (int)$_POST['step'] : (isset($_GET['step']) ? (int)$_GET['step'] : 1);
 $errors = [];
+
+// Vérifier si c'est une requête AJAX
+$isAjax = isset($_POST['ajax']) || isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
 
 try {
     // Traitement du formulaire
@@ -61,10 +79,23 @@ try {
                     // Appel obligatoire à verifierLicence avec le domaine et l'IP
                     $licenseCheck = verifierLicence($_POST['serial_key'], $domain, $ipAddress);
                     
+                    // Vérification de la validité de la licence
                     if (!$licenseCheck['valide']) {
                         // Licence invalide - rester à l'étape 1
                         $errors[] = $licenseCheck['message'];
                         writeToLog("Licence invalide: " . $licenseCheck['message'], 'ERROR');
+                        
+                        // Réponse AJAX pour licence invalide
+                        if ($isAjax) {
+                            header('Content-Type: application/json');
+                            echo json_encode([
+                                'success' => false,
+                                'message' => $licenseCheck['message'],
+                                'step' => 1
+                            ]);
+                            exit;
+                        }
+                        
                         // Forcer explicitement le maintien à l'étape 1
                         $step = 1;
                     } else {
@@ -73,6 +104,18 @@ try {
                         $_SESSION['license_key'] = $_POST['serial_key'];
                         $_SESSION['license_valid'] = true;
                         writeToLog("Licence valide - Passage à l'étape 2", 'SUCCESS');
+                        
+                        // Réponse AJAX pour licence valide - REDIRECTION
+                        if ($isAjax) {
+                            header('Content-Type: application/json');
+                            echo json_encode([
+                                'success' => true,
+                                'message' => t('license_valid_next_step'),
+                                'redirect' => 'install_new.php?step=2'
+                            ]);
+                            exit;
+                        }
+                        
                         // Passage explicite à l'étape 2
                         $step = 2;
                     }
@@ -90,7 +133,7 @@ try {
                 }
                 
                 if (!empty($missingFields)) {
-                    $errors[] = t('required_fields_missing');
+                    $errors[] = 'Champs requis manquants';
                 } else {
                     // Tester la connexion à la base de données
                     try {
@@ -107,7 +150,7 @@ try {
                             try {
                                 $pdo->exec("CREATE DATABASE `{$_POST['db_name']}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
                             } catch (PDOException $e) {
-                                $errors[] = t('database_creation_failed');
+                                $errors[] = 'Erreur lors de la création de la base de données';
                                 writeToLog("Erreur lors de la création de la base de données: " . $e->getMessage(), 'ERROR');
                                 break;
                             }
@@ -124,7 +167,7 @@ try {
                         
                         $step = 3;
                     } catch (PDOException $e) {
-                        $errors[] = t('database_connection_failed');
+                        $errors[] = 'Erreur de connexion à la base de données';
                         writeToLog("Erreur de connexion à la base de données: " . $e->getMessage(), 'ERROR');
                     }
                 }
@@ -141,11 +184,11 @@ try {
                 }
                 
                 if (!empty($missingFields)) {
-                    $errors[] = t('required_fields_missing');
+                    $errors[] = 'Champs requis manquants';
                 } elseif ($_POST['admin_password'] !== $_POST['admin_password_confirm']) {
-                    $errors[] = t('password_mismatch');
+                    $errors[] = 'Les mots de passe ne correspondent pas';
                 } elseif (!filter_var($_POST['admin_email'], FILTER_VALIDATE_EMAIL)) {
-                    $errors[] = t('invalid_email');
+                    $errors[] = 'Adresse email invalide';
                 } else {
                     // Stocker les informations de l'administrateur en session
                     $_SESSION['admin_config'] = [
@@ -162,24 +205,24 @@ try {
                 try {
                     // Créer le fichier .env à partir du modèle
                     if (!createEnvFile()) {
-                        $errors[] = t('env_creation_failed');
+                        $errors[] = 'Erreur lors de la création du fichier .env';
                         break;
                     }
                     
                     // Exécuter les migrations et créer l'administrateur
                     if (!runMigrations()) {
-                        $errors[] = t('migrations_failed');
+                        $errors[] = 'Erreur lors de l\'exécution des migrations';
                         break;
                     }
                     
                     if (!createAdminUser()) {
-                        $errors[] = t('admin_creation_failed');
+                        $errors[] = 'Erreur lors de la création de l\'administrateur';
                         break;
                     }
                     
                     // Marquer l'installation comme terminée
                     if (!finalizeInstallation()) {
-                        $errors[] = t('installation_finalization_failed');
+                        $errors[] = 'Erreur lors de la finalisation de l\'installation';
                         break;
                     }
                     
@@ -187,7 +230,7 @@ try {
                     header('Location: install_new.php?success=1');
                     exit;
                 } catch (Exception $e) {
-                    $errors[] = t('installation_error');
+                    $errors[] = 'Erreur lors de l\'installation';
                     writeToLog("Erreur lors de l'installation finale: " . $e->getMessage(), 'ERROR');
                 }
                 break;
@@ -201,7 +244,7 @@ try {
     }
 } catch (Exception $e) {
     writeToLog("Erreur lors du traitement du formulaire: " . $e->getMessage());
-    showError(t('installation_error'), $e->getMessage());
+    showError('Erreur lors de l\'installation', $e->getMessage());
 }
 
 // Afficher le formulaire d'installation

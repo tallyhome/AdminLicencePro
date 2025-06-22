@@ -1,389 +1,403 @@
-[2025-06-20 15:23:11] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "project_detection", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 36
-[2025-06-20 15:26:52] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:27:40] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:32:04] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:32:06] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:32:09] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:34:10] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:34:12] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:35:52] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 15:35:54] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:06:03] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:06:07] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:07:36] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:07:38] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:08:14] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:08:29] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:12:01] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:12:06] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:12:41] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:14:10] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:15:40] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:15:42] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:17:49] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:17:57] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:18:05] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:18:07] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:18:23] [FATAL] ERREUR FATALE: syntax error, unexpected single-quoted string "installation_logs", expecting "]" dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\languages\fr.php à la ligne 126
-[2025-06-20 16:22:45] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:22:45] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:22:45] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:22:45] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"42c0c214c4872ccd9892c595848c2669","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:22:45"}}}
-[2025-06-20 16:49:15] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:49:15] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:49:15] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:49:15] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"56e3699b712177fcaaaf5d687c97f7fa","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:49:15"}}}
-[2025-06-20 16:49:24] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 16:49:24] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:49:24] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:49:24] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"64427601abe22072e7a90b507fea60a2","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:49:24"}}}
-[2025-06-20 16:49:38] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicenceteste'@'localhost' (using password: YES)
-[2025-06-20 16:50:06] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicencetest'@'localhost' (using password: YES)
-[2025-06-20 16:50:16] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicencetest'@'localhost' (using password: YES)
-[2025-06-20 16:50:16] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicencetest'@'localhost' (using password: YES)
-[2025-06-20 16:50:56] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:50:56] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:50:59] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:50:59] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:00] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicence1'@'localhost' (using password: YES)
-[2025-06-20 16:51:05] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:05] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:05] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:05] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"5303754b69701d06319b232ec1dc22e7","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:06"}}}
-[2025-06-20 16:51:05] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:05] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:05] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:05] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"2ae2e51556d1fa9e01e113ab55c7fc95","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:06"}}}
-[2025-06-20 16:51:07] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:07] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:07] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:07] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"0815973f49ca8ad5802cd6b52e032d53","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:07"}}}
-[2025-06-20 16:51:07] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:07] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:07] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:07] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"9e468ee96c889de2ed8ebca4b401dd1a","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:07"}}}
-[2025-06-20 16:51:22] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:22] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:22] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:22] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"bbe9bd3bed1a7a8f822b5f4d3adf1a66","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:22"}}}
-[2025-06-20 16:51:22] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:22] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:22] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:22] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"5a18c45190b549bedeb5191246e302b7","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:22"}}}
-[2025-06-20 16:51:23] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:23] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:23] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:23] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"4d7647416ef1556330e8c1216fdcfe27","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:23"}}}
-[2025-06-20 16:51:23] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:23] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:23] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:23] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"950483c23631211555f0424471d31af5","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:24"}}}
-[2025-06-20 16:51:23] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:23] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:24] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:24] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"7291c94ad9dc1baa0d499008846083b6","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:24"}}}
-[2025-06-20 16:51:24] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:24] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:24] [INFO] Réponse de l'API - Code HTTP: 404
-[2025-06-20 16:51:24] [INFO] Corps de la réponse: <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Not Found</title>
-
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}code{font-family:monospace,monospace;font-size:1em}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}code{font-family:Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-gray-400{--border-opacity:1;border-color:#cbd5e0;border-color:rgba(203,213,224,var(--border-opacity))}.border-t{border-top-width:1px}.border-r{border-right-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-xl{max-width:36rem}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.uppercase{text-transform:uppercase}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.tracking-wider{letter-spacing:.05em}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@-webkit-keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@-webkit-keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@-webkit-keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@-webkit-keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}
-        </style>
-
-        <style>
-            body {
-                font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
-                    <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                        404                    </div>
-
-                    <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                        Not Found                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-
-[2025-06-20 16:51:24] [INFO] Erreur lors de la vérification de licence: Erreur de décodage JSON: Syntax error
-[2025-06-20 16:51:27] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:27] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:27] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"f27146954e8f89913295fe535558c747","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:27"}}}
-[2025-06-20 16:51:27] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:51:27] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:51:27] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:51:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"ac8e8d8691bb880d74a286069fd4de14","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:51:27"}}}
-[2025-06-20 16:52:15] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:15] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:15] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:52:15] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"750bf279a5a2093924067d6f4e5c30b3","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:52:15"}}}
-[2025-06-20 16:52:15] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:15] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:15] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:52:15] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"f0afdc393d2495d400931f3c4bfb25b6","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:52:16"}}}
-[2025-06-20 16:52:17] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:17] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:17] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:52:17] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"f187fa1b8b198bdbd9295579e5641042","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:52:17"}}}
-[2025-06-20 16:52:17] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:17] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:17] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:52:17] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"665c7d7a7a5a3e93995b0f3cd65243ed","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:52:17"}}}
-[2025-06-20 16:52:17] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:17] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:17] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:52:17] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"f68b643a936c327378b952fe01ef02bb","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:52:17"}}}
-[2025-06-20 16:52:17] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 16:52:17] [INFO] Données envoyées à l'API: {"serial_key":"T927-3G27-MAIE-IZ81","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:52:17] [INFO] Réponse de l'API - Code HTTP: 404
-[2025-06-20 16:52:17] [INFO] Corps de la réponse: <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Not Found</title>
-
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}code{font-family:monospace,monospace;font-size:1em}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}code{font-family:Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-gray-400{--border-opacity:1;border-color:#cbd5e0;border-color:rgba(203,213,224,var(--border-opacity))}.border-t{border-top-width:1px}.border-r{border-right-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-xl{max-width:36rem}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.uppercase{text-transform:uppercase}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.tracking-wider{letter-spacing:.05em}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@-webkit-keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@-webkit-keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@-webkit-keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@-webkit-keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}
-        </style>
-
-        <style>
-            body {
-                font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
-                    <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                        404                    </div>
-
-                    <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                        Not Found                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-
-[2025-06-20 16:52:17] [INFO] Erreur lors de la vérification de licence: Erreur de décodage JSON: Syntax error
-[2025-06-20 16:58:51] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:58:51] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:58:51] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:58:51] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"974058de0bfc552bc1e18dc306c51586","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:58:51"}}}
-[2025-06-20 16:58:51] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 16:58:51] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 16:58:51] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 16:58:51] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"fde37dc5529b9351e8e88afca782f5fb","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 16:58:52"}}}
-[2025-06-20 17:02:42] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 17:02:42] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 17:02:42] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 17:02:42] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"358dac12072075df174025a138a47c01","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-KLKP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 17:02:43"}}}
-[2025-06-20 17:07:21] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:07:21] [INFO] Données envoyées à l'API: {"serial_key":"MEST-FM7A-BLGA-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 17:07:21] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 17:07:21] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"b780054ddb866fe0bea7e1ad927849ac","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"MEST-FM7A-BLGA-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 17:07:21"}}}
-[2025-06-20 17:08:28] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:08:28] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-20 17:08:28] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-20 17:08:28] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"efb431c120bd59dc9426fce55b819606","project":"Test Project","expires_at":"2026-06-20","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-20 17:08:29"}}}
-[2025-06-20 17:09:24] [ERROR] Erreur de connexion à la base de données: SQLSTATE[HY000] [1045] Access denied for user 'adminlicenceteste'@'localhost' (using password: YES)
-[2025-06-20 17:15:56] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:15:56] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:16:04] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:16:04] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:16:44] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:16:44] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:04] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:04] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:10] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:10] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:15] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:15] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:45] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:18:45] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:19:01] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 17:19:01] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-1234
-[2025-06-20 17:19:21] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 17:19:21] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-KLKP
-[2025-06-20 17:19:42] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-KLKP
-[2025-06-20 17:19:42] [INFO] Licence invalide en mode développement: MEST-FM7A-BLGA-KLKP
-[2025-06-20 17:19:46] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:19:46] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:20:33] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:20:33] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:23:43] [INFO] Début de la vérification de licence - Clé: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 17:23:43] [INFO] Licence invalide en mode développement: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 17:24:35] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:24:35] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:24:53] [INFO] Début de la vérification de licence - Clé: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 19:24:53] [INFO] Licence valide trouvée en mode développement: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 19:24:53] [INFO] Début de la vérification de licence - Clé: INVALID-KEY-TEST
-[2025-06-20 19:24:53] [INFO] Erreur: Format de clé invalide
-[2025-06-20 17:38:14] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:38:14] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:39:06] [INFO] Début de la vérification de licence - Clé: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 19:39:06] [INFO] Licence valide trouvée en mode développement: JZPR-9QJQ-ZRNW-S60B
-[2025-06-20 19:39:06] [INFO] Début de la vérification de licence - Clé: INVALID-KEY-TEST
-[2025-06-20 19:39:06] [INFO] Erreur: Format de clé invalide
-[2025-06-20 17:42:38] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:42:38] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:42:41] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:42:41] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:42:50] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:42:50] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:45:15] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:45:15] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:45:17] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:45:17] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:17] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:17] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:20] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:20] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:21] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:21] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:43] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 17:48:43] [INFO] Licence invalide en mode développement: T927-3G27-MAIE-IZ81
-[2025-06-20 17:48:54] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:48:54] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:51:21] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:51:21] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:51:24] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:51:24] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:06] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:06] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:09] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:09] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:13] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 17:58:13] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:51] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:51] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:54] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:54] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:57] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:57] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:59] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:46:59] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:47:00] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:47:00] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:48:23] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:48:23] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:48:39] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 19:48:39] [INFO] Licence invalide en mode développement: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:06:20] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:06:20] [INFO] Licence acceptée en mode développement (format valide): VTJU-Z4A5-XATJ-MSFN (domaine: 127.0.0.1:8000)
-[2025-06-20 21:07:10] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:07:10] [INFO] Licence acceptée en mode développement (format valide): VTJU-Z4A5-XATJ-MSFN (domaine: 127.0.0.1:8000)
-[2025-06-20 21:07:17] [INFO] Début de la vérification de licence - Clé: DEV1-DEV2-DEV3-DEV4
-[2025-06-20 21:07:17] [INFO] Licence valide trouvée en mode développement: DEV1-DEV2-DEV3-DEV4 (domaine: 127.0.0.1:8000)
-[2025-06-20 21:07:27] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:07:27] [INFO] Licence acceptée en mode développement (format valide): VTJU-Z4A5-XATJ-MSFN (domaine: 127.0.0.1:8000)
-[2025-06-20 21:07:30] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:07:30] [INFO] Licence acceptée en mode développement (format valide): VTJU-Z4A5-XATJ-MSFN (domaine: 127.0.0.1:8000)
-[2025-06-20 21:08:24] [INFO] Début de la vérification de licence - Clé: T927-3G27-MAIE-IZ81
-[2025-06-20 21:08:24] [INFO] Licence acceptée en mode développement (format valide): T927-3G27-MAIE-IZ81 (domaine: 127.0.0.1:8000)
-[2025-06-20 21:08:35] [INFO] Début de la vérification de licence - Clé: KENP-IUQN-KVG5-7O11
-[2025-06-20 21:08:35] [INFO] Licence acceptée en mode développement (format valide): KENP-IUQN-KVG5-7O11 (domaine: 127.0.0.1:8000)
-[2025-06-20 21:08:41] [INFO] Début de la vérification de licence - Clé: MEST-FM7A-BLGA-1234
-[2025-06-20 21:08:41] [INFO] Licence acceptée en mode développement (format valide): MEST-FM7A-BLGA-1234 (domaine: 127.0.0.1:8000)
-[2025-06-20 21:09:05] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-20 21:09:05] [INFO] Licence acceptée en mode développement (format valide): VTJU-Z4A5-XATJ-MSFN (domaine: 127.0.0.1:8000)
-[2025-06-21 00:30:10] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-21 00:30:10] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:30:10] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:30:10] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"2ad37bc71398bdef8e3635cc2fa396df","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:30:10"}}}
-[2025-06-21 00:30:40] [INFO] Début de la vérification de licence - Clé: KENP-IUQN-KVG5-7O11
-[2025-06-21 00:30:40] [INFO] Données envoyées à l'API: {"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:30:40] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:30:40] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"e6291a7cefa8cd85bcfd106ae2031765","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:30:40"}}}
-[2025-06-21 00:43:56] [INFO] Vérification de licence pour la clé: KENP-IUQN-KVG5-7O11 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 00:43:56] [INFO] Début de la vérification de licence - Clé: KENP-IUQN-KVG5-7O11
-[2025-06-21 00:43:56] [INFO] Données envoyées à l'API: {"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:43:56] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:43:56] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"5a2b40f72ce0c1067ffe54e538eb0859","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:43:56"}}}
-[2025-06-21 00:43:56] [INFO] Licence valide - Passage à l'étape 2
-[2025-06-21 00:44:15] [INFO] Vérification de licence pour la clé: VTJU-Z4A5-XATJ-MSFN - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 00:44:15] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-21 00:44:15] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:44:15] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:44:15] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"4cda08f5933f65fb0cd42052c6b6c313","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:44:15"}}}
-[2025-06-21 00:44:15] [INFO] Licence valide - Passage à l'étape 2
-[2025-06-21 00:44:45] [INFO] Vérification de licence pour la clé: VTJU-Z4A5-XATJ-1000 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 00:44:45] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-1000
-[2025-06-21 00:44:45] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-1000","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:44:45] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:44:45] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"3b0ed1eefb40a45d5914f86c4497dc45","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-1000","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:44:45"}}}
-[2025-06-21 00:44:45] [INFO] Licence valide - Passage à l'étape 2
-[2025-06-21 00:54:33] [INFO] Vérification de licence pour la clé: KENP-IUQN-KVG5-7O11 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 00:54:33] [INFO] Début de la vérification de licence - Clé: KENP-IUQN-KVG5-7O11
-[2025-06-21 00:54:33] [INFO] Données envoyées à l'API: {"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:54:33] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:54:33] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"2a48fee4b940f1c56f757837410e7842","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"KENP-IUQN-KVG5-7O11","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:54:33"}}}
-[2025-06-21 00:54:33] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 00:54:48] [INFO] Vérification de licence pour la clé: VTJU-Z4A5-XATJ-MSFN - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 00:54:48] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-21 00:54:48] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 00:54:48] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 00:54:48] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"4fd8085ef352765d836a636f30aac383","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 00:54:48"}}}
-[2025-06-21 00:54:48] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 02:44:51] [INFO] Vérification de licence pour la clé: VTJU-Z4A5-XATJ-MSFN - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 02:44:51] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-21 02:44:51] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 02:44:51] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 02:44:51] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de licence valide (simulation)","data":{"token":"97f6260bd8ce4f8cafd4ec7adcedfa68","project":"Test Project","expires_at":"2026-06-21","debug_info":{"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1","server_time":"2025-06-21 02:44:50"}}}
-[2025-06-21 02:44:51] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 03:27:50] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 03:27:50] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8001","ip_address":"127.0.0.1"}
-[2025-06-21 03:27:50] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 03:27:50] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 03:27:50] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 03:31:02] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 03:31:02] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 03:31:02] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 03:31:02] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 03:31:02] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 03:31:02] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 03:31:02] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 03:31:11] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 03:31:11] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 03:31:11] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 03:31:11] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 03:31:11] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 03:31:11] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 03:31:11] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 03:31:48] [INFO] Vérification de licence pour la clé: N5OJ-GOHJ-NNUI-ORPY - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 03:31:48] [INFO] Début de la vérification de licence - Clé: N5OJ-GOHJ-NNUI-ORPY
-[2025-06-21 03:31:48] [INFO] Données envoyées à l'API: {"serial_key":"N5OJ-GOHJ-NNUI-ORPY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 03:31:49] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 03:31:49] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"542722d2fb9ab92d3396dca772e975f7","project":"","expires_at":null}}
-[2025-06-21 03:31:49] [INFO] Licence valide - Token: 542722d2fb...
-[2025-06-21 03:31:49] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 03:32:06] [INFO] Vérification de licence pour la clé: N5OJ-GOHJ-NNUI-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 03:32:06] [INFO] Début de la vérification de licence - Clé: N5OJ-GOHJ-NNUI-1234
-[2025-06-21 03:32:06] [INFO] Données envoyées à l'API: {"serial_key":"N5OJ-GOHJ-NNUI-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 03:32:06] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 03:32:06] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 03:32:06] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 03:32:06] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 04:12:19] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:12:26] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:12:34] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:12:37] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:13:23] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:13:26] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 04:13:30] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:07:13] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:07:41] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:13:43] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:14:23] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:14:27] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:14:27] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
+[2025-06-21 14:14:27] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:14:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"d3bd2ba27b234e463c4675fc15630df7","project":"","expires_at":null}}
+[2025-06-21 14:14:27] [INFO] Licence valide - Token: d3bd2ba27b...
+[2025-06-21 14:14:27] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:14:27] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
+[2025-06-21 14:14:27] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:14:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"1ea2c3a459984330f5ffc74b268ea1ad","project":"","expires_at":null}}
+[2025-06-21 14:14:27] [INFO] Licence valide - Token: 1ea2c3a459...
+[2025-06-21 14:15:21] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:18:00] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: localhost - IP: 127.0.0.1
+[2025-06-21 14:18:00] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:18:00] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
+[2025-06-21 14:18:00] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:18:00] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"2fe7439e12dcea82e953c1585e6759bc","project":"","expires_at":null}}
+[2025-06-21 14:18:00] [INFO] Licence valide - Token: 2fe7439e12...
+[2025-06-21 14:18:00] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 14:25:44] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:25:57] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:25:59] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:26:06] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:26:51] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:26:55] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:27:02] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:36:51] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 14:36:51] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:36:51] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:36:51] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:36:51] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 14:36:51] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 14:36:51] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-21 14:37:01] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:37:26] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 14:37:26] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
+[2025-06-21 14:37:26] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:37:26] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:37:26] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"159323d5bdd410ff26190ec70cebb4bf","project":"","expires_at":null}}
+[2025-06-21 14:37:26] [INFO] Licence valide - Token: 159323d5bd...
+[2025-06-21 14:37:26] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 14:39:25] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:39:32] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:39:37] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:40:12] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:40:29] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:40:54] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:40:58] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:41:16] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:41:53] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:42:04] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:42:29] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:42:32] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:43:13] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:43:23] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:49:54] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:49:54] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:49:55] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:49:55] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 14:49:55] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 14:50:31] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:50:31] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:50:31] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:50:31] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 14:50:31] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 14:50:31] [INFO] Début de la vérification de licence - Clé: KOOH-TSXE-DTWK-AAN3
+[2025-06-21 14:50:31] [INFO] Données envoyées à l'API: {"serial_key":"KOOH-TSXE-DTWK-AAN3","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:50:31] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:50:31] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"882aeeb9df6fad3aabfe5825e5060d26","project":"","expires_at":null}}
+[2025-06-21 14:50:31] [INFO] Licence valide - Token: 882aeeb9df...
+[2025-06-21 14:58:16] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:58:19] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:58:31] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 14:58:55] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 14:58:55] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:58:55] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:58:55] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 14:58:55] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 14:58:55] [INFO] Début de la vérification de licence - Clé: ILOH-TQ65-ZIMO-F1MT
+[2025-06-21 14:58:55] [INFO] Données envoyées à l'API: {"serial_key":"ILOH-TQ65-ZIMO-F1MT","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 14:58:56] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 14:58:56] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"c191876a618d4b4da84c5dec6515b57d","project":"","expires_at":null}}
+[2025-06-21 14:58:56] [INFO] Licence valide - Token: c191876a61...
+[2025-06-21 15:00:28] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:01:01] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 17:06:50] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 17:06:50] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
+[2025-06-21 17:06:50] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 17:06:50] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 17:06:50] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 17:06:50] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 17:06:50] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 17:07:26] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 17:07:26] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
+[2025-06-21 17:07:26] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 17:07:26] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 17:07:26] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 17:07:26] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 17:07:26] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 17:07:41] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 17:07:41] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
+[2025-06-21 17:07:41] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 17:07:42] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 17:07:42] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 17:07:42] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 17:07:42] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 17:08:32] [INFO] Vérification licence - Clé: RUYZ-KFJ0-7BGO-2VJB - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 17:08:32] [INFO] Début de la vérification de licence - Clé: RUYZ-KFJ0-7BGO-2VJB
+[2025-06-21 17:08:32] [INFO] Données envoyées à l'API: {"serial_key":"RUYZ-KFJ0-7BGO-2VJB","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 17:08:33] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 17:08:33] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"6fb16543f14146ee1e51afacb2053cb8","project":"","expires_at":null}}
+[2025-06-21 17:08:33] [INFO] Licence valide - Token: 6fb16543f1...
+[2025-06-21 17:08:33] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 17:09:50] [INFO] Vérification licence - Clé: VJF3-RRFT-SYDP-IJK2 - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 17:09:50] [INFO] Début de la vérification de licence - Clé: VJF3-RRFT-SYDP-IJK2
+[2025-06-21 17:09:50] [INFO] Données envoyées à l'API: {"serial_key":"VJF3-RRFT-SYDP-IJK2","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 17:09:50] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 17:09:50] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3405ee3ccb1da24b5dafc2a52b0bb61c","project":"","expires_at":null}}
+[2025-06-21 17:09:50] [INFO] Licence valide - Token: 3405ee3ccb...
+[2025-06-21 17:09:50] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 15:12:37] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:12] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:18] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:24] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:29] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:40] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:17:45] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:22:12] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:33:12] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:33:59] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:34:02] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:34:14] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:35:51] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:41:26] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:42:42] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:54:53] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:55:16] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 15:55:40] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 16:00:36] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:03:32] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: localhost:8000 - IP: ::1
+[2025-06-21 18:03:32] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
+[2025-06-21 18:03:32] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"localhost:8000","ip_address":"::1"}
+[2025-06-21 18:03:32] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:03:32] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"330be9c45abaf092148d0eacc1cf1596","project":"","expires_at":null}}
+[2025-06-21 18:03:32] [INFO] Licence valide - Token: 330be9c45a...
+[2025-06-21 18:03:32] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 16:13:14] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 16:13:22] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 16:18:13] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 16:23:50] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 16:24:04] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 16:24:04] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 16:24:04] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 16:24:04] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 16:24:04] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 16:24:04] [INFO] Début de la vérification de licence - Clé: ABCD-EFGH-IJKL-MNOP
+[2025-06-21 16:24:04] [INFO] Données envoyées à l'API: {"serial_key":"ABCD-EFGH-IJKL-MNOP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 16:24:04] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 16:24:04] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 16:24:04] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 16:28:02] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:02:57] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 20:07:24] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: localhost:8000 - IP: 127.0.0.1
+[2025-06-21 20:07:24] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
+[2025-06-21 20:07:24] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"localhost:8000","ip_address":"127.0.0.1"}
+[2025-06-21 20:07:24] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 20:07:24] [INFO] Corps de la réponse: {"status":"error","message":"Adresse IP non autoris\u00e9e pour cette cl\u00e9"}
+[2025-06-21 20:07:24] [INFO] Erreur API: Adresse IP non autorisée pour cette clé
+[2025-06-21 20:07:24] [ERROR] Licence invalide: Adresse IP non autorisée pour cette clé
+[2025-06-21 18:07:34] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 18:07:34] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:07:34] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:07:34] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:07:34] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:11:03] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:11:18] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:32:32] [INFO] Vérification licence - Clé: VTJU-Z4A5-XATJ-MSFN - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:32:32] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
+[2025-06-21 18:32:32] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:32:32] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:32:32] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:32:32] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:32:32] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-21 18:32:48] [INFO] Vérification licence - Clé: FBQD-9GF5-JMHA-DGDT - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:32:48] [INFO] Début de la vérification de licence - Clé: FBQD-9GF5-JMHA-DGDT
+[2025-06-21 18:32:48] [INFO] Données envoyées à l'API: {"serial_key":"FBQD-9GF5-JMHA-DGDT","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:32:48] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:32:48] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3f26d20d473b2575e53fd59262b77cde","project":"","expires_at":null}}
+[2025-06-21 18:32:48] [INFO] Licence valide - Token: 3f26d20d47...
+[2025-06-21 18:32:48] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 18:33:42] [INFO] Vérification licence - Clé: VUCG-HERC-NDPW-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:33:42] [INFO] Début de la vérification de licence - Clé: VUCG-HERC-NDPW-1234
+[2025-06-21 18:33:42] [INFO] Données envoyées à l'API: {"serial_key":"VUCG-HERC-NDPW-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:33:42] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:33:42] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 18:33:42] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 18:33:42] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 18:35:38] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:35:58] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:52:10] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 18:57:19] [INFO] Vérification licence - Clé: 1111111111111111111111111111111111111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:57:19] [INFO] Début de la vérification de licence - Clé: 1111111111111111111111111111111111111
+[2025-06-21 18:57:19] [INFO] Erreur: Format de clé invalide
+[2025-06-21 18:57:19] [ERROR] Licence invalide: Format de clé de licence invalide (XXXX-XXXX-XXXX-XXXX)
+[2025-06-21 18:57:32] [INFO] Vérification licence - Clé: 4WHX-DYIY-6D8Z-JW6F - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:57:32] [INFO] Début de la vérification de licence - Clé: 4WHX-DYIY-6D8Z-JW6F
+[2025-06-21 18:57:32] [INFO] Données envoyées à l'API: {"serial_key":"4WHX-DYIY-6D8Z-JW6F","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:57:32] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:57:32] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:57:32] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:57:32] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-21 18:57:42] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:57:42] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
+[2025-06-21 18:57:42] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:57:42] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:57:42] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:57:42] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:57:42] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-21 18:57:52] [INFO] Vérification licence - Clé: FBQD-9GF5-JMHA-DGDT - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:57:52] [INFO] Début de la vérification de licence - Clé: FBQD-9GF5-JMHA-DGDT
+[2025-06-21 18:57:52] [INFO] Données envoyées à l'API: {"serial_key":"FBQD-9GF5-JMHA-DGDT","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:57:52] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:57:52] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"9b42158937ffe1f81feee96df60c0948","project":"","expires_at":null}}
+[2025-06-21 18:57:52] [INFO] Licence valide - Token: 9b42158937...
+[2025-06-21 18:57:52] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 18:58:06] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:58:06] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
+[2025-06-21 18:58:06] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:58:06] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:58:06] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:58:06] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:58:06] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-21 18:58:14] [INFO] Vérification licence - Clé: VUCG-HERC-NDPW-XSWA - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 18:58:14] [INFO] Début de la vérification de licence - Clé: VUCG-HERC-NDPW-XSWA
+[2025-06-21 18:58:14] [INFO] Données envoyées à l'API: {"serial_key":"VUCG-HERC-NDPW-XSWA","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:58:14] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:58:14] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"6c16356a2ada35e6be1ec6acc49cd428","project":"","expires_at":null}}
+[2025-06-21 18:58:14] [INFO] Licence valide - Token: 6c16356a2a...
+[2025-06-21 18:58:14] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 18:59:10] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
+[2025-06-21 18:59:10] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:59:10] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:59:10] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-21 18:59:10] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-21 18:59:10] [INFO] Début de la vérification de licence - Clé: ABCD-EFGH-IJKL-MNOP
+[2025-06-21 18:59:10] [INFO] Données envoyées à l'API: {"serial_key":"ABCD-EFGH-IJKL-MNOP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 18:59:10] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 18:59:10] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 18:59:10] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: INVALID-FORMAT
+[2025-06-21 19:12:05] [INFO] Erreur: Format de clé invalide
+[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
+[2025-06-21 19:12:05] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"test.localhost","ip_address":"127.0.0.1"}
+[2025-06-21 19:12:05] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:12:05] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:12:05] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: 
+[2025-06-21 19:12:05] [INFO] Erreur: Clé de licence vide
+[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: TEST-@#$%-XXXX-YYYY
+[2025-06-21 19:12:05] [INFO] Erreur: Format de clé invalide
+[2025-06-21 19:13:49] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 19:14:30] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 19:16:10] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 19:16:30] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-21 19:17:56] [INFO] Vérification de licence pour la clé: TEST-TEST-TEST-TEST - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:17:56] [INFO] Début de la vérification de licence - Clé: TEST-TEST-TEST-TEST
+[2025-06-21 19:17:56] [INFO] Données envoyées à l'API: {"serial_key":"TEST-TEST-TEST-TEST","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:17:56] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:17:57] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:17:57] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:17:57] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 19:19:41] [INFO] Vérification de licence pour la clé: 1111-1111-1111-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:19:41] [INFO] Début de la vérification de licence - Clé: 1111-1111-1111-1111
+[2025-06-21 19:19:41] [INFO] Données envoyées à l'API: {"serial_key":"1111-1111-1111-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:19:41] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:19:41] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:19:41] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:19:41] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 19:20:30] [INFO] Vérification de licence pour la clé: 0CMA-BW4M-2ML4-WM7R - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:20:30] [INFO] Début de la vérification de licence - Clé: 0CMA-BW4M-2ML4-WM7R
+[2025-06-21 19:20:30] [INFO] Données envoyées à l'API: {"serial_key":"0CMA-BW4M-2ML4-WM7R","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:20:30] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:20:30] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"03b8c3363956b6f692284f11fb41e883","project":"","expires_at":null}}
+[2025-06-21 19:20:30] [INFO] Licence valide - Token: 03b8c33639...
+[2025-06-21 19:20:30] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 19:20:48] [INFO] Vérification de licence pour la clé: 1111-1111-1111-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:20:48] [INFO] Début de la vérification de licence - Clé: 1111-1111-1111-1111
+[2025-06-21 19:20:48] [INFO] Données envoyées à l'API: {"serial_key":"1111-1111-1111-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:20:48] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:20:48] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:20:48] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:20:48] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 19:21:15] [INFO] Vérification de licence pour la clé: 6R4Z-NRIT-QCMU-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:21:15] [INFO] Début de la vérification de licence - Clé: 6R4Z-NRIT-QCMU-1234
+[2025-06-21 19:21:15] [INFO] Données envoyées à l'API: {"serial_key":"6R4Z-NRIT-QCMU-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:21:15] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:21:15] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:21:15] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:21:15] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 19:22:04] [INFO] Vérification de licence pour la clé: 6R4Z-NRIT-QCMU-8OHK - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:22:04] [INFO] Début de la vérification de licence - Clé: 6R4Z-NRIT-QCMU-8OHK
+[2025-06-21 19:22:04] [INFO] Données envoyées à l'API: {"serial_key":"6R4Z-NRIT-QCMU-8OHK","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:22:04] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:22:04] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"f102ceb35a4fb9b3c9f635ab253ca9ba","project":"","expires_at":null}}
+[2025-06-21 19:22:04] [INFO] Licence valide - Token: f102ceb35a...
+[2025-06-21 19:22:04] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-21 19:24:56] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:24:56] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1111
+[2025-06-21 19:24:56] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:24:56] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:24:56] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:24:56] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:24:56] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 19:25:22] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 19:25:22] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
+[2025-06-21 19:25:22] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 19:25:22] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 19:25:22] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 19:25:22] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 19:25:22] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 20:08:03] [INFO] Vérification de licence pour la clé: INVALID-TEST-LICENCE-KEY - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 20:08:03] [INFO] Début de la vérification de licence - Clé: INVALID-TEST-LICENCE-KEY
+[2025-06-21 20:08:03] [INFO] Erreur: Format de clé invalide
+[2025-06-21 20:08:03] [ERROR] Licence invalide: Format de clé de licence invalide (XXXX-XXXX-XXXX-XXXX)
+[2025-06-21 20:08:03] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
+[2025-06-21 20:08:03] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Format de cl\u00e9 de licence invalide (XXXX-XXXX-XXXX-XXXX)","step":1}
+[2025-06-21 21:13:14] [INFO] Vérification de licence pour la clé: AAAA-BBBB-CCCC-DDDD - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-21 21:13:14] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
+[2025-06-21 21:13:14] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-21 21:13:14] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-21 21:13:14] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-21 21:13:14] [INFO] Erreur API: Clé de série invalide
+[2025-06-21 21:13:14] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-21 21:13:14] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
+[2025-06-21 21:13:14] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
+[2025-06-22 00:44:57] [INFO] Vérification de licence pour la clé: LURL-1270-0180-00LL - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:44:57] [INFO] Début de la vérification de licence - Clé: LURL-1270-0180-00LL
+[2025-06-22 00:44:57] [INFO] Données envoyées à l'API: {"serial_key":"LURL-1270-0180-00LL","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:44:57] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:44:57] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-22 00:44:57] [INFO] Erreur API: Clé de série invalide
+[2025-06-22 00:44:57] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-22 00:44:57] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
+[2025-06-22 00:44:57] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
+[2025-06-22 00:44:58] [INFO] Vérification de licence pour la clé: AAAA-BBBB-CCCC-DDDD - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:44:58] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
+[2025-06-22 00:44:58] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:44:58] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:44:58] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-22 00:44:58] [INFO] Erreur API: Clé de série invalide
+[2025-06-22 00:44:58] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-22 00:44:58] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
+[2025-06-22 00:44:58] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
+[2025-06-22 00:45:50] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-DAUS - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:45:50] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-DAUS
+[2025-06-22 00:45:50] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-DAUS","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:45:50] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:45:50] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3e6d9638b6447361a0bb66c84fefc4b2","project":"","expires_at":null}}
+[2025-06-22 00:45:50] [INFO] Licence valide - Token: 3e6d9638b6...
+[2025-06-22 00:45:50] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-22 00:45:50] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence valide
+[2025-06-22 00:45:50] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":true,"message":"Licence valide ! Passage \u00e0 l'\u00e9tape suivante...","redirect":"install_new.php?step=2"}
+[2025-06-22 00:46:08] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:46:08] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
+[2025-06-22 00:46:08] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:46:08] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:46:08] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-22 00:46:08] [INFO] Erreur API: Clé de série invalide
+[2025-06-22 00:46:08] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-22 00:46:08] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
+[2025-06-22 00:46:08] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
+[2025-06-22 00:46:49] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:46:49] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1111
+[2025-06-22 00:46:49] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:46:49] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:46:49] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-22 00:46:49] [INFO] Erreur API: Clé de série invalide
+[2025-06-22 00:46:49] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-22 00:47:38] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:47:38] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
+[2025-06-22 00:47:38] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:47:39] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:47:39] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-22 00:47:39] [INFO] Erreur API: Clé de série invalide
+[2025-06-22 00:47:39] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-22 00:47:45] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-DAUS - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-22 00:47:45] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-DAUS
+[2025-06-22 00:47:45] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-DAUS","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-22 00:47:45] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-22 00:47:45] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"cb16fd0c9db416d56931f58da421ff97","project":"","expires_at":null}}
+[2025-06-22 00:47:45] [INFO] Licence valide - Token: cb16fd0c9d...
+[2025-06-22 00:47:45] [SUCCESS] Licence valide - Passage à l'étape 2

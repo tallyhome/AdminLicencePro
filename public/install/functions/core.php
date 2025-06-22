@@ -121,7 +121,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
         writeToLog("Erreur: Clé de licence vide");
         return [
             'valide' => false,
-            'message' => t('license_key_required'),
+            'message' => 'Clé de licence requise',
             'donnees' => null
         ];
     }
@@ -131,7 +131,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
         writeToLog("Erreur: Format de clé invalide");
         return [
             'valide' => false,
-            'message' => t('license_key_invalid_format'),
+            'message' => 'Format de clé de licence invalide (XXXX-XXXX-XXXX-XXXX)',
             'donnees' => null
         ];
     }
@@ -208,7 +208,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
             writeToLog("Erreur API: " . ($resultat['message'] ?? 'non spécifiée'));
             return [
                 'valide' => false,
-                'message' => $resultat['message'] ?? t('license_key_invalid'),
+                'message' => $resultat['message'] ?? 'Clé de licence invalide',
                 'donnees' => null
             ];
         }
@@ -220,7 +220,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
             // Vérifier si les données essentielles sont présentes (token est requis)
             if (isset($data['token'])) {
                 $isValid = true;
-                $message = t('license_valid');
+                $message = 'Licence valide';
                 
                 // Vérifier si la licence n'est pas expirée (si expires_at est fourni)
                 if (!empty($data['expires_at']) && $data['expires_at'] !== null) {
@@ -229,7 +229,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
                         $currentDate = new DateTime();
                         if ($currentDate > $expirationDate) {
                             $isValid = false;
-                            $message = t('license_expired');
+                            $message = 'Licence expirée';
                             writeToLog("Licence expirée - Date d'expiration: " . $data['expires_at']);
                         }
                     } catch (Exception $e) {
@@ -258,7 +258,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
                 writeToLog("Erreur: Token de licence manquant");
                 return [
                     'valide' => false,
-                    'message' => t('license_key_invalid'),
+                    'message' => 'Clé de licence invalide',
                     'donnees' => null
                 ];
             }
@@ -266,7 +266,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
             writeToLog("Erreur: Statut de réponse invalide ou données manquantes");
             return [
                 'valide' => false,
-                'message' => $resultat['message'] ?? t('license_key_invalid'),
+                'message' => $resultat['message'] ?? 'Clé de licence invalide',
                 'donnees' => null
             ];
         }

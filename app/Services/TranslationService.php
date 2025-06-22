@@ -18,9 +18,24 @@ class TranslationService
      */
     protected $availableLocales;
 
+    /**
+     * Langue de fallback par défaut
+     *
+     * @var string
+     */
+    protected $fallbackLocale;
+
+    /**
+     * Cache des traductions chargées
+     *
+     * @var array
+     */
+    protected $translations = [];
+
     public function __construct()
     {
         $this->availableLocales = config('app.available_locales', ['en', 'fr']);
+        $this->fallbackLocale = config('app.fallback_locale', 'fr');
     }
 
     /**
@@ -95,6 +110,16 @@ class TranslationService
     }
 
     /**
+     * Alias pour getLocale() pour compatibilité
+     *
+     * @return string
+     */
+    public function getCurrentLocale(): string
+    {
+        return $this->getLocale();
+    }
+
+    /**
      * Obtenir le nom de la langue dans sa langue native
      *
      * @param string $locale
@@ -128,7 +153,7 @@ class TranslationService
      */
     public function getTranslations(?string $locale = null): array
     {
-        $locale = $locale ?? $this->getLocale();
+        $locale = $locale ?? $this->getCurrentLocale();
         
         // Récupérer les traductions du cache ou les charger
         $cacheKey = 'translations.' . $locale;
@@ -136,7 +161,7 @@ class TranslationService
         return Cache::remember($cacheKey, 60 * 24, function () use ($locale) {
             $translations = [];
             
-            // Charger le fichier principal de traduction
+            // Charger le fichier principal de traduction depuis resources/locales
             $path = resource_path('locales/' . $locale . '/translation.json');
             
             // Vérifier si le fichier existe
@@ -189,44 +214,106 @@ class TranslationService
     }
 
     /**
-     * Traduire une clé
+     * Charge les traductions pour une locale donnée
+     *
+     * @param string $locale
+     * @return array
+     */
+    private function loadTranslations(string $locale): array
+    {
+        $translations = [];
+        
+        // Utiliser le bon chemin : /resources/locales/ au lieu de /resources/lang/
+        $localeDir = resource_path("locales/{$locale}");
+        
+        if (!is_dir($localeDir)) {
+            Log::warning("Répertoire de traductions non trouvé: {$localeDir}");
+            return [];
+        }
+
+        // Charger tous les fichiers JSON du répertoire de la locale
+        $files = glob($localeDir . '/*.json');
+        
+        foreach ($files as $file) {
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $content = file_get_contents($file);
+            
+            if ($content === false) {
+                Log::warning("Impossible de lire le fichier de traduction: {$file}");
+                continue;
+            }
+            
+            $decoded = json_decode($content, true);
+            
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                Log::error("Erreur JSON dans le fichier {$file}: " . json_last_error_msg());
+                continue;
+            }
+            
+            if (is_array($decoded)) {
+                // Si c'est le fichier principal (translation.json), fusionner directement
+                if ($filename === 'translation') {
+                    $translations = array_merge($translations, $decoded);
+                } else {
+                    // Sinon, utiliser le nom du fichier comme clé
+                    $translations[$filename] = $decoded;
+                }
+            }
+        }
+        
+        return $translations;
+    }
+
+    /**
+     * Traduit une clé donnée avec les paramètres fournis
      *
      * @param string $key
-     * @param array $replace
+     * @param array $parameters
      * @param string|null $locale
      * @return string
      */
-    public function translate(string $key, array $replace = [], ?string $locale = null): string
+    public function translate(string $key, array $parameters = [], ?string $locale = null): string
     {
-        $locale = $locale ?? $this->getLocale();
+        $locale = $locale ?? $this->getCurrentLocale();
         
-        // Récupérer les traductions du cache ou les charger
-        $translations = $this->getTranslations($locale);
-        
-        // Gérer les clés imbriquées avec la notation point
-        $keys = explode('.', $key);
-        $translation = $translations;
-        
-        foreach ($keys as $k) {
-            if (!isset($translation[$k])) {
-                return $key;
-            }
-            $translation = $translation[$k];
+        // Charger les traductions si nécessaire
+        if (!isset($this->translations[$locale])) {
+            $this->translations[$locale] = $this->loadTranslations($locale);
         }
         
-        // Si la traduction est un tableau, retourner la clé
-        if (is_array($translation)) {
+        $translations = $this->translations[$locale];
+        
+        // Gérer les clés imbriquées avec des points (ex: "common.dashboard")
+        $keys = explode('.', $key);
+        $value = $translations;
+        
+        foreach ($keys as $keyPart) {
+            if (is_array($value) && isset($value[$keyPart])) {
+                $value = $value[$keyPart];
+            } else {
+                // Clé non trouvée, essayer avec la locale de fallback
+                if ($locale !== $this->fallbackLocale) {
+                    return $this->translate($key, $parameters, $this->fallbackLocale);
+                }
+                
+                // Si même la locale de fallback n'a pas la clé, retourner la clé elle-même
+                Log::debug("Clé de traduction non trouvée: {$key} pour la locale {$locale}");
+                return $key;
+            }
+        }
+        
+        // Si la valeur n'est pas une chaîne, retourner la clé
+        if (!is_string($value)) {
+            Log::debug("Valeur de traduction invalide pour la clé: {$key}");
             return $key;
         }
         
-        // Remplacer les variables
-        if (!empty($replace)) {
-            foreach ($replace as $key => $value) {
-                $translation = str_replace(':' . $key, $value, $translation);
-            }
+        // Remplacer les paramètres dans la chaîne traduite
+        foreach ($parameters as $param => $replacement) {
+            $value = str_replace(":{$param}", $replacement, $value);
         }
         
-        return $translation;
+        return $value;
     }
 
     /**
@@ -244,13 +331,13 @@ class TranslationService
     }
 
     /**
-     * Charge les traductions de fallback (anglais)
+     * Charge les traductions de fallback (français)
      *
      * @return array
      */
     protected function loadFallbackTranslations(): array
     {
-        $fallbackLocale = config('app.fallback_locale', 'en');
+        $fallbackLocale = config('app.fallback_locale', 'fr');
         $fallbackPath = resource_path('locales/' . $fallbackLocale . '/translation.json');
         
         try {

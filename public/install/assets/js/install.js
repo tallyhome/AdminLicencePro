@@ -4,6 +4,10 @@
  * Modern installation wizard interactions
  */
 
+// Variables globales
+let currentStep = 1;
+let isProcessing = false;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize installation wizard
     initializeInstallation();
@@ -18,6 +22,7 @@ function initializeInstallation() {
     initializeLoadingStates();
     initializeAnimations();
     initializeAccessibility();
+    initializeLicenseVerification();
 }
 
 /**
@@ -226,8 +231,11 @@ function clearFieldError(field) {
 function initializeLoadingStates() {
     // Auto-hide loading overlay after page load
     window.addEventListener('load', function() {
-        setTimeout(hideLoading, 500);
+        setTimeout(hideLoading, 100);
     });
+    
+    // Force hide loading overlay after DOM ready
+    hideLoading();
 }
 
 /**
@@ -391,3 +399,208 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+/**
+ * Initialize license verification with AJAX
+ */
+function initializeLicenseVerification() {
+    const licenseForm = document.querySelector('form[data-step="1"]');
+    if (licenseForm) {
+        licenseForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale
+            
+            // Utiliser AJAX pour la vérification
+            verifyLicenseAjax(this);
+        });
+    }
+}
+
+/**
+ * Verify license via AJAX
+ */
+async function verifyLicenseAjax(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const serialKeyInput = form.querySelector('input[name="serial_key"]');
+    const alertContainer = form.querySelector('.alert-container') || createAlertContainer(form);
+    
+    // Clear previous errors
+    clearFormErrors(form);
+    hideAlert(alertContainer);
+    
+    // Validate form
+    if (!validateForm(form)) {
+        return;
+    }
+    
+    // Show loading state
+    isProcessing = true;
+    showLoadingButton(submitBtn);
+    
+    try {
+        // Prepare form data - s'assurer que serial_key est bien inclus
+        const formData = new FormData();
+        const serialKeyValue = serialKeyInput.value.trim();
+        
+        // Vérifier que la clé n'est pas vide
+        if (!serialKeyValue) {
+            showAlert(alertContainer, 'Veuillez saisir une clé de licence', 'error');
+            // Ne pas faire return ici, laisser le finally s'exécuter
+            throw new Error('Clé de licence vide');
+        }
+        
+        formData.append('serial_key', serialKeyValue);
+        formData.append('ajax', '1');
+        formData.append('step', '1');
+        
+        // Send AJAX request
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        
+        // Vérifier si c'est une redirection HTML au lieu de JSON
+        if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+            // Vérifier si c'est vraiment un succès en cherchant des indicateurs dans le HTML
+            if (responseText.includes('Configuration de la base de données') ||
+                responseText.includes('step=2') ||
+                responseText.includes('step active') && responseText.includes('2')) {
+                // Redirection après nettoyage
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=2';
+                }, 100);
+                return; // Ce return est OK car c'est un succès
+            } else {
+                // Si c'est du HTML mais pas l'étape 2, c'est probablement une erreur
+                showAlert(alertContainer, 'Erreur de validation de la licence', 'error');
+                // Ne pas faire return ici, laisser le finally s'exécuter
+                throw new Error('HTML détecté mais pas de succès confirmé');
+            }
+        }
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            // Si on ne peut pas parser le JSON, essayer de détecter le succès dans le texte
+            if (responseText.includes('success') || responseText.includes('valide')) {
+                showAlert(alertContainer, 'Licence valide ! Redirection...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=2';
+                }, 1000);
+                // Ne pas faire return ici, laisser le finally s'exécuter
+                throw new Error('Succès détecté dans la réponse texte - redirection en cours');
+            }
+            
+            throw new Error('Réponse serveur invalide: ' + responseText.substring(0, 100));
+        }
+        
+        if (result.success) {
+            // License valid - show success and proceed
+            showAlert(alertContainer, result.message || 'Licence valide !', 'success');
+            
+            // Wait a bit then redirect to step 2
+            setTimeout(() => {
+                window.location.href = 'install_new.php?step=2';
+            }, 1000);
+            
+        } else {
+            // License invalid - show error
+            showAlert(alertContainer, result.message || 'Licence invalide', 'error');
+            serialKeyInput.focus();
+        }
+        
+    } catch (error) {
+        showAlert(alertContainer, 'Erreur de connexion au serveur de licence: ' + error.message, 'error');
+    } finally {
+        isProcessing = false;
+        hideLoadingButton(submitBtn);
+    }
+}
+
+/**
+ * Create alert container if it doesn't exist
+ */
+function createAlertContainer(form) {
+    const container = document.createElement('div');
+    container.className = 'alert-container';
+    container.style.marginBottom = '1.5rem';
+    
+    // Insert after form title
+    const title = form.querySelector('.step-title');
+    if (title && title.nextSibling) {
+        title.parentNode.insertBefore(container, title.nextSibling);
+    } else {
+        form.insertBefore(container, form.firstChild);
+    }
+    
+    return container;
+}
+
+/**
+ * Show alert message
+ */
+function showAlert(container, message, type = 'info') {
+    container.innerHTML = `
+        <div class="alert alert-${type}" style="animation: slideDown 0.3s ease;">
+            ${message}
+        </div>
+    `;
+}
+
+/**
+ * Hide alert message
+ */
+function hideAlert(container) {
+    container.innerHTML = '';
+}
+
+/**
+ * Show loading state on button
+ */
+function showLoadingButton(button) {
+    button.disabled = true;
+    button.classList.add('loading');
+    
+    const originalText = button.textContent;
+    button.dataset.originalText = originalText;
+    button.innerHTML = `
+        <span class="loading-spinner" style="width: 16px; height: 16px; margin-right: 8px;"></span>
+        Vérification en cours...
+    `;
+}
+
+/**
+ * Hide loading state on button
+ */
+function hideLoadingButton(button) {
+    button.disabled = false;
+    button.classList.remove('loading');
+    button.textContent = button.dataset.originalText || 'Vérifier la licence';
+}
+
+/**
+ * Clear all form errors
+ */
+function clearFormErrors(form) {
+    const errorElements = form.querySelectorAll('.form-error');
+    errorElements.forEach(error => error.remove());
+    
+    const errorInputs = form.querySelectorAll('.form-input.error');
+    errorInputs.forEach(input => input.classList.remove('error'));
+}

@@ -551,20 +551,7 @@ body::before {
     min-width: 120px;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left var(--transition-slow);
-}
-
-.btn:hover::before {
-    left: 100%;
-}
+/* Effet de survol simplifié sans ::before */
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
@@ -609,12 +596,56 @@ body::before {
     background: linear-gradient(135deg, var(--success-600) 0%, var(--success-700) 100%);
     color: white;
     box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: visible;
 }
 
 .btn-verify:hover {
     background: linear-gradient(135deg, var(--success-700) 0%, var(--success-800) 100%);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+}
+
+/* Forcer la suppression de tous les pseudo-éléments sur les boutons */
+.btn::before,
+.btn::after,
+.btn-verify::before,
+.btn-verify::after,
+.btn-primary::before,
+.btn-primary::after,
+.btn-secondary::before,
+.btn-secondary::after,
+button::before,
+button::after,
+input[type="submit"]::before,
+input[type="submit"]::after,
+input[type="button"]::before,
+input[type="button"]::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    border: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Supprimer tous les overlays et effets sur hover/focus/active */
+.btn:hover::before, .btn:hover::after,
+.btn:focus::before, .btn:focus::after,
+.btn:active::before, .btn:active::after,
+.btn-verify:hover::before, .btn-verify:hover::after,
+.btn-verify:focus::before, .btn-verify:focus::after,
+.btn-verify:active::before, .btn-verify:active::after,
+.btn-primary:hover::before, .btn-primary:hover::after,
+.btn-primary:focus::before, .btn-primary:focus::after,
+.btn-primary:active::before, .btn-primary:active::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* Form actions */
@@ -956,25 +987,10 @@ body::before {
     outline-offset: 2px;
 }
 
-/* Loading button state */
+/* Loading button state - simplifié */
 .btn.loading {
-    color: transparent;
+    opacity: 0.7;
     pointer-events: none;
-}
-
-.btn.loading::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
 }
 
 /* Dark mode support */
@@ -1007,4 +1023,95 @@ body::before {
     .btn {
         display: none;
     }
+}
+
+/* CORRECTION FINALE - Suppression totale des pseudo-éléments problématiques */
+.btn, .btn-verify, .btn-primary, .btn-secondary, 
+button, input[type="submit"], .form-submit {
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 1 !important;
+}
+
+/* Suppression forcée de TOUS les pseudo-éléments */
+.btn::before, .btn::after,
+.btn-verify::before, .btn-verify::after,
+.btn-primary::before, .btn-primary::after,
+.btn-secondary::before, .btn-secondary::after,
+button::before, button::after,
+input[type="submit"]::before, input[type="submit"]::after,
+.form-submit::before, .form-submit::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    z-index: -1 !important;
+}
+
+/* Suppression forcée de tous les pseudo-éléments au survol/focus/actif */
+.btn:hover::before, .btn:hover::after,
+.btn:focus::before, .btn:focus::after,
+.btn:active::before, .btn:active::after,
+.btn-verify:hover::before, .btn-verify:hover::after,
+.btn-verify:focus::before, .btn-verify:focus::after,
+.btn-verify:active::before, .btn-verify:active::after,
+.btn-primary:hover::before, .btn-primary:hover::after,
+.btn-primary:focus::before, .btn-primary:focus::after,
+.btn-primary:active::before, .btn-primary:active::after,
+.btn-secondary:hover::before, .btn-secondary:hover::after,
+.btn-secondary:focus::before, .btn-secondary:focus::after,
+.btn-secondary:active::before, .btn-secondary:active::after,
+button:hover::before, button:hover::after,
+button:focus::before, button:focus::after,
+button:active::before, button:active::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    z-index: -1 !important;
+}
+
+/* Forcer les couleurs de fond correctes */
+.btn-verify {
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.btn-verify:hover, .btn-verify:focus, .btn-verify:active {
+    background-color: #218838 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+    background-color: #545b62 !important;
+    color: #ffffff !important;
 }

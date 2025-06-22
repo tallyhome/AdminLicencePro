@@ -48,7 +48,8 @@
         "suspended": "Suspendu",
         "revoked": "Révoqué",
         "expired": "Expiré",
-        "pending": "En attente"
+        "pending": "En attente",
+        "language_changed_successfully": "Langue changée avec succès"
     },
     "translations": {
         "title": "Gestion des traductions",

@@ -12,20 +12,33 @@ error_reporting(E_ALL);
 date_default_timezone_set('UTC');
 
 // Définir le chemin racine du projet
-define('ROOT_PATH', realpath(dirname(dirname(__DIR__))));
-define('INSTALL_PATH', __DIR__);
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(dirname(dirname(__DIR__))));
+}
+if (!defined('INSTALL_PATH')) {
+    define('INSTALL_PATH', __DIR__);
+}
 
 // Configuration des langues
-define('DEFAULT_LANGUAGE', 'fr');
-define('AVAILABLE_LANGUAGES', [
-    'fr' => 'Français',
-    'en' => 'English',
-    'es' => 'Español',
-    'pt' => 'Português',
-    'ar' => 'العربية',
-    'zh' => '中文',
-    'ru' => 'Русский'
-]);
+if (!defined('DEFAULT_LANGUAGE')) {
+    define('DEFAULT_LANGUAGE', 'fr');
+}
+if (!defined('AVAILABLE_LANGUAGES')) {
+    define('AVAILABLE_LANGUAGES', [
+        'fr' => 'Français',
+        'en' => 'English',
+        'es' => 'Español',
+        'de' => 'Deutsch',
+        'it' => 'Italiano',
+        'pt' => 'Português',
+        'nl' => 'Nederlands',
+        'ru' => 'Русский',
+        'zh' => '中文',
+        'ja' => '日本語',
+        'tr' => 'Türkçe',
+        'ar' => 'العربية'
+    ]);
+}
 
 // Vérifier les extensions PHP requises
 $required_extensions = ['curl', 'json', 'pdo', 'pdo_mysql', 'mbstring'];

@@ -42,7 +42,8 @@
         "of": "de",
         "all": "Todos",
         "used": "Utilizada",
-        "unused": "No utilizada"
+        "unused": "No utilizada",
+        "language_changed_successfully": "Idioma cambiado exitosamente"
     },
     "translations": {
         "title": "Gestión de Traducciones",

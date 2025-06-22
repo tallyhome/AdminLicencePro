@@ -11,14 +11,14 @@
  * @return void
  */
 function showError($message, $details = null) {
-    $lang = getCurrentLanguage();
+    $lang = 'fr';
     header('Content-Type: text/html; charset=utf-8');
     echo '<!DOCTYPE html>
     <html lang="' . $lang . '">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>' . t('installation_error') . '</title>
+        <title>Erreur d\'installation</title>
         <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; }
             .container { max-width: 800px; margin: 0 auto; background: #f9f9f9; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -34,17 +34,14 @@ function showError($message, $details = null) {
     </head>
     <body>
         <div class="container">
-            <div class="language-selector">
-                ' . getLanguageLinks() . '
-            </div>
-            <h1>' . t('installation_error') . '</h1>
+            <h1>Erreur d\'installation</h1>
             <div class="error">' . htmlspecialchars($message) . '</div>';
     
     if ($details) {
         echo '<div class="details">' . htmlspecialchars($details) . '</div>';
     }
     
-    echo '<a href="install_new.php" class="btn">' . t('retry') . '</a>
+    echo '<a href="install_new.php" class="btn">Réessayer</a>
         </div>
     </body>
     </html>';
@@ -76,21 +73,21 @@ function displayInstallationForm($step, $errors = []) {
         case 1: // Sélection de la langue et vérification de la licence
             echo '<div class="license-info">
                 <h3>' . t('license_verification') . '</h3>
-                <p><strong>' . t('information') . ':</strong> ' . t('license_verification_info') . '</p>
-                <p><strong>' . t('license_api') . ':</strong> <code>https://licence.myvcard.fr</code></p>
+                <p><strong>' . t('info') . ' :</strong> ' . t('license_verification_description') . '</p>
+                <p><strong>API de licence :</strong> <code>https://licence.myvcard.fr</code></p>
             </div>
             
-            <form method="post" action="install_new.php">
+            <form method="post" action="install_new.php" data-step="1" class="install-form">
                 <input type="hidden" name="step" value="1">
                 
                 <div class="form-group">
                     <label for="serial_key">' . t('license_key') . '</label>
                     <input type="text" id="serial_key" name="serial_key" required 
-                           placeholder="FCGI-WC2S-H3PE-QJQG" 
+                           placeholder="' . t('license_key_placeholder') . '" 
                            pattern="[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}" 
-                           value="' . htmlspecialchars($_POST['serial_key'] ?? '') . '"
+                           value=""
                            style="text-transform: uppercase;">
-                    <small style="color: #666; font-size: 0.9em;">' . t('license_key_format_help') . '</small>
+                    <small style="color: #666; font-size: 0.9em;">Format requis : XXXX-XXXX-XXXX-XXXX</small>
                 </div>
                 
                 <div class="form-actions">
@@ -105,31 +102,31 @@ function displayInstallationForm($step, $errors = []) {
                 <input type="hidden" name="step" value="2">
                 
                 <div class="form-group">
-                    <label for="db_host">' . t('database_host') . '</label>
+                    <label for="db_host">' . t('db_host') . '</label>
                     <input type="text" id="db_host" name="db_host" required 
                            value="' . htmlspecialchars($_POST['db_host'] ?? 'localhost') . '">
                 </div>
                 
                 <div class="form-group">
-                    <label for="db_port">' . t('database_port') . '</label>
+                    <label for="db_port">' . t('db_port') . '</label>
                     <input type="text" id="db_port" name="db_port" required 
                            value="' . htmlspecialchars($_POST['db_port'] ?? '3306') . '">
                 </div>
                 
                 <div class="form-group">
-                    <label for="db_name">' . t('database_name') . '</label>
+                    <label for="db_name">' . t('db_name') . '</label>
                     <input type="text" id="db_name" name="db_name" required 
                            value="' . htmlspecialchars($_POST['db_name'] ?? '') . '">
                 </div>
                 
                 <div class="form-group">
-                    <label for="db_user">' . t('database_username') . '</label>
+                    <label for="db_user">' . t('db_user') . '</label>
                     <input type="text" id="db_user" name="db_user" required 
                            value="' . htmlspecialchars($_POST['db_user'] ?? '') . '">
                 </div>
                 
                 <div class="form-group">
-                    <label for="db_password">' . t('database_password') . '</label>
+                    <label for="db_password">' . t('db_password') . '</label>
                     <input type="password" id="db_password" name="db_password" 
                            value="' . htmlspecialchars($_POST['db_password'] ?? '') . '">
                 </div>
@@ -179,26 +176,26 @@ function displayInstallationForm($step, $errors = []) {
                 <input type="hidden" name="step" value="4">
                 
                 <div style="margin-bottom: 20px;">
-                    <h3>' . t('installation_summary') . '</h3>
-                    <p>' . t('installation_summary_text') . '</p>
+                    <h3>Résumé de l\'installation</h3>
+                    <p>Vérifiez les informations ci-dessous avant de procéder à l\'installation finale.</p>
                     
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
-                        <h4>' . t('database_information') . '</h4>
-                        <p><strong>' . t('database_host') . ':</strong> ' . htmlspecialchars($_SESSION['db_config']['host'] ?? '') . '</p>
-                        <p><strong>' . t('database_name') . ':</strong> ' . htmlspecialchars($_SESSION['db_config']['database'] ?? '') . '</p>
-                        <p><strong>' . t('database_username') . ':</strong> ' . htmlspecialchars($_SESSION['db_config']['username'] ?? '') . '</p>
+                        <h4>Informations de la base de données</h4>
+                        <p><strong>Hôte :</strong> ' . htmlspecialchars($_SESSION['db_config']['host'] ?? '') . '</p>
+                        <p><strong>Base de données :</strong> ' . htmlspecialchars($_SESSION['db_config']['database'] ?? '') . '</p>
+                        <p><strong>Utilisateur :</strong> ' . htmlspecialchars($_SESSION['db_config']['username'] ?? '') . '</p>
                         
-                        <h4>' . t('admin_information') . '</h4>
-                        <p><strong>' . t('admin_name') . ':</strong> ' . htmlspecialchars($_SESSION['admin_config']['name'] ?? '') . '</p>
-                        <p><strong>' . t('admin_email') . ':</strong> ' . htmlspecialchars($_SESSION['admin_config']['email'] ?? '') . '</p>
+                        <h4>Informations de l\'administrateur</h4>
+                        <p><strong>Nom :</strong> ' . htmlspecialchars($_SESSION['admin_config']['name'] ?? '') . '</p>
+                        <p><strong>Email :</strong> ' . htmlspecialchars($_SESSION['admin_config']['email'] ?? '') . '</p>
                     </div>
                     
-                    <p>' . t('installation_warning') . '</p>
+                    <p><strong>Attention :</strong> Cette opération va créer les tables de la base de données et configurer l\'application.</p>
                 </div>
                 
                 <div class="form-actions">
-                    <a href="install_new.php?step=3" class="btn">' . t('back') . '</a>
-                    <button type="submit" class="btn">' . t('install_now') . '</button>
+                    <a href="install_new.php?step=3" class="btn">Retour</a>
+                    <button type="submit" class="btn">Installer maintenant</button>
                 </div>
             </form>';
             break;
@@ -213,38 +210,29 @@ function displayInstallationForm($step, $errors = []) {
  * @return void
  */
 function displaySuccessPage() {
-    $currentLang = getCurrentLanguage();
+    $step = 5; // Étape finale pour l'affichage
     
-    header('Content-Type: text/html; charset=utf-8');
-    echo '<!DOCTYPE html>
-    <html lang="' . $currentLang . '">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>' . t('installation_complete') . '</title>
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; background: #f4f4f4; }
-            .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-            h1 { color: #2c3e50; margin-bottom: 30px; text-align: center; }
-            .success-icon { text-align: center; margin-bottom: 30px; font-size: 80px; color: #2ecc71; }
-            .btn { display: inline-block; background: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; }
-            .btn:hover { background: #2980b9; }
-            .info { background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>' . t('installation_complete') . '</h1>
-            <div class="success-icon">✓</div>
-            <div class="info">
-                <p>' . t('installation_success_message') . '</p>
-                <p>' . t('admin_credentials_reminder') . '</p>
-            </div>
-            <div style="text-align: center;">
-                <a href="' . dirname(dirname($_SERVER['REQUEST_URI'])) . '/admin/login" class="btn">' . t('go_to_admin') . '</a>
-                <a href="' . dirname(dirname($_SERVER['REQUEST_URI'])) . '" class="btn">' . t('go_to_homepage') . '</a>
-            </div>
+    // Inclure le header
+    include 'templates/header.php';
+    
+    echo '<div class="success-content">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Installation terminée</div>
+        <div class="success-description">
+            <p>L\'installation d\'AdminLicence s\'est déroulée avec succès !</p>
+            <p>Vous pouvez maintenant vous connecter avec le compte administrateur que vous avez créé.</p>
         </div>
-    </body>
-    </html>';
+        
+        <div class="alert alert-success">
+            <strong>Félicitations !</strong><br>
+            AdminLicence est maintenant installé et prêt à être utilisé.
+        </div>
+        
+        <div class="form-actions" style="justify-content: center; gap: 2rem;">
+            <a href="' . dirname(dirname($_SERVER['REQUEST_URI'])) . '/admin/login" class="btn btn-primary">Accéder à l\'administration</a>
+            <a href="' . dirname(dirname($_SERVER['REQUEST_URI'])) . '" class="btn btn-secondary">Aller à l\'accueil</a>
+        </div>
+    </div>';
+    
+    include 'templates/footer.php';
 }

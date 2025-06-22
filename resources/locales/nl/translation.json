@@ -42,7 +42,8 @@
         "of": "van",
         "all": "Allemaal",
         "used": "Gebruikt",
-        "unused": "Niet gebruikt"
+        "unused": "Niet gebruikt",
+        "language_changed_successfully": "Taal succesvol gewijzigd"
     },
     "layout": {
         "support": "Support",

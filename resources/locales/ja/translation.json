@@ -162,6 +162,7 @@
     "dashboard": "ダッシュボード",
     "name": "名前",
     "email": "メール",
+    "language_changed_successfully": "言語が正常に変更されました",
     "actions": {
       "save": "保存",
       "cancel": "キャンセル",

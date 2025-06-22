@@ -61,7 +61,8 @@
         "manage": "Manage",
         "information": "Information",
         "showing": "显示 :first 到 :last，共 :total 条结果",
-        "of": "的"
+        "of": "的",
+        "language_changed_successfully": "语言更改成功"
     },
     "auth": {
         "login": "登录",

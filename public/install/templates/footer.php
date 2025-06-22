@@ -5,47 +5,46 @@
 ?>
         </div> <!-- Fin du contenu -->
         
+        <!-- Footer -->
         <div class="footer">
             <div class="footer-content">
-                <p>&copy; <?php echo date('Y'); ?> AdminLicence. Tous droits réservés.</p>
+                <p>&copy; <?php echo date('Y'); ?> AdminLicence. <?php echo t('all_rights_reserved'); ?></p>
                 <div class="footer-links">
-                    <a href="https://adminlicence.com/support" target="_blank"><?php echo t('support'); ?></a>
-                    <a href="https://adminlicence.com/documentation" target="_blank"><?php echo t('documentation'); ?></a>
+                    <a href="#" onclick="return false;"><?php echo t('support'); ?></a>
+                    <a href="#" onclick="return false;"><?php echo t('documentation'); ?></a>
                 </div>
             </div>
         </div>
     </div> <!-- Fin du container -->
     
-    <!-- Scripts JavaScript -->
+    <!-- JavaScript -->
     <script src="assets/js/install.js"></script>
     
-    <!-- Script d'initialisation -->
+    <!-- Additional JavaScript for modern interactions -->
     <script>
+        // Auto-hide loading overlay after page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const overlay = document.getElementById('loadingOverlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+            }, 300);
+        });
+        
+        // Add smooth transitions to form elements
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialiser le gestionnaire d'installation
-            const installer = new InstallationManager();
-            
-            // Masquer l'overlay de chargement
-            const loadingOverlay = document.querySelector('.loading-overlay');
-            if (loadingOverlay) {
-                setTimeout(() => {
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                    }, 300);
-                }, 500);
-            }
-            
-            // Auto-masquer les alertes après 5 secondes
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    hideAlert(alert);
-                }, 5000);
+            const formElements = document.querySelectorAll('.form-group');
+            formElements.forEach(function(element, index) {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                setTimeout(function() {
+                    element.style.transition = 'all 0.4s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100 + 200);
             });
-            
-            // L'InstallationManager est déjà initialisé dans install.js
-            // et gère automatiquement la validation des formulaires
         });
     </script>
 </body>

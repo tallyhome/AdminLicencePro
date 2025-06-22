@@ -42,7 +42,8 @@
         "of": "из",
         "all": "Все",
         "used": "Использовано",
-        "unused": "Не использовано"
+        "unused": "Не использовано",
+        "language_changed_successfully": "Язык успешно изменен"
     },
     "translations": {
         "title": "Управление переводами",
