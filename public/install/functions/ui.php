@@ -70,134 +70,266 @@ function displayInstallationForm($step, $errors = []) {
     
     // Afficher le formulaire en fonction de l'étape
     switch ($step) {
-        case 1: // Sélection de la langue et vérification de la licence
-            echo '<div class="license-info">
-                <h3>' . t('license_verification') . '</h3>
-                <p><strong>' . t('info') . ' :</strong> ' . t('license_verification_description') . '</p>
-                <p><strong>API de licence :</strong> <code>https://licence.myvcard.fr</code></p>
-            </div>
-            
-            <form method="post" action="install_new.php" data-step="1" class="install-form">
-                <input type="hidden" name="step" value="1">
-                
-                <div class="form-group">
-                    <label for="serial_key">' . t('license_key') . '</label>
-                    <input type="text" id="serial_key" name="serial_key" required 
-                           placeholder="' . t('license_key_placeholder') . '" 
-                           pattern="[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}" 
-                           value=""
-                           style="text-transform: uppercase;">
-                    <small style="color: #666; font-size: 0.9em;">Format requis : XXXX-XXXX-XXXX-XXXX</small>
+        case 1: // Vérification de la licence
+            echo '<div class="license-verification-section">
+                <div class="license-info">
+                    <h3>' . t('license_verification') . '</h3>
+                    <p><strong>' . t('info') . ' :</strong> ' . t('license_verification_description') . '</p>
+                    <p><strong>' . t('license_api') . ' :</strong> <code>https://licence.myvcard.fr</code></p>
                 </div>
                 
-                <div class="form-actions">
-                    <div></div>
-                    <button type="submit" class="btn btn-verify">' . t('verify_license') . '</button>
-                </div>
-            </form>';
-            break;
-            
-        case 2: // Configuration de la base de données
-            echo '<form method="post" action="install_new.php">
-                <input type="hidden" name="step" value="2">
-                
-                <div class="form-group">
-                    <label for="db_host">' . t('db_host') . '</label>
-                    <input type="text" id="db_host" name="db_host" required 
-                           value="' . htmlspecialchars($_POST['db_host'] ?? 'localhost') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="db_port">' . t('db_port') . '</label>
-                    <input type="text" id="db_port" name="db_port" required 
-                           value="' . htmlspecialchars($_POST['db_port'] ?? '3306') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="db_name">' . t('db_name') . '</label>
-                    <input type="text" id="db_name" name="db_name" required 
-                           value="' . htmlspecialchars($_POST['db_name'] ?? '') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="db_user">' . t('db_user') . '</label>
-                    <input type="text" id="db_user" name="db_user" required 
-                           value="' . htmlspecialchars($_POST['db_user'] ?? '') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="db_password">' . t('db_password') . '</label>
-                    <input type="password" id="db_password" name="db_password" 
-                           value="' . htmlspecialchars($_POST['db_password'] ?? '') . '">
-                </div>
-                
-                <div class="form-actions">
-                    <a href="install_new.php" class="btn">' . t('back') . '</a>
-                    <button type="submit" class="btn">' . t('next') . '</button>
-                </div>
-            </form>';
-            break;
-            
-        case 3: // Configuration du compte admin
-            echo '<form method="post" action="install_new.php">
-                <input type="hidden" name="step" value="3">
-                
-                <div class="form-group">
-                    <label for="admin_name">' . t('admin_name') . '</label>
-                    <input type="text" id="admin_name" name="admin_name" required 
-                           value="' . htmlspecialchars($_POST['admin_name'] ?? '') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="admin_email">' . t('admin_email') . '</label>
-                    <input type="email" id="admin_email" name="admin_email" required 
-                           value="' . htmlspecialchars($_POST['admin_email'] ?? '') . '">
-                </div>
-                
-                <div class="form-group">
-                    <label for="admin_password">' . t('admin_password') . '</label>
-                    <input type="password" id="admin_password" name="admin_password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="admin_password_confirm">' . t('admin_password_confirm') . '</label>
-                    <input type="password" id="admin_password_confirm" name="admin_password_confirm" required>
-                </div>
-                
-                <div class="form-actions">
-                    <a href="install_new.php?step=2" class="btn">' . t('back') . '</a>
-                    <button type="submit" class="btn">' . t('next') . '</button>
-                </div>
-            </form>';
-            break;
-            
-        case 4: // Installation finale
-            echo '<form method="post" action="install_new.php">
-                <input type="hidden" name="step" value="4">
-                
-                <div style="margin-bottom: 20px;">
-                    <h3>Résumé de l\'installation</h3>
-                    <p>Vérifiez les informations ci-dessous avant de procéder à l\'installation finale.</p>
+                <form method="post" action="install_new.php" data-step="1" class="install-form">
+                    <input type="hidden" name="step" value="1">
                     
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
-                        <h4>Informations de la base de données</h4>
-                        <p><strong>Hôte :</strong> ' . htmlspecialchars($_SESSION['db_config']['host'] ?? '') . '</p>
-                        <p><strong>Base de données :</strong> ' . htmlspecialchars($_SESSION['db_config']['database'] ?? '') . '</p>
-                        <p><strong>Utilisateur :</strong> ' . htmlspecialchars($_SESSION['db_config']['username'] ?? '') . '</p>
-                        
-                        <h4>Informations de l\'administrateur</h4>
-                        <p><strong>Nom :</strong> ' . htmlspecialchars($_SESSION['admin_config']['name'] ?? '') . '</p>
-                        <p><strong>Email :</strong> ' . htmlspecialchars($_SESSION['admin_config']['email'] ?? '') . '</p>
+                    <div class="form-group">
+                        <label for="serial_key">' . t('license_key') . '</label>
+                        <input type="text" id="serial_key" name="serial_key" required 
+                               placeholder="' . t('license_key_placeholder') . '" 
+                               pattern="[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}" 
+                               value=""
+                               style="text-transform: uppercase;">
+                        <small>' . t('required_format') . ' : XXXX-XXXX-XXXX-XXXX</small>
                     </div>
                     
-                    <p><strong>Attention :</strong> Cette opération va créer les tables de la base de données et configurer l\'application.</p>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-verify">' . t('verify_license') . '</button>
+                    </div>
+                </form>
+            </div>';
+            break;
+            
+        case 2: // Vérification des prérequis système
+            echo '<div class="system-requirements-section">
+                <div class="system-info">
+                    <h3>' . t('system_requirements') . '</h3>
+                    <p>' . t('system_requirements_description') . '</p>
                 </div>
                 
-                <div class="form-actions">
-                    <a href="install_new.php?step=3" class="btn">Retour</a>
-                    <button type="submit" class="btn">Installer maintenant</button>
+                <div class="requirements-check">
+                    <div class="requirement-group">
+                        <h4>' . t('php_version') . '</h4>
+                        <div class="requirement-item">
+                            <span class="requirement-name">PHP >= 8.1</span>
+                            <span class="requirement-status status-' . (version_compare(PHP_VERSION, '8.1.0', '>=') ? 'ok' : 'error') . '">
+                                ' . (version_compare(PHP_VERSION, '8.1.0', '>=') ? t('status_ok') : t('status_error')) . ' (' . PHP_VERSION . ')
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="requirement-group">
+                        <h4>' . t('php_extensions') . '</h4>';
+                        
+                        $extensions = [
+                            'pdo' => ['required' => true, 'name' => 'PDO'],
+                            'pdo_mysql' => ['required' => true, 'name' => 'PDO MySQL'],
+                            'mbstring' => ['required' => true, 'name' => 'Mbstring'],
+                            'openssl' => ['required' => true, 'name' => 'OpenSSL'],
+                            'tokenizer' => ['required' => true, 'name' => 'Tokenizer'],
+                            'xml' => ['required' => true, 'name' => 'XML'],
+                            'ctype' => ['required' => true, 'name' => 'Ctype'],
+                            'json' => ['required' => true, 'name' => 'JSON'],
+                            'curl' => ['required' => false, 'name' => 'cURL'],
+                            'gd' => ['required' => false, 'name' => 'GD'],
+                            'zip' => ['required' => false, 'name' => 'ZIP']
+                        ];
+                        
+                        foreach ($extensions as $ext => $info) {
+                            $loaded = extension_loaded($ext);
+                            $status = $loaded ? 'ok' : ($info['required'] ? 'error' : 'warning');
+                            
+                            echo '<div class="requirement-item">
+                                <span class="requirement-name">' . $info['name'] . ' (' . ($info['required'] ? t('extension_required') : t('extension_optional')) . ')</span>
+                                <span class="requirement-status status-' . $status . '">
+                                    ' . ($loaded ? t('status_ok') : ($info['required'] ? t('status_error') : t('status_warning'))) . '
+                                </span>
+                            </div>';
+                        }
+                        
+                    echo '</div>
+                    
+                    <div class="requirement-group">
+                        <h4>' . t('file_permissions') . '</h4>';
+                        
+                        $directories = [
+                            'storage' => '../storage',
+                            'bootstrap/cache' => '../bootstrap/cache',
+                            '.env' => '../.env.example'
+                        ];
+                        
+                        foreach ($directories as $name => $path) {
+                            $writable = is_writable($path);
+                            $status = $writable ? 'ok' : 'error';
+                            
+                            echo '<div class="requirement-item">
+                                <span class="requirement-name">' . $name . ' (' . t('permission_writable') . ')</span>
+                                <span class="requirement-status status-' . $status . '">
+                                    ' . ($writable ? t('status_ok') : t('status_error')) . '
+                                </span>
+                            </div>';
+                        }
+                        
+                    echo '</div>
                 </div>
-            </form>';
+                
+                <form method="post" action="install_new.php" data-step="2" class="install-form">
+                    <input type="hidden" name="step" value="2">
+                    
+                    <div class="form-actions">
+                        <a href="install_new.php" class="btn btn-secondary">' . t('back') . '</a>
+                        <button type="submit" class="btn btn-primary">' . t('next') . '</button>
+                    </div>
+                </form>
+            </div>';
+            break;
+            
+        case 3: // Configuration de la base de données
+            echo '<div class="step-3-container">
+                <div class="database-config-section">
+                    <div class="database-info">
+                        <h3>' . t('database_configuration') . '</h3>
+                        <p>' . t('database_configuration_description') . '</p>
+                    </div>
+                    
+                    <form method="post" action="install_new.php" data-step="3" class="install-form">
+                        <input type="hidden" name="step" value="3">
+                        
+                        <div class="db-form-row">
+                            <div class="form-group">
+                                <label for="db_host">' . t('db_host') . '</label>
+                                <input type="text" id="db_host" name="db_host" required 
+                                       value="' . htmlspecialchars($_POST['db_host'] ?? 'localhost') . '"
+                                       placeholder="localhost">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="db_port">' . t('db_port') . '</label>
+                                <input type="text" id="db_port" name="db_port" required 
+                                       value="' . htmlspecialchars($_POST['db_port'] ?? '3306') . '"
+                                       placeholder="3306">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group db-form-full">
+                            <label for="db_name">' . t('db_name') . '</label>
+                            <input type="text" id="db_name" name="db_name" required 
+                                   value="' . htmlspecialchars($_POST['db_name'] ?? '') . '"
+                                   placeholder="adminlicence">
+                            <small>' . t('database_will_be_created') . '</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="db_user">' . t('db_user') . '</label>
+                            <input type="text" id="db_user" name="db_user" required 
+                                   value="' . htmlspecialchars($_POST['db_user'] ?? '') . '"
+                                   placeholder="root">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="db_password">' . t('db_password') . '</label>
+                            <input type="password" id="db_password" name="db_password" 
+                                   value="' . htmlspecialchars($_POST['db_password'] ?? '') . '"
+                                   placeholder="' . t('optional') . '">
+                            <small>' . t('leave_empty_if_no_password') . '</small>
+                        </div>
+                        
+                        <div class="db-test-section" style="margin: 1.5rem 0;">
+                            <button type="button" id="test-db-btn" class="btn btn-info" style="margin-bottom: 1rem;">
+                                🔧 Tester la connexion SQL
+                            </button>
+                            <div class="db-test-alert"></div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <a href="install_new.php?step=2" class="btn btn-secondary">' . t('back') . '</a>
+                            <button type="submit" class="btn btn-primary">' . t('next') . '</button>
+                        </div>
+                    </form>
+                </div>
+            </div>';
+            break;
+            
+        case 4: // Configuration du compte admin
+            echo '<div class="step-4-container">
+                <div class="admin-config-section">
+                    <div class="admin-info">
+                        <h3>' . t('admin_setup') . '</h3>
+                        <p>' . t('admin_setup_description') . '</p>
+                    </div>
+                    
+                    <form method="post" action="install_new.php" data-step="4" class="install-form">
+                        <input type="hidden" name="step" value="4">
+                        
+                        <div class="form-group">
+                            <label for="admin_name">' . t('admin_name') . '</label>
+                            <input type="text" id="admin_name" name="admin_name" required 
+                                   value="' . htmlspecialchars($_POST['admin_name'] ?? '') . '"
+                                   placeholder="Administrateur">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin_email">' . t('admin_email') . '</label>
+                            <input type="email" id="admin_email" name="admin_email" required 
+                                   value="' . htmlspecialchars($_POST['admin_email'] ?? '') . '"
+                                   placeholder="admin@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin_password">' . t('admin_password') . '</label>
+                            <input type="password" id="admin_password" name="admin_password" required
+                                   placeholder="Mot de passe sécurisé">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin_password_confirm">' . t('admin_password_confirm') . '</label>
+                            <input type="password" id="admin_password_confirm" name="admin_password_confirm" required
+                                   placeholder="Confirmez le mot de passe">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <a href="install_new.php?step=3" class="btn btn-secondary">' . t('back') . '</a>
+                            <button type="submit" class="btn btn-primary">' . t('next') . '</button>
+                        </div>
+                    </form>
+                </div>
+            </div>';
+            break;
+            
+        case 5: // Installation finale
+            echo '<div class="step-5-container">
+                <div class="finalization-section">
+                    <div class="finalization-info">
+                        <h3>' . t('finalization') . '</h3>
+                        <p>' . t('finalization_description') . '</p>
+                    </div>
+                    
+                    <form method="post" action="install_new.php" data-step="5" class="install-form">
+                        <input type="hidden" name="step" value="5">
+                        
+                        <div class="installation-summary">
+                            <h4>Résumé de l\'installation</h4>
+                            <p>Vérifiez les informations ci-dessous avant de procéder à l\'installation finale.</p>
+                            
+                            <div class="summary-section">
+                                <h5>Informations de la base de données</h5>
+                                <p><strong>Hôte :</strong> ' . htmlspecialchars($_SESSION['db_config']['host'] ?? '') . '</p>
+                                <p><strong>Base de données :</strong> ' . htmlspecialchars($_SESSION['db_config']['database'] ?? '') . '</p>
+                                <p><strong>Utilisateur :</strong> ' . htmlspecialchars($_SESSION['db_config']['username'] ?? '') . '</p>
+                                
+                                <h5>Informations de l\'administrateur</h5>
+                                <p><strong>Nom :</strong> ' . htmlspecialchars($_SESSION['admin_config']['name'] ?? '') . '</p>
+                                <p><strong>Email :</strong> ' . htmlspecialchars($_SESSION['admin_config']['email'] ?? '') . '</p>
+                            </div>
+                            
+                            <p><strong>Attention :</strong> Cette opération va créer les tables de la base de données et configurer l\'application.</p>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <a href="install_new.php?step=4" class="btn btn-secondary">' . t('back') . '</a>
+                            <button type="submit" class="btn btn-primary">Installer maintenant</button>
+                        </div>
+                    </form>
+                </div>
+            </div>';
             break;
     }
     

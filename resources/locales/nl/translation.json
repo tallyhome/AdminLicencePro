@@ -43,7 +43,8 @@
         "all": "Allemaal",
         "used": "Gebruikt",
         "unused": "Niet gebruikt",
-        "language_changed_successfully": "Taal succesvol gewijzigd"
+        "language_changed_successfully": "Taal succesvol gewijzigd",
+        "system_requirements": "Systeemvereisten"
     },
     "layout": {
         "support": "Support",

@@ -65,7 +65,8 @@
     "information": "Bilgi",
     "showing": ":total sonuçtan :first ile :last arası gösteriliyor",
     "of": "-den",
-    "no_description": "Açıklama yok"
+    "no_description": "Açıklama yok",
+    "system_requirements": "Sistem Gereksinimleri"
   },
   "layout": {
     "support": "Destek",

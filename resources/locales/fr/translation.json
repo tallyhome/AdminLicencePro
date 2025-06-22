@@ -49,7 +49,8 @@
         "revoked": "Révoqué",
         "expired": "Expiré",
         "pending": "En attente",
-        "language_changed_successfully": "Langue changée avec succès"
+        "language_changed_successfully": "Langue changée avec succès",
+        "system_requirements": "Prérequis système"
     },
     "translations": {
         "title": "Gestion des traductions",

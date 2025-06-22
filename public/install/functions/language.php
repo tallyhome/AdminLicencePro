@@ -86,6 +86,21 @@ function t($key, $replacements = []) {
             'info' => 'Information',
             'required' => 'Requis',
             'optional' => 'Optionnel',
+            'system_requirements' => 'Prérequis système',
+            'system_requirements_description' => 'Vérification des extensions PHP et des permissions de fichiers',
+            'php_version' => 'Version PHP',
+            'php_extensions' => 'Extensions PHP',
+            'file_permissions' => 'Permissions de fichiers',
+            'extension_required' => 'Requis',
+            'extension_optional' => 'Optionnel',
+            'permission_writable' => 'Écriture',
+            'permission_readable' => 'Lecture',
+            'status_ok' => 'OK',
+            'status_warning' => 'Attention',
+            'status_error' => 'Erreur',
+            'check_system_requirements' => 'Vérifier les prérequis',
+            'requirements_met' => 'Tous les prérequis sont satisfaits',
+            'requirements_issues' => 'Certains prérequis ne sont pas satisfaits',
             
             // Interface
             'installation_title' => 'Installation AdminLicence',
@@ -97,9 +112,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentation',
             'step_labels' => [
                 1 => 'Licence',
-                2 => 'Base de données',
-                3 => 'Administrateur',
-                4 => 'Finalisation'
+                2 => 'Prérequis système',
+                3 => 'Base de données',
+                4 => 'Administrateur',
+                5 => 'Finalisation'
             ],
             
             // Licence
@@ -116,12 +132,14 @@ function t($key, $replacements = []) {
             
             // Base de données
             'database_configuration' => 'Configuration de la base de données',
-            'database_configuration_description' => 'Configurez la connexion à votre base de données',
+            'database_configuration_description' => 'Configurez la connexion à votre base de données MySQL',
             'db_host' => 'Hôte de la base de données',
             'db_port' => 'Port',
             'db_name' => 'Nom de la base de données',
             'db_user' => 'Utilisateur',
             'db_password' => 'Mot de passe',
+            'database_will_be_created' => 'La base de données sera créée si elle n\'existe pas',
+            'leave_empty_if_no_password' => 'Laissez vide si aucun mot de passe',
             'test_connection' => 'Tester la connexion',
             'connection_successful' => 'Connexion réussie',
             'connection_failed' => 'Échec de la connexion',
@@ -161,6 +179,21 @@ function t($key, $replacements = []) {
             'info' => 'Information',
             'required' => 'Required',
             'optional' => 'Optional',
+            'system_requirements' => 'System Requirements',
+            'system_requirements_description' => 'Verify PHP extensions and file permissions',
+            'php_version' => 'PHP Version',
+            'php_extensions' => 'PHP Extensions',
+            'file_permissions' => 'File Permissions',
+            'extension_required' => 'Required',
+            'extension_optional' => 'Optional',
+            'permission_writable' => 'Writable',
+            'permission_readable' => 'Readable',
+            'status_ok' => 'OK',
+            'status_warning' => 'Warning',
+            'status_error' => 'Error',
+            'check_system_requirements' => 'Check Requirements',
+            'requirements_met' => 'All requirements are satisfied',
+            'requirements_issues' => 'Some requirements are not satisfied',
             
             // Interface
             'installation_title' => 'AdminLicence Installation',
@@ -172,9 +205,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentation',
             'step_labels' => [
                 1 => 'License',
-                2 => 'Database',
-                3 => 'Administrator',
-                4 => 'Finalization'
+                2 => 'System Requirements',
+                3 => 'Database',
+                4 => 'Administrator',
+                5 => 'Finalization'
             ],
             
             // License
@@ -191,12 +225,14 @@ function t($key, $replacements = []) {
             
             // Database
             'database_configuration' => 'Database Configuration',
-            'database_configuration_description' => 'Configure your database connection',
+            'database_configuration_description' => 'Configure your MySQL database connection',
             'db_host' => 'Database Host',
             'db_port' => 'Port',
             'db_name' => 'Database Name',
             'db_user' => 'Username',
             'db_password' => 'Password',
+            'database_will_be_created' => 'Database will be created if it doesn\'t exist',
+            'leave_empty_if_no_password' => 'Leave empty if no password',
             'test_connection' => 'Test Connection',
             'connection_successful' => 'Connection Successful',
             'connection_failed' => 'Connection Failed',
@@ -236,6 +272,21 @@ function t($key, $replacements = []) {
             'info' => 'Información',
             'required' => 'Requerido',
             'optional' => 'Opcional',
+            'system_requirements' => 'Requisitos del Sistema',
+            'system_requirements_description' => 'Verificar extensiones PHP y permisos de archivos',
+            'php_version' => 'Versión PHP',
+            'php_extensions' => 'Extensiones PHP',
+            'file_permissions' => 'Permisos de Archivos',
+            'extension_required' => 'Requerido',
+            'extension_optional' => 'Opcional',
+            'permission_writable' => 'Escritura',
+            'permission_readable' => 'Lectura',
+            'status_ok' => 'OK',
+            'status_warning' => 'Advertencia',
+            'status_error' => 'Error',
+            'check_system_requirements' => 'Verificar Requisitos',
+            'requirements_met' => 'Todos los requisitos se cumplen',
+            'requirements_issues' => 'Algunos requisitos no se cumplen',
             
             // Interface
             'installation_title' => 'Instalación AdminLicence',
@@ -247,9 +298,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentación',
             'step_labels' => [
                 1 => 'Licencia',
-                2 => 'Base de datos',
-                3 => 'Administrador',
-                4 => 'Finalización'
+                2 => 'Requisitos del Sistema',
+                3 => 'Base de datos',
+                4 => 'Administrador',
+                5 => 'Finalización'
             ],
             
             // License
@@ -311,6 +363,21 @@ function t($key, $replacements = []) {
             'info' => 'Information',
             'required' => 'Erforderlich',
             'optional' => 'Optional',
+            'system_requirements' => 'Systemanforderungen',
+            'system_requirements_description' => 'Überprüfen Sie PHP-Erweiterungen und Berechtigungen',
+            'php_version' => 'PHP-Version',
+            'php_extensions' => 'PHP-Erweiterungen',
+            'file_permissions' => 'Dateiberechtigungen',
+            'extension_required' => 'Erforderlich',
+            'extension_optional' => 'Optional',
+            'permission_writable' => 'Schreiben',
+            'permission_readable' => 'Lesen',
+            'status_ok' => 'OK',
+            'status_warning' => 'Warnung',
+            'status_error' => 'Fehler',
+            'check_system_requirements' => 'Systemanforderungen überprüfen',
+            'requirements_met' => 'Alle Systemanforderungen sind erfüllt',
+            'requirements_issues' => 'Nicht alle Systemanforderungen sind erfüllt',
             
             // Interface
             'installation_title' => 'AdminLicence Installation',
@@ -322,9 +389,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Dokumentation',
             'step_labels' => [
                 1 => 'Lizenz',
-                2 => 'Datenbank',
-                3 => 'Administrator',
-                4 => 'Fertigstellung'
+                2 => 'Systemanforderungen',
+                3 => 'Datenbank',
+                4 => 'Administrator',
+                5 => 'Fertigstellung'
             ],
             
             // License
@@ -386,6 +454,21 @@ function t($key, $replacements = []) {
             'info' => 'Informazione',
             'required' => 'Richiesto',
             'optional' => 'Opzionale',
+            'system_requirements' => 'Requisiti di Sistema',
+            'system_requirements_description' => 'Verifica estensioni PHP e permessi',
+            'php_version' => 'Versione PHP',
+            'php_extensions' => 'Estensioni PHP',
+            'file_permissions' => 'Permessi File',
+            'extension_required' => 'Richiesto',
+            'extension_optional' => 'Opzionale',
+            'permission_writable' => 'Scrittura',
+            'permission_readable' => 'Lettura',
+            'status_ok' => 'OK',
+            'status_warning' => 'Attenzione',
+            'status_error' => 'Errore',
+            'check_system_requirements' => 'Verifica Requisiti',
+            'requirements_met' => 'Tutti i requisiti sono soddisfatti',
+            'requirements_issues' => 'Alcuni requisiti non sono soddisfatti',
             
             // Interface
             'installation_title' => 'Installazione AdminLicence',
@@ -397,9 +480,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentazione',
             'step_labels' => [
                 1 => 'Licenza',
-                2 => 'Database',
-                3 => 'Amministratore',
-                4 => 'Finalizzazione'
+                2 => 'Requisiti di Sistema',
+                3 => 'Database',
+                4 => 'Amministratore',
+                5 => 'Finalizzazione'
             ],
             
             // License
@@ -461,6 +545,21 @@ function t($key, $replacements = []) {
             'info' => 'Informação',
             'required' => 'Obrigatório',
             'optional' => 'Opcional',
+            'system_requirements' => 'Requisitos de Sistema',
+            'system_requirements_description' => 'Verificar extensões PHP e permissões',
+            'php_version' => 'Versão PHP',
+            'php_extensions' => 'Extensões PHP',
+            'file_permissions' => 'Permissões de Arquivo',
+            'extension_required' => 'Obrigatório',
+            'extension_optional' => 'Opcional',
+            'permission_writable' => 'Escrita',
+            'permission_readable' => 'Leitura',
+            'status_ok' => 'OK',
+            'status_warning' => 'Atenção',
+            'status_error' => 'Erro',
+            'check_system_requirements' => 'Verificar Requisitos',
+            'requirements_met' => 'Todos os requisitos são atendidos',
+            'requirements_issues' => 'Alguns requisitos não são atendidos',
             
             // Interface
             'installation_title' => 'Instalação AdminLicence',
@@ -472,9 +571,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentação',
             'step_labels' => [
                 1 => 'Licença',
-                2 => 'Base de dados',
-                3 => 'Administrador',
-                4 => 'Finalização'
+                2 => 'Requisitos do Sistema',
+                3 => 'Base de dados',
+                4 => 'Administrador',
+                5 => 'Finalização'
             ],
             
             // License
@@ -536,6 +636,21 @@ function t($key, $replacements = []) {
             'info' => 'Informatie',
             'required' => 'Vereist',
             'optional' => 'Optioneel',
+            'system_requirements' => 'Systeemanforderingen',
+            'system_requirements_description' => 'Controleer PHP-extensies en machtigingen',
+            'php_version' => 'PHP-versie',
+            'php_extensions' => 'PHP-extensies',
+            'file_permissions' => 'Bestandsrechten',
+            'extension_required' => 'Vereist',
+            'extension_optional' => 'Optioneel',
+            'permission_writable' => 'Schrijven',
+            'permission_readable' => 'Lezen',
+            'status_ok' => 'OK',
+            'status_warning' => 'Waarschuwing',
+            'status_error' => 'Fout',
+            'check_system_requirements' => 'Systeemanforderingen controleren',
+            'requirements_met' => 'Alle systeemanforderingen zijn voldaan',
+            'requirements_issues' => 'Niet alle systeemanforderingen zijn voldaan',
             
             // Interface
             'installation_title' => 'AdminLicence Installatie',
@@ -547,9 +662,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Documentatie',
             'step_labels' => [
                 1 => 'Licentie',
-                2 => 'Database',
-                3 => 'Beheerder',
-                4 => 'Voltooiing'
+                2 => 'Systeemvereisten',
+                3 => 'Database',
+                4 => 'Beheerder',
+                5 => 'Voltooiing'
             ],
             
             // License
@@ -611,6 +727,21 @@ function t($key, $replacements = []) {
             'info' => 'Информация',
             'required' => 'Обязательно',
             'optional' => 'Необязательно',
+            'system_requirements' => 'Системные требования',
+            'system_requirements_description' => 'Проверка расширений PHP и разрешений',
+            'php_version' => 'Версия PHP',
+            'php_extensions' => 'PHP-расширения',
+            'file_permissions' => 'Права доступа',
+            'extension_required' => 'Обязательно',
+            'extension_optional' => 'Необязательно',
+            'permission_writable' => 'Запись',
+            'permission_readable' => 'Чтение',
+            'status_ok' => 'OK',
+            'status_warning' => 'Предупреждение',
+            'status_error' => 'Ошибка',
+            'check_system_requirements' => 'Проверка системных требований',
+            'requirements_met' => 'Все системные требования выполнены',
+            'requirements_issues' => 'Не все системные требования выполнены',
             
             // Interface
             'installation_title' => 'Установка AdminLicence',
@@ -622,9 +753,10 @@ function t($key, $replacements = []) {
             'documentation' => 'Документация',
             'step_labels' => [
                 1 => 'Лицензия',
-                2 => 'База данных',
-                3 => 'Администратор',
-                4 => 'Завершение'
+                2 => 'Системные требования',
+                3 => 'База данных',
+                4 => 'Администратор',
+                5 => 'Завершение'
             ],
             
             // License
@@ -686,6 +818,21 @@ function t($key, $replacements = []) {
             'info' => '信息',
             'required' => '必填',
             'optional' => '可选',
+            'system_requirements' => '系统要求',
+            'system_requirements_description' => '检查PHP扩展和权限',
+            'php_version' => 'PHP版本',
+            'php_extensions' => 'PHP扩展',
+            'file_permissions' => '文件权限',
+            'extension_required' => '必填',
+            'extension_optional' => '可选',
+            'permission_writable' => '写入',
+            'permission_readable' => '读取',
+            'status_ok' => 'OK',
+            'status_warning' => '警告',
+            'status_error' => '错误',
+            'check_system_requirements' => '检查系统要求',
+            'requirements_met' => '所有系统要求都已满足',
+            'requirements_issues' => '某些系统要求未满足',
             
             // Interface
             'installation_title' => 'AdminLicence 安装',
@@ -697,9 +844,10 @@ function t($key, $replacements = []) {
             'documentation' => '文档',
             'step_labels' => [
                 1 => '许可证',
-                2 => '数据库',
-                3 => '管理员',
-                4 => '完成'
+                2 => '系统要求',
+                3 => '数据库',
+                4 => '管理员',
+                5 => '完成'
             ],
             
             // License
@@ -761,6 +909,21 @@ function t($key, $replacements = []) {
             'info' => '情報',
             'required' => '必須',
             'optional' => 'オプション',
+            'system_requirements' => 'システム要件',
+            'system_requirements_description' => 'PHP拡張機能と権限を確認',
+            'php_version' => 'PHPバージョン',
+            'php_extensions' => 'PHP拡張機能',
+            'file_permissions' => 'ファイル権限',
+            'extension_required' => '必須',
+            'extension_optional' => 'オプション',
+            'permission_writable' => '書き込み',
+            'permission_readable' => '読み取り',
+            'status_ok' => 'OK',
+            'status_warning' => '警告',
+            'status_error' => 'エラー',
+            'check_system_requirements' => 'システム要件の確認',
+            'requirements_met' => 'すべてのシステム要件が満たされています',
+            'requirements_issues' => '一部のシステム要件が満たされていません',
             
             // License
             'license_key' => 'ライセンスキー',
@@ -821,52 +984,21 @@ function t($key, $replacements = []) {
             'info' => 'Bilgi',
             'required' => 'Gerekli',
             'optional' => 'İsteğe Bağlı',
-            
-            // License
-            'license_key' => 'Lisans Anahtarı',
-            'license_key_placeholder' => 'XXXX-XXXX-XXXX-XXXX',
-            'license_verification' => 'Lisans Doğrulama',
-            'license_verification_description' => 'Devam etmek için lisans anahtarınızı doğrulayın',
-            'verify_license' => 'Lisansı Doğrula',
-            'license_valid' => 'Lisans Geçerli',
-            'license_invalid' => 'Lisans Geçersiz',
-            'license_required' => 'Lisans anahtarı gereklidir',
-            'license_key_required' => 'Lisans anahtarı gereklidir',
-            'license_valid_next_step' => 'Lisans geçerli! Sonraki adıma geçiliyor...',
-            
-            // Database
-            'database_configuration' => 'Veritabanı Yapılandırması',
-            'database_configuration_description' => 'Veritabanı bağlantınızı yapılandırın',
-            'db_host' => 'Veritabanı Sunucusu',
-            'db_port' => 'Port',
-            'db_name' => 'Veritabanı Adı',
-            'db_user' => 'Kullanıcı Adı',
-            'db_password' => 'Şifre',
-            'test_connection' => 'Bağlantıyı Test Et',
-            'connection_successful' => 'Bağlantı Başarılı',
-            'connection_failed' => 'Bağlantı Başarısız',
-            
-            // Admin
-            'admin_setup' => 'Yönetici Kurulumu',
-            'admin_setup_description' => 'Ana yönetici hesabını oluşturun',
-            'admin_name' => 'Yönetici Adı',
-            'admin_email' => 'Yönetici E-postası',
-            'admin_password' => 'Şifre',
-            'admin_password_confirm' => 'Şifreyi Onayla',
-            'passwords_dont_match' => 'Şifreler eşleşmiyor',
-            
-            // Finalization
-            'finalization' => 'Sonlandırma',
-            'finalization_description' => 'Son kurulum ve yapılandırma',
-            'installation_complete' => 'Kurulum Tamamlandı',
-            'installation_success' => 'Kurulum başarıyla tamamlandı',
-            'go_to_admin' => 'Yönetim Paneline Git',
-            
-            // Errors
-            'installation_failed' => 'Kurulum başarısız',
-            'database_error' => 'Veritabanı hatası',
-            'file_permission_error' => 'Dosya izin hatası',
-            'already_installed' => 'Uygulama zaten kurulu'
+            'system_requirements' => 'Sistem Gereksinimleri',
+            'system_requirements_description' => 'PHP uzantılarını ve izinleri kontrol et',
+            'php_version' => 'PHP Versiyonu',
+            'php_extensions' => 'PHP Uzantıları',
+            'file_permissions' => 'Dosya İzinleri',
+            'extension_required' => 'Gerekli',
+            'extension_optional' => 'İsteğe Bağlı',
+            'permission_writable' => 'Yazma',
+            'permission_readable' => 'Okuma',
+            'status_ok' => 'OK',
+            'status_warning' => 'Uyarı',
+            'status_error' => 'Hata',
+            'check_system_requirements' => 'Sistem Gereksinimlerini Kontrol Et',
+            'requirements_met' => 'Tüm sistem gereksinimleri karşılandı',
+            'requirements_issues' => 'Bazı sistem gereksinimleri karşılanmadı'
         ],
         'ar' => [
             // General
@@ -881,52 +1013,21 @@ function t($key, $replacements = []) {
             'info' => 'معلومات',
             'required' => 'مطلوب',
             'optional' => 'اختياري',
-            
-            // License
-            'license_key' => 'مفتاح الترخيص',
-            'license_key_placeholder' => 'XXXX-XXXX-XXXX-XXXX',
-            'license_verification' => 'التحقق من الترخيص',
-            'license_verification_description' => 'تحقق من مفتاح الترخيص للمتابعة',
-            'verify_license' => 'التحقق من الترخيص',
-            'license_valid' => 'الترخيص صالح',
-            'license_invalid' => 'الترخيص غير صالح',
-            'license_required' => 'مفتاح الترخيص مطلوب',
-            'license_key_required' => 'مفتاح الترخيص مطلوب',
-            'license_valid_next_step' => 'الترخيص صالح! الانتقال إلى الخطوة التالية...',
-            
-            // Database
-            'database_configuration' => 'تكوين قاعدة البيانات',
-            'database_configuration_description' => 'قم بتكوين اتصال قاعدة البيانات',
-            'db_host' => 'مضيف قاعدة البيانات',
-            'db_port' => 'المنفذ',
-            'db_name' => 'اسم قاعدة البيانات',
-            'db_user' => 'اسم المستخدم',
-            'db_password' => 'كلمة المرور',
-            'test_connection' => 'اختبار الاتصال',
-            'connection_successful' => 'الاتصال ناجح',
-            'connection_failed' => 'فشل الاتصال',
-            
-            // Admin
-            'admin_setup' => 'إعداد المدير',
-            'admin_setup_description' => 'إنشاء حساب المدير الرئيسي',
-            'admin_name' => 'اسم المدير',
-            'admin_email' => 'بريد المدير الإلكتروني',
-            'admin_password' => 'كلمة المرور',
-            'admin_password_confirm' => 'تأكيد كلمة المرور',
-            'passwords_dont_match' => 'كلمات المرور غير متطابقة',
-            
-            // Finalization
-            'finalization' => 'الإنهاء',
-            'finalization_description' => 'التثبيت والتكوين النهائي',
-            'installation_complete' => 'اكتمل التثبيت',
-            'installation_success' => 'تم التثبيت بنجاح',
-            'go_to_admin' => 'الذهاب إلى الإدارة',
-            
-            // Errors
-            'installation_failed' => 'فشل التثبيت',
-            'database_error' => 'خطأ في قاعدة البيانات',
-            'file_permission_error' => 'خطأ في أذونات الملف',
-            'already_installed' => 'التطبيق مثبت بالفعل'
+            'system_requirements' => 'متطلبات النظام',
+            'system_requirements_description' => 'فحص امتدادات PHP والأذونات',
+            'php_version' => 'إصدار PHP',
+            'php_extensions' => 'امتدادات PHP',
+            'file_permissions' => 'أذونات الملف',
+            'extension_required' => 'مطلوب',
+            'extension_optional' => 'اختياري',
+            'permission_writable' => 'كتابة',
+            'permission_readable' => 'قراءة',
+            'status_ok' => 'موجود',
+            'status_warning' => 'تحذير',
+            'status_error' => 'خطأ',
+            'check_system_requirements' => 'فحص متطلبات النظام',
+            'requirements_met' => 'جميع متطلبات النظام موجودة',
+            'requirements_issues' => 'لم تتم معالجة كل المتطلبات'
         ]
     ];
     
@@ -969,26 +1070,73 @@ function getAvailableLanguages() {
 }
 
 /**
- * Générer les liens de changement de langue
+ * Générer les liens de changement de langue avec menu déroulant
  * 
- * @return string HTML des liens de changement de langue
+ * @return string HTML du sélecteur de langue avec menu déroulant
  */
 function getLanguageLinks() {
     $currentLang = getCurrentLanguage();
+    $currentLangName = AVAILABLE_LANGUAGES[$currentLang] ?? 'Français';
     
     // Conserver les paramètres actuels de l'URL, y compris l'étape
     $params = $_GET;
     unset($params['language']); // Supprimer le paramètre language s'il existe
     $queryString = !empty($params) ? '&' . http_build_query($params) : '';
     
-    $html = '';
+    // Obtenir le drapeau de la langue actuelle
+    $currentFlag = getLanguageFlag($currentLang);
+    
+    $html = '<div class="language-dropdown">';
+    $html .= '<button class="language-dropdown-btn" type="button" onclick="toggleLanguageDropdown()">';
+    $html .= '<span class="language-flag">' . $currentFlag . '</span>';
+    $html .= '<span class="language-name">' . htmlspecialchars($currentLangName) . '</span>';
+    $html .= '<span class="dropdown-arrow">▼</span>';
+    $html .= '</button>';
+    
+    $html .= '<div class="language-dropdown-menu" id="languageDropdownMenu">';
     
     foreach (AVAILABLE_LANGUAGES as $code => $name) {
         $active = $code === $currentLang ? ' class="active"' : '';
-        $html .= sprintf('<a href="?language=%s%s"%s>%s</a>', $code, $queryString, $active, $name);
+        $flag = getLanguageFlag($code);
+        $html .= sprintf(
+            '<a href="?language=%s%s"%s><span class="language-flag">%s</span><span class="language-name">%s</span></a>',
+            $code,
+            $queryString,
+            $active,
+            $flag,
+            htmlspecialchars($name)
+        );
     }
     
+    $html .= '</div>';
+    $html .= '</div>';
+    
     return $html;
+}
+
+/**
+ * Obtenir le drapeau emoji pour une langue
+ * 
+ * @param string $langCode Code de la langue
+ * @return string Emoji du drapeau
+ */
+function getLanguageFlag($langCode) {
+    $flags = [
+        'fr' => '🇫🇷',
+        'en' => '🇬🇧',
+        'es' => '🇪🇸',
+        'de' => '🇩🇪',
+        'it' => '🇮🇹',
+        'pt' => '🇵🇹',
+        'nl' => '🇳🇱',
+        'ru' => '🇷🇺',
+        'zh' => '🇨🇳',
+        'ja' => '🇯🇵',
+        'tr' => '🇹🇷',
+        'ar' => '🇸🇦'
+    ];
+    
+    return $flags[$langCode] ?? '🌐';
 }
 
 /**
@@ -1013,75 +1161,87 @@ function getStepTitle($step) {
     $titles = [
         'fr' => [
             1 => 'Vérification de la licence',
-            2 => 'Configuration de la base de données', 
-            3 => 'Configuration de l\'administrateur',
-            4 => 'Finalisation'
+            2 => 'Vérification des prérequis système',
+            3 => 'Configuration de la base de données',
+            4 => 'Configuration de l\'administrateur',
+            5 => 'Finalisation de l\'installation'
         ],
         'en' => [
             1 => 'License Verification',
-            2 => 'Database Configuration', 
-            3 => 'Admin Setup',
-            4 => 'Finalization'
+            2 => 'System Requirements Check',
+            3 => 'Database Configuration',
+            4 => 'Administrator Setup',
+            5 => 'Installation Finalization'
         ],
         'es' => [
             1 => 'Verificación de Licencia',
-            2 => 'Configuración de Base de Datos', 
-            3 => 'Configuración de Administrador',
-            4 => 'Finalización'
+            2 => 'Verificación de Requisitos del Sistema',
+            3 => 'Configuración de Base de Datos',
+            4 => 'Configuración de Administrador',
+            5 => 'Finalización de Instalación'
         ],
         'de' => [
-            1 => 'Lizenzverifizierung',
-            2 => 'Datenbank-Konfiguration', 
-            3 => 'Administrator-Setup',
-            4 => 'Finalisierung'
+            1 => 'Lizenzüberprüfung',
+            2 => 'Systemanforderungen Prüfung',
+            3 => 'Datenbank-Konfiguration',
+            4 => 'Administrator-Einrichtung',
+            5 => 'Installation Abschluss'
         ],
         'it' => [
             1 => 'Verifica Licenza',
-            2 => 'Configurazione Database', 
-            3 => 'Configurazione Amministratore',
-            4 => 'Finalizzazione'
+            2 => 'Verifica Requisiti di Sistema',
+            3 => 'Configurazione Database',
+            4 => 'Configurazione Amministratore',
+            5 => 'Finalizzazione Installazione'
         ],
         'pt' => [
             1 => 'Verificação de Licença',
-            2 => 'Configuração do Banco de Dados', 
-            3 => 'Configuração do Administrador',
-            4 => 'Finalização'
+            2 => 'Verificação de Requisitos do Sistema',
+            3 => 'Configuração de Base de Dados',
+            4 => 'Configuração de Administrador',
+            5 => 'Finalização da Instalação'
         ],
         'nl' => [
             1 => 'Licentieverificatie',
-            2 => 'Database Configuratie', 
-            3 => 'Beheerder Setup',
-            4 => 'Voltooiing'
+            2 => 'Systeemvereisten Controle',
+            3 => 'Database Configuratie',
+            4 => 'Beheerder Configuratie',
+            5 => 'Installatie Voltooiing'
         ],
         'ru' => [
             1 => 'Проверка лицензии',
-            2 => 'Конфигурация базы данных', 
-            3 => 'Настройка администратора',
-            4 => 'Завершение'
+            2 => 'Проверка системных требований',
+            3 => 'Конфигурация базы данных',
+            4 => 'Настройка администратора',
+            5 => 'Завершение установки'
         ],
         'zh' => [
             1 => '许可证验证',
-            2 => '数据库配置', 
-            3 => '管理员设置',
-            4 => '完成'
+            2 => '系统要求检查',
+            3 => '数据库配置',
+            4 => '管理员设置',
+            5 => '安装完成'
         ],
         'ja' => [
             1 => 'ライセンス検証',
-            2 => 'データベース設定', 
-            3 => '管理者設定',
-            4 => '最終処理'
+            2 => 'システム要件確認',
+            3 => 'データベース設定',
+            4 => '管理者設定',
+            5 => 'インストール完了'
         ],
         'tr' => [
             1 => 'Lisans Doğrulama',
-            2 => 'Veritabanı Yapılandırması', 
-            3 => 'Yönetici Kurulumu',
-            4 => 'Sonlandırma'
+            2 => 'Sistem Gereksinimleri Kontrolü',
+            3 => 'Veritabanı Yapılandırması',
+            4 => 'Yönetici Kurulumu',
+            5 => 'Kurulum Tamamlama'
         ],
         'ar' => [
             1 => 'التحقق من الترخيص',
-            2 => 'تكوين قاعدة البيانات', 
-            3 => 'إعداد المدير',
-            4 => 'الإنهاء'
+            2 => 'فحص امتدادات PHP والأذونات',
+            3 => 'قم بتكوين اتصال قاعدة البيانات',
+            4 => 'إنشاء حساب المدير الرئيسي',
+            5 => 'إنهاء التثبيت'
         ]
     ];
     
@@ -1100,75 +1260,87 @@ function getStepDescription($step) {
     $descriptions = [
         'fr' => [
             1 => 'Vérifiez votre clé de licence pour continuer',
-            2 => 'Configurez la connexion à votre base de données',
-            3 => 'Créez le compte administrateur principal', 
-            4 => 'Installation et configuration finale'
+            2 => 'Vérification des extensions PHP et des permissions',
+            3 => 'Configurez la connexion à votre base de données',
+            4 => 'Créez le compte administrateur principal',
+            5 => 'Installation et configuration finale'
         ],
         'en' => [
             1 => 'Verify your license key to continue',
-            2 => 'Configure your database connection',
-            3 => 'Create the main administrator account', 
-            4 => 'Final installation and configuration'
+            2 => 'Check PHP extensions and permissions',
+            3 => 'Configure your database connection',
+            4 => 'Create the main administrator account',
+            5 => 'Final installation and configuration'
         ],
         'es' => [
             1 => 'Verifique su clave de licencia para continuar',
-            2 => 'Configure su conexión de base de datos',
-            3 => 'Crear la cuenta principal de administrador', 
-            4 => 'Instalación y configuración final'
+            2 => 'Verificar extensiones PHP y permisos',
+            3 => 'Configure su conexión de base de datos',
+            4 => 'Crear la cuenta principal de administrador',
+            5 => 'Instalación y configuración final'
         ],
         'de' => [
             1 => 'Verifizieren Sie Ihren Lizenzschlüssel, um fortzufahren',
-            2 => 'Konfigurieren Sie Ihre Datenbankverbindung',
-            3 => 'Erstellen Sie das Haupt-Administratorkonto', 
-            4 => 'Abschließende Installation und Konfiguration'
+            2 => 'PHP-Erweiterungen und Berechtigungen prüfen',
+            3 => 'Konfigurieren Sie Ihre Datenbankverbindung',
+            4 => 'Erstellen Sie das Haupt-Administratorkonto',
+            5 => 'Abschließende Installation und Konfiguration'
         ],
         'it' => [
             1 => 'Verifica la tua chiave di licenza per continuare',
-            2 => 'Configura la connessione al database',
-            3 => 'Crea l\'account amministratore principale', 
-            4 => 'Installazione e configurazione finale'
+            2 => 'Controlla estensioni PHP e permessi',
+            3 => 'Configura la connessione al database',
+            4 => 'Crea l\'account amministratore principale',
+            5 => 'Installazione e configurazione finale'
         ],
         'pt' => [
             1 => 'Verifique sua chave de licença para continuar',
-            2 => 'Configure sua conexão com o banco de dados',
-            3 => 'Criar a conta principal do administrador', 
-            4 => 'Instalação e configuração final'
+            2 => 'Verificar extensões PHP e permissões',
+            3 => 'Configure sua conexão com o banco de dados',
+            4 => 'Criar a conta principal do administrador',
+            5 => 'Instalação e configuração final'
         ],
         'nl' => [
             1 => 'Verifieer uw licentiesleutel om door te gaan',
-            2 => 'Configureer uw databaseverbinding',
-            3 => 'Maak het hoofdbeheerdersaccount aan', 
-            4 => 'Definitieve installatie en configuratie'
+            2 => 'Controleer PHP-extensies en machtigingen',
+            3 => 'Configureer uw databaseverbinding',
+            4 => 'Maak het hoofdbeheerdersaccount aan',
+            5 => 'Definitieve installatie en configuratie'
         ],
         'ru' => [
             1 => 'Проверьте ваш лицензионный ключ для продолжения',
-            2 => 'Настройте подключение к базе данных',
-            3 => 'Создайте основную учетную запись администратора', 
-            4 => 'Финальная установка и конфигурация'
+            2 => 'Проверка расширений PHP и разрешений',
+            3 => 'Настройте подключение к базе данных',
+            4 => 'Создайте основную учетную запись администратора',
+            5 => 'Финальная установка и конфигурация'
         ],
         'zh' => [
             1 => '验证您的许可证密钥以继续',
-            2 => '配置您的数据库连接',
-            3 => '创建主管理员账户', 
-            4 => '最终安装和配置'
+            2 => '检查PHP扩展和权限',
+            3 => '配置您的数据库连接',
+            4 => '创建主管理员账户',
+            5 => '最终安装和配置'
         ],
         'ja' => [
             1 => '続行するにはライセンスキーを確認してください',
-            2 => 'データベース接続を設定してください',
-            3 => 'メイン管理者アカウントを作成してください', 
-            4 => '最終インストールと設定'
+            2 => 'PHP拡張機能と権限を確認',
+            3 => 'データベース接続を設定してください',
+            4 => 'メイン管理者アカウントを作成してください',
+            5 => '最終インストールと設定'
         ],
         'tr' => [
             1 => 'Devam etmek için lisans anahtarınızı doğrulayın',
-            2 => 'Veritabanı bağlantınızı yapılandırın',
-            3 => 'Ana yönetici hesabını oluşturun', 
-            4 => 'Son kurulum ve yapılandırma'
+            2 => 'PHP uzantıları ve izinleri kontrol et',
+            3 => 'Veritabanı bağlantınızı yapılandırın',
+            4 => 'Ana yönetici hesabını oluşturun',
+            5 => 'Son kurulum ve yapılandırma'
         ],
         'ar' => [
             1 => 'تحقق من مفتاح الترخيص للمتابعة',
-            2 => 'قم بتكوين اتصال قاعدة البيانات',
-            3 => 'إنشاء حساب المدير الرئيسي', 
-            4 => 'التثبيت والتكوين النهائي'
+            2 => 'فحص امتدادات PHP والأذونات',
+            3 => 'قم بتكوين اتصال قاعدة البيانات',
+            4 => 'إنشاء حساب المدير الرئيسي',
+            5 => 'التثبيت والتكوين النهائي'
         ]
     ];
     
@@ -1187,75 +1359,87 @@ function getStepLabel($step) {
     $labels = [
         'fr' => [
             1 => 'Licence',
-            2 => 'Base de données',
-            3 => 'Administrateur',
-            4 => 'Finalisation'
+            2 => 'Prérequis système',
+            3 => 'Base de données',
+            4 => 'Administrateur',
+            5 => 'Finalisation'
         ],
         'en' => [
             1 => 'License',
-            2 => 'Database',
-            3 => 'Administrator',
-            4 => 'Finalization'
+            2 => 'System Requirements',
+            3 => 'Database',
+            4 => 'Administrator',
+            5 => 'Finalization'
         ],
         'es' => [
             1 => 'Licencia',
-            2 => 'Base de datos',
-            3 => 'Administrador',
-            4 => 'Finalización'
+            2 => 'Requisitos del Sistema',
+            3 => 'Base de datos',
+            4 => 'Administrador',
+            5 => 'Finalización'
         ],
         'de' => [
             1 => 'Lizenz',
-            2 => 'Datenbank',
-            3 => 'Administrator',
-            4 => 'Fertigstellung'
+            2 => 'Systemanforderungen',
+            3 => 'Datenbank',
+            4 => 'Administrator',
+            5 => 'Fertigstellung'
         ],
         'it' => [
             1 => 'Licenza',
-            2 => 'Database',
-            3 => 'Amministratore',
-            4 => 'Finalizzazione'
+            2 => 'Requisiti di Sistema',
+            3 => 'Database',
+            4 => 'Amministratore',
+            5 => 'Finalizzazione'
         ],
         'pt' => [
             1 => 'Licença',
-            2 => 'Base de dados',
-            3 => 'Administrador',
-            4 => 'Finalização'
+            2 => 'Requisitos do Sistema',
+            3 => 'Base de dados',
+            4 => 'Administrador',
+            5 => 'Finalização'
         ],
         'nl' => [
             1 => 'Licentie',
-            2 => 'Database',
-            3 => 'Beheerder',
-            4 => 'Voltooiing'
+            2 => 'Systeemvereisten',
+            3 => 'Database',
+            4 => 'Beheerder',
+            5 => 'Voltooiing'
         ],
         'ru' => [
             1 => 'Лицензия',
-            2 => 'База данных',
-            3 => 'Администратор',
-            4 => 'Завершение'
+            2 => 'Системные требования',
+            3 => 'База данных',
+            4 => 'Администратор',
+            5 => 'Завершение'
         ],
         'zh' => [
             1 => '许可证',
-            2 => '数据库',
-            3 => '管理员',
-            4 => '完成'
+            2 => '系统要求',
+            3 => '数据库',
+            4 => '管理员',
+            5 => '完成'
         ],
         'ja' => [
             1 => 'ライセンス',
-            2 => 'データベース',
-            3 => '管理者',
-            4 => '最終処理'
+            2 => 'システム要件',
+            3 => 'データベース',
+            4 => '管理者',
+            5 => '最終処理'
         ],
         'tr' => [
             1 => 'Lisans',
-            2 => 'Veritabanı',
-            3 => 'Yönetici',
-            4 => 'Sonlandırma'
+            2 => 'Sistem Gereksinimleri',
+            3 => 'Veritabanı',
+            4 => 'Yönetici',
+            5 => 'Sonlandırma'
         ],
         'ar' => [
             1 => 'الترخيص',
-            2 => 'قاعدة البيانات',
-            3 => 'المدير',
-            4 => 'الإنهاء'
+            2 => 'متطلبات النظام',
+            3 => 'قاعدة البيانات',
+            4 => 'المدير',
+            5 => 'الإنهاء'
         ]
     ];
     

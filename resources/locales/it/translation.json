@@ -42,7 +42,8 @@
         "of": "di",
         "all": "Tutti",
         "used": "Utilizzata",
-        "unused": "Non utilizzata"
+        "unused": "Non utilizzata",
+        "system_requirements": "Requisiti di Sistema"
     },
     "translations": {
         "title": "Gestione traduzioni",

@@ -42,7 +42,8 @@
         "of": "von",
         "all": "Alle",
         "used": "Verwendet",
-        "unused": "Nicht verwendet"
+        "unused": "Nicht verwendet",
+        "system_requirements": "Systemanforderungen"
     },
     "translations": {
         "title": "Übersetzungsverwaltung",

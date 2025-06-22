@@ -43,7 +43,8 @@
         "all": "Todos",
         "used": "Utilizada",
         "unused": "No utilizada",
-        "language_changed_successfully": "Idioma cambiado exitosamente"
+        "language_changed_successfully": "Idioma cambiado exitosamente",
+        "system_requirements": "Requisitos del Sistema"
     },
     "translations": {
         "title": "Gestión de Traducciones",

@@ -63,11 +63,11 @@ function createEnvFile() {
             'LOG_LEVEL' => 'error',
             
             'DB_CONNECTION' => 'mysql',
-            'DB_HOST' => 'localhost',
-            'DB_PORT' => '3306',
-            'DB_DATABASE' => '',
-            'DB_USERNAME' => '',
-            'DB_PASSWORD' => '',
+            'DB_HOST' => $_SESSION['db_config']['host'] ?? 'localhost',
+            'DB_PORT' => $_SESSION['db_config']['port'] ?? '3306',
+            'DB_DATABASE' => $_SESSION['db_config']['database'] ?? '',
+            'DB_USERNAME' => $_SESSION['db_config']['username'] ?? '',
+            'DB_PASSWORD' => $_SESSION['db_config']['password'] ?? '',
             
             'BROADCAST_DRIVER' => 'log',
             'CACHE_DRIVER' => 'file',
@@ -86,8 +86,8 @@ function createEnvFile() {
             'MAIL_FROM_NAME' => '${APP_NAME}'
         ];
 
-        // Vérifier la licence avant de continuer l'installation
-        $cleSeriale = $_SESSION['license_data']['token'] ?? '';
+        // CORRECTION: Récupérer la clé de licence depuis la session
+        $cleSeriale = $_SESSION['license_key'] ?? '';
         if (empty($cleSeriale)) {
             // Essayer de récupérer depuis le POST si pas en session
             $cleSeriale = $_POST['serial_key'] ?? '';
@@ -95,6 +95,10 @@ function createEnvFile() {
                 throw new Exception('La clé de licence est requise pour l\'installation');
             }
         }
+        
+        // Ajouter la clé de licence aux configurations
+        $defaultConfigs['LICENCE_KEY'] = $cleSeriale;
+        writeToLog("Clé de licence ajoutée au fichier .env: " . $cleSeriale, 'SUCCESS');
 
         // Mettre à jour ou ajouter chaque configuration
         foreach ($defaultConfigs as $key => $value) {

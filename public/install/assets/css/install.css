@@ -156,12 +156,12 @@ body::before {
     position: relative;
 }
 
-.language-toggle {
+.language-dropdown-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--neutral-200);
     border-radius: var(--radius-lg);
     font-size: 0.875rem;
@@ -170,30 +170,40 @@ body::before {
     cursor: pointer;
     transition: all var(--transition-fast);
     backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
 }
 
-.language-toggle:hover {
+.language-dropdown-btn:hover {
     background: rgba(255, 255, 255, 1);
     border-color: var(--primary-300);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
 }
 
-.language-toggle::after {
-    content: '▼';
-    font-size: 0.75rem;
-    transition: transform var(--transition-fast);
+.language-flag {
+    font-size: 1.1rem;
+    line-height: 1;
 }
 
-.language-dropdown.open .language-toggle::after {
+.language-name {
+    font-weight: 500;
+}
+
+.dropdown-arrow {
+    font-size: 0.75rem;
+    transition: transform var(--transition-fast);
+    color: var(--neutral-500);
+}
+
+.language-dropdown.open .dropdown-arrow {
     transform: rotate(180deg);
 }
 
-.language-menu {
+.language-dropdown-menu {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
-    min-width: 200px;
+    min-width: 220px;
     background: white;
     border: 1px solid var(--neutral-200);
     border-radius: var(--radius-lg);
@@ -204,15 +214,17 @@ body::before {
     transition: all var(--transition-fast);
     z-index: 100;
     backdrop-filter: blur(20px);
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-.language-dropdown.open .language-menu {
+.language-dropdown.open .language-dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.language-menu a {
+.language-dropdown-menu a {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -224,19 +236,27 @@ body::before {
     border-bottom: 1px solid var(--neutral-100);
 }
 
-.language-menu a:last-child {
+.language-dropdown-menu a:last-child {
     border-bottom: none;
 }
 
-.language-menu a:hover {
+.language-dropdown-menu a:hover {
     background: var(--primary-50);
     color: var(--primary-700);
+    transform: translateX(2px);
 }
 
-.language-menu a.active {
+.language-dropdown-menu a.active {
     background: var(--primary-100);
     color: var(--primary-800);
     font-weight: 600;
+}
+
+.language-dropdown-menu a.active::after {
+    content: '✓';
+    margin-left: auto;
+    color: var(--primary-600);
+    font-weight: bold;
 }
 
 /* Header section */
@@ -457,204 +477,274 @@ body::before {
     border: 1px solid var(--primary-200);
 }
 
-/* Form styles */
-.install-form {
-    max-width: 600px;
-    margin: 0 auto;
+/* Form actions positioning and styling */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--neutral-200);
 }
 
-.form-group {
+/* Better spacing for step 1 license verification */
+.license-verification-section {
     margin-bottom: 2rem;
 }
 
-.form-label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--neutral-800);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
+.license-verification-section .form-group {
+    margin-bottom: 1.5rem;
 }
 
-.form-input {
+.license-verification-section .form-actions {
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+/* License key input specific styling - Reduced width by 70% */
+.license-verification-section .form-group input[name="serial_key"] {
+    width: 30% !important; /* Réduction de 70% */
+    max-width: 300px;
+    min-width: 250px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+/* Center the license form */
+.license-verification-section .form-group {
+    text-align: center;
+}
+
+.license-verification-section .form-group label {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.license-verification-section .form-group small {
+    text-align: center;
+    display: block;
+}
+
+/* Mobile responsive for license field */
+@media (max-width: 768px) {
+    .license-verification-section .form-group input[name="serial_key"] {
+        width: 80% !important;
+        min-width: 200px;
+    }
+}
+
+/* Database configuration styling for step 2 */
+.database-config-section {
+    margin-bottom: 2rem;
+}
+
+.database-config-section h3 {
+    color: var(--neutral-800);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.database-config-section p {
+    color: var(--neutral-600);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Two-column layout for database fields */
+.db-form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.db-form-full {
+    grid-column: 1 / -1;
+}
+
+/* Better form group spacing */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* Form labels styling */
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--neutral-700);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Form inputs styling */
+.form-group input {
     width: 100%;
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
     border: 2px solid var(--neutral-200);
     border-radius: var(--radius-lg);
-    font-size: 1rem;
-    color: var(--neutral-800);
-    background: white;
+    font-size: 0.95rem;
     transition: all var(--transition-fast);
-    font-family: inherit;
+    background: rgba(255, 255, 255, 0.8);
 }
 
-.form-input:focus {
+.form-group input:focus {
     outline: none;
     border-color: var(--primary-500);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 1);
 }
 
-.form-input:hover:not(:focus) {
+.form-group input:hover:not(:focus) {
     border-color: var(--neutral-300);
 }
 
-.form-input.error {
-    border-color: var(--error-500);
-    background: var(--error-50);
-}
-
-.form-input.error:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.form-help {
-    font-size: 0.875rem;
+/* Small helper text */
+.form-group small {
+    display: block;
+    margin-top: 0.5rem;
     color: var(--neutral-500);
-    margin-top: 0.5rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
 }
 
-.form-error {
-    color: var(--error-600);
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-}
-
-.form-error::before {
-    content: '⚠';
-    font-size: 1rem;
-}
-
-/* Button styles */
+/* Button improvements */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     border: none;
     border-radius: var(--radius-lg);
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
     transition: all var(--transition-fast);
+    text-decoration: none;
     position: relative;
-    overflow: hidden;
-    font-family: inherit;
-    letter-spacing: -0.01em;
     min-width: 120px;
 }
 
-/* Effet de survol simplifié sans ::before */
+.btn-verify {
+    background: linear-gradient(135deg, var(--success-500), var(--success-600));
+    color: white;
+    box-shadow: var(--shadow-md);
+    margin-top: 1rem;
+}
+
+.btn-verify:hover {
+    background: linear-gradient(135deg, var(--success-600), var(--success-700));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
     color: white;
     box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
-.btn-primary:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:disabled {
-    background: var(--neutral-300);
-    color: var(--neutral-500);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
 .btn-secondary {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     color: var(--neutral-700);
     border: 2px solid var(--neutral-200);
     box-shadow: var(--shadow-sm);
 }
 
-.btn-secondary:hover {
-    background: var(--neutral-50);
-    border-color: var(--neutral-300);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+    background-color: #545b62 !important;
+    color: #ffffff !important;
 }
 
-.btn-verify {
-    background: linear-gradient(135deg, var(--success-600) 0%, var(--success-700) 100%);
-    color: white;
-    box-shadow: var(--shadow-md);
+/* Database info section */
+.database-info {
+    background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
-    overflow: visible;
 }
 
-.btn-verify:hover {
-    background: linear-gradient(135deg, var(--success-700) 0%, var(--success-800) 100%);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+.database-info::before {
+    content: '🗄️';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.7;
 }
 
-/* Forcer la suppression de tous les pseudo-éléments sur les boutons */
-.btn::before,
-.btn::after,
-.btn-verify::before,
-.btn-verify::after,
-.btn-primary::before,
-.btn-primary::after,
-.btn-secondary::before,
-.btn-secondary::after,
-button::before,
-button::after,
-input[type="submit"]::before,
-input[type="submit"]::after,
-input[type="button"]::before,
-input[type="button"]::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-    border: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
+.database-info h3 {
+    color: var(--primary-700);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
-/* Supprimer tous les overlays et effets sur hover/focus/active */
-.btn:hover::before, .btn:hover::after,
-.btn:focus::before, .btn:focus::after,
-.btn:active::before, .btn:active::after,
-.btn-verify:hover::before, .btn-verify:hover::after,
-.btn-verify:focus::before, .btn-verify:focus::after,
-.btn-verify:active::before, .btn-verify:active::after,
-.btn-primary:hover::before, .btn-primary:hover::after,
-.btn-primary:focus::before, .btn-primary:focus::after,
-.btn-primary:active::before, .btn-primary:active::after {
-    display: none !important;
-    content: none !important;
-    background: transparent !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
+.database-info p {
+    color: var(--primary-600);
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
-/* Form actions */
-.form-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3rem;
-    gap: 1rem;
+/* Connection test button */
+.btn-test {
+    background: linear-gradient(135deg, var(--warning-500), var(--warning-600));
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    margin-top: 1rem;
+}
+
+.btn-test:hover {
+    background: linear-gradient(135deg, var(--warning-600), var(--warning-500));
+    transform: translateY(-1px);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .db-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Step 2 specific improvements */
+.step-2-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.step-2-container .form-actions {
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 /* Alert styles */
@@ -1114,4 +1204,224 @@ button:active::before, button:active::after {
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
     background-color: #545b62 !important;
     color: #ffffff !important;
+}
+
+/* === Styles pour les prérequis système === */
+.system-requirements-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.system-info h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.system-info p {
+    color: #6c757d;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.requirements-check {
+    margin: 20px 0;
+}
+
+.requirement-group {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.requirement-group h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.requirement-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.requirement-item:last-child {
+    border-bottom: none;
+}
+
+.requirement-name {
+    font-weight: 500;
+    color: #495057;
+    flex: 1;
+}
+
+.requirement-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-ok {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Amélioration des conteneurs d'étapes */
+.step-3-container,
+.step-4-container,
+.step-5-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.database-config-section,
+.admin-config-section,
+.finalization-section {
+    max-width: 100%;
+}
+
+.database-info h3,
+.admin-info h3,
+.finalization-info h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.database-info p,
+.admin-info p,
+.finalization-info p {
+    color: #6c757d;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+/* Amélioration du résumé d'installation */
+.installation-summary {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 4px solid #28a745;
+}
+
+.installation-summary h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.summary-section {
+    margin: 20px 0;
+}
+
+.summary-section h5 {
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.summary-section p {
+    margin: 8px 0;
+    color: #6c757d;
+}
+
+/* Amélioration des boutons d'actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive design pour les étapes */
+@media (max-width: 768px) {
+    .requirement-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .requirement-status {
+        align-self: flex-end;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
 }

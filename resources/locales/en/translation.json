@@ -48,7 +48,8 @@
         "revoked": "Revoked",
         "expired": "Expired",
         "pending": "Pending",
-        "language_changed_successfully": "Language changed successfully"
+        "language_changed_successfully": "Language changed successfully",
+        "system_requirements": "System Requirements"
     },
     "translations": {
         "title": "Translation Management",

@@ -8,6 +8,40 @@
 let currentStep = 1;
 let isProcessing = false;
 
+/**
+ * Toggle language dropdown menu
+ */
+function toggleLanguageDropdown() {
+    const dropdown = document.querySelector('.language-dropdown');
+    const menu = document.getElementById('languageDropdownMenu');
+    
+    if (!dropdown || !menu) return;
+    
+    const isOpen = dropdown.classList.contains('open');
+    
+    if (isOpen) {
+        dropdown.classList.remove('open');
+        document.removeEventListener('click', closeLanguageDropdownOnOutsideClick);
+    } else {
+        dropdown.classList.add('open');
+        // Close dropdown when clicking outside
+        setTimeout(() => {
+            document.addEventListener('click', closeLanguageDropdownOnOutsideClick);
+        }, 10);
+    }
+}
+
+/**
+ * Close language dropdown when clicking outside
+ */
+function closeLanguageDropdownOnOutsideClick(event) {
+    const dropdown = document.querySelector('.language-dropdown');
+    if (dropdown && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('open');
+        document.removeEventListener('click', closeLanguageDropdownOnOutsideClick);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize installation wizard
     initializeInstallation();
@@ -413,6 +447,59 @@ function initializeLicenseVerification() {
             verifyLicenseAjax(this);
         });
     }
+    
+    // CORRECTION: Ajouter la gestion AJAX pour l'étape 2
+    const step2Form = document.querySelector('form[data-step="2"]');
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale
+            
+            // Utiliser AJAX pour la vérification des prérequis
+            verifyStep2Ajax(this);
+        });
+    }
+    
+    // CORRECTION: Ajouter la gestion AJAX pour l'étape 3
+    const step3Form = document.querySelector('form[data-step="3"]');
+    if (step3Form) {
+        step3Form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale
+            
+            // Utiliser AJAX pour la configuration DB
+            verifyStep3Ajax(this);
+        });
+        
+        // Ajouter le gestionnaire pour le bouton de test DB
+        const testDbBtn = step3Form.querySelector('#test-db-btn');
+        if (testDbBtn) {
+            testDbBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                testDatabaseConnection(step3Form);
+            });
+        }
+    }
+    
+    // CORRECTION: Ajouter la gestion AJAX pour l'étape 4
+    const step4Form = document.querySelector('form[data-step="4"]');
+    if (step4Form) {
+        step4Form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale
+            
+            // Utiliser AJAX pour la configuration admin
+            verifyStep4Ajax(this);
+        });
+    }
+    
+    // CORRECTION: Ajouter la gestion AJAX pour l'étape 5
+    const step5Form = document.querySelector('form[data-step="5"]');
+    if (step5Form) {
+        step5Form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale
+            
+            // Utiliser AJAX pour l'installation finale
+            verifyStep5Ajax(this);
+        });
+    }
 }
 
 /**
@@ -534,6 +621,548 @@ async function verifyLicenseAjax(form) {
 }
 
 /**
+ * Verify step 2 system requirements via AJAX
+ */
+async function verifyStep2Ajax(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const alertContainer = form.querySelector('.alert-container') || createAlertContainer(form);
+    
+    // Clear previous errors
+    clearFormErrors(form);
+    hideAlert(alertContainer);
+    
+    // Show loading state
+    isProcessing = true;
+    showLoadingButton(submitBtn);
+    
+    try {
+        // Prepare form data
+        const formData = new FormData();
+        formData.append('ajax', '1');
+        formData.append('step', '2');
+        
+        // Send AJAX request
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        
+        // Vérifier si c'est une redirection HTML au lieu de JSON
+        if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+            // Vérifier si c'est vraiment un succès en cherchant des indicateurs dans le HTML
+            if (responseText.includes('Configuration de la base de données') ||
+                responseText.includes('step=3') ||
+                responseText.includes('step active') && responseText.includes('3')) {
+                // Redirection après nettoyage
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=3';
+                }, 100);
+                return;
+            } else {
+                // Si c'est du HTML mais pas l'étape 3, c'est probablement une erreur
+                showAlert(alertContainer, 'Erreur lors de la vérification des prérequis', 'error');
+                throw new Error('HTML détecté mais pas de succès confirmé');
+            }
+        }
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            // Si on ne peut pas parser le JSON, essayer de détecter le succès dans le texte
+            if (responseText.includes('success') || responseText.includes('validé')) {
+                showAlert(alertContainer, 'Prérequis validés ! Redirection...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=3';
+                }, 1000);
+                throw new Error('Succès détecté dans la réponse texte - redirection en cours');
+            }
+            
+            throw new Error('Réponse serveur invalide: ' + responseText.substring(0, 100));
+        }
+        
+        if (result.success) {
+            // Requirements OK - show success and proceed
+            showAlert(alertContainer, result.message || 'Prérequis système validés !', 'success');
+            
+            // Wait a bit then redirect to step 3
+            setTimeout(() => {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    window.location.href = 'install_new.php?step=3';
+                }
+            }, 1000);
+            
+        } else {
+            // Requirements failed - show error
+            showAlert(alertContainer, result.message || 'Erreur lors de la vérification des prérequis', 'error');
+        }
+        
+    } catch (error) {
+        showAlert(alertContainer, 'Erreur lors de la vérification des prérequis: ' + error.message, 'error');
+    } finally {
+        isProcessing = false;
+        hideLoadingButton(submitBtn);
+    }
+}
+
+/**
+ * Verify step 3 database configuration via AJAX
+ */
+async function verifyStep3Ajax(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const alertContainer = form.querySelector('.alert-container') || createAlertContainer(form);
+    
+    // Clear previous errors
+    clearFormErrors(form);
+    hideAlert(alertContainer);
+    
+    // Validate form
+    if (!validateForm(form)) {
+        return;
+    }
+    
+    // Show loading state
+    isProcessing = true;
+    showLoadingButton(submitBtn);
+    
+    try {
+        // Prepare form data
+        const formData = new FormData(form);
+        formData.append('ajax', '1');
+        formData.append('step', '3');
+        
+        // Send AJAX request
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        
+        // Vérifier si c'est une redirection HTML au lieu de JSON
+        if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+            // Vérifier si c'est vraiment un succès en cherchant des indicateurs dans le HTML
+            if (responseText.includes('Configuration du compte admin') ||
+                responseText.includes('step=4') ||
+                responseText.includes('step active') && responseText.includes('4')) {
+                // Redirection après nettoyage
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=4';
+                }, 100);
+                return;
+            } else {
+                // Si c'est du HTML mais pas l'étape 4, c'est probablement une erreur
+                showAlert(alertContainer, 'Erreur lors de la configuration de la base de données', 'error');
+                throw new Error('HTML détecté mais pas de succès confirmé');
+            }
+        }
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            // Si on ne peut pas parser le JSON, essayer de détecter le succès dans le texte
+            if (responseText.includes('success') || responseText.includes('validé')) {
+                showAlert(alertContainer, 'Configuration validée ! Redirection...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=4';
+                }, 1000);
+                throw new Error('Succès détecté dans la réponse texte - redirection en cours');
+            }
+            
+            throw new Error('Réponse serveur invalide: ' + responseText.substring(0, 100));
+        }
+        
+        if (result.success) {
+            // Database config OK - show success and proceed
+            showAlert(alertContainer, result.message || 'Configuration de base de données validée !', 'success');
+            
+            // Wait a bit then redirect to step 4
+            setTimeout(() => {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    window.location.href = 'install_new.php?step=4';
+                }
+            }, 1000);
+            
+        } else {
+            // Database config failed - show error
+            showAlert(alertContainer, result.message || 'Erreur lors de la configuration de la base de données', 'error');
+        }
+        
+    } catch (error) {
+        showAlert(alertContainer, 'Erreur lors de la configuration de la base de données: ' + error.message, 'error');
+    } finally {
+        isProcessing = false;
+        hideLoadingButton(submitBtn);
+    }
+}
+
+/**
+ * Verify step 4 admin configuration via AJAX
+ */
+async function verifyStep4Ajax(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const alertContainer = form.querySelector('.alert-container') || createAlertContainer(form);
+    
+    // Clear previous errors
+    clearFormErrors(form);
+    hideAlert(alertContainer);
+    
+    // Validate form
+    if (!validateForm(form)) {
+        return;
+    }
+    
+    // Show loading state
+    isProcessing = true;
+    showLoadingButton(submitBtn);
+    
+    try {
+        // Prepare form data
+        const formData = new FormData(form);
+        formData.append('ajax', '1');
+        formData.append('step', '4');
+        
+        // Send AJAX request
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        
+        // Vérifier si c'est une redirection HTML au lieu de JSON
+        if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+            // Vérifier si c'est vraiment un succès en cherchant des indicateurs dans le HTML
+            if (responseText.includes('Installation finale') ||
+                responseText.includes('step=5') ||
+                responseText.includes('step active') && responseText.includes('5')) {
+                // Redirection après nettoyage
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=5';
+                }, 100);
+                return;
+            } else {
+                // Si c'est du HTML mais pas l'étape 5, c'est probablement une erreur
+                showAlert(alertContainer, 'Erreur lors de la configuration administrateur', 'error');
+                throw new Error('HTML détecté mais pas de succès confirmé');
+            }
+        }
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            // Si on ne peut pas parser le JSON, essayer de détecter le succès dans le texte
+            if (responseText.includes('success') || responseText.includes('validé')) {
+                showAlert(alertContainer, 'Configuration validée ! Redirection...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?step=5';
+                }, 1000);
+                throw new Error('Succès détecté dans la réponse texte - redirection en cours');
+            }
+            
+            throw new Error('Réponse serveur invalide: ' + responseText.substring(0, 100));
+        }
+        
+        if (result.success) {
+            // Admin config OK - show success and proceed
+            showAlert(alertContainer, result.message || 'Configuration administrateur validée !', 'success');
+            
+            // Wait a bit then redirect to step 5
+            setTimeout(() => {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    window.location.href = 'install_new.php?step=5';
+                }
+            }, 1000);
+            
+        } else {
+            // Admin config failed - show error
+            showAlert(alertContainer, result.message || 'Erreur lors de la configuration administrateur', 'error');
+        }
+        
+    } catch (error) {
+        showAlert(alertContainer, 'Erreur lors de la configuration administrateur: ' + error.message, 'error');
+    } finally {
+        isProcessing = false;
+        hideLoadingButton(submitBtn);
+    }
+}
+
+/**
+ * Verify step 5 final installation via AJAX
+ */
+async function verifyStep5Ajax(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const alertContainer = form.querySelector('.alert-container') || createAlertContainer(form);
+    
+    // Clear previous errors
+    clearFormErrors(form);
+    hideAlert(alertContainer);
+    
+    // Show loading state with specific message for installation
+    isProcessing = true;
+    showLoadingButton(submitBtn, 'Installation en cours...');
+    
+    // Show progress message
+    showAlert(alertContainer, '🚀 Installation en cours... Cela peut prendre quelques minutes.', 'info');
+    
+    try {
+        // Prepare form data
+        const formData = new FormData(form);
+        formData.append('ajax', '1');
+        formData.append('step', '5');
+        
+        // Send AJAX request with longer timeout for installation
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        
+        // Vérifier si c'est une redirection HTML au lieu de JSON
+        if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+            // Vérifier si c'est vraiment un succès en cherchant des indicateurs dans le HTML
+            if (responseText.includes('Installation terminée') ||
+                responseText.includes('success=1') ||
+                responseText.includes('Félicitations')) {
+                // Redirection après nettoyage
+                showAlert(alertContainer, '🎉 Installation terminée ! Redirection vers la page de succès...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?success=1';
+                }, 2000);
+                return;
+            } else {
+                // Si c'est du HTML mais pas de succès, c'est probablement une erreur
+                showAlert(alertContainer, 'Erreur lors de l\'installation finale', 'error');
+                throw new Error('HTML détecté mais pas de succès confirmé');
+            }
+        }
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            // Si on ne peut pas parser le JSON, essayer de détecter le succès dans le texte
+            if (responseText.includes('success') || responseText.includes('terminé')) {
+                showAlert(alertContainer, '🎉 Installation terminée ! Redirection...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'install_new.php?success=1';
+                }, 2000);
+                throw new Error('Succès détecté dans la réponse texte - redirection en cours');
+            }
+            
+            throw new Error('Réponse serveur invalide: ' + responseText.substring(0, 100));
+        }
+        
+        if (result.success) {
+            // Installation successful - show success and redirect
+            showAlert(alertContainer, '🎉 ' + (result.message || 'Installation terminée avec succès !'), 'success');
+            
+            // Wait a bit longer then redirect to success page
+            setTimeout(() => {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    window.location.href = 'install_new.php?success=1';
+                }
+            }, 2000);
+            
+        } else {
+            // Installation failed - show error
+            showAlert(alertContainer, '❌ ' + (result.message || 'Erreur lors de l\'installation finale'), 'error');
+        }
+        
+    } catch (error) {
+        if (!error.message.includes('Succès détecté')) {
+            showAlert(alertContainer, 'Erreur lors de l\'installation finale: ' + error.message, 'error');
+        }
+    } finally {
+        if (!error || !error.message.includes('Succès détecté')) {
+            isProcessing = false;
+            hideLoadingButton(submitBtn, 'Installer maintenant');
+        }
+    }
+}
+
+/**
+ * Test database connection via AJAX
+ */
+async function testDatabaseConnection(form) {
+    if (isProcessing) {
+        return;
+    }
+    
+    const testBtn = form.querySelector('#test-db-btn');
+    const alertContainer = form.querySelector('.db-test-alert') || createDbTestAlertContainer(form);
+    
+    // Clear previous alerts
+    hideAlert(alertContainer);
+    
+    // Validate required fields
+    const requiredFields = ['db_host', 'db_port', 'db_name', 'db_user'];
+    let hasErrors = false;
+    
+    requiredFields.forEach(fieldName => {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        if (field && !field.value.trim()) {
+            showFieldError(field, 'Ce champ est requis');
+            hasErrors = true;
+        }
+    });
+    
+    if (hasErrors) {
+        showAlert(alertContainer, 'Veuillez remplir tous les champs requis avant de tester la connexion', 'error');
+        return;
+    }
+    
+    // Show loading state
+    isProcessing = true;
+    showLoadingButton(testBtn, 'Test en cours...');
+    
+    try {
+        // Prepare form data
+        const formData = new FormData(form);
+        formData.append('action', 'test_db_connection');
+        formData.append('ajax', '1');
+        
+        // Send AJAX request
+        const response = await fetch('install_new.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Parse JSON response
+        const result = await response.json();
+        
+        if (result.success) {
+            // Connection successful
+            let message = result.message;
+            if (result.details) {
+                message += '<br><small>';
+                Object.values(result.details).forEach(detail => {
+                    message += `<br>• ${detail}`;
+                });
+                message += '</small>';
+            }
+            showAlert(alertContainer, message, 'success');
+        } else {
+            // Connection failed
+            let message = result.message;
+            if (result.details) {
+                message += '<br><small>';
+                Object.values(result.details).forEach(detail => {
+                    message += `<br>• ${detail}`;
+                });
+                message += '</small>';
+            }
+            showAlert(alertContainer, message, 'error');
+        }
+        
+    } catch (error) {
+        showAlert(alertContainer, 'Erreur lors du test de connexion: ' + error.message, 'error');
+    } finally {
+        isProcessing = false;
+        hideLoadingButton(testBtn, 'Tester la connexion');
+    }
+}
+
+/**
+ * Create DB test alert container if it doesn't exist
+ */
+function createDbTestAlertContainer(form) {
+    let container = form.querySelector('.db-test-alert');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'db-test-alert';
+        container.style.marginBottom = '1rem';
+        
+        // Insert after the form fields, before the buttons
+        const actions = form.querySelector('.form-actions');
+        if (actions) {
+            actions.parentNode.insertBefore(container, actions);
+        } else {
+            form.appendChild(container);
+        }
+    }
+    
+    return container;
+}
+
+/**
  * Create alert container if it doesn't exist
  */
 function createAlertContainer(form) {
@@ -573,7 +1202,7 @@ function hideAlert(container) {
 /**
  * Show loading state on button
  */
-function showLoadingButton(button) {
+function showLoadingButton(button, loadingText = 'Vérification en cours...') {
     button.disabled = true;
     button.classList.add('loading');
     
@@ -581,17 +1210,22 @@ function showLoadingButton(button) {
     button.dataset.originalText = originalText;
     button.innerHTML = `
         <span class="loading-spinner" style="width: 16px; height: 16px; margin-right: 8px;"></span>
-        Vérification en cours...
+        ${loadingText}
     `;
 }
 
 /**
  * Hide loading state on button
  */
-function hideLoadingButton(button) {
+function hideLoadingButton(button, originalText = null) {
     button.disabled = false;
     button.classList.remove('loading');
-    button.textContent = button.dataset.originalText || 'Vérifier la licence';
+    
+    if (originalText) {
+        button.textContent = originalText;
+    } else {
+        button.textContent = button.dataset.originalText || 'Vérifier la licence';
+    }
 }
 
 /**
