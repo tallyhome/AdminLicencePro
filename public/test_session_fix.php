@@ -1,1 +1,0 @@
-<?php session_start(); $_SESSION["license_valid"] = true; $_SESSION["license_key"] = "TEST-KEY"; echo "Session forcée: "; print_r($_SESSION); echo "<br><a href=\"install/install_new.php?step=2\">Test Step 2</a>"; ?>

@@ -5,13 +5,319 @@
  * Date: 2025-04-15
  */
 
-// Inclure les fichiers nécessaires
+// Inclure les fichiers nécessaires AVANT l'initialisation
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/functions/language.php';
+require_once __DIR__ . '/functions/ip_helper.php';
 require_once __DIR__ . '/functions/core.php';
 require_once __DIR__ . '/functions/database.php';
 require_once __DIR__ . '/functions/installation.php';
 require_once __DIR__ . '/functions/ui.php';
+
+// ÉTAPE 0: INITIALISATION AUTOMATIQUE PROFESSIONNELLE
+// =====================================================
+function initializeInstaller() {
+    $log = [];
+    
+    // 1. NETTOYAGE ULTRA-AGRESSIF DU CACHE LARAVEL (CORRECTION CHEMINS cPanel)
+    $log[] = "🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)...";
+    
+    // CORRECTION: Chemins corrects depuis adminlicence/public/install/ vers adminlicence/bootstrap/cache/
+    $cacheFiles = [
+        '../../bootstrap/cache/config.php',
+        '../../bootstrap/cache/routes-v7.php',
+        '../../bootstrap/cache/routes.php',
+        '../../bootstrap/cache/services.php',
+        '../../bootstrap/cache/packages.php',
+        '../../bootstrap/cache/compiled.php',
+        '../../bootstrap/cache/events.php',
+        '../../bootstrap/cache/schedule.php'
+    ];
+    
+    $cacheCleared = 0;
+    foreach ($cacheFiles as $file) {
+        if (file_exists($file)) {
+            // Tentatives multiples avec permissions forcées
+            for ($i = 0; $i < 3; $i++) {
+                if (@unlink($file)) {
+                    $cacheCleared++;
+                    $log[] = "✅ Cache supprimé: " . basename($file);
+                    break;
+                } else {
+                    @chmod($file, 0777); // Forcer permissions
+                    usleep(100000); // Attendre 100ms
+                }
+            }
+        }
+    }
+    
+    // 2. Nettoyer TOUS les répertoires de cache avec chemins corrigés
+    $cacheDirectories = [
+        '../../storage/framework/cache/data',
+        '../../storage/framework/views',
+        '../../storage/framework/sessions',
+        '../../bootstrap/cache'
+    ];
+    
+    foreach ($cacheDirectories as $dir) {
+        if (is_dir($dir)) {
+            $files = glob($dir . '/*');
+            if ($files) {
+                foreach ($files as $file) {
+                    if (is_file($file) && basename($file) !== '.gitignore') {
+                        if (@unlink($file)) {
+                            $cacheCleared++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    $log[] = "✅ Cache Laravel ultra-nettoyé: $cacheCleared fichiers supprimés";
+    
+    // 3. Vérifier et créer le fichier .env si nécessaire (CORRECTION CHEMIN)
+    $envFile = '../../.env';
+    $envExampleFile = '../../.env.example';
+    
+    if (!file_exists($envFile)) {
+        if (file_exists($envExampleFile)) {
+            copy($envExampleFile, $envFile);
+            $log[] = "✅ Fichier .env créé depuis .env.example";
+        } else {
+            // Créer un .env minimal si même .env.example n'existe pas
+            $defaultEnv = "APP_NAME=AdminLicence
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=error
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=\"hello@example.com\"
+MAIL_FROM_NAME=\"\${APP_NAME}\"";
+            
+            file_put_contents($envFile, $defaultEnv);
+            $log[] = "✅ Fichier .env créé avec configuration par défaut";
+        }
+    } else {
+        $log[] = "✅ Fichier .env existe déjà";
+    }
+    
+    // 4. Créer les répertoires nécessaires s'ils n'existent pas (CORRECTION CHEMINS)
+    $requiredDirs = [
+        '../../storage/app',
+        '../../storage/framework/cache',
+        '../../storage/framework/cache/data',
+        '../../storage/framework/sessions',
+        '../../storage/framework/views',
+        '../../storage/logs',
+        '../../bootstrap/cache'
+    ];
+    
+    foreach ($requiredDirs as $dir) {
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0755, true);
+        }
+    }
+    $log[] = "✅ Répertoires système vérifiés";
+    
+    // 5. Logger l'initialisation (writeToLog est maintenant disponible)
+    if (function_exists('writeToLog')) {
+        writeToLog("INITIALISATION AUTO: " . implode(" | ", $log), 'INFO');
+    }
+    
+    return $log;
+}
+
+// Fonction de sauvegarde immédiate dans .env (PROTECTION SESSIONS) - VERSION RENFORCÉE
+function saveToEnvImmediately($data, $description = '') {
+    $envFile = '../../.env';
+    
+    // Créer le fichier .env s'il n'existe pas
+    if (!file_exists($envFile)) {
+        $envExampleFile = '../../.env.example';
+        if (file_exists($envExampleFile)) {
+            copy($envExampleFile, $envFile);
+            writeToLog("Fichier .env créé depuis .env.example", 'INFO');
+        } else {
+            // Créer un .env minimal
+            $defaultEnv = "APP_NAME=AdminLicence
+APP_ENV=production
+APP_KEY=base64:" . base64_encode(random_bytes(32)) . "
+APP_DEBUG=false
+APP_URL=" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? 'localhost') . "
+APP_INSTALLED=false
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=error
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=\"noreply@adminlicence.com\"
+MAIL_FROM_NAME=\"\${APP_NAME}\"";
+            
+            file_put_contents($envFile, $defaultEnv);
+            writeToLog("Fichier .env créé avec configuration par défaut", 'INFO');
+        }
+    }
+    
+    // Forcer les permissions avant lecture
+    @chmod($envFile, 0666);
+    
+    $envContent = file_get_contents($envFile);
+    if ($envContent === false) {
+        writeToLog("ERREUR: Impossible de lire .env après création", 'ERROR');
+        return false;
+    }
+    
+    $updated = false;
+    foreach ($data as $key => $value) {
+        // Échapper les caractères spéciaux dans la valeur
+        $escapedValue = $value;
+        if (strpos($value, ' ') !== false || strpos($value, '"') !== false) {
+            $escapedValue = '"' . addcslashes($value, '"\\') . '"';
+        }
+        
+        $pattern = "/^{$key}=.*$/m";
+        $newLine = "{$key}={$escapedValue}";
+        
+        if (preg_match($pattern, $envContent)) {
+            $envContent = preg_replace($pattern, $newLine, $envContent);
+        } else {
+            $envContent .= "\n$newLine";
+        }
+        $updated = true;
+        writeToLog("ENV IMMÉDIAT: $key = " . (strlen($value) > 50 ? substr($value, 0, 50) . '...' : $value), 'INFO');
+    }
+    
+    if ($updated) {
+        // Tentatives multiples d'écriture avec permissions forcées
+        $writeSuccess = false;
+        for ($attempt = 1; $attempt <= 3; $attempt++) {
+            @chmod($envFile, 0666);
+            $bytesWritten = @file_put_contents($envFile, $envContent, LOCK_EX);
+            
+            if ($bytesWritten !== false && $bytesWritten > 0) {
+                $writeSuccess = true;
+                writeToLog("SAUVEGARDE IMMÉDIATE .env réussie (tentative $attempt): $description", 'SUCCESS');
+                break;
+            } else {
+                writeToLog("Échec sauvegarde .env (tentative $attempt)", 'WARNING');
+                if ($attempt < 3) {
+                    usleep(500000); // Attendre 500ms
+                }
+            }
+        }
+        
+        if (!$writeSuccess) {
+            writeToLog("ERREUR: Échec sauvegarde immédiate .env après 3 tentatives", 'ERROR');
+            return false;
+        }
+        
+        // Vérifier que les données ont bien été écrites
+        $verifyContent = file_get_contents($envFile);
+        foreach ($data as $key => $value) {
+            if (strpos($verifyContent, $key . '=') === false) {
+                writeToLog("AVERTISSEMENT: Clé $key non trouvée après écriture", 'WARNING');
+            }
+        }
+        
+        return true;
+    }
+    
+    writeToLog("ERREUR: Aucune donnée à sauvegarder", 'ERROR');
+    return false;
+}
+
+// Fonction de protection des sessions (BACKUP/RESTORE)
+function backupSessionData() {
+    $sessionBackup = [
+        'license_key' => $_SESSION['license_key'] ?? null,
+        'license_valid' => $_SESSION['license_valid'] ?? null,
+        'license_data' => $_SESSION['license_data'] ?? null,
+        'system_check_passed' => $_SESSION['system_check_passed'] ?? null,
+        'db_config' => $_SESSION['db_config'] ?? null,
+        'admin_config' => $_SESSION['admin_config'] ?? null
+    ];
+    
+    // Sauvegarder dans un fichier temporaire
+    $backupFile = __DIR__ . '/session_backup_' . session_id() . '.json';
+    file_put_contents($backupFile, json_encode($sessionBackup));
+    writeToLog("BACKUP SESSION: Données sauvegardées dans $backupFile", 'INFO');
+    
+    return $backupFile;
+}
+
+function restoreSessionData($backupFile = null) {
+    if (!$backupFile) {
+        $backupFile = __DIR__ . '/session_backup_' . session_id() . '.json';
+    }
+    
+    if (file_exists($backupFile)) {
+        $sessionBackup = json_decode(file_get_contents($backupFile), true);
+        if ($sessionBackup) {
+            foreach ($sessionBackup as $key => $value) {
+                if ($value !== null) {
+                    $_SESSION[$key] = $value;
+                    writeToLog("RESTORE SESSION: $key restauré", 'INFO');
+                }
+            }
+            @unlink($backupFile); // Nettoyer le backup
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// LANCER L'INITIALISATION AUTOMATIQUE AU PREMIER APPEL
+static $initialized = false;
+if (!$initialized) {
+    $initLog = initializeInstaller();
+    $initialized = true;
+}
 
 // Fonction pour capturer les erreurs fatales
 register_shutdown_function(function() {
@@ -24,6 +330,44 @@ register_shutdown_function(function() {
 // Démarrer la session si elle n'est pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// PROTECTION SESSIONS: Restaurer automatiquement si sessions perdues
+if (empty($_SESSION['license_valid']) || empty($_SESSION['license_key'])) {
+    $restored = restoreSessionData();
+    if ($restored) {
+        writeToLog("SESSIONS RESTAURÉES: Données récupérées depuis backup", 'SUCCESS');
+    } else {
+        // Essayer de récupérer depuis .env si backup échoue
+        $envFile = '../../.env';
+        if (file_exists($envFile)) {
+            $envContent = file_get_contents($envFile);
+            
+            // Récupérer la licence depuis .env
+            if (preg_match('/LICENCE_KEY=(.+)/', $envContent, $matches)) {
+                $licenseKey = trim($matches[1]);
+                if (!empty($licenseKey) && $licenseKey !== '') {
+                    $_SESSION['license_key'] = $licenseKey;
+                    $_SESSION['license_valid'] = true;
+                    writeToLog("SESSIONS RÉCUPÉRÉES: Licence restaurée depuis .env: $licenseKey", 'SUCCESS');
+                }
+            }
+            
+            // Récupérer la config DB depuis .env
+            $dbConfig = [];
+            if (preg_match('/DB_HOST=(.+)/', $envContent, $matches)) $dbConfig['host'] = trim($matches[1]);
+            if (preg_match('/DB_PORT=(.+)/', $envContent, $matches)) $dbConfig['port'] = trim($matches[1]);
+            if (preg_match('/DB_DATABASE=(.+)/', $envContent, $matches)) $dbConfig['database'] = trim($matches[1]);
+            if (preg_match('/DB_USERNAME=(.+)/', $envContent, $matches)) $dbConfig['username'] = trim($matches[1]);
+            if (preg_match('/DB_PASSWORD=(.+)/', $envContent, $matches)) $dbConfig['password'] = trim($matches[1]);
+            
+            if (count($dbConfig) >= 4 && !empty($dbConfig['host'])) {
+                $_SESSION['db_config'] = $dbConfig;
+                $_SESSION['system_check_passed'] = true;
+                writeToLog("SESSIONS RÉCUPÉRÉES: Config DB restaurée depuis .env", 'SUCCESS');
+            }
+        }
+    }
 }
 
 // Gestion du changement de langue
@@ -69,6 +413,26 @@ if ($step > 2 && $_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_SESSION['licen
 try {
     // Traitement du formulaire
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // NETTOYAGE CACHE À CHAQUE ÉTAPE (PROTECTION ULTIME)
+        $cacheFiles = [
+            '../../bootstrap/cache/config.php',
+            '../../bootstrap/cache/routes-v7.php',
+            '../../bootstrap/cache/routes.php',
+            '../../bootstrap/cache/services.php',
+            '../../bootstrap/cache/packages.php'
+        ];
+        
+        $cacheCleared = 0;
+        foreach ($cacheFiles as $file) {
+            if (file_exists($file) && @unlink($file)) {
+                $cacheCleared++;
+            }
+        }
+        
+        if ($cacheCleared > 0) {
+            writeToLog("CACHE NETTOYÉ À L'ÉTAPE: $cacheCleared fichiers supprimés", 'INFO');
+        }
+        
         // Gestion spéciale pour le test de connexion DB
         if (isset($_POST['action']) && $_POST['action'] === 'test_db_connection') {
             testDatabaseConnection();
@@ -85,8 +449,22 @@ try {
                 } else {
                     // Obtenir le domaine et l'IP pour la vérification
                     $domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
-                    $ipAddress = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : 
-                                 (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
+                    
+                    // SOLUTION ROBUSTE: Utiliser la nouvelle fonction de collecte d'IP
+                    $ipInfo = collectServerIP();
+                    $ipAddress = $ipInfo['ip'];
+                    
+                    // Logger les informations détaillées pour diagnostic
+                    if (function_exists('formatIPInfoForLog')) {
+                        writeToLog("COLLECTE IP ROBUSTE - " . formatIPInfoForLog($ipInfo), 'INFO');
+                    } else {
+                        writeToLog("COLLECTE IP ROBUSTE - IP: {$ipInfo['ip']} | Raison: {$ipInfo['reason']}", 'INFO');
+                    }
+                    
+                    // Avertissement si IP locale détectée
+                    if ($ipInfo['is_local']) {
+                        writeToLog("ATTENTION: IP locale détectée ({$ipAddress}). Le serveur distant recevra cette IP mais elle pourrait ne pas être utile pour l'identification.", 'WARNING');
+                    }
                     
                     // Vérifier la licence sur le serveur distant
                     writeToLog("Vérification de licence pour la clé: " . $_POST['serial_key'] . " - Domaine: " . $domain . " - IP: " . $ipAddress);
@@ -118,7 +496,16 @@ try {
                         $_SESSION['license_data'] = $licenseCheck['donnees'];
                         $_SESSION['license_key'] = $_POST['serial_key'];
                         $_SESSION['license_valid'] = true;
-                        writeToLog("Licence valide - Passage à l'étape 2", 'SUCCESS');
+                        
+                        // SAUVEGARDE IMMÉDIATE dans .env (PROTECTION SESSIONS)
+                        saveToEnvImmediately([
+                            'LICENCE_KEY' => $_POST['serial_key']
+                        ], 'Licence validée');
+                        
+                        // Backup des sessions
+                        backupSessionData();
+                        
+                        writeToLog("Licence valide - Données sauvegardées - Passage à l'étape 2", 'SUCCESS');
                         
                         // Réponse AJAX pour licence valide - REDIRECTION
                         if ($isAjax) {
@@ -280,7 +667,23 @@ try {
                             'password' => $_POST['db_password']
                         ];
                         
-                        writeToLog("Configuration de base de données validée - Passage à l'étape 4", 'SUCCESS');
+                        // SAUVEGARDE IMMÉDIATE dans .env (PROTECTION SESSIONS)
+                        $dbSaveSuccess = saveToEnvImmediately([
+                            'DB_HOST' => $_POST['db_host'],
+                            'DB_PORT' => $_POST['db_port'],
+                            'DB_DATABASE' => $_POST['db_name'],
+                            'DB_USERNAME' => $_POST['db_user'],
+                            'DB_PASSWORD' => $_POST['db_password']
+                        ], 'Configuration DB validée');
+                        
+                        if (!$dbSaveSuccess) {
+                            writeToLog("AVERTISSEMENT: Sauvegarde DB dans .env échouée", 'WARNING');
+                        }
+                        
+                        // Backup des sessions
+                        backupSessionData();
+                        
+                        writeToLog("Configuration de base de données validée et sauvegardée - Passage à l'étape 4", 'SUCCESS');
                         
                         // CORRECTION: Ajouter la gestion AJAX pour l'étape 3  
                         if ($isAjax) {
@@ -332,7 +735,10 @@ try {
                         'password' => $_POST['admin_password']
                     ];
                     
-                    writeToLog("Configuration administrateur validée - Passage à l'étape 5", 'SUCCESS');
+                    // Backup des sessions (pas de sauvegarde mot de passe en .env)
+                    backupSessionData();
+                    
+                    writeToLog("Configuration administrateur validée et sauvegardée - Passage à l'étape 5", 'SUCCESS');
                     
                     // CORRECTION: Ajouter la gestion AJAX pour l'étape 4
                     if ($isAjax) {

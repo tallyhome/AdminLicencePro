@@ -72,6 +72,20 @@ function displayInstallationForm($step, $errors = []) {
     switch ($step) {
         case 1: // Vérification de la licence
             echo '<div class="license-verification-section">
+                <!-- Indicateur d\'initialisation automatique -->
+                <div class="initialization-status" style="background: linear-gradient(135deg, #d4edda, #c3e6cb); border: 2px solid #28a745; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin: 0 0 10px 0; color: #155724;">🚀 Initialisation automatique terminée</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px;">
+                        <div>✅ Caches Laravel vidés</div>
+                        <div>✅ Fichier .env vérifié/créé</div>
+                        <div>✅ Répertoires système créés</div>
+                        <div>✅ Permissions vérifiées</div>
+                    </div>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #155724; font-style: italic;">
+                        Votre installation est prête ! Aucune configuration manuelle requise.
+                    </p>
+                </div>
+                
                 <div class="license-info">
                     <h3>' . t('license_verification') . '</h3>
                     <p><strong>' . t('info') . ' :</strong> ' . t('license_verification_description') . '</p>

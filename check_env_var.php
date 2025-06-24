@@ -1,3 +1,0 @@
-<?php
-
-echo "INSTALLATION_LICENSE_KEY: " . getenv('INSTALLATION_LICENSE_KEY') . PHP_EOL;

@@ -62,21 +62,84 @@ function runMigrations() {
                 ");
             }
             
-            // Essayer d'exécuter la commande de migration
-            $command = 'cd ' . escapeshellarg(ROOT_PATH) . ' && php artisan migrate --force 2>&1';
-            exec($command, $output, $returnCode);
-            
-            if ($returnCode !== 0) {
-                writeToLog("Avertissement lors de l'exécution des migrations via artisan: " . implode("\n", $output), 'WARNING');
-                writeToLog("Tentative de migration manuelle...", 'INFO');
+            // Vérifier si exec() est disponible
+            if (function_exists('exec') && !in_array('exec', explode(',', ini_get('disable_functions')))) {
+                // Essayer d'exécuter la commande de migration
+                $command = 'cd ' . escapeshellarg(ROOT_PATH) . ' && php artisan migrate --force 2>&1';
+                exec($command, $output, $returnCode);
                 
-                // Si la commande échoue, on considère que c'est un succès quand même
-                // car nous avons déjà créé la table migrations qui est essentielle
-                writeToLog("Migration considérée comme réussie malgré les avertissements");
-                return true;
+                if ($returnCode === 0) {
+                    writeToLog("Migrations exécutées avec succès via artisan");
+                    return true;
+                } else {
+                    writeToLog("Avertissement lors de l'exécution des migrations via artisan: " . implode("\n", $output), 'WARNING');
+                }
+            } else {
+                writeToLog("Fonction exec() non disponible, migration manuelle", 'INFO');
             }
             
-            writeToLog("Migrations exécutées avec succès");
+            // Migration manuelle sans exec()
+            writeToLog("Exécution de la migration manuelle...", 'INFO');
+            
+            // Créer les tables essentielles manuellement
+            $tables = [
+                'users' => "CREATE TABLE IF NOT EXISTS `users` (
+                    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                    `name` varchar(255) NOT NULL,
+                    `email` varchar(255) NOT NULL,
+                    `email_verified_at` timestamp NULL DEFAULT NULL,
+                    `password` varchar(255) NOT NULL,
+                    `remember_token` varchar(100) DEFAULT NULL,
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`),
+                    UNIQUE KEY `users_email_unique` (`email`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+                
+                'admins' => "CREATE TABLE IF NOT EXISTS `admins` (
+                    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                    `name` varchar(255) NOT NULL,
+                    `email` varchar(255) NOT NULL,
+                    `password` varchar(255) NOT NULL,
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`),
+                    UNIQUE KEY `admins_email_unique` (`email`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+                
+                'projects' => "CREATE TABLE IF NOT EXISTS `projects` (
+                    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                    `name` varchar(255) NOT NULL,
+                    `description` text,
+                    `status` varchar(50) DEFAULT 'active',
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+                
+                'serial_keys' => "CREATE TABLE IF NOT EXISTS `serial_keys` (
+                    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                    `serial_key` varchar(255) NOT NULL,
+                    `project_id` bigint(20) UNSIGNED DEFAULT NULL,
+                    `status` varchar(50) DEFAULT 'active',
+                    `created_at` timestamp NULL DEFAULT NULL,
+                    `updated_at` timestamp NULL DEFAULT NULL,
+                    PRIMARY KEY (`id`),
+                    UNIQUE KEY `serial_keys_serial_key_unique` (`serial_key`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"
+            ];
+            
+            foreach ($tables as $tableName => $sql) {
+                try {
+                    $pdo->exec($sql);
+                    writeToLog("Table '$tableName' créée avec succès", 'SUCCESS');
+                } catch (PDOException $e) {
+                    writeToLog("Erreur lors de la création de la table '$tableName': " . $e->getMessage(), 'WARNING');
+                    // Continuer même en cas d'erreur (table peut déjà exister)
+                }
+            }
+            
+            writeToLog("Migration manuelle terminée avec succès");
             return true;
         } catch (PDOException $e) {
             writeToLog("Erreur PDO lors de la migration: " . $e->getMessage(), 'ERROR');

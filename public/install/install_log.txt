@@ -1,621 +1,96 @@
-
-[2025-06-21 04:12:19] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:12:26] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:12:34] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:12:37] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:13:23] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:13:26] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 04:13:30] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:07:13] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:07:41] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:13:43] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:14:23] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:14:27] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:14:27] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
-[2025-06-21 14:14:27] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:14:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"d3bd2ba27b234e463c4675fc15630df7","project":"","expires_at":null}}
-[2025-06-21 14:14:27] [INFO] Licence valide - Token: d3bd2ba27b...
-[2025-06-21 14:14:27] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:14:27] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
-[2025-06-21 14:14:27] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:14:27] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"1ea2c3a459984330f5ffc74b268ea1ad","project":"","expires_at":null}}
-[2025-06-21 14:14:27] [INFO] Licence valide - Token: 1ea2c3a459...
-[2025-06-21 14:15:21] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:18:00] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: localhost - IP: 127.0.0.1
-[2025-06-21 14:18:00] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:18:00] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost","ip_address":"127.0.0.1"}
-[2025-06-21 14:18:00] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:18:00] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"2fe7439e12dcea82e953c1585e6759bc","project":"","expires_at":null}}
-[2025-06-21 14:18:00] [INFO] Licence valide - Token: 2fe7439e12...
-[2025-06-21 14:18:00] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 14:25:44] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:25:57] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:25:59] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:26:06] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:26:51] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:26:55] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:27:02] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:36:51] [INFO] Vérification de licence pour la clé: JQUV-QSDM-UT8G-BFHY - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 14:36:51] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:36:51] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:36:51] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:36:51] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 14:36:51] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 14:36:51] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 14:37:01] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:37:26] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 14:37:26] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
-[2025-06-21 14:37:26] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:37:26] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:37:26] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"159323d5bdd410ff26190ec70cebb4bf","project":"","expires_at":null}}
-[2025-06-21 14:37:26] [INFO] Licence valide - Token: 159323d5bd...
-[2025-06-21 14:37:26] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 14:39:25] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:39:32] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:39:37] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:40:12] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:40:29] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:40:54] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:40:58] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:41:16] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:41:53] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:42:04] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:42:29] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:42:32] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:43:13] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:43:23] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:49:54] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:49:54] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:49:55] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:49:55] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 14:49:55] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 14:50:31] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:50:31] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:50:31] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:50:31] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 14:50:31] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 14:50:31] [INFO] Début de la vérification de licence - Clé: KOOH-TSXE-DTWK-AAN3
-[2025-06-21 14:50:31] [INFO] Données envoyées à l'API: {"serial_key":"KOOH-TSXE-DTWK-AAN3","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:50:31] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:50:31] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"882aeeb9df6fad3aabfe5825e5060d26","project":"","expires_at":null}}
-[2025-06-21 14:50:31] [INFO] Licence valide - Token: 882aeeb9df...
-[2025-06-21 14:58:16] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:58:19] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:58:31] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 14:58:55] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 14:58:55] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:58:55] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:58:55] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 14:58:55] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 14:58:55] [INFO] Début de la vérification de licence - Clé: ILOH-TQ65-ZIMO-F1MT
-[2025-06-21 14:58:55] [INFO] Données envoyées à l'API: {"serial_key":"ILOH-TQ65-ZIMO-F1MT","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 14:58:56] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 14:58:56] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"c191876a618d4b4da84c5dec6515b57d","project":"","expires_at":null}}
-[2025-06-21 14:58:56] [INFO] Licence valide - Token: c191876a61...
-[2025-06-21 15:00:28] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:01:01] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 17:06:50] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 17:06:50] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
-[2025-06-21 17:06:50] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 17:06:50] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 17:06:50] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 17:06:50] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 17:06:50] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 17:07:26] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 17:07:26] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
-[2025-06-21 17:07:26] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 17:07:26] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 17:07:26] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 17:07:26] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 17:07:26] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 17:07:41] [INFO] Vérification licence - Clé: JRUY-ZKFJ-07BG-O2VJ - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 17:07:41] [INFO] Début de la vérification de licence - Clé: JRUY-ZKFJ-07BG-O2VJ
-[2025-06-21 17:07:41] [INFO] Données envoyées à l'API: {"serial_key":"JRUY-ZKFJ-07BG-O2VJ","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 17:07:42] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 17:07:42] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 17:07:42] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 17:07:42] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 17:08:32] [INFO] Vérification licence - Clé: RUYZ-KFJ0-7BGO-2VJB - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 17:08:32] [INFO] Début de la vérification de licence - Clé: RUYZ-KFJ0-7BGO-2VJB
-[2025-06-21 17:08:32] [INFO] Données envoyées à l'API: {"serial_key":"RUYZ-KFJ0-7BGO-2VJB","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 17:08:33] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 17:08:33] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"6fb16543f14146ee1e51afacb2053cb8","project":"","expires_at":null}}
-[2025-06-21 17:08:33] [INFO] Licence valide - Token: 6fb16543f1...
-[2025-06-21 17:08:33] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 17:09:50] [INFO] Vérification licence - Clé: VJF3-RRFT-SYDP-IJK2 - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 17:09:50] [INFO] Début de la vérification de licence - Clé: VJF3-RRFT-SYDP-IJK2
-[2025-06-21 17:09:50] [INFO] Données envoyées à l'API: {"serial_key":"VJF3-RRFT-SYDP-IJK2","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 17:09:50] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 17:09:50] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3405ee3ccb1da24b5dafc2a52b0bb61c","project":"","expires_at":null}}
-[2025-06-21 17:09:50] [INFO] Licence valide - Token: 3405ee3ccb...
-[2025-06-21 17:09:50] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 15:12:37] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:12] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:18] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:24] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:29] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:40] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:17:45] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:22:12] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:33:12] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:33:59] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:34:02] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:34:14] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:35:51] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:41:26] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:42:42] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:54:53] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:55:16] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 15:55:40] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 16:00:36] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:03:32] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: localhost:8000 - IP: ::1
-[2025-06-21 18:03:32] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
-[2025-06-21 18:03:32] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"localhost:8000","ip_address":"::1"}
-[2025-06-21 18:03:32] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:03:32] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"330be9c45abaf092148d0eacc1cf1596","project":"","expires_at":null}}
-[2025-06-21 18:03:32] [INFO] Licence valide - Token: 330be9c45a...
-[2025-06-21 18:03:32] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 16:13:14] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 16:13:22] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 16:18:13] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 16:23:50] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 16:24:04] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 16:24:04] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 16:24:04] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 16:24:04] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 16:24:04] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 16:24:04] [INFO] Début de la vérification de licence - Clé: ABCD-EFGH-IJKL-MNOP
-[2025-06-21 16:24:04] [INFO] Données envoyées à l'API: {"serial_key":"ABCD-EFGH-IJKL-MNOP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 16:24:04] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 16:24:04] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 16:24:04] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 16:28:02] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:02:57] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 20:07:24] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: localhost:8000 - IP: 127.0.0.1
-[2025-06-21 20:07:24] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
-[2025-06-21 20:07:24] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"localhost:8000","ip_address":"127.0.0.1"}
-[2025-06-21 20:07:24] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 20:07:24] [INFO] Corps de la réponse: {"status":"error","message":"Adresse IP non autoris\u00e9e pour cette cl\u00e9"}
-[2025-06-21 20:07:24] [INFO] Erreur API: Adresse IP non autorisée pour cette clé
-[2025-06-21 20:07:24] [ERROR] Licence invalide: Adresse IP non autorisée pour cette clé
-[2025-06-21 18:07:34] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 18:07:34] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"localhost:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:07:34] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:07:34] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:07:34] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:11:03] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:11:18] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:32:32] [INFO] Vérification licence - Clé: VTJU-Z4A5-XATJ-MSFN - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:32:32] [INFO] Début de la vérification de licence - Clé: VTJU-Z4A5-XATJ-MSFN
-[2025-06-21 18:32:32] [INFO] Données envoyées à l'API: {"serial_key":"VTJU-Z4A5-XATJ-MSFN","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:32:32] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:32:32] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:32:32] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:32:32] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 18:32:48] [INFO] Vérification licence - Clé: FBQD-9GF5-JMHA-DGDT - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:32:48] [INFO] Début de la vérification de licence - Clé: FBQD-9GF5-JMHA-DGDT
-[2025-06-21 18:32:48] [INFO] Données envoyées à l'API: {"serial_key":"FBQD-9GF5-JMHA-DGDT","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:32:48] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:32:48] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3f26d20d473b2575e53fd59262b77cde","project":"","expires_at":null}}
-[2025-06-21 18:32:48] [INFO] Licence valide - Token: 3f26d20d47...
-[2025-06-21 18:32:48] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 18:33:42] [INFO] Vérification licence - Clé: VUCG-HERC-NDPW-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:33:42] [INFO] Début de la vérification de licence - Clé: VUCG-HERC-NDPW-1234
-[2025-06-21 18:33:42] [INFO] Données envoyées à l'API: {"serial_key":"VUCG-HERC-NDPW-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:33:42] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:33:42] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 18:33:42] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 18:33:42] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 18:35:38] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:35:58] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:52:10] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 18:57:19] [INFO] Vérification licence - Clé: 1111111111111111111111111111111111111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:57:19] [INFO] Début de la vérification de licence - Clé: 1111111111111111111111111111111111111
-[2025-06-21 18:57:19] [INFO] Erreur: Format de clé invalide
-[2025-06-21 18:57:19] [ERROR] Licence invalide: Format de clé de licence invalide (XXXX-XXXX-XXXX-XXXX)
-[2025-06-21 18:57:32] [INFO] Vérification licence - Clé: 4WHX-DYIY-6D8Z-JW6F - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:57:32] [INFO] Début de la vérification de licence - Clé: 4WHX-DYIY-6D8Z-JW6F
-[2025-06-21 18:57:32] [INFO] Données envoyées à l'API: {"serial_key":"4WHX-DYIY-6D8Z-JW6F","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:57:32] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:57:32] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:57:32] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:57:32] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 18:57:42] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:57:42] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
-[2025-06-21 18:57:42] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:57:42] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:57:42] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:57:42] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:57:42] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 18:57:52] [INFO] Vérification licence - Clé: FBQD-9GF5-JMHA-DGDT - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:57:52] [INFO] Début de la vérification de licence - Clé: FBQD-9GF5-JMHA-DGDT
-[2025-06-21 18:57:52] [INFO] Données envoyées à l'API: {"serial_key":"FBQD-9GF5-JMHA-DGDT","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:57:52] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:57:52] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"9b42158937ffe1f81feee96df60c0948","project":"","expires_at":null}}
-[2025-06-21 18:57:52] [INFO] Licence valide - Token: 9b42158937...
-[2025-06-21 18:57:52] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 18:58:06] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:58:06] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
-[2025-06-21 18:58:06] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:58:06] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:58:06] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:58:06] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:58:06] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-21 18:58:14] [INFO] Vérification licence - Clé: VUCG-HERC-NDPW-XSWA - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 18:58:14] [INFO] Début de la vérification de licence - Clé: VUCG-HERC-NDPW-XSWA
-[2025-06-21 18:58:14] [INFO] Données envoyées à l'API: {"serial_key":"VUCG-HERC-NDPW-XSWA","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:58:14] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:58:14] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"6c16356a2ada35e6be1ec6acc49cd428","project":"","expires_at":null}}
-[2025-06-21 18:58:14] [INFO] Licence valide - Token: 6c16356a2a...
-[2025-06-21 18:58:14] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 18:59:10] [INFO] Début de la vérification de licence - Clé: JQUV-QSDM-UT8G-BFHY
-[2025-06-21 18:59:10] [INFO] Données envoyées à l'API: {"serial_key":"JQUV-QSDM-UT8G-BFHY","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:59:10] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:59:10] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-21 18:59:10] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-21 18:59:10] [INFO] Début de la vérification de licence - Clé: ABCD-EFGH-IJKL-MNOP
-[2025-06-21 18:59:10] [INFO] Données envoyées à l'API: {"serial_key":"ABCD-EFGH-IJKL-MNOP","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 18:59:10] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 18:59:10] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 18:59:10] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: INVALID-FORMAT
-[2025-06-21 19:12:05] [INFO] Erreur: Format de clé invalide
-[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
-[2025-06-21 19:12:05] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"test.localhost","ip_address":"127.0.0.1"}
-[2025-06-21 19:12:05] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:12:05] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:12:05] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: 
-[2025-06-21 19:12:05] [INFO] Erreur: Clé de licence vide
-[2025-06-21 19:12:05] [INFO] Début de la vérification de licence - Clé: TEST-@#$%-XXXX-YYYY
-[2025-06-21 19:12:05] [INFO] Erreur: Format de clé invalide
-[2025-06-21 19:13:49] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 19:14:30] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 19:16:10] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 19:16:30] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-21 19:17:56] [INFO] Vérification de licence pour la clé: TEST-TEST-TEST-TEST - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:17:56] [INFO] Début de la vérification de licence - Clé: TEST-TEST-TEST-TEST
-[2025-06-21 19:17:56] [INFO] Données envoyées à l'API: {"serial_key":"TEST-TEST-TEST-TEST","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:17:56] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:17:57] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:17:57] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:17:57] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 19:19:41] [INFO] Vérification de licence pour la clé: 1111-1111-1111-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:19:41] [INFO] Début de la vérification de licence - Clé: 1111-1111-1111-1111
-[2025-06-21 19:19:41] [INFO] Données envoyées à l'API: {"serial_key":"1111-1111-1111-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:19:41] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:19:41] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:19:41] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:19:41] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 19:20:30] [INFO] Vérification de licence pour la clé: 0CMA-BW4M-2ML4-WM7R - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:20:30] [INFO] Début de la vérification de licence - Clé: 0CMA-BW4M-2ML4-WM7R
-[2025-06-21 19:20:30] [INFO] Données envoyées à l'API: {"serial_key":"0CMA-BW4M-2ML4-WM7R","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:20:30] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:20:30] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"03b8c3363956b6f692284f11fb41e883","project":"","expires_at":null}}
-[2025-06-21 19:20:30] [INFO] Licence valide - Token: 03b8c33639...
-[2025-06-21 19:20:30] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 19:20:48] [INFO] Vérification de licence pour la clé: 1111-1111-1111-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:20:48] [INFO] Début de la vérification de licence - Clé: 1111-1111-1111-1111
-[2025-06-21 19:20:48] [INFO] Données envoyées à l'API: {"serial_key":"1111-1111-1111-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:20:48] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:20:48] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:20:48] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:20:48] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 19:21:15] [INFO] Vérification de licence pour la clé: 6R4Z-NRIT-QCMU-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:21:15] [INFO] Début de la vérification de licence - Clé: 6R4Z-NRIT-QCMU-1234
-[2025-06-21 19:21:15] [INFO] Données envoyées à l'API: {"serial_key":"6R4Z-NRIT-QCMU-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:21:15] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:21:15] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:21:15] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:21:15] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 19:22:04] [INFO] Vérification de licence pour la clé: 6R4Z-NRIT-QCMU-8OHK - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:22:04] [INFO] Début de la vérification de licence - Clé: 6R4Z-NRIT-QCMU-8OHK
-[2025-06-21 19:22:04] [INFO] Données envoyées à l'API: {"serial_key":"6R4Z-NRIT-QCMU-8OHK","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:22:04] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:22:04] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"f102ceb35a4fb9b3c9f635ab253ca9ba","project":"","expires_at":null}}
-[2025-06-21 19:22:04] [INFO] Licence valide - Token: f102ceb35a...
-[2025-06-21 19:22:04] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-21 19:24:56] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:24:56] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1111
-[2025-06-21 19:24:56] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:24:56] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:24:56] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:24:56] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:24:56] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 19:25:22] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 19:25:22] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
-[2025-06-21 19:25:22] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 19:25:22] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 19:25:22] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 19:25:22] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 19:25:22] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 20:08:03] [INFO] Vérification de licence pour la clé: INVALID-TEST-LICENCE-KEY - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 20:08:03] [INFO] Début de la vérification de licence - Clé: INVALID-TEST-LICENCE-KEY
-[2025-06-21 20:08:03] [INFO] Erreur: Format de clé invalide
-[2025-06-21 20:08:03] [ERROR] Licence invalide: Format de clé de licence invalide (XXXX-XXXX-XXXX-XXXX)
-[2025-06-21 20:08:03] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
-[2025-06-21 20:08:03] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Format de cl\u00e9 de licence invalide (XXXX-XXXX-XXXX-XXXX)","step":1}
-[2025-06-21 21:13:14] [INFO] Vérification de licence pour la clé: AAAA-BBBB-CCCC-DDDD - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-21 21:13:14] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
-[2025-06-21 21:13:14] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-21 21:13:14] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-21 21:13:14] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-21 21:13:14] [INFO] Erreur API: Clé de série invalide
-[2025-06-21 21:13:14] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-21 21:13:14] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
-[2025-06-21 21:13:14] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
-[2025-06-22 00:44:57] [INFO] Vérification de licence pour la clé: LURL-1270-0180-00LL - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:44:57] [INFO] Début de la vérification de licence - Clé: LURL-1270-0180-00LL
-[2025-06-22 00:44:57] [INFO] Données envoyées à l'API: {"serial_key":"LURL-1270-0180-00LL","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:44:57] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:44:57] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 00:44:57] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 00:44:57] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 00:44:57] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
-[2025-06-22 00:44:57] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
-[2025-06-22 00:44:58] [INFO] Vérification de licence pour la clé: AAAA-BBBB-CCCC-DDDD - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:44:58] [INFO] Début de la vérification de licence - Clé: AAAA-BBBB-CCCC-DDDD
-[2025-06-22 00:44:58] [INFO] Données envoyées à l'API: {"serial_key":"AAAA-BBBB-CCCC-DDDD","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:44:58] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:44:58] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 00:44:58] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 00:44:58] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 00:44:58] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
-[2025-06-22 00:44:58] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
-[2025-06-22 00:45:50] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-DAUS - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:45:50] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-DAUS
-[2025-06-22 00:45:50] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-DAUS","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:45:50] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:45:50] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3e6d9638b6447361a0bb66c84fefc4b2","project":"","expires_at":null}}
-[2025-06-22 00:45:50] [INFO] Licence valide - Token: 3e6d9638b6...
-[2025-06-22 00:45:50] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 00:45:50] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence valide
-[2025-06-22 00:45:50] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":true,"message":"Licence valide ! Passage \u00e0 l'\u00e9tape suivante...","redirect":"install_new.php?step=2"}
-[2025-06-22 00:46:08] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:46:08] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
-[2025-06-22 00:46:08] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:46:08] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:46:08] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 00:46:08] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 00:46:08] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 00:46:08] [DEBUG] 🔍 DEBUG PHP: Envoi réponse AJAX pour licence invalide
-[2025-06-22 00:46:08] [DEBUG] 🔍 DEBUG PHP: Réponse JSON: {"success":false,"message":"Cl\u00e9 de s\u00e9rie invalide","step":1}
-[2025-06-22 00:46:49] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1111 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:46:49] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1111
-[2025-06-22 00:46:49] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1111","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:46:49] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:46:49] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 00:46:49] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 00:46:49] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 00:47:38] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:47:38] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-1234
-[2025-06-22 00:47:38] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:47:39] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:47:39] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 00:47:39] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 00:47:39] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 00:47:45] [INFO] Vérification de licence pour la clé: 8CJG-QRTM-HYWG-DAUS - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 00:47:45] [INFO] Début de la vérification de licence - Clé: 8CJG-QRTM-HYWG-DAUS
-[2025-06-22 00:47:45] [INFO] Données envoyées à l'API: {"serial_key":"8CJG-QRTM-HYWG-DAUS","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 00:47:45] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 00:47:45] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"cb16fd0c9db416d56931f58da421ff97","project":"","expires_at":null}}
-[2025-06-22 00:47:45] [INFO] Licence valide - Token: cb16fd0c9d...
-[2025-06-22 00:47:45] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:01:31] [INFO] Vérification licence - Clé: UIM3-DWPY-VQ9O-JKKH - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:01:31] [INFO] Début de la vérification de licence - Clé: UIM3-DWPY-VQ9O-JKKH
-[2025-06-22 01:01:31] [INFO] Données envoyées à l'API: {"serial_key":"UIM3-DWPY-VQ9O-JKKH","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:01:32] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:01:32] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-22 01:01:32] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-22 01:01:32] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-22 01:22:12] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:22:12] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 01:22:12] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:22:12] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:22:12] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"46f890dd6c6b45426e7e2ea0e47963ce","project":"","expires_at":null}}
-[2025-06-22 01:22:12] [INFO] Licence valide - Token: 46f890dd6c...
-[2025-06-22 01:22:12] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:22:26] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:22:26] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-1234
-[2025-06-22 01:22:26] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:22:26] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:22:26] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 01:22:26] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 01:22:26] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 01:27:34] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:27:34] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
-[2025-06-22 01:27:34] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:27:34] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:27:34] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-22 01:27:34] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-22 01:27:34] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-22 01:27:46] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:27:46] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 01:27:46] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:27:46] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:27:46] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"ef284ea55278daa1e079046dc52c795b","project":"","expires_at":null}}
-[2025-06-22 01:27:46] [INFO] Licence valide - Token: ef284ea552...
-[2025-06-22 01:27:46] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:30:00] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 01:30:30] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 01:42:47] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:42:47] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
-[2025-06-22 01:42:47] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:42:47] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:42:47] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-22 01:42:47] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-22 01:42:47] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-22 01:42:52] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 01:43:02] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 01:44:00] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:44:00] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 01:44:00] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:44:00] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:44:00] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"2762a847e5dc28dcb2cf874e0c3f40df","project":"","expires_at":null}}
-[2025-06-22 01:44:00] [INFO] Licence valide - Token: 2762a847e5...
-[2025-06-22 01:44:00] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:44:46] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 01:45:48] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:45:48] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 01:45:48] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:45:48] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:45:48] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"73202fbb9f273ff82e2ab9a73a8d1650","project":"","expires_at":null}}
-[2025-06-22 01:45:48] [INFO] Licence valide - Token: 73202fbb9f...
-[2025-06-22 01:45:48] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:56:45] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 01:56:45] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 01:56:45] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 01:56:45] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 01:56:45] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"9655f6d8cedbe4d3c42613384f9e813b","project":"","expires_at":null}}
-[2025-06-22 01:56:45] [INFO] Licence valide - Token: 9655f6d8ce...
-[2025-06-22 01:56:45] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 01:57:25] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:08:46] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:08:46] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:08:46] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:08:46] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:08:46] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"71887ef52d929938f8d3002a3fcff161","project":"","expires_at":null}}
-[2025-06-22 02:08:46] [INFO] Licence valide - Token: 71887ef52d...
-[2025-06-22 02:08:46] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:09:24] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:09:32] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-1234 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:09:32] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-1234
-[2025-06-22 02:09:32] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-1234","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:09:33] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:09:33] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
-[2025-06-22 02:09:33] [INFO] Erreur API: Clé de série invalide
-[2025-06-22 02:09:33] [ERROR] Licence invalide: Clé de série invalide
-[2025-06-22 02:09:44] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:09:44] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:09:44] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:09:44] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:09:44] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"314647cfc2688a0e6761c52c54370b3d","project":"","expires_at":null}}
-[2025-06-22 02:09:44] [INFO] Licence valide - Token: 314647cfc2...
-[2025-06-22 02:09:44] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:09:50] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:13:12] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:13:12] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
-[2025-06-22 02:13:12] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:13:12] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:13:12] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
-[2025-06-22 02:13:12] [INFO] Erreur API: Domaine non autorisé pour cette clé
-[2025-06-22 02:13:12] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
-[2025-06-22 02:13:22] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:13:22] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:13:22] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:13:22] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:13:22] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"97218750b42cdda007152ff35cbdbe3b","project":"","expires_at":null}}
-[2025-06-22 02:13:22] [INFO] Licence valide - Token: 97218750b4...
-[2025-06-22 02:13:22] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:13:26] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:13:53] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:13:53] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:13:53] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:13:53] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:13:53] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"ca06f78d4f51c36c0cdf221947e7419d","project":"","expires_at":null}}
-[2025-06-22 02:13:53] [INFO] Licence valide - Token: ca06f78d4f...
-[2025-06-22 02:13:53] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:13:59] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:13:59] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:13:59] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:13:59] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:13:59] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"81c108dc798239881d0b34880e4337e3","project":"","expires_at":null}}
-[2025-06-22 02:13:59] [INFO] Licence valide - Token: 81c108dc79...
-[2025-06-22 02:13:59] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:14:03] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:14:09] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:19:39] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:19:39] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:19:39] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:19:40] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:19:40] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"0e5206d5e55f9f2e81e0d98794641009","project":"","expires_at":null}}
-[2025-06-22 02:19:40] [INFO] Licence valide - Token: 0e5206d5e5...
-[2025-06-22 02:19:40] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:21:55] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:22:00] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:22:04] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:22:04] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:22:04] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:22:04] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:22:04] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3b407df774a3425d3114d33385ca233d","project":"","expires_at":null}}
-[2025-06-22 02:22:04] [INFO] Licence valide - Token: 3b407df774...
-[2025-06-22 02:22:04] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:22:07] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:22:36] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:24:36] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:24:36] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:24:36] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:24:36] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:24:36] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"b7bad063a2a6f356987e5e1437836559","project":"","expires_at":null}}
-[2025-06-22 02:24:36] [INFO] Licence valide - Token: b7bad063a2...
-[2025-06-22 02:24:36] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:24:40] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:24:43] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:25:29] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:25:29] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:25:29] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:25:29] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:25:29] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"0c5243330fbed49aea41902a6cde6069","project":"","expires_at":null}}
-[2025-06-22 02:25:29] [INFO] Licence valide - Token: 0c5243330f...
-[2025-06-22 02:25:29] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:25:32] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:35:17] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:35:17] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:35:17] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:35:17] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:35:17] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"366df79fda08a5df2257f32989cac30f","project":"","expires_at":null}}
-[2025-06-22 02:35:17] [INFO] Licence valide - Token: 366df79fda...
-[2025-06-22 02:35:17] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:35:21] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:48:41] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:48:41] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:48:41] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:48:41] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:48:41] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"f4c60947e51091794e881d7cf55850dc","project":"","expires_at":null}}
-[2025-06-22 02:48:41] [INFO] Licence valide - Token: f4c60947e5...
-[2025-06-22 02:48:41] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:48:44] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:51:06] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:51:12] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:51:12] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:51:12] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:51:12] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:51:12] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"71a833c1a5043914a3e0885ccadcf47b","project":"","expires_at":null}}
-[2025-06-22 02:51:12] [INFO] Licence valide - Token: 71a833c1a5...
-[2025-06-22 02:51:12] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:52:16] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:52:34] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:57:48] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:57:52] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:57:54] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 02:58:05] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 02:58:05] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 02:58:05] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 02:58:05] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 02:58:05] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"393b34e11c7675fb33cfc4fd7200d9db","project":"","expires_at":null}}
-[2025-06-22 02:58:05] [INFO] Licence valide - Token: 393b34e11c...
-[2025-06-22 02:58:05] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 02:58:33] [DEBUG] Étape 2 - Vérification licence - Session license_valid: true
-[2025-06-22 02:58:33] [INFO] Étape 2 - Vérification des prérequis système démarrée
-[2025-06-22 02:58:33] [WARNING] Permissions insuffisantes: ../storage (non bloquant pour les tests)
-[2025-06-22 02:58:33] [WARNING] Permissions insuffisantes: ../bootstrap/cache (non bloquant pour les tests)
-[2025-06-22 02:58:33] [SUCCESS] Prérequis système validés - Passage à l'étape 3
-[2025-06-22 02:58:33] [WARNING] Warnings système (non bloquants): Répertoire '../storage' non accessible en écriture, Répertoire '../bootstrap/cache' non accessible en écriture
-[2025-06-22 02:59:03] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 03:35:41] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
-[2025-06-22 03:35:41] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
-[2025-06-22 03:35:41] [INFO] Données envoyées à l'API: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
-[2025-06-22 03:35:41] [INFO] Réponse de l'API - Code HTTP: 200
-[2025-06-22 03:35:41] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"8a72a902d77e1867cc330c0ef76a553f","project":"","expires_at":null}}
-[2025-06-22 03:35:41] [INFO] Licence valide - Token: 8a72a902d7...
-[2025-06-22 03:35:41] [SUCCESS] Licence valide - Passage à l'étape 2
-[2025-06-22 03:35:44] [DEBUG] Étape 2 - Vérification licence - Session license_valid: true
-[2025-06-22 03:35:44] [INFO] Étape 2 - Vérification des prérequis système démarrée
-[2025-06-22 03:35:44] [WARNING] Permissions insuffisantes: ../storage (non bloquant pour les tests)
-[2025-06-22 03:35:44] [WARNING] Permissions insuffisantes: ../bootstrap/cache (non bloquant pour les tests)
-[2025-06-22 03:35:44] [SUCCESS] Prérequis système validés - Passage à l'étape 3
-[2025-06-22 03:35:44] [WARNING] Warnings système (non bloquants): Répertoire '../storage' non accessible en écriture, Répertoire '../bootstrap/cache' non accessible en écriture
-[2025-06-22 03:36:12] [SUCCESS] Connexion au serveur MySQL réussie - Host: localhost:3306
-[2025-06-22 03:36:12] [SUCCESS] Test de connexion DB complet réussi
-[2025-06-22 03:36:57] [ERROR] Erreur: Clé de licence non fournie
-[2025-06-22 03:40:59] [ERROR] Erreur: Clé de licence non fournie
+[2025-06-23 01:28:31] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 01:29:39] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:22] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:25] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:30] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:30] [INFO] Vérification de licence pour la clé: UKRS-2W5E-L5LG-GXA4 - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-23 02:30:30] [INFO] Début de la vérification de licence - Clé: UKRS-2W5E-L5LG-GXA4
+[2025-06-23 02:30:30] [INFO] Données envoyées à l'API: {"serial_key":"UKRS-2W5E-L5LG-GXA4","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-23 02:30:30] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-23 02:30:30] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-23 02:30:30] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-23 02:30:30] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-23 02:30:48] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:49] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:52] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:30:52] [INFO] Vérification de licence pour la clé: DWIC-AMCH-0DVL-092Z - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-23 02:30:52] [INFO] Début de la vérification de licence - Clé: DWIC-AMCH-0DVL-092Z
+[2025-06-23 02:30:52] [INFO] Données envoyées à l'API: {"serial_key":"DWIC-AMCH-0DVL-092Z","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-23 02:30:52] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-23 02:30:52] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"0afccd44663f9dcd77e1fea6507714fd","project":"","expires_at":null}}
+[2025-06-23 02:30:52] [INFO] Licence valide - Token: 0afccd4466...
+[2025-06-23 02:30:52] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-23 02:30:53] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:43:07] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:43:10] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:46:34] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:48:28] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:48:29] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:48:30] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 02:59:08] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:04:28] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:05:22] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:19:31] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:19:31] [INFO] Vérification de licence pour la clé: HOQK-BL00-V3TW-NJOO - Domaine: 127.0.0.1:8000 - IP: 127.0.0.1
+[2025-06-23 03:19:31] [INFO] Début de la vérification de licence - Clé: HOQK-BL00-V3TW-NJOO
+[2025-06-23 03:19:31] [INFO] Données envoyées à l'API: {"serial_key":"HOQK-BL00-V3TW-NJOO","domain":"127.0.0.1:8000","ip_address":"127.0.0.1"}
+[2025-06-23 03:19:31] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-23 03:19:31] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"90f83507421e6bad2482166e52d84309","project":"","expires_at":null}}
+[2025-06-23 03:19:31] [INFO] Licence valide - Token: 90f8350742...
+[2025-06-23 03:19:31] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-23 03:19:32] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:19:47] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 03:19:47] [DEBUG] Étape 2 - Vérification licence - Session license_valid: true
+[2025-06-23 03:19:47] [INFO] Étape 2 - Vérification des prérequis système démarrée
+[2025-06-23 03:19:47] [SUCCESS] Prérequis système validés - Passage à l'étape 3
+[2025-06-23 03:19:48] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:33:23] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:33:29] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:33:32] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:33:51] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:33:51] [FATAL] ERREUR FATALE: Uncaught Error: Call to undefined function formatIPInfoForLog() in R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php:241
+Stack trace:
+#0 {main}
+  thrown dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php à la ligne 241
+[2025-06-23 05:34:44] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:34:49] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:34:51] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:34:54] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:34:55] [FATAL] ERREUR FATALE: Uncaught Error: Call to undefined function formatIPInfoForLog() in R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php:241
+Stack trace:
+#0 {main}
+  thrown dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php à la ligne 241
+[2025-06-23 05:35:44] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:35:49] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:35:50] [FATAL] ERREUR FATALE: Uncaught Error: Call to undefined function formatIPInfoForLog() in R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php:241
+Stack trace:
+#0 {main}
+  thrown dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install\install_new.php à la ligne 241
+[2025-06-23 05:37:04] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:37:31] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:37:31] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-23 05:37:31] [INFO] Vérification de licence pour la clé: TEST-1234-5678-9012 - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-23 05:37:31] [INFO] Début de la vérification de licence - Clé: TEST-1234-5678-9012
+[2025-06-23 05:37:31] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"TEST-1234-5678-9012","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-23 05:37:31] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-23 05:37:31] [INFO] Corps de la réponse: {"status":"error","message":"Cl\u00e9 de s\u00e9rie invalide"}
+[2025-06-23 05:37:31] [INFO] Erreur API: Clé de série invalide
+[2025-06-23 05:37:31] [ERROR] Licence invalide: Clé de série invalide
+[2025-06-23 05:37:58] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:38:03] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:38:04] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-23 05:38:04] [INFO] Vérification de licence pour la clé: 4PIA-V48B-6WJ9-RVLW - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-23 05:38:04] [INFO] Début de la vérification de licence - Clé: 4PIA-V48B-6WJ9-RVLW
+[2025-06-23 05:38:04] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"4PIA-V48B-6WJ9-RVLW","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-23 05:38:04] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-23 05:38:04] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"e4170302263a53744d50b3fa3bdb4d32","project":"","expires_at":null}}
+[2025-06-23 05:38:04] [INFO] Licence valide - Token: e417030226...
+[2025-06-23 05:38:04] [SUCCESS] Licence valide - Passage à l'étape 2
+[2025-06-23 05:38:05] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:38:10] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 05:38:10] [DEBUG] Étape 2 - Vérification licence - Session license_valid: true
+[2025-06-23 05:38:10] [INFO] Étape 2 - Vérification des prérequis système démarrée
+[2025-06-23 05:38:10] [SUCCESS] Prérequis système validés - Passage à l'étape 3
+[2025-06-23 05:38:11] [INFO] INITIALISATION AUTO: 🧹 Nettoyage automatique des caches (production)... | ✅ Fichiers de cache Laravel supprimés (méthode manuelle - cPanel compatible) | ✅ Caches vidés automatiquement | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-23 15:28:35] [INFO] DIAGNOSTIC CPANEL - Cache: 0 | Permissions: 0 | Sessions: 0
+[2025-06-23 16:41:50] [INFO] DIAGNOSTIC CPANEL - Cache: 0 | Permissions: 0 | Sessions: 0

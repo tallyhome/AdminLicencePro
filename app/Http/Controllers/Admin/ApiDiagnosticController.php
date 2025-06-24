@@ -80,7 +80,7 @@ class ApiDiagnosticController extends Controller
         try {
             $serialKey = $request->input('serial_key');
             $domain = $request->input('domain') ?: request()->getHost();
-            $ipAddress = $request->input('ip_address') ?: request()->ip();
+            $ipAddress = ''; // IP non utilisée maintenant, mais gardée pour compatibilité
             
             $result = $this->licenceService->validateSerialKey($serialKey, $domain, $ipAddress);
             
@@ -114,7 +114,7 @@ class ApiDiagnosticController extends Controller
             $testData = [
                 'serial_key' => 'TEST-CONN-TION-TEST',
                 'domain' => request()->getHost(),
-                'ip_address' => request()->ip(),
+                // 'ip_address' => request()->ip(), // Supprimé car on ne vérifie plus l'IP
                 'api_key' => 'sk_wuRFNJ7fI6CaMzJptdfYhzAGW3DieKwC',
                 'api_secret' => 'sk_3ewgI2dP0zPyLXlHyDT1qYbzQny6H2hb'
             ];

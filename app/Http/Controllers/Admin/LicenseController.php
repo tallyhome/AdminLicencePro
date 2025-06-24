@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SerialKey;
 use App\Models\Setting;
 use App\Services\LicenceService;
+use App\Helpers\IPHelper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -219,9 +220,15 @@ class LicenseController extends Controller
             
             // Vérifier la licence avec le serveur distant
             $domain = request()->getHost();
-            $ipAddress = request()->ip();
             
-            // Utiliser le LicenceService pour valider la licence
+            // CORRECTION: Utiliser le nouveau système de détection d'IP robuste
+            $ipInfo = IPHelper::collectServerIPRobust(false);
+            $ipAddress = $ipInfo['ip'];
+            
+            // Logger les informations d'IP pour diagnostic
+            Log::info('LICENCE CONTROLLER - Détection IP: ' . IPHelper::formatIPInfoForLog($ipInfo));
+            
+            // Utiliser le LicenceService pour valider la licence (domaine + IP robuste)
             $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
             $isValid = $result['valid'] ?? false;
             
@@ -306,9 +313,15 @@ class LicenseController extends Controller
             
             // Valider avec le serveur distant
             $domain = request()->getHost();
-            $ipAddress = $_SERVER['SERVER_ADDR'] ?? $_SERVER['REMOTE_ADDR'] ?? gethostbyname(gethostname());
             
-            // Forcer une validation fraîche
+            // CORRECTION: Utiliser le nouveau système de détection d'IP robuste
+            $ipInfo = IPHelper::collectServerIPRobust(false);
+            $ipAddress = $ipInfo['ip'];
+            
+            // Logger les informations d'IP pour diagnostic
+            Log::info('LICENCE CONTROLLER FORCE CHECK - Détection IP: ' . IPHelper::formatIPInfoForLog($ipInfo));
+            
+            // Forcer une validation fraîche (domaine + IP robuste)
             $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
             $isValid = isset($result['valid']) && $result['valid'] === true;
             
@@ -331,7 +344,7 @@ class LicenseController extends Controller
                     'status' => 'active', // Forcer le statut à active
                     'expires_at' => $result['expires_at'] ?? null,
                     'domain' => $result['domain'] ?? $domain,
-                    'ip_address' => $result['ip_address'] ?? $ipAddress,
+                    // 'ip_address' => $result['ip_address'] ?? $ipAddress, // Supprimé car on ne vérifie plus l'IP
                     'valid' => true,
                     'last_check' => now()->toDateTimeString()
                 ];
@@ -357,7 +370,7 @@ class LicenseController extends Controller
                     'status' => 'invalid',
                     'expires_at' => $result['expires_at'] ?? null,
                     'domain' => $result['domain'] ?? $domain,
-                    'ip_address' => $result['ip_address'] ?? $ipAddress,
+                    // 'ip_address' => $result['ip_address'] ?? $ipAddress, // Supprimé car on ne vérifie plus l'IP
                     'valid' => false,
                     'message' => $result['message'] ?? 'Clé de licence non valide',
                     'last_check' => now()->toDateTimeString()
@@ -571,16 +584,25 @@ class LicenseController extends Controller
             // Récupérer les détails de licence depuis le service
             Log::info('Appel au service de validation de licence', ['key' => substr($licenseKey, 0, 5) . '...']);
             
-            // Récupérer le domaine et l'adresse IP pour la validation
+            // Récupérer le domaine pour la validation
             $domain = request()->getHost();
-            $ipAddress = request()->server('SERVER_ADDR') ?? request()->ip() ?? gethostbyname(gethostname());
+            
+            // CORRECTION: Utiliser le nouveau système de détection d'IP robuste
+            $ipInfo = IPHelper::collectServerIPRobust(false);
+            $ipAddress = $ipInfo['ip'];
             
             Log::info('Paramètres de validation de licence', [
                 'domain' => $domain,
-                'ip' => $ipAddress
+                'ip_address' => $ipAddress,
+                'ip_confidence' => $ipInfo['confidence'] ?? 0,
+                'ip_reason' => $ipInfo['reason'] ?? 'unknown',
+                'validation_method' => 'domain_and_ip_robust'
             ]);
             
-            // Vérifier la validité
+            // Logger les informations d'IP pour diagnostic
+            Log::info('LICENCE CONTROLLER GET DETAILS - Détection IP: ' . IPHelper::formatIPInfoForLog($ipInfo));
+            
+            // Vérifier la validité (domaine + IP robuste)
             $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
             
             // S'assurer que tous les champs nécessaires sont présents
@@ -609,7 +631,7 @@ class LicenseController extends Controller
                 'status' => $result['status'] ?? 'invalid',
                 'message' => $result['message'] ?? 'Vérification terminée',
                 'domain' => $result['domain'] ?? $domain,
-                'ip_address' => $result['ip_address'] ?? $ipAddress,
+                // 'ip_address' => $result['ip_address'] ?? $ipAddress, // Supprimé car on ne vérifie plus l'IP
                 'expires_at' => $result['expires_at'] ?? null,
                 'key' => $licenseKey // Ajouter la clé dans les détails pour l'affichage
             ];

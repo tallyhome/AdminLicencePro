@@ -140,14 +140,31 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
     // URL de l'API de vérification (utilisation de l'API check-serial pour la production)
     $url = "https://licence.myvcard.fr/api/check-serial.php";
     
+    // SOLUTION ROBUSTE: Utiliser la nouvelle fonction de collecte d'IP si pas fournie
+    if (!$adresseIP) {
+        $ipInfo = collectServerIP();
+        $adresseIP = $ipInfo['ip'];
+        
+        if (function_exists('formatIPInfoForLog')) {
+            writeToLog("COLLECTE IP CORE - " . formatIPInfoForLog($ipInfo), 'INFO');
+        } else {
+            writeToLog("COLLECTE IP CORE - IP: {$ipInfo['ip']} | Raison: {$ipInfo['reason']}", 'INFO');
+        }
+        
+        if ($ipInfo['is_local']) {
+            writeToLog("ATTENTION CORE: IP locale détectée ({$adresseIP}). Le serveur distant recevra cette IP.", 'WARNING');
+        }
+    }
+    
     // Données à envoyer (même format que le LicenceService)
     $donnees = [
         'serial_key' => trim(strtoupper($cleSeriale)),
         'domain' => $domaine ?: (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost'),
-        'ip_address' => $adresseIP ?: (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1')
+        'ip_address' => $adresseIP,
+        'validation_mode' => 'domain_only' // Indique au serveur de ne valider que le domaine mais d'enregistrer l'IP
     ];
     
-    writeToLog("Données envoyées à l'API: " . json_encode($donnees));
+    writeToLog("TRANSMISSION API - Données envoyées: " . json_encode($donnees), 'INFO');
      
     try {
         // Initialiser cURL

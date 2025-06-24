@@ -9,6 +9,7 @@ use App\Notifications\LicenceStatusChanged;
 use App\Services\WebSocketService;
 use App\Services\LicenceHistoryService;
 use App\Services\EncryptionService;
+use App\Helpers\IPHelper;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -71,10 +72,12 @@ class LicenceService
             $endpoint = env('LICENCE_API_ENDPOINT', '/api/check-serial.php');
             
             // Préparer les données à envoyer (format JSON comme dans l'installation)
+            // Note: On envoie l'IP pour l'enregistrement mais la validation se base uniquement sur le domaine
             $data = [
                 'serial_key' => trim(strtoupper($serialKey)),
                 'domain' => $domain,
-                'ip_address' => $ipAddress
+                'ip_address' => $ipAddress, // Envoyé pour enregistrement, mais validation basée sur le domaine uniquement
+                'validation_mode' => 'domain_only' // Indique au serveur de ne valider que le domaine
             ];
             
             // Logger la requête uniquement en environnement de développement
@@ -200,7 +203,7 @@ class LicenceService
                 Setting::set('license_status', 'active');
                 Setting::set('license_key', $serialKey);
                 Setting::set('license_domain', $domain);
-                Setting::set('license_ip', $ipAddress);
+                // Setting::set('license_ip', $ipAddress); // Supprimé car on ne vérifie plus l'IP
                 Setting::set('last_license_check', now()->toDateTimeString());
                 
                 if (isset($decoded['data']['expires_at'])) {
@@ -222,7 +225,7 @@ class LicenceService
                     'token' => $decoded['data']['token'] ?? null,
                     'expires_at' => $decoded['data']['expires_at'] ?? null,
                     'domain' => $domain,
-                    'ip_address' => $ipAddress,
+                    // 'ip_address' => $ipAddress, // Supprimé car on ne vérifie plus l'IP
                     'data' => $decoded['data']
                 ];
             } else {
@@ -561,14 +564,24 @@ class LicenceService
                 }
             }
             
-            // Récupérer l'adresse IP du serveur
-            $ipAddress = $_SERVER['SERVER_ADDR'] ?? $_SERVER['REMOTE_ADDR'] ?? gethostbyname(gethostname());
+            // SOLUTION ROBUSTE: Utiliser la nouvelle fonction de collecte d'IP
+            $ipInfo = IPHelper::collectServerIP();
+            $ipAddress = $ipInfo['ip'];
+            
+            // Logger les informations détaillées pour diagnostic
+            Log::info('COLLECTE IP RUNTIME ROBUSTE - ' . IPHelper::formatIPInfoForLog($ipInfo));
+            
+            // Avertissement si IP locale détectée
+            if ($ipInfo['is_local']) {
+                Log::warning("ATTENTION RUNTIME: IP locale détectée ({$ipAddress}). Le serveur distant recevra cette IP mais elle pourrait ne pas être utile pour l'identification.");
+            }
             
             // Log uniquement en environnement de développement
             if (env('APP_ENV') === 'local' || env('APP_DEBUG') === true) {
                 Log::debug('Paramètres de vérification d\'API', [
                     'domain' => $domain,
-                    'ip_address' => $ipAddress
+                    'ip_address' => $ipAddress,
+                    'ip_selection_reason' => $ipInfo['reason']
                 ]);
             }
             

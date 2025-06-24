@@ -968,13 +968,19 @@ async function verifyStep5Ajax(form) {
         formData.append('step', '5');
         
         // Send AJAX request with longer timeout for installation
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minutes timeout
+        
         const response = await fetch('install_new.php', {
             method: 'POST',
             body: formData,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
-            }
+            },
+            signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
         
         // Check if response is OK
         if (!response.ok) {
@@ -1040,13 +1046,33 @@ async function verifyStep5Ajax(form) {
         
     } catch (error) {
         if (!error.message.includes('Succès détecté')) {
-            showAlert(alertContainer, 'Erreur lors de l\'installation finale: ' + error.message, 'error');
+            let errorMessage = 'Erreur lors de l\'installation finale: ';
+            
+            if (error.name === 'AbortError') {
+                errorMessage += 'Timeout - L\'installation prend plus de temps que prévu. Vérifiez le fichier .env et la base de données.';
+            } else {
+                errorMessage += error.message;
+            }
+            
+            showAlert(alertContainer, errorMessage, 'error');
+            
+            // En cas de timeout, proposer des actions
+            if (error.name === 'AbortError') {
+                setTimeout(() => {
+                    showAlert(alertContainer,
+                        '⚠️ Installation interrompue. <br>' +
+                        '<a href="debug_step5_problem.php" style="color: #007bff;">🔍 Diagnostic</a> | ' +
+                        '<a href="fix_step5_installation.php" style="color: #007bff;">🔧 Correctif</a> | ' +
+                        '<a href="install_new.php?success=1" style="color: #007bff;">✅ Vérifier si terminée</a>',
+                        'warning'
+                    );
+                }, 2000);
+            }
         }
     } finally {
-        if (!error || !error.message.includes('Succès détecté')) {
-            isProcessing = false;
-            hideLoadingButton(submitBtn, 'Installer maintenant');
-        }
+        // Toujours nettoyer l'état de traitement
+        isProcessing = false;
+        hideLoadingButton(submitBtn, 'Installer maintenant');
     }
 }
 

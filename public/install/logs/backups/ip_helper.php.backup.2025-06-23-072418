@@ -1,0 +1,148 @@
+<?php
+/**
+ * Fonctions d'aide pour la collecte d'IP du serveur
+ */
+
+/**
+ * Collecte l'adresse IP réelle du serveur de manière robuste
+ * 
+ * @return array Tableau avec l'IP sélectionnée et les détails de diagnostic
+ */
+function collectServerIP() {
+    $ipSources = [
+        'SERVER_ADDR' => $_SERVER['SERVER_ADDR'] ?? null,
+        'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'] ?? null,
+        'HTTP_X_FORWARDED_FOR' => $_SERVER['HTTP_X_FORWARDED_FOR'] ?? null,
+        'HTTP_X_REAL_IP' => $_SERVER['HTTP_X_REAL_IP'] ?? null,
+        'HTTP_CF_CONNECTING_IP' => $_SERVER['HTTP_CF_CONNECTING_IP'] ?? null, // Cloudflare
+        'HTTP_X_FORWARDED' => $_SERVER['HTTP_X_FORWARDED'] ?? null,
+        'HTTP_FORWARDED_FOR' => $_SERVER['HTTP_FORWARDED_FOR'] ?? null,
+        'HTTP_FORWARDED' => $_SERVER['HTTP_FORWARDED'] ?? null,
+        'HTTP_CLIENT_IP' => $_SERVER['HTTP_CLIENT_IP'] ?? null,
+    ];
+    
+    // Calculer l'IP via hostname
+    $hostnameIP = null;
+    try {
+        $hostname = gethostname();
+        if ($hostname !== false) {
+            $hostnameIP = gethostbyname($hostname);
+            // Vérifier si gethostbyname a échoué (retourne le hostname si échec)
+            if ($hostnameIP === $hostname) {
+                $hostnameIP = null;
+            }
+        }
+    } catch (Exception $e) {
+        $hostnameIP = null;
+    }
+    
+    $ipSources['gethostbyname'] = $hostnameIP;
+    
+    // Logique de sélection d'IP par priorité
+    $selectedIP = null;
+    $selectionReason = '';
+    
+    // 1. Priorité à SERVER_ADDR si elle existe et n'est pas localhost
+    if (!empty($ipSources['SERVER_ADDR']) && !isLocalIP($ipSources['SERVER_ADDR'])) {
+        $selectedIP = $ipSources['SERVER_ADDR'];
+        $selectionReason = 'SERVER_ADDR (IP du serveur)';
+    }
+    // 2. Ensuite HTTP_X_REAL_IP (souvent utilisé par les proxies)
+    elseif (!empty($ipSources['HTTP_X_REAL_IP']) && !isLocalIP($ipSources['HTTP_X_REAL_IP'])) {
+        $selectedIP = $ipSources['HTTP_X_REAL_IP'];
+        $selectionReason = 'HTTP_X_REAL_IP (proxy)';
+    }
+    // 3. Ensuite HTTP_CF_CONNECTING_IP (Cloudflare)
+    elseif (!empty($ipSources['HTTP_CF_CONNECTING_IP']) && !isLocalIP($ipSources['HTTP_CF_CONNECTING_IP'])) {
+        $selectedIP = $ipSources['HTTP_CF_CONNECTING_IP'];
+        $selectionReason = 'HTTP_CF_CONNECTING_IP (Cloudflare)';
+    }
+    // 4. Ensuite la première IP valide de HTTP_X_FORWARDED_FOR
+    elseif (!empty($ipSources['HTTP_X_FORWARDED_FOR'])) {
+        $forwardedIPs = explode(',', $ipSources['HTTP_X_FORWARDED_FOR']);
+        foreach ($forwardedIPs as $ip) {
+            $ip = trim($ip);
+            if (!empty($ip) && !isLocalIP($ip) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                $selectedIP = $ip;
+                $selectionReason = 'HTTP_X_FORWARDED_FOR (première IP publique)';
+                break;
+            }
+        }
+    }
+    // 5. Ensuite REMOTE_ADDR si elle n'est pas localhost
+    elseif (!empty($ipSources['REMOTE_ADDR']) && !isLocalIP($ipSources['REMOTE_ADDR'])) {
+        $selectedIP = $ipSources['REMOTE_ADDR'];
+        $selectionReason = 'REMOTE_ADDR';
+    }
+    // 6. Ensuite gethostbyname si elle n'est pas localhost
+    elseif (!empty($hostnameIP) && !isLocalIP($hostnameIP)) {
+        $selectedIP = $hostnameIP;
+        $selectionReason = 'gethostbyname(gethostname())';
+    }
+    // 7. Fallback vers SERVER_ADDR même si localhost
+    elseif (!empty($ipSources['SERVER_ADDR'])) {
+        $selectedIP = $ipSources['SERVER_ADDR'];
+        $selectionReason = 'SERVER_ADDR (fallback)';
+    }
+    // 8. Fallback vers REMOTE_ADDR même si localhost
+    elseif (!empty($ipSources['REMOTE_ADDR'])) {
+        $selectedIP = $ipSources['REMOTE_ADDR'];
+        $selectionReason = 'REMOTE_ADDR (fallback)';
+    }
+    // 9. Dernier fallback
+    else {
+        $selectedIP = $hostnameIP ?: '127.0.0.1';
+        $selectionReason = 'Fallback final';
+    }
+    
+    return [
+        'ip' => $selectedIP,
+        'reason' => $selectionReason,
+        'sources' => $ipSources,
+        'is_local' => isLocalIP($selectedIP),
+        'is_valid' => filter_var($selectedIP, FILTER_VALIDATE_IP) !== false
+    ];
+}
+
+/**
+ * Vérifie si une IP est considérée comme locale/privée
+ * 
+ * @param string $ip L'adresse IP à vérifier
+ * @return bool True si l'IP est locale, false sinon
+ */
+function isLocalIP($ip) {
+    if (empty($ip)) {
+        return true;
+    }
+    
+    // IPs explicitement locales
+    $localIPs = ['127.0.0.1', '::1', 'localhost'];
+    if (in_array($ip, $localIPs)) {
+        return true;
+    }
+    
+    // Utiliser les filtres PHP pour détecter les IPs privées/réservées
+    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Formate les informations d'IP pour les logs
+ * 
+ * @param array $ipInfo Résultat de collectServerIP()
+ * @return string Message formaté pour les logs
+ */
+function formatIPInfoForLog($ipInfo) {
+    $sources = [];
+    foreach ($ipInfo['sources'] as $key => $value) {
+        $sources[] = "$key: " . ($value ?: 'null');
+    }
+    
+    return "IP sélectionnée: {$ipInfo['ip']} ({$ipInfo['reason']}) | " . 
+           "Local: " . ($ipInfo['is_local'] ? 'oui' : 'non') . " | " .
+           "Valide: " . ($ipInfo['is_valid'] ? 'oui' : 'non') . " | " .
+           "Sources: " . implode(' | ', $sources);
+}

@@ -96,33 +96,12 @@ class CheckLicenseMiddleware
             if (true) { // Force toujours une nouvelle vérification
                 // Vérifier directement avec l'API
                 $domain = $request->getHost();
-                $ipAddress = $_SERVER['SERVER_ADDR'] ?? gethostbyname(gethostname());
+                $ipAddress = ''; // IP non utilisée maintenant, mais gardée pour compatibilité
                 
-                // DEBUG: Tester avec différentes IPs
-                Log::info('Test de validation avec IP détectée', ['ip' => $ipAddress, 'domain' => $domain]);
+                Log::info('Validation de licence (domaine uniquement)', ['domain' => $domain]);
                 
-                // Essayer d'abord avec l'IP détectée
+                // Valider avec le domaine uniquement
                 $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $ipAddress);
-                
-                // Si échec avec message IP, essayer avec d'autres IPs
-                if (!$result['valid'] && strpos($result['message'], 'IP') !== false) {
-                    Log::info('Échec avec IP détectée, test avec IPs alternatives');
-                    
-                    // Essayer avec localhost
-                    $result = $this->licenceService->validateSerialKey($licenseKey, $domain, '127.0.0.1');
-                    if (!$result['valid']) {
-                        // Essayer avec IP externe
-                        try {
-                            $externalIp = file_get_contents('https://api.ipify.org');
-                            if ($externalIp) {
-                                Log::info('Test avec IP externe', ['external_ip' => $externalIp]);
-                                $result = $this->licenceService->validateSerialKey($licenseKey, $domain, $externalIp);
-                            }
-                        } catch (Exception $e) {
-                            Log::warning('Impossible de récupérer IP externe', ['error' => $e->getMessage()]);
-                        }
-                    }
-                }
                 $isValid = $result['valid'] === true;
                 
                 // Mettre à jour le timestamp de la dernière vérification

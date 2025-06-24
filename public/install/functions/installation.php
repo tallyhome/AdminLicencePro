@@ -112,14 +112,39 @@ function createEnvFile() {
             }
         }
 
-        // Écrire le contenu mis à jour dans le fichier .env
-        if (file_put_contents($envPath, $envContent) === false) {
-            throw new Exception('Impossible d\'écrire dans le fichier .env');
+        // Écrire le contenu mis à jour dans le fichier .env avec plusieurs tentatives
+        $writeSuccess = false;
+        $attempts = 0;
+        $maxAttempts = 3;
+        
+        while (!$writeSuccess && $attempts < $maxAttempts) {
+            $attempts++;
+            
+            // Forcer les permissions avant l'écriture
+            if (file_exists($envPath)) {
+                @chmod($envPath, 0666);
+            }
+            
+            $bytesWritten = @file_put_contents($envPath, $envContent, LOCK_EX);
+            if ($bytesWritten !== false && $bytesWritten > 0) {
+                $writeSuccess = true;
+                writeToLog("Écriture .env réussie (tentative $attempts, $bytesWritten octets)", 'SUCCESS');
+            } else {
+                writeToLog("Échec écriture .env (tentative $attempts)", 'WARNING');
+                if ($attempts < $maxAttempts) {
+                    usleep(500000); // Attendre 500ms avant la prochaine tentative
+                }
+            }
+        }
+        
+        if (!$writeSuccess) {
+            throw new Exception('Impossible d\'écrire dans le fichier .env après ' . $maxAttempts . ' tentatives');
         }
 
-        // Vérifier les permissions du fichier .env
-        if (!chmod($envPath, 0644)) {
-            throw new Exception('Impossible de définir les permissions du fichier .env');
+        // Vérifier les permissions du fichier .env (non critique)
+        if (!@chmod($envPath, 0644)) {
+            writeToLog('Avertissement: Impossible de définir les permissions du fichier .env', 'WARNING');
+            // Ne pas lever d'exception, ce n'est pas critique
         }
     
         return true;

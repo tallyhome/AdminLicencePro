@@ -1,69 +1,60 @@
-# Protection renforcée du dossier d'installation
-# Bloquer complètement l'accès après l'installation
-
 <IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
     RewriteEngine On
-    
-    # Vérifier si l'installation est terminée (installed.lock existe)
-    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/install/installed.lock -f
-    RewriteRule ^(.*)$ - [F,L]
-    
-    # Rediriger toutes les requêtes vers index.php si ce n'est pas un fichier ou un répertoire
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Spécifique pour cPanel - Forcer HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Spécifique pour les routes API - Assurer que les routes API fonctionnent correctement
+    RewriteRule ^api/(.*)$ api/$1 [L,QSA]
+
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L,QSA]
+
+    # Performance - Compression et mise en cache
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    </IfModule>
+
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType image/jpg "access plus 1 year"
+        ExpiresByType image/jpeg "access plus 1 year"
+        ExpiresByType image/gif "access plus 1 year"
+        ExpiresByType image/png "access plus 1 year"
+        ExpiresByType text/css "access plus 1 month"
+        ExpiresByType application/pdf "access plus 1 month"
+        ExpiresByType text/javascript "access plus 1 month"
+        ExpiresByType application/javascript "access plus 1 month"
+        ExpiresByType application/x-javascript "access plus 1 month"
+        ExpiresByType application/x-shockwave-flash "access plus 1 month"
+        ExpiresByType image/x-icon "access plus 1 year"
+        ExpiresDefault "access plus 2 days"
+    </IfModule>
 </IfModule>
 
-# Bloquer l'accès aux fichiers sensibles
-<FilesMatch "^(functions\.php|installed\.lock|.*\.log|debug\.php|test.*\.php|direct-api-test\.php)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Bloquer l'accès aux fichiers PHP dans les sous-répertoires
-<FilesMatch "\.(php|phtml|php3|php4|php5|php7)$">
-    <IfModule mod_authz_core.c>
-        Require all denied
-    </IfModule>
-    <IfModule !mod_authz_core.c>
-        Order deny,allow
-        Deny from all
-    </IfModule>
-</FilesMatch>
-
-# Autoriser uniquement index.php, install.php et languages.php
-<Files ~ "^(index\.php|install\.php|languages\.php)$">
-    <IfModule mod_authz_core.c>
-        Require all granted
-    </IfModule>
-    <IfModule !mod_authz_core.c>
-        Order allow,deny
-        Allow from all
-    </IfModule>
-</Files>
-
-# Paramètres PHP
-<IfModule mod_php7.c>
-    php_flag display_errors Off
-    php_flag log_errors On
-    php_value error_log logs/error.log
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php82” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
 </IfModule>
-
-# Paramètres PHP pour PHP 8+
-<IfModule mod_php.c>
-    php_flag display_errors Off
-    php_flag log_errors On
-    php_value error_log logs/error.log
-</IfModule>
-
-# Empêcher la navigation dans les répertoires
-Options -Indexes
-
-# Protection supplémentaire contre les attaques XSS
-<IfModule mod_headers.c>
-    Header set X-XSS-Protection "1; mode=block"
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-</IfModule>
+# php -- END cPanel-generated handler, do not edit
