@@ -495,23 +495,41 @@ class SerialKeyController extends Controller
      */
     public function history(SerialKey $serialKey)
     {
-        $history = $this->historyService->getHistory($serialKey);
-        
-        if (request()->ajax()) {
-            return response()->json([
-                'success' => true,
-                'history' => $history->map(function($item) {
-                    return [
-                        'date' => $item->created_at->format('d/m/Y H:i'),
-                        'action' => $item->action,
-                        'details' => $item->details,
-                        'admin' => $item->admin->name ?? 'Système',
-                        'ip_address' => $item->ip_address
-                    ];
-                })
-            ]);
-        }
+        try {
+            $history = $this->historyService->getHistory($serialKey);
+            
+            if (request()->ajax()) {
+                $historyData = [];
+                
+                if ($history->count() > 0) {
+                    $historyData = $history->getCollection()->map(function($item) {
+                        return [
+                            'date' => $item->created_at->format('d/m/Y H:i'),
+                            'action' => $item->action,
+                            'details' => is_string($item->details) ? $item->details : (is_array($item->details) ? json_encode($item->details) : $item->details),
+                            'admin' => $item->admin->name ?? 'Système',
+                            'ip_address' => $item->ip_address
+                        ];
+                    })->toArray();
+                }
+                
+                return response()->json([
+                    'success' => true,
+                    'history' => $historyData
+                ]);
+            }
 
-        return view('admin.serial-keys.history', compact('serialKey', 'history'));
+            return view('admin.serial-keys.history', compact('serialKey', 'history'));
+            
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Erreur lors du chargement de l\'historique: ' . $e->getMessage()
+                ], 500);
+            }
+            
+            return redirect()->back()->with('error', 'Erreur lors du chargement de l\'historique.');
+        }
     }
 }

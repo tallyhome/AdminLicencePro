@@ -34,13 +34,13 @@ class HistoryService
      * Récupère l'historique d'une clé de licence
      *
      * @param SerialKey $serialKey
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getHistory(SerialKey $serialKey)
     {
         return $serialKey->history()
             ->with('admin')
             ->latest()
-            ->get();
+            ->paginate(15);
     }
 } 

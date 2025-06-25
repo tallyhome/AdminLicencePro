@@ -39,7 +39,7 @@
                                     <?php endswitch; ?>
                                 </p>
                                 <p class="text-sm text-gray-600">
-                                    Par : <?php echo e($entry->user ? $entry->user->name : 'Système'); ?>
+                                    Par : <?php echo e($entry->admin ? $entry->admin->name : 'Système'); ?>
 
                                 </p>
                             </div>
@@ -57,12 +57,20 @@
 
                         <?php if($entry->details): ?>
                             <div class="mt-2 text-sm text-gray-700">
-                                <?php if($entry->action === 'updated'): ?>
+                                <?php
+                                    $details = $entry->details;
+                                    // Si c'est une chaîne JSON, on la décode
+                                    if (is_string($details) && str_starts_with($details, '{')) {
+                                        $details = json_decode($details, true);
+                                    }
+                                ?>
+                                
+                                <?php if($entry->action === 'updated' && is_array($details) && isset($details['old_data'])): ?>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
                                             <h4 class="font-medium">Anciennes valeurs :</h4>
                                             <ul class="list-disc list-inside">
-                                                <?php $__currentLoopData = $entry->details['old_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php $__currentLoopData = $details['old_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if(in_array($key, ['project_id', 'domain', 'ip_address', 'expires_at', 'status'])): ?>
                                                         <li><?php echo e($key); ?>: <?php echo e($value ?? 'Non défini'); ?></li>
                                                     <?php endif; ?>
@@ -72,7 +80,7 @@
                                         <div>
                                             <h4 class="font-medium">Nouvelles valeurs :</h4>
                                             <ul class="list-disc list-inside">
-                                                <?php $__currentLoopData = $entry->details['new_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php $__currentLoopData = $details['new_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if(in_array($key, ['project_id', 'domain', 'ip_address', 'expires_at', 'status'])): ?>
                                                         <li><?php echo e($key); ?>: <?php echo e($value ?? 'Non défini'); ?></li>
                                                     <?php endif; ?>
@@ -81,7 +89,17 @@
                                         </div>
                                     </div>
                                 <?php else: ?>
-                                    <pre class="bg-gray-100 p-2 rounded"><?php echo e(json_encode($entry->details, JSON_PRETTY_PRINT)); ?></pre>
+                                    <div class="bg-gray-100 p-2 rounded">
+                                        <?php if(is_string($entry->details)): ?>
+                                            <?php echo e($entry->details); ?>
+
+                                        <?php elseif(is_array($details)): ?>
+                                            <pre><?php echo e(json_encode($details, JSON_PRETTY_PRINT)); ?></pre>
+                                        <?php else: ?>
+                                            <?php echo e($entry->details); ?>
+
+                                        <?php endif; ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>

@@ -295,9 +295,9 @@
                                 </button>
                             </form>
                         @endif
-                        <a href="{{ route('admin.serial-keys.history', $serialKey) }}" class="btn btn-outline-secondary btn-sm" onclick="showHistory(event)">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#historyModal">
                             <i class="fas fa-history"></i> Historique
-                        </a>
+                        </button>
                         <button class="btn btn-outline-info btn-sm" onclick="exportData()">
                             <i class="fas fa-download"></i> Exporter les données
                         </button>
@@ -339,121 +339,29 @@
     </div>
 @endif
 
-<script>
-function showHistory(event) {
-    event.preventDefault();
-    
-    // Créer et afficher un modal pour l'historique
-    const modal = document.createElement('div');
-    modal.className = 'modal fade';
-    modal.id = 'historyModal';
-    modal.setAttribute('tabindex', '-1');
-    modal.innerHTML = `
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-history"></i> Historique de la clé {{ $serialKey->serial_key }}
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Chargement...</span>
-                        </div>
-                        <p class="mt-2">Chargement de l'historique...</p>
+<!-- Modal Historique -->
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="historyModalLabel">
+                    <i class="fas fa-history"></i> Historique de la clé {{ $serialKey->serial_key }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="historyModalBody">
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Chargement...</span>
                     </div>
+                    <p class="mt-2">Chargement de l'historique...</p>
                 </div>
             </div>
         </div>
-    `;
-    
-    document.body.appendChild(modal);
-    const bootstrapModal = new bootstrap.Modal(modal);
-    bootstrapModal.show();
-    
-    // Charger l'historique via AJAX
-    fetch('{{ route("admin.serial-keys.history", $serialKey) }}', {
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            let historyHtml = '';
-            if (data.history.length > 0) {
-                historyHtml = `
-                    <div class="table-responsive">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                    <th>Détails</th>
-                                    <th>Administrateur</th>
-                                    <th>IP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                `;
-                
-                data.history.forEach(item => {
-                    const actionBadge = getActionBadge(item.action);
-                    historyHtml += `
-                        <tr>
-                            <td>${item.date}</td>
-                            <td>${actionBadge}</td>
-                            <td>${item.details || '-'}</td>
-                            <td>${item.admin}</td>
-                            <td><small class="text-muted">${item.ip_address}</small></td>
-                        </tr>
-                    `;
-                });
-                
-                historyHtml += `
-                            </tbody>
-                        </table>
-                    </div>
-                `;
-            } else {
-                historyHtml = `
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        Aucun historique disponible pour cette clé de licence.
-                    </div>
-                `;
-            }
-            
-            modal.querySelector('.modal-body').innerHTML = historyHtml;
-        } else {
-            modal.querySelector('.modal-body').innerHTML = `
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Erreur lors du chargement de l'historique.
-                </div>
-            `;
-        }
-    })
-    .catch(error => {
-        modal.querySelector('.modal-body').innerHTML = `
-            <div class="alert alert-danger">
-                <i class="fas fa-exclamation-triangle"></i>
-                Erreur lors du chargement de l'historique : ${error.message}
-            </div>
-        `;
-    });
-    
-    // Nettoyer le modal quand il est fermé
-    modal.addEventListener('hidden.bs.modal', () => {
-        modal.remove();
-    });
-}
+    </div>
+</div>
 
+<script>
 function getActionBadge(action) {
     const badges = {
         'create': '<span class="badge bg-success">Création</span>',
@@ -472,6 +380,138 @@ function getActionBadge(action) {
     return badges[action] || `<span class="badge bg-secondary">${action}</span>`;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Charger l'historique quand le modal s'ouvre
+    const historyModal = document.getElementById('historyModal');
+    const historyModalBody = document.getElementById('historyModalBody');
+    
+    historyModal.addEventListener('show.bs.modal', function() {
+        // Réinitialiser le contenu du modal
+        historyModalBody.innerHTML = `
+            <div class="text-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Chargement...</span>
+                </div>
+                <p class="mt-2">Chargement de l'historique...</p>
+            </div>
+        `;
+        
+        // Charger l'historique via AJAX
+        console.log('Chargement historique pour la clé:', '{{ $serialKey->serial_key }}');
+        console.log('URL de la requête:', '{{ route("admin.serial-keys.history", $serialKey) }}');
+        
+        // Vérifier d'abord si on a le token CSRF
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (!csrfToken) {
+            console.error('Token CSRF non trouvé');
+            historyModalBody.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur: Token CSRF non trouvé
+                </div>
+            `;
+            return;
+        }
+        
+        fetch('{{ route("admin.serial-keys.history", $serialKey) }}', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrfToken.getAttribute('content')
+            }
+        })
+        .then(response => {
+            console.log('Réponse reçue, status:', response.status);
+            console.log('Headers de la réponse:', response.headers);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            return response.text(); // Changé en text() pour voir le contenu brut
+        })
+        .then(text => {
+            console.log('Contenu brut de la réponse:', text);
+            
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error('Erreur de parsing JSON:', e);
+                throw new Error('Réponse non-JSON reçue: ' + text.substring(0, 100));
+            }
+            
+            console.log('Données parsées:', data);
+            
+            if (data.success) {
+                let historyHtml = '';
+                if (data.history && data.history.length > 0) {
+                    historyHtml = `
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                        <th>Détails</th>
+                                        <th>Administrateur</th>
+                                        <th>IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+                    
+                    data.history.forEach(item => {
+                        const actionBadge = getActionBadge(item.action);
+                        historyHtml += `
+                            <tr>
+                                <td>${item.date}</td>
+                                <td>${actionBadge}</td>
+                                <td>${item.details || '-'}</td>
+                                <td>${item.admin}</td>
+                                <td><small class="text-muted">${item.ip_address}</small></td>
+                            </tr>
+                        `;
+                    });
+                    
+                    historyHtml += `
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                } else {
+                    historyHtml = `
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            Aucun historique disponible pour cette clé de licence.
+                        </div>
+                    `;
+                }
+                
+                historyModalBody.innerHTML = historyHtml;
+            } else {
+                console.error('Erreur dans la réponse:', data);
+                historyModalBody.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        ${data.error || 'Erreur lors du chargement de l\'historique.'}
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Erreur AJAX:', error);
+            historyModalBody.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur lors du chargement de l'historique : ${error.message}
+                </div>
+            `;
+        });
+    });
+});
+
 function exportData() {
     // Créer les données à exporter
     const data = {
@@ -479,13 +519,12 @@ function exportData() {
         project: '{{ $serialKey->project->name }}',
         licence_type: '{{ $serialKey->licence_type }}',
         status: '{{ $serialKey->status }}',
-        max_accounts: {{ $serialKey->max_accounts }},
-        used_accounts: {{ $serialKey->used_accounts }},
+        max_accounts: {{ $serialKey->max_accounts ?? 'null' }},
+        used_accounts: {{ $serialKey->used_accounts ?? 0 }},
         domain: '{{ $serialKey->domain ?? "" }}',
         ip_address: '{{ $serialKey->ip_address ?? "" }}',
         expires_at: '{{ $serialKey->expires_at?->format("d/m/Y H:i") ?? "Aucune" }}',
-        created_at: '{{ $serialKey->created_at->format("d/m/Y H:i") }}',
-        @if($serialKey->licence_type === 'multi')
+        created_at: '{{ $serialKey->created_at->format("d/m/Y H:i") }}'@if($serialKey->licence_type === 'multi'),
         accounts: [
             @foreach($serialKey->accounts as $account)
             {

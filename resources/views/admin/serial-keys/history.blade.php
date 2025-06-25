@@ -40,7 +40,7 @@
                                     @endswitch
                                 </p>
                                 <p class="text-sm text-gray-600">
-                                    Par : {{ $entry->user ? $entry->user->name : 'Système' }}
+                                    Par : {{ $entry->admin ? $entry->admin->name : 'Système' }}
                                 </p>
                             </div>
                             <div class="text-right">
@@ -55,12 +55,20 @@
 
                         @if($entry->details)
                             <div class="mt-2 text-sm text-gray-700">
-                                @if($entry->action === 'updated')
+                                @php
+                                    $details = $entry->details;
+                                    // Si c'est une chaîne JSON, on la décode
+                                    if (is_string($details) && str_starts_with($details, '{')) {
+                                        $details = json_decode($details, true);
+                                    }
+                                @endphp
+                                
+                                @if($entry->action === 'updated' && is_array($details) && isset($details['old_data']))
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
                                             <h4 class="font-medium">Anciennes valeurs :</h4>
                                             <ul class="list-disc list-inside">
-                                                @foreach($entry->details['old_data'] as $key => $value)
+                                                @foreach($details['old_data'] as $key => $value)
                                                     @if(in_array($key, ['project_id', 'domain', 'ip_address', 'expires_at', 'status']))
                                                         <li>{{ $key }}: {{ $value ?? 'Non défini' }}</li>
                                                     @endif
@@ -70,7 +78,7 @@
                                         <div>
                                             <h4 class="font-medium">Nouvelles valeurs :</h4>
                                             <ul class="list-disc list-inside">
-                                                @foreach($entry->details['new_data'] as $key => $value)
+                                                @foreach($details['new_data'] as $key => $value)
                                                     @if(in_array($key, ['project_id', 'domain', 'ip_address', 'expires_at', 'status']))
                                                         <li>{{ $key }}: {{ $value ?? 'Non défini' }}</li>
                                                     @endif
@@ -79,7 +87,15 @@
                                         </div>
                                     </div>
                                 @else
-                                    <pre class="bg-gray-100 p-2 rounded">{{ json_encode($entry->details, JSON_PRETTY_PRINT) }}</pre>
+                                    <div class="bg-gray-100 p-2 rounded">
+                                        @if(is_string($entry->details))
+                                            {{ $entry->details }}
+                                        @elseif(is_array($details))
+                                            <pre>{{ json_encode($details, JSON_PRETTY_PRINT) }}</pre>
+                                        @else
+                                            {{ $entry->details }}
+                                        @endif
+                                    </div>
                                 @endif
                             </div>
                         @endif
