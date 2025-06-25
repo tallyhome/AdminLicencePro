@@ -44,7 +44,8 @@
         "used": "Utilizada",
         "unused": "No utilizada",
         "language_changed_successfully": "Idioma cambiado exitosamente",
-        "system_requirements": "Requisitos del Sistema"
+        "system_requirements": "Requisitos del Sistema",
+        "not_specified": "No especificado"
     },
     "translations": {
         "title": "Gestión de Traducciones",

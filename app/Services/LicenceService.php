@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\SerialKey;
+use App\Models\LicenceAccount;
 use App\Models\Admin;
 use App\Models\LicenceHistory;
 use App\Notifications\LicenceStatusChanged;
@@ -64,6 +65,178 @@ class LicenceService
             'data' => []
         ];
 
+        try {
+            // D'abord vérifier si la clé existe localement
+            $localKey = SerialKey::where('serial_key', trim(strtoupper($serialKey)))->first();
+            
+            if ($localKey) {
+                // Validation locale pour les clés mono/multi
+                return $this->validateLocalSerialKey($localKey, $domain, $ipAddress);
+            }
+            
+            // Si la clé n'existe pas localement, utiliser l'API externe
+            return $this->validateExternalSerialKey($serialKey, $domain, $ipAddress);
+        } catch (\Exception $e) {
+            // Logger l'exception
+            Log::error('Exception lors de la vérification de licence: ' . $e->getMessage(), [
+                'exception' => $e->getTraceAsString()
+            ]);
+            
+            // Mettre à jour les settings pour une erreur
+            Setting::set('license_valid', false);
+            Setting::set('license_status', 'error');
+            Setting::set('last_license_check', now()->toDateTimeString());
+            
+            // Vider la session
+            session()->forget(['license_details', 'license_valid', 'license_status']);
+            
+            return [
+                'valid' => false,
+                'message' => 'Erreur lors de la vérification de licence: ' . $e->getMessage(),
+                'status_code' => 500,
+                'data' => []
+            ];
+        }
+    }
+
+    /**
+     * Valide une clé de série locale (mono/multi)
+     */
+    private function validateLocalSerialKey(SerialKey $serialKey, string $domain, string $ipAddress): array
+    {
+        // Vérifier si la clé est valide
+        if (!$serialKey->isValid()) {
+            return [
+                'valid' => false,
+                'message' => 'Clé de série invalide ou expirée',
+                'status_code' => 401,
+                'status' => $serialKey->status,
+                'data' => []
+            ];
+        }
+
+        if ($serialKey->isSingle()) {
+            return $this->validateSingleLicence($serialKey, $domain, $ipAddress);
+        } else {
+            return $this->validateMultiLicence($serialKey, $domain, $ipAddress);
+        }
+    }
+
+    /**
+     * Valide une licence single
+     */
+    private function validateSingleLicence(SerialKey $serialKey, string $domain, string $ipAddress): array
+    {
+        // Pour une licence single, vérifier si elle est déjà utilisée
+        if (!empty($serialKey->domain) && $serialKey->domain !== $domain) {
+            return [
+                'valid' => false,
+                'message' => 'Cette licence est déjà utilisée sur un autre domaine',
+                'status_code' => 403,
+                'status' => 'already_used',
+                'data' => []
+            ];
+        }
+
+        // Si la licence n'est pas encore assignée, l'assigner
+        if (empty($serialKey->domain)) {
+            $serialKey->addAccount($domain, $ipAddress);
+        }
+
+        return [
+            'valid' => true,
+            'message' => 'Licence single valide',
+            'status_code' => 200,
+            'status' => 'active',
+            'licence_type' => 'single',
+            'token' => $this->generateSecureToken($serialKey->serial_key, $domain, $ipAddress),
+            'expires_at' => $serialKey->expires_at?->format('Y-m-d H:i:s'),
+            'domain' => $domain,
+            'data' => [
+                'serial_key' => $serialKey->serial_key,
+                'licence_type' => 'single',
+                'project' => $serialKey->project->name ?? '',
+                'max_accounts' => 1,
+                'used_accounts' => 1
+            ]
+        ];
+    }
+
+    /**
+     * Valide une licence multi
+     */
+    private function validateMultiLicence(SerialKey $serialKey, string $domain, string $ipAddress): array
+    {
+        // Vérifier si le domaine est déjà autorisé
+        if ($serialKey->isDomainAuthorized($domain)) {
+            // Mettre à jour last_used_at pour ce compte
+            $account = $serialKey->accounts()->where('domain', $domain)->first();
+            if ($account) {
+                $account->updateLastUsed();
+            }
+
+            return [
+                'valid' => true,
+                'message' => 'Licence multi valide - domaine déjà autorisé',
+                'status_code' => 200,
+                'status' => 'active',
+                'licence_type' => 'multi',
+                'token' => $this->generateSecureToken($serialKey->serial_key, $domain, $ipAddress),
+                'expires_at' => $serialKey->expires_at?->format('Y-m-d H:i:s'),
+                'domain' => $domain,
+                'data' => [
+                    'serial_key' => $serialKey->serial_key,
+                    'licence_type' => 'multi',
+                    'project' => $serialKey->project->name ?? '',
+                    'max_accounts' => $serialKey->max_accounts,
+                    'used_accounts' => $serialKey->used_accounts,
+                    'available_slots' => $serialKey->getAvailableSlots()
+                ]
+            ];
+        }
+
+        // Vérifier s'il y a encore des slots disponibles
+        if (!$serialKey->canAcceptNewAccount()) {
+            return [
+                'valid' => false,
+                'message' => 'Limite de comptes atteinte pour cette licence multi (' . $serialKey->max_accounts . ' max)',
+                'status_code' => 403,
+                'status' => 'limit_reached',
+                'data' => [
+                    'max_accounts' => $serialKey->max_accounts,
+                    'used_accounts' => $serialKey->used_accounts
+                ]
+            ];
+        }
+
+        // Ajouter le nouveau compte
+        $account = $serialKey->addAccount($domain, $ipAddress);
+
+        return [
+            'valid' => true,
+            'message' => 'Licence multi valide - nouveau compte ajouté',
+            'status_code' => 200,
+            'status' => 'active',
+            'licence_type' => 'multi',
+            'token' => $this->generateSecureToken($serialKey->serial_key, $domain, $ipAddress),
+            'expires_at' => $serialKey->expires_at?->format('Y-m-d H:i:s'),
+            'domain' => $domain,
+            'data' => [
+                'serial_key' => $serialKey->serial_key,
+                'licence_type' => 'multi',
+                'project' => $serialKey->project->name ?? '',
+                'max_accounts' => $serialKey->max_accounts,
+                'used_accounts' => $serialKey->used_accounts,
+                'available_slots' => $serialKey->getAvailableSlots()
+            ]
+        ];
+    }
+
+    /**
+     * Valide une clé de série via l'API externe (ancien système)
+     */
+    private function validateExternalSerialKey(string $serialKey, string $domain, string $ipAddress): array
+    {
         try {
             // Configuration de l'API de licence depuis les variables d'environnement
             $apiUrl = env('LICENCE_API_URL', 'https://licence.myvcard.fr');

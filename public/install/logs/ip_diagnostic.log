@@ -1,7 +1,0 @@
-[2025-06-23 05:25:20] [VALIDATION] HYPOTHÈSE 1 CONFIRMÉE: SERVER_ADDR non définie | Data: {"server_addr":null}
-[2025-06-23 05:25:20] [VALIDATION] HYPOTHÈSE 2 CONFIRMÉE: Configuration serveur web défaillante | Data: {"issues":["Serveur web non standard d\u00e9tect\u00e9","SERVER_ADDR non d\u00e9finie par le serveur web"]}
-[2025-06-23 05:25:20] [VALIDATION] HYPOTHÈSE 3 INFIRMÉE: IP publique détectée | Data: {"ip":"82.66.185.78"}
-[2025-06-23 05:25:20] [VALIDATION] HYPOTHÈSE 4 PARTIELLEMENT CONFIRMÉE: Contexte installation | Data: {"laravel_available":false}
-[2025-06-23 05:25:20] [TEST] Test collecte exhaustive terminé | Data: {"public_ips":0,"local_ips":1,"null_sources":9,"total_sources":10}
-[2025-06-23 05:25:20] [DETECTION] Environnement production détecté
-[2025-06-23 05:25:20] [SUMMARY] Diagnostic terminé | Data: {"recommendations_count":2,"selected_ip":"82.66.185.78","is_local_env":false,"public_ips_available":0}

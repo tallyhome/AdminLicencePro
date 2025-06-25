@@ -44,7 +44,8 @@
         "used": "Использовано",
         "unused": "Не использовано",
         "language_changed_successfully": "Язык успешно изменен",
-        "system_requirements": "Системные требования"
+        "system_requirements": "Системные требования",
+        "not_specified": "Не указано"
     },
     "translations": {
         "title": "Управление переводами",

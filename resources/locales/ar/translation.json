@@ -198,7 +198,8 @@
     "all": "الكل",
     "used": "مستخدم",
     "unused": "غير مستخدم",
-    "system_requirements": "متطلبات النظام"
+    "system_requirements": "متطلبات النظام",
+    "not_specified": "غير محدد"
   },
   "translations": {
     "sections": {

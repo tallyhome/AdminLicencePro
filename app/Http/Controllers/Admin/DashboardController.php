@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SerialKey;
+use App\Models\LicenceAccount;
 use App\Models\Project;
 use App\Models\LicenceHistory;
 use App\Models\Setting;
@@ -69,6 +70,40 @@ class DashboardController extends Controller
             'total_projects' => Project::count(),
         ];
 
+        // Nouvelles statistiques pour les licences mono/multi
+        $licenceStats = [
+            'single_licences' => SerialKey::where('licence_type', 'single')->count(),
+            'multi_licences' => SerialKey::where('licence_type', 'multi')->count(),
+            'single_active' => SerialKey::where('licence_type', 'single')
+                ->where('status', 'active')->count(),
+            'multi_active' => SerialKey::where('licence_type', 'multi')
+                ->where('status', 'active')->count(),
+            'single_used' => SerialKey::where('licence_type', 'single')
+                ->where('used_accounts', '>', 0)->count(),
+            'multi_accounts_total' => SerialKey::where('licence_type', 'multi')
+                ->sum('max_accounts'),
+            'multi_accounts_used' => SerialKey::where('licence_type', 'multi')
+                ->sum('used_accounts'),
+            'total_active_accounts' => LicenceAccount::where('status', 'active')->count(),
+        ];
+
+        // Calculs supplémentaires
+        $licenceStats['multi_utilization_rate'] = $licenceStats['multi_accounts_total'] > 0 
+            ? round(($licenceStats['multi_accounts_used'] / $licenceStats['multi_accounts_total']) * 100, 2)
+            : 0;
+        
+        $licenceStats['single_utilization_rate'] = $licenceStats['single_active'] > 0 
+            ? round(($licenceStats['single_used'] / $licenceStats['single_active']) * 100, 2)
+            : 0;
+
+        // Top 5 des licences multi les plus utilisées
+        $topMultiLicences = SerialKey::where('licence_type', 'multi')
+            ->where('status', 'active')
+            ->with('project')
+            ->orderByRaw('(used_accounts / max_accounts) DESC')
+            ->take(5)
+            ->get();
+
         // Clés récentes avec pagination
         $recentKeys = SerialKey::with('project')
             ->orderBy('created_at', 'desc')
@@ -80,23 +115,25 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        // Statistiques d'utilisation par projet
+        // Statistiques d'utilisation par projet avec les nouvelles colonnes
         $projectStats = Project::withCount([
             'serialKeys', 
             'serialKeys as active_keys_count' => function ($query) {
                 $query->where('status', 'active');
             },
+            'serialKeys as single_keys_count' => function ($query) {
+                $query->where('licence_type', 'single');
+            },
+            'serialKeys as multi_keys_count' => function ($query) {
+                $query->where('licence_type', 'multi');
+            },
             'serialKeys as used_keys_count' => function ($query) {
                 $query->where('status', 'active')
-                      ->where(function($q) {
-                          $q->whereNotNull('domain')
-                            ->orWhereNotNull('ip_address');
-                      });
+                      ->where('used_accounts', '>', 0);
             },
             'serialKeys as available_keys_count' => function ($query) {
                 $query->where('status', 'active')
-                      ->whereNull('domain')
-                      ->whereNull('ip_address');
+                      ->where('used_accounts', '=', 0);
             }
         ])->get();
         
@@ -135,6 +172,8 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact(
             'stats',
+            'licenceStats',
+            'topMultiLicences',
             'recentKeys',
             'recentActions',
             'projectStats',
@@ -157,6 +196,13 @@ class DashboardController extends Controller
             'revoked_keys' => SerialKey::where('status', 'revoked')->count(),
             'total_projects' => Project::count(),
             'usage_last_30_days' => LicenceHistory::where('created_at', '>=', Carbon::now()->subDays(30))->count(),
+            
+            // Nouvelles statistiques pour l'API
+            'single_licences' => SerialKey::where('licence_type', 'single')->count(),
+            'multi_licences' => SerialKey::where('licence_type', 'multi')->count(),
+            'total_multi_slots' => SerialKey::where('licence_type', 'multi')->sum('max_accounts'),
+            'used_multi_slots' => SerialKey::where('licence_type', 'multi')->sum('used_accounts'),
+            'active_accounts' => LicenceAccount::where('status', 'active')->count(),
         ];
 
         return response()->json($stats);

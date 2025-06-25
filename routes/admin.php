@@ -116,6 +116,13 @@ Route::middleware(['auth:admin', 'check.licence'])->group(function () {
     Route::patch('serial-keys/{serialKey}/revoke', [SerialKeyController::class, 'revoke'])->name('admin.serial-keys.revoke');
     Route::patch('serial-keys/{serialKey}/suspend', [SerialKeyController::class, 'suspend'])->name('admin.serial-keys.suspend');
     Route::patch('serial-keys/{serialKey}/reactivate', [SerialKeyController::class, 'reactivate'])->name('admin.serial-keys.reactivate');
+    Route::get('serial-keys/{serialKey}/history', [SerialKeyController::class, 'history'])->name('admin.serial-keys.history');
+    
+    // Routes pour la gestion des comptes des licences multi
+    Route::post('serial-keys/{serialKey}/accounts', [SerialKeyController::class, 'addAccount'])->name('admin.serial-keys.accounts.store');
+    Route::delete('serial-keys/{serialKey}/accounts/{account}', [SerialKeyController::class, 'removeAccount'])->name('admin.serial-keys.accounts.destroy');
+    Route::patch('serial-keys/{serialKey}/accounts/{account}/suspend', [SerialKeyController::class, 'suspendAccount'])->name('admin.serial-keys.accounts.suspend');
+    Route::patch('serial-keys/{serialKey}/accounts/{account}/reactivate', [SerialKeyController::class, 'reactivateAccount'])->name('admin.serial-keys.accounts.reactivate');
 
     // Gestion des clés API
     Route::resource('api-keys', ApiKeyController::class)

@@ -43,7 +43,8 @@
         "all": "Todos",
         "used": "Usada",
         "unused": "Não usada",
-        "system_requirements": "Requisitos do Sistema"
+        "system_requirements": "Requisitos do Sistema",
+        "not_specified": "Não especificado"
     },
     "translations": {
         "title": "Gerenciamento de Traduções",

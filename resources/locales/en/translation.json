@@ -49,7 +49,8 @@
         "expired": "Expired",
         "pending": "Pending",
         "language_changed_successfully": "Language changed successfully",
-        "system_requirements": "System Requirements"
+        "system_requirements": "System Requirements",
+        "not_specified": "Not specified"
     },
     "translations": {
         "title": "Translation Management",
@@ -292,7 +293,8 @@
         "delete_success": "License key deleted successfully",
         "suspend_success": "License key suspended successfully",
         "revoke_success": "License key revoked successfully",
-        "reactivate_success": "License key reactivated successfully"
+        "reactivate_success": "License key reactivated successfully",
+        "confirm_delete": "Are you sure you want to delete this license key?"
     },
     "api": {
         "title": "API Documentation",

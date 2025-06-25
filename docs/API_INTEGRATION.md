@@ -70,10 +70,18 @@ Toutes les requêtes de vérification de licence doivent être envoyées en POST
 - `domain` : Le domaine sur lequel la licence est utilisée (optionnel)
 - `ip_address` : L'adresse IP de l'utilisateur (optionnel)
 
+**⚠️ Important** : AdminLicence 4.5.1+ prend en charge deux types de licences :
+
+- **Licences Single** : 1 licence = 1 domaine/application maximum
+- **Licences Multi** : 1 licence = X domaines/applications (selon le nombre de slots configurés)
+
+Le comportement de l'API s'adapte automatiquement selon le type de licence.
+
 ### Format de réponse
 
 La réponse sera au format JSON avec la structure suivante :
 
+#### Réponse de succès - Licence Single
 ```json
 {
   "status": "success",
@@ -81,18 +89,101 @@ La réponse sera au format JSON avec la structure suivante :
   "data": {
     "token": "2c23f1f8446f32b89bd58cb51da1897d",
     "project": "Nom du projet",
-    "expires_at": "2025-12-31"
+    "licence_type": "single",
+    "expires_at": "2025-12-31",
+    "domain": "example.com",
+    "is_first_activation": true
   }
 }
 ```
 
-En cas d'erreur :
+#### Réponse de succès - Licence Multi
+```json
+{
+  "status": "success",
+  "message": "Clé de série valide",
+  "data": {
+    "token": "2c23f1f8446f32b89bd58cb51da1897d",
+    "project": "Nom du projet",
+    "licence_type": "multi",
+    "max_accounts": 10,
+    "used_accounts": 3,
+    "available_slots": 7,
+    "expires_at": "2025-12-31",
+    "domain": "example.com",
+    "is_first_activation": false,
+    "account_id": 123
+  }
+}
+```
+
+#### Codes d'erreur possibles
 
 ```json
 {
   "status": "error",
   "message": "Clé de série invalide ou inactive",
+  "error_code": "INVALID_KEY",
   "data": null
+}
+```
+
+**Codes d'erreur spécifiques :**
+- `INVALID_KEY` : Clé inexistante ou invalide
+- `KEY_SUSPENDED` : Clé suspendue
+- `KEY_REVOKED` : Clé révoquée
+- `KEY_EXPIRED` : Clé expirée
+- `DOMAIN_MISMATCH` : Domaine non autorisé (Single uniquement)
+- `MAX_ACCOUNTS_REACHED` : Nombre maximum de comptes atteint (Multi uniquement)
+- `ACCOUNT_EXISTS` : Ce domaine est déjà activé pour cette licence
+
+## Bonnes pratiques pour les licences Single/Multi
+
+### Recommandations par type de licence
+
+#### Licences Single
+- **Usage idéal** : Applications vendues à des développeurs individuels ou petites entreprises
+- **Avantages** : Sécurité maximale, contrôle strict des domaines
+- **Prix recommandé** : 29€ - 99€ / licence
+
+**Exemple d'implémentation pour Single :**
+```php
+// Vérifiez systématiquement le domaine
+$resultat = verifierLicence($cleSeriale, $_SERVER['SERVER_NAME']);
+if (!$resultat['valide']) {
+    die("Licence invalide pour ce domaine");
+}
+```
+
+#### Licences Multi
+- **Usage idéal** : Agences web, grandes entreprises, revendeurs
+- **Avantages** : Flexibilité, économies d'échelle, gestion centralisée
+- **Prix recommandé** : 149€ - 499€ / licence (pour 5-50 slots)
+
+**Exemple d'implémentation pour Multi :**
+```php
+// La licence Multi s'adapte automatiquement
+$resultat = verifierLicence($cleSeriale, $_SERVER['SERVER_NAME']);
+if ($resultat['valide']) {
+    $slotsRestants = $resultat['donnees']['available_slots'] ?? 0;
+    echo "Slots disponibles: {$slotsRestants}";
+}
+```
+
+### Gestion des erreurs spécifiques
+
+```php
+function gererErreurLicence($errorCode, $message) {
+    switch ($errorCode) {
+        case 'MAX_ACCOUNTS_REACHED':
+            return "Cette licence multi a atteint sa limite de {$maxAccounts} comptes. Contactez votre administrateur.";
+        case 'DOMAIN_MISMATCH':
+            return "Cette licence single est liée à un autre domaine. Vérifiez votre configuration.";
+        case 'ACCOUNT_EXISTS':
+            return "Ce domaine est déjà activé pour cette licence.";
+        default:
+            return $message;
+    }
 }
 ```
 

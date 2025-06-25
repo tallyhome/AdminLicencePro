@@ -38,6 +38,7 @@ class SerialKeyController extends Controller
         $ipFilter = $request->input('ip_address');
         $statusFilter = $request->input('status');
         $usedFilter = $request->input('used');
+        $licenceTypeFilter = $request->input('licence_type');
         
         // Construire la requête
         $query = SerialKey::with(['project']);
@@ -57,6 +58,10 @@ class SerialKeyController extends Controller
         
         if ($statusFilter) {
             $query->where('status', $statusFilter);
+        }
+        
+        if ($licenceTypeFilter) {
+            $query->where('licence_type', $licenceTypeFilter);
         }
         
         // Appliquer la recherche
@@ -79,11 +84,31 @@ class SerialKeyController extends Controller
             });
         }
         
-        // Ajouter une logique pour détecter les clés utilisées
+        // Ajouter une logique pour détecter les clés utilisées/non utilisées
         if ($usedFilter === 'true') {
+            // Clés utilisées : used_accounts > 0 OU (domain OU ip_address non null pour les single)
             $query->where(function($q) {
-                $q->whereNotNull('domain')
-                  ->orWhereNotNull('ip_address');
+                $q->where('used_accounts', '>', 0)
+                  ->orWhere(function($subQ) {
+                      $subQ->where('licence_type', 'single')
+                           ->where(function($innerQ) {
+                               $innerQ->whereNotNull('domain')
+                                      ->orWhereNotNull('ip_address');
+                           });
+                  });
+            });
+        } elseif ($usedFilter === 'false') {
+            // Clés non utilisées : used_accounts = 0 ET (domain ET ip_address sont null pour les single)
+            $query->where(function($q) {
+                $q->where('used_accounts', 0)
+                  ->where(function($subQ) {
+                      $subQ->where('licence_type', 'multi')
+                           ->orWhere(function($innerQ) {
+                               $innerQ->where('licence_type', 'single')
+                                      ->whereNull('domain')
+                                      ->whereNull('ip_address');
+                           });
+                  });
             });
         }
         
@@ -122,6 +147,8 @@ class SerialKeyController extends Controller
         $validated = $request->validate([
             'project_id' => 'required|exists:projects,id',
             'quantity' => 'required|integer|min:1|max:100000',
+            'licence_type' => 'required|in:single,multi',
+            'max_accounts' => 'required_if:licence_type,multi|nullable|integer|min:1|max:1000',
             'domain' => 'nullable|string|max:255',
             'ip_address' => 'nullable|ip',
             'expires_at' => 'nullable|date|after:today',
@@ -130,13 +157,21 @@ class SerialKeyController extends Controller
         $project = Project::findOrFail($validated['project_id']);
         $keys = [];
 
+        // Pour les licences single, max_accounts doit être 1
+        if ($validated['licence_type'] === 'single') {
+            $validated['max_accounts'] = 1;
+        }
+
         DB::transaction(function () use ($validated, $project, &$keys) {
             for ($i = 0; $i < $validated['quantity']; $i++) {
                 $key = new SerialKey([
                     'serial_key' => $this->licenceService->generateKey(),
                     'project_id' => $project->id,
-                    'domain' => $validated['domain'],
-                    'ip_address' => $validated['ip_address'],
+                    'licence_type' => $validated['licence_type'],
+                    'max_accounts' => $validated['max_accounts'],
+                    'used_accounts' => 0,
+                    'domain' => $validated['licence_type'] === 'single' ? $validated['domain'] : null,
+                    'ip_address' => $validated['licence_type'] === 'single' ? $validated['ip_address'] : null,
                     'expires_at' => $validated['expires_at'],
                     'status' => 'active',
                 ]);
@@ -147,14 +182,15 @@ class SerialKeyController extends Controller
                 $this->historyService->logAction(
                     $key,
                     'create',
-                    'Création d\'une nouvelle clé de licence'
+                    'Création d\'une nouvelle clé de licence ' . $validated['licence_type'] . 
+                    ($validated['licence_type'] === 'multi' ? ' (max: ' . $validated['max_accounts'] . ' comptes)' : '')
                 );
             }
         });
 
         return redirect()
             ->route('admin.serial-keys.index')
-            ->with('success', $validated['quantity'] . ' clé(s) de licence créée(s) avec succès.');
+            ->with('success', $validated['quantity'] . ' clé(s) de licence ' . $validated['licence_type'] . ' créée(s) avec succès.');
     }
 
     /**
@@ -162,7 +198,7 @@ class SerialKeyController extends Controller
      */
     public function show(SerialKey $serialKey)
     {
-        $serialKey->load(['project', 'history']);
+        $serialKey->load(['project', 'history', 'accounts']);
         return view('admin.serial-keys.show', compact('serialKey'));
     }
 
@@ -209,13 +245,15 @@ class SerialKeyController extends Controller
      */
     public function destroy(SerialKey $serialKey)
     {
-        $serialKey->delete();
-
+        // Enregistrer l'historique AVANT la suppression
         $this->historyService->logAction(
             $serialKey,
             'delete',
             'Suppression de la clé de licence'
         );
+
+        // Supprimer la clé après avoir enregistré l'historique
+        $serialKey->delete();
 
         return redirect()
             ->route('admin.serial-keys.index')
@@ -292,5 +330,144 @@ class SerialKeyController extends Controller
         return redirect()
             ->route('admin.serial-keys.show', $serialKey)
             ->with('error', 'Impossible de réactiver une clé non suspendue.');
+    }
+
+    /**
+     * Ajouter un nouveau compte à une licence multi
+     */
+    public function addAccount(Request $request, SerialKey $serialKey)
+    {
+        // Vérifier que c'est une licence multi
+        if (!$serialKey->isMulti()) {
+            return redirect()->back()->with('error', 'Cette fonction n\'est disponible que pour les licences multi.');
+        }
+
+        // Vérifier si la licence peut accepter un nouveau compte
+        if (!$serialKey->canAcceptNewAccount()) {
+            return redirect()->back()->with('error', 'Cette licence a atteint son nombre maximum de comptes.');
+        }
+
+        $validated = $request->validate([
+            'domain' => 'required|string|max:255',
+            'ip_address' => 'nullable|ip',
+        ]);
+
+        // Vérifier si le domaine n'est pas déjà utilisé pour cette licence
+        $existingAccount = $serialKey->accounts()->where('domain', $validated['domain'])->first();
+        if ($existingAccount) {
+            return redirect()->back()->with('error', 'Ce domaine est déjà associé à cette licence.');
+        }
+
+        $account = $serialKey->addAccount($validated['domain'], $validated['ip_address']);
+
+        if ($account) {
+            $this->historyService->logAction(
+                $serialKey,
+                'add_account',
+                'Ajout du compte pour le domaine : ' . $validated['domain']
+            );
+
+            return redirect()->back()->with('success', 'Compte ajouté avec succès à la licence multi.');
+        }
+
+        return redirect()->back()->with('error', 'Erreur lors de l\'ajout du compte.');
+    }
+
+    /**
+     * Supprimer un compte d'une licence multi
+     */
+    public function removeAccount(SerialKey $serialKey, \App\Models\LicenceAccount $account)
+    {
+        // Vérifier que le compte appartient bien à cette licence
+        if ($account->serial_key_id !== $serialKey->id) {
+            return redirect()->back()->with('error', 'Ce compte n\'appartient pas à cette licence.');
+        }
+
+        $domain = $account->domain;
+        $account->delete();
+        $serialKey->decrement('used_accounts');
+
+        $this->historyService->logAction(
+            $serialKey,
+            'remove_account',
+            'Suppression du compte pour le domaine : ' . $domain
+        );
+
+        return redirect()->back()->with('success', 'Compte supprimé avec succès.');
+    }
+
+    /**
+     * Suspendre un compte d'une licence multi
+     */
+    public function suspendAccount(SerialKey $serialKey, \App\Models\LicenceAccount $account)
+    {
+        // Vérifier que le compte appartient bien à cette licence
+        if ($account->serial_key_id !== $serialKey->id) {
+            return redirect()->back()->with('error', 'Ce compte n\'appartient pas à cette licence.');
+        }
+
+        if ($account->status === 'suspended') {
+            return redirect()->back()->with('error', 'Ce compte est déjà suspendu.');
+        }
+
+        $account->suspend();
+
+        $this->historyService->logAction(
+            $serialKey,
+            'suspend_account',
+            'Suspension du compte pour le domaine : ' . $account->domain
+        );
+
+        return redirect()->back()->with('success', 'Compte suspendu avec succès.');
+    }
+
+    /**
+     * Réactiver un compte suspendu d'une licence multi
+     */
+    public function reactivateAccount(SerialKey $serialKey, \App\Models\LicenceAccount $account)
+    {
+        // Vérifier que le compte appartient bien à cette licence
+        if ($account->serial_key_id !== $serialKey->id) {
+            return redirect()->back()->with('error', 'Ce compte n\'appartient pas à cette licence.');
+        }
+
+        if ($account->status !== 'suspended') {
+            return redirect()->back()->with('error', 'Ce compte ne peut pas être réactivé.');
+        }
+
+        $account->activate();
+
+        $this->historyService->logAction(
+            $serialKey,
+            'reactivate_account',
+            'Réactivation du compte pour le domaine : ' . $account->domain
+        );
+
+        return redirect()->back()->with('success', 'Compte réactivé avec succès.');
+    }
+
+    /**
+     * Afficher l'historique d'une clé de licence
+     */
+    public function history(SerialKey $serialKey)
+    {
+        $history = $this->historyService->getHistory($serialKey);
+        
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'history' => $history->map(function($item) {
+                    return [
+                        'date' => $item->created_at->format('d/m/Y H:i'),
+                        'action' => $item->action,
+                        'details' => $item->details,
+                        'admin' => $item->admin->name ?? 'Système',
+                        'ip_address' => $item->ip_address
+                    ];
+                })
+            ]);
+        }
+
+        return view('admin.serial-keys.history', compact('serialKey', 'history'));
     }
 }

@@ -164,6 +164,7 @@
     "email": "メール",
     "language_changed_successfully": "言語が正常に変更されました",
     "system_requirements": "システム要件",
+    "not_specified": "指定なし",
     "actions": {
       "save": "保存",
       "cancel": "キャンセル",

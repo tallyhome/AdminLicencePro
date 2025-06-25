@@ -31,7 +31,7 @@
     </div>
     @endif
 
-    <!-- {{ t('dashboard.statistics') }} -->
+    <!-- Statistiques principales -->
     <div class="row">
         <div class="col-xl col-lg-4 col-md-6 mb-4">
             <a href="{{ route('admin.serial-keys.index') }}" class="text-decoration-none card-link">
@@ -128,6 +128,153 @@
             </a>
         </div>
     </div>
+
+    <!-- Statistiques Licences Single vs Multi -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-pie"></i> Répartition des Licences Single/Multi
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Licences Single -->
+                        <div class="col-md-6">
+                            <div class="card border-left-primary h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <i class="fas fa-user"></i> Licences Single
+                                            </div>
+                                            <div class="h4 mb-2 font-weight-bold text-gray-800">{{ $licenceStats['single_licences'] }}</div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <small class="text-success">
+                                                        <i class="fas fa-check"></i> Actives: {{ $licenceStats['single_active'] }}
+                                                    </small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small class="text-info">
+                                                        <i class="fas fa-laptop"></i> Utilisées: {{ $licenceStats['single_used'] }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-primary" style="width: {{ $licenceStats['single_utilization_rate'] }}%"></div>
+                                                </div>
+                                                <small class="text-muted">Taux d'utilisation: {{ $licenceStats['single_utilization_rate'] }}%</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-3x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Licences Multi -->
+                        <div class="col-md-6">
+                            <div class="card border-left-warning h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                <i class="fas fa-users"></i> Licences Multi
+                                            </div>
+                                            <div class="h4 mb-2 font-weight-bold text-gray-800">{{ $licenceStats['multi_licences'] }}</div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <small class="text-success">
+                                                        <i class="fas fa-check"></i> Actives: {{ $licenceStats['multi_active'] }}
+                                                    </small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small class="text-info">
+                                                        <i class="fas fa-hashtag"></i> Slots: {{ $licenceStats['multi_accounts_used'] }}/{{ $licenceStats['multi_accounts_total'] }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-warning" style="width: {{ $licenceStats['multi_utilization_rate'] }}%"></div>
+                                                </div>
+                                                <small class="text-muted">Taux d'utilisation: {{ $licenceStats['multi_utilization_rate'] }}%</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-3x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Licences Multi les plus utilisées -->
+    @if(count($topMultiLicences) > 0)
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-trophy"></i> Top 5 Licences Multi les plus utilisées
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Clé de série</th>
+                                    <th>Projet</th>
+                                    <th>Utilisation</th>
+                                    <th>Taux</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($topMultiLicences as $licence)
+                                <tr>
+                                    <td><code>{{ $licence->serial_key }}</code></td>
+                                    <td>{{ $licence->project->name }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="me-2">{{ $licence->used_accounts }}/{{ $licence->max_accounts }}</span>
+                                            <div class="progress flex-grow-1" style="height: 6px; min-width: 100px;">
+                                                <div class="progress-bar {{ $licence->used_accounts >= $licence->max_accounts ? 'bg-danger' : ($licence->used_accounts > $licence->max_accounts * 0.8 ? 'bg-warning' : 'bg-success') }}" 
+                                                     style="width: {{ $licence->max_accounts > 0 ? ($licence->used_accounts / $licence->max_accounts) * 100 : 0 }}%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ $licence->max_accounts > 0 ? (($licence->used_accounts / $licence->max_accounts) >= 1 ? 'danger' : (($licence->used_accounts / $licence->max_accounts) > 0.8 ? 'warning' : 'success')) : 'secondary' }}">
+                                            {{ $licence->max_accounts > 0 ? round(($licence->used_accounts / $licence->max_accounts) * 100) : 0 }}%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ $licence->status === 'active' ? 'success' : ($licence->status === 'suspended' ? 'warning' : 'danger') }}">
+                                            {{ ucfirst($licence->status) }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <!-- {{ t('dashboard.keys_usage_by_project') }} -->
     <div class="row mb-4">

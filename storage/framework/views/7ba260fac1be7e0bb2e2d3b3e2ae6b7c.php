@@ -21,9 +21,19 @@
                 <input type="hidden" name="per_page" value="<?php echo e(request()->input('per_page', 10)); ?>">
                 
                 <div class="row align-items-end">
-                    <div class="col-md-1-5">
-                        <div class="form-group" style="width: 100%; min-width: 80px;">
-                            <label for="status"><?php echo e(t('serial_keys.status')); ?></label>
+                    <div class="col-md-1">
+                        <div class="form-group" style="width: 100%; min-width: 50px;">
+                            <label for="licence_type" class="small">Type</label>
+                            <select name="licence_type" id="licence_type" class="form-control form-control-sm">
+                                <option value=""><?php echo e(t('common.all')); ?></option>
+                                <option value="single" <?php echo e(request('licence_type') === 'single' ? 'selected' : ''); ?>>Single</option>
+                                <option value="multi" <?php echo e(request('licence_type') === 'multi' ? 'selected' : ''); ?>>Multi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group" style="width: 100%; min-width: 60px;">
+                            <label for="status" class="small"><?php echo e(t('serial_keys.status')); ?></label>
                             <select name="status" id="status" class="form-control form-control-sm">
                                 <option value=""><?php echo e(t('common.all')); ?></option>
                                 <option value="active" <?php echo e(request('status') === 'active' ? 'selected' : ''); ?>><?php echo e(t('serial_keys.status_active')); ?></option>
@@ -35,7 +45,7 @@
                     </div>
                     <div class="col-md-1-5">
                         <div class="form-group" style="width: 100%; min-width: 80px;">
-                            <label for="project"><?php echo e(t('serial_keys.project')); ?></label>
+                            <label for="project" class="small"><?php echo e(t('serial_keys.project')); ?></label>
                             <select name="project_id" id="project" class="form-control form-control-sm">
                                 <option value=""><?php echo e(t('common.all')); ?></option>
                                 <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -49,7 +59,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="form-group" style="width: 100%; min-width: 60px;">
-                            <label for="used"><?php echo e(t('serial_keys.key_used')); ?></label>
+                            <label for="used" class="small"><?php echo e(t('serial_keys.key_used')); ?></label>
                             <select name="used" id="used" class="form-control form-control-sm">
                                 <option value=""><?php echo e(t('common.all')); ?></option>
                                 <option value="true" <?php echo e(request('used') === 'true' ? 'selected' : ''); ?>><?php echo e(t('common.used')); ?></option>
@@ -57,27 +67,27 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1-5">
                         <div class="form-group">
-                            <label for="domain"><?php echo e(t('serial_keys.domain')); ?></label>
+                            <label for="domain" class="small"><?php echo e(t('serial_keys.domain')); ?></label>
                             <input type="text" name="domain" id="domain" class="form-control form-control-sm" value="<?php echo e(request('domain')); ?>" placeholder="exemple.com">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1-5">
                         <div class="form-group">
-                            <label for="ip_address"><?php echo e(t('serial_keys.ip_address')); ?></label>
-                            <input type="text" name="ip_address" id="ip_address" class="form-control form-control-sm" value="<?php echo e(request('ip_address')); ?>" placeholder="127.0.0.1">
+                            <label for="ip_address" class="small">Adresse IP</label>
+                            <input type="text" name="ip_address" id="ip_address" class="form-control form-control-sm" value="<?php echo e(request('ip_address')); ?>" placeholder="255.255.255.255">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="search"><?php echo e(t('common.search')); ?></label>
+                            <label for="search" class="small"><?php echo e(t('common.search')); ?></label>
                             <input type="text" name="search" id="search" class="form-control form-control-sm" value="<?php echo e(request('search')); ?>" placeholder="<?php echo e(t('serial_keys.search_placeholder')); ?>">
                         </div>
                     </div>
                     <div class="col-md-1">
                         <div class="form-group" style="width: 100%; min-width: 40px;">
-                            <label for="per_page"><?php echo e(t('pagination.per_page', ['number' => ''])); ?></label>
+                            <label for="per_page" class="small"><?php echo e(t('pagination.per_page', ['number' => ''])); ?></label>
                             <select name="per_page" id="per_page" class="form-control form-control-sm" onchange="document.getElementById('searchForm').submit()">
                                 <option value="10" <?php echo e(request('per_page') == 10 ? 'selected' : ''); ?>>10</option>
                                 <option value="25" <?php echo e(request('per_page') == 25 ? 'selected' : ''); ?>>25</option>
@@ -100,12 +110,78 @@
             </form>
         </div>
         <div class="card-body">
+            <style>
+                /* Ajustement des colonnes pour un meilleur affichage */
+                .table th:nth-child(1), .table td:nth-child(1) { /* Colonne Clé */
+                    width: 180px;
+                    max-width: 180px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .table th:nth-child(2), .table td:nth-child(2) { /* Colonne Projet */
+                    width: 160px; /* Agrandi de 5 caractères (120px + 40px) */
+                    max-width: 160px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .table th:nth-child(3), .table td:nth-child(3) { /* Colonne Type */
+                    width: 90px;
+                    max-width: 90px;
+                    text-align: center;
+                }
+                .table th:nth-child(4), .table td:nth-child(4) { /* Colonne Utilisation */
+                    width: 100px; /* Réduit de 40px */
+                    max-width: 100px;
+                    padding-left: 15px; /* Décalage vers la droite */
+                }
+                .table th:nth-child(5), .table td:nth-child(5) { /* Colonne Statut */
+                    width: 90px;
+                    max-width: 90px;
+                    text-align: center;
+                }
+                .table th:nth-child(6), .table td:nth-child(6) { /* Colonne Domaine */
+                    width: 140px;
+                    max-width: 140px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .table th:nth-child(7), .table td:nth-child(7) { /* Colonne Adresse IP */
+                    width: 120px;
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .table th:nth-child(8), .table td:nth-child(8) { /* Colonne Expiration */
+                    width: 110px;
+                    max-width: 110px;
+                }
+                .table th:nth-child(9), .table td:nth-child(9) { /* Colonne Actions */
+                    width: 180px;
+                    min-width: 180px;
+                }
+                /* Couleur orange pour le bouton révoquer */
+                .btn-revoke {
+                    background-color: #fd7e14 !important;
+                    border-color: #fd7e14 !important;
+                    color: white !important;
+                }
+                .btn-revoke:hover {
+                    background-color: #e86d01 !important;
+                    border-color: #e86d01 !important;
+                }
+            </style>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th><?php echo e(t('serial_keys.key')); ?></th>
                             <th><?php echo e(t('serial_keys.project')); ?></th>
+                            <th>Type</th>
+                            <th>Utilisation</th>
                             <th><?php echo e(t('serial_keys.status')); ?></th>
                             <th><?php echo e(t('serial_keys.domain')); ?></th>
                             <th><?php echo e(t('serial_keys.ip_address')); ?></th>
@@ -121,6 +197,34 @@
                                 </td>
                                 <td><?php echo e($key->project->name); ?></td>
                                 <td>
+                                    <?php if($key->licence_type === 'single'): ?>
+                                        <span class="badge bg-primary">
+                                            <i class="fas fa-user"></i> Single
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-users"></i> Multi
+                                        </span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($key->licence_type === 'single'): ?>
+                                        <?php if($key->used_accounts > 0): ?>
+                                            <span class="badge bg-success">Utilisée</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-secondary">Libre</span>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <div class="d-flex align-items-center">
+                                            <span class="me-2"><?php echo e($key->used_accounts); ?>/<?php echo e($key->max_accounts); ?></span>
+                                            <div class="progress flex-grow-1" style="height: 6px; min-width: 50px;">
+                                                <div class="progress-bar <?php echo e($key->used_accounts >= $key->max_accounts ? 'bg-danger' : ($key->used_accounts > $key->max_accounts * 0.8 ? 'bg-warning' : 'bg-success')); ?>" 
+                                                     style="width: <?php echo e($key->max_accounts > 0 ? ($key->used_accounts / $key->max_accounts) * 100 : 0); ?>%"></div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
                                     <?php if($key->status === 'active'): ?>
                                         <span class="badge bg-success"><?php echo e(t('serial_keys.status_active')); ?></span>
                                     <?php elseif($key->status === 'suspended'): ?>
@@ -131,8 +235,18 @@
                                         <span class="badge bg-secondary"><?php echo e(t('serial_keys.status_expired')); ?></span>
                                     <?php endif; ?>
                                 </td>
-                                <td><?php echo e($key->domain ?? t('serial_keys.not_specified')); ?></td>
-                                <td><?php echo e($key->ip_address ?? t('serial_keys.not_specified')); ?></td>
+                                <td>
+                                    <?php if($key->licence_type === 'single'): ?>
+                                        <?php echo e($key->domain ?? t('serial_keys.not_specified')); ?>
+
+                                    <?php else: ?>
+                                        <small class="text-muted">Multi-domaines</small>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php echo e($key->ip_address ?? t('serial_keys.not_specified')); ?>
+
+                                </td>
                                 <td><?php echo e($key->expires_at ? $key->expires_at->format('d/m/Y') : t('serial_keys.no_expiration')); ?></td>
                                 <td>
                                     <div class="btn-group">
@@ -153,17 +267,24 @@
                                             <form action="<?php echo e(route('admin.serial-keys.revoke', $key)); ?>" method="POST" class="d-inline">
                                                 <?php echo csrf_field(); ?>
                                                 <?php echo method_field('PATCH'); ?>
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('<?php echo e(t('serial_keys.confirm_revoke')); ?>')" title="<?php echo e(t('serial_keys.revoke')); ?>">
+                                                <button type="submit" class="btn btn-sm btn-revoke" onclick="return confirm('<?php echo e(t('serial_keys.confirm_revoke')); ?>')" title="<?php echo e(t('serial_keys.revoke')); ?>">
                                                     <i class="fas fa-ban"></i>
                                                 </button>
                                             </form>
                                         <?php endif; ?>
+                                        <form action="<?php echo e(route('admin.serial-keys.destroy', $key)); ?>" method="POST" class="d-inline">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('<?php echo e(t('serial_keys.confirm_delete')); ?>')" title="<?php echo e(t('common.delete')); ?>">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr>
-                                <td colspan="7" class="text-center"><?php echo e(t('serial_keys.no_keys')); ?></td>
+                                <td colspan="9" class="text-center"><?php echo e(t('serial_keys.no_keys')); ?></td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

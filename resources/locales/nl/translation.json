@@ -44,7 +44,8 @@
         "used": "Gebruikt",
         "unused": "Niet gebruikt",
         "language_changed_successfully": "Taal succesvol gewijzigd",
-        "system_requirements": "Systeemvereisten"
+        "system_requirements": "Systeemvereisten",
+        "not_specified": "Niet gespecificeerd"
     },
     "layout": {
         "support": "Support",

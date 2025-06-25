@@ -50,7 +50,8 @@
         "expired": "Expiré",
         "pending": "En attente",
         "language_changed_successfully": "Langue changée avec succès",
-        "system_requirements": "Prérequis système"
+        "system_requirements": "Prérequis système",
+        "not_specified": "Non spécifié"
     },
     "translations": {
         "title": "Gestion des traductions",
@@ -290,7 +291,8 @@
         "create_keys": "Créer les clés",
         "search_by_key": "Recherche par clé",
         "key_used": "Clé utilisée",
-        "search_placeholder": "Rechercher par clé, domaine, IP, etc..."
+        "search_placeholder": "Rechercher par clé, domaine, IP, etc...",
+        "confirm_delete": "Êtes-vous sûr de vouloir supprimer cette clé de licence ?"
     },
     "api": {
         "title": "Documentation API",
