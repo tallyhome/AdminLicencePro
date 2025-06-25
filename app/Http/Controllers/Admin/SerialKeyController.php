@@ -217,27 +217,71 @@ class SerialKeyController extends Controller
     public function update(Request $request, SerialKey $serialKey)
     {
         $validated = $request->validate([
+            'serial_key' => [
+                'required',
+                'string',
+                'regex:/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/',
+                'unique:serial_keys,serial_key,' . $serialKey->id
+            ],
             'project_id' => 'required|exists:projects,id',
             'status' => 'required|in:active,suspended,revoked,expired',
             'domain' => 'nullable|string|max:255',
             'ip_address' => 'nullable|ip',
             'expires_at' => 'nullable|date|after:today',
+        ], [
+            'serial_key.regex' => 'La clé de licence doit respecter le format XXXX-XXXX-XXXX-XXXX avec des lettres majuscules et des chiffres uniquement.',
+            'serial_key.unique' => 'Cette clé de licence existe déjà. Veuillez en choisir une autre.',
         ]);
 
+        // Récupérer les anciennes valeurs pour l'historique
+        $oldSerialKey = $serialKey->serial_key;
+        $oldProjectId = $serialKey->project_id;
         $oldStatus = $serialKey->status;
+
+        // Mettre à jour la clé
         $serialKey->update($validated);
 
+        // Enregistrer les changements dans l'historique
+        $changes = [];
+
+        if ($oldSerialKey !== $validated['serial_key']) {
+            $changes[] = "Clé modifiée de '{$oldSerialKey}' vers '{$validated['serial_key']}'";
+            $this->historyService->logAction(
+                $serialKey,
+                'update',
+                "Modification de la clé de licence : {$oldSerialKey} → {$validated['serial_key']}"
+            );
+        }
+
+        if ($oldProjectId !== $validated['project_id']) {
+            $oldProject = Project::find($oldProjectId);
+            $newProject = Project::find($validated['project_id']);
+            $changes[] = "Projet modifié de '{$oldProject->name}' vers '{$newProject->name}'";
+            $this->historyService->logAction(
+                $serialKey,
+                'update',
+                "Changement de projet : {$oldProject->name} → {$newProject->name}"
+            );
+        }
+
         if ($oldStatus !== $validated['status']) {
+            $changes[] = "Statut modifié de '{$oldStatus}' vers '{$validated['status']}'";
             $this->historyService->logAction(
                 $serialKey,
                 'status_change',
-                'Changement de statut de la clé de ' . $oldStatus . ' à ' . $validated['status']
+                "Changement de statut : {$oldStatus} → {$validated['status']}"
             );
+        }
+
+        // Message de succès avec détails des changements
+        $successMessage = 'Clé de licence mise à jour avec succès.';
+        if (!empty($changes)) {
+            $successMessage .= ' Modifications : ' . implode(', ', $changes);
         }
 
         return redirect()
             ->route('admin.serial-keys.show', $serialKey)
-            ->with('success', 'Clé de licence mise à jour avec succès.');
+            ->with('success', $successMessage);
     }
 
     /**
