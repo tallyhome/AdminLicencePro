@@ -376,6 +376,24 @@
 </div>
 
 <script>
+function getActionBadge(action) {
+    const badges = {
+        'create': '<span class="badge bg-success">Création</span>',
+        'update': '<span class="badge bg-primary">Modification</span>',
+        'delete': '<span class="badge bg-danger">Suppression</span>',
+        'suspend': '<span class="badge bg-warning">Suspension</span>',
+        'reactivate': '<span class="badge bg-success">Réactivation</span>',
+        'revoke': '<span class="badge bg-danger">Révocation</span>',
+        'add_account': '<span class="badge bg-info">Ajout compte</span>',
+        'remove_account': '<span class="badge bg-warning">Suppression compte</span>',
+        'suspend_account': '<span class="badge bg-warning">Suspension compte</span>',
+        'reactivate_account': '<span class="badge bg-success">Réactivation compte</span>',
+        'status_change': '<span class="badge bg-primary">Changement statut</span>'
+    };
+    
+    return badges[action] || `<span class="badge bg-secondary">${action}</span>`;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Charger l'historique quand le modal s'ouvre
     const historyModal = document.getElementById('historyModal');
@@ -393,19 +411,56 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         // Charger l'historique via AJAX
+        console.log('Chargement historique pour la clé:', '<?php echo e($serialKey->serial_key); ?>');
+        console.log('URL de la requête:', '<?php echo e(route("admin.serial-keys.history", $serialKey)); ?>');
+        
+        // Vérifier d'abord si on a le token CSRF
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (!csrfToken) {
+            console.error('Token CSRF non trouvé');
+            historyModalBody.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur: Token CSRF non trouvé
+                </div>
+            `;
+            return;
+        }
+        
         fetch('<?php echo e(route("admin.serial-keys.history", $serialKey)); ?>', {
             method: 'GET',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Accept': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                'X-CSRF-TOKEN': csrfToken.getAttribute('content')
             }
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(response => {
+            console.log('Réponse reçue, status:', response.status);
+            console.log('Headers de la réponse:', response.headers);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            return response.text(); // Changé en text() pour voir le contenu brut
+        })
+        .then(text => {
+            console.log('Contenu brut de la réponse:', text);
+            
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error('Erreur de parsing JSON:', e);
+                throw new Error('Réponse non-JSON reçue: ' + text.substring(0, 100));
+            }
+            
+            console.log('Données parsées:', data);
+            
             if (data.success) {
                 let historyHtml = '';
-                if (data.history.length > 0) {
+                if (data.history && data.history.length > 0) {
                     historyHtml = `
                         <div class="table-responsive">
                             <table class="table table-sm">
@@ -450,15 +505,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 historyModalBody.innerHTML = historyHtml;
             } else {
+                console.error('Erreur dans la réponse:', data);
                 historyModalBody.innerHTML = `
                     <div class="alert alert-danger">
                         <i class="fas fa-exclamation-triangle"></i>
-                        Erreur lors du chargement de l'historique.
+                        ${data.error || 'Erreur lors du chargement de l\'historique.'}
                     </div>
                 `;
             }
         })
         .catch(error => {
+            console.error('Erreur AJAX:', error);
             historyModalBody.innerHTML = `
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle"></i>
@@ -469,24 +526,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function getActionBadge(action) {
-    const badges = {
-        'create': '<span class="badge bg-success">Création</span>',
-        'update': '<span class="badge bg-primary">Modification</span>',
-        'delete': '<span class="badge bg-danger">Suppression</span>',
-        'suspend': '<span class="badge bg-warning">Suspension</span>',
-        'reactivate': '<span class="badge bg-success">Réactivation</span>',
-        'revoke': '<span class="badge bg-danger">Révocation</span>',
-        'add_account': '<span class="badge bg-info">Ajout compte</span>',
-        'remove_account': '<span class="badge bg-warning">Suppression compte</span>',
-        'suspend_account': '<span class="badge bg-warning">Suspension compte</span>',
-        'reactivate_account': '<span class="badge bg-success">Réactivation compte</span>',
-        'status_change': '<span class="badge bg-primary">Changement statut</span>'
-    };
-    
-    return badges[action] || `<span class="badge bg-secondary">${action}</span>`;
-}
-
 function exportData() {
     // Créer les données à exporter
     const data = {
@@ -494,13 +533,12 @@ function exportData() {
         project: '<?php echo e($serialKey->project->name); ?>',
         licence_type: '<?php echo e($serialKey->licence_type); ?>',
         status: '<?php echo e($serialKey->status); ?>',
-        max_accounts: <?php echo e($serialKey->max_accounts); ?>,
-        used_accounts: <?php echo e($serialKey->used_accounts); ?>,
+        max_accounts: <?php echo e($serialKey->max_accounts ?? 'null'); ?>,
+        used_accounts: <?php echo e($serialKey->used_accounts ?? 0); ?>,
         domain: '<?php echo e($serialKey->domain ?? ""); ?>',
         ip_address: '<?php echo e($serialKey->ip_address ?? ""); ?>',
         expires_at: '<?php echo e($serialKey->expires_at?->format("d/m/Y H:i") ?? "Aucune"); ?>',
-        created_at: '<?php echo e($serialKey->created_at->format("d/m/Y H:i")); ?>',
-        <?php if($serialKey->licence_type === 'multi'): ?>
+        created_at: '<?php echo e($serialKey->created_at->format("d/m/Y H:i")); ?>'<?php if($serialKey->licence_type === 'multi'): ?>,
         accounts: [
             <?php $__currentLoopData = $serialKey->accounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $account): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             {

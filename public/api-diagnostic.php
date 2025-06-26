@@ -119,7 +119,7 @@ switch ($action) {
         
     case 'test_connection':
         // Tester la connexion à l'API externe
-        $apiUrl = 'https://licence.myvcard.fr/api/check-serial.php';
+        $apiUrl = 'https://adminlicence.eu/api/check-serial.php';
         $testData = [
             'serial_key' => 'TEST-CONN-TION-TEST',
             'domain' => $_SERVER['HTTP_HOST'] ?? 'localhost',

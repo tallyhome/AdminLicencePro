@@ -89,7 +89,7 @@ function displayInstallationForm($step, $errors = []) {
                 <div class="license-info">
                     <h3>' . t('license_verification') . '</h3>
                     <p><strong>' . t('info') . ' :</strong> ' . t('license_verification_description') . '</p>
-                    <p><strong>' . t('license_api') . ' :</strong> <code>https://licence.myvcard.fr</code></p>
+                    <p><strong>' . t('license_api') . ' :</strong> <code>https://adminlicence.eu</code></p>
                 </div>
                 
                 <form method="post" action="install_new.php" data-step="1" class="install-form">

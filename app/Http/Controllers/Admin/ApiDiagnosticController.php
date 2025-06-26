@@ -110,7 +110,7 @@ class ApiDiagnosticController extends Controller
     public function testApiConnection(Request $request)
     {
         try {
-            $apiUrl = 'https://licence.myvcard.fr/api/check-serial.php';
+            $apiUrl = 'https://adminlicence.eu/api/check-serial.php';
             $testData = [
                 'serial_key' => 'TEST-CONN-TION-TEST',
                 'domain' => request()->getHost(),

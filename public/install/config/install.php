@@ -65,9 +65,9 @@ return [
     
     // API endpoints configuration
     'api_endpoints' => [
-        'license' => 'https://licence.myvcard.fr/api/ultra-simple.php',
-        'license_check' => 'https://licence.myvcard.fr/api/check.php',
-        'license_info' => 'https://licence.myvcard.fr/api/info.php'
+        'license' => 'https://adminlicence.eu/api/ultra-simple.php',
+        'license_check' => 'https://adminlicence.eu/api/check.php',
+        'license_info' => 'https://adminlicence.eu/api/info.php'
     ],
     
     // System requirements

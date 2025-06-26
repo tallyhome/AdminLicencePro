@@ -41,7 +41,7 @@ class Installer
                 5 => 'finalization'
             ],
             'api_endpoints' => [
-                'license' => 'https://licence.myvcard.fr/api/ultra-simple.php'
+                'license' => 'https://adminlicence.eu/api/ultra-simple.php'
             ],
             'required_php_version' => '8.0',
             'required_extensions' => [

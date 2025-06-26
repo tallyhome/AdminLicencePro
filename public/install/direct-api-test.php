@@ -15,7 +15,7 @@ if (!is_dir($logDir)) {
 }
 
 // Configuration de l'API
-$apiUrl = 'https://licence.myvcard.fr';
+$apiUrl = 'https://adminlicence.eu';
 $apiKey = 'sk_wuRFNJ7fI6CaMzJptdfYhzAGW3DieKwC';
 $apiSecret = 'sk_3ewgI2dP0zPyLXlHyDT1qYbzQny6H2hb';
 

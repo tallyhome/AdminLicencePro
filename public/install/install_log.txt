@@ -1,0 +1,52 @@
+[2025-06-25 19:16:31] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache supprimé: config.php | ✅ Cache supprimé: routes-v7.php | ✅ Cache supprimé: services.php | ✅ Cache supprimé: packages.php | ✅ Cache supprimé: events.php | ✅ Cache Laravel ultra-nettoyé: 131 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:16] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:17] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-25 19:18:17] [INFO] Vérification de licence pour la clé: 1NQJ-XT3Y-BCWR-EH9D - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-25 19:18:17] [INFO] Début de la vérification de licence - Clé: 1NQJ-XT3Y-BCWR-EH9D
+[2025-06-25 19:18:17] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"1NQJ-XT3Y-BCWR-EH9D","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-25 19:18:17] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-25 19:18:17] [INFO] Corps de la réponse: {"status":"error","message":"Adresse IP non autoris\u00e9e pour cette cl\u00e9"}
+[2025-06-25 19:18:17] [INFO] Erreur API: Adresse IP non autorisée pour cette clé
+[2025-06-25 19:18:17] [ERROR] Licence invalide: Adresse IP non autorisée pour cette clé
+[2025-06-25 19:18:23] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:24] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:34] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:35] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-25 19:18:35] [INFO] Vérification de licence pour la clé: YLRM-ZZPG-JXYP-DIPL - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-25 19:18:35] [INFO] Début de la vérification de licence - Clé: YLRM-ZZPG-JXYP-DIPL
+[2025-06-25 19:18:35] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"YLRM-ZZPG-JXYP-DIPL","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-25 19:18:35] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-25 19:18:35] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-25 19:18:35] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-25 19:18:35] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-25 19:18:40] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:40] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:57] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:18:57] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-25 19:18:57] [INFO] Vérification de licence pour la clé: AYU7-4AEL-VDGY-EVR5 - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-25 19:18:57] [INFO] Début de la vérification de licence - Clé: AYU7-4AEL-VDGY-EVR5
+[2025-06-25 19:18:57] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"AYU7-4AEL-VDGY-EVR5","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-25 19:18:58] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-25 19:18:58] [INFO] Corps de la réponse: {"status":"error","message":"Domaine non autoris\u00e9 pour cette cl\u00e9"}
+[2025-06-25 19:18:58] [INFO] Erreur API: Domaine non autorisé pour cette clé
+[2025-06-25 19:18:58] [ERROR] Licence invalide: Domaine non autorisé pour cette clé
+[2025-06-25 19:19:37] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:19:42] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:19:42] [INFO] COLLECTE IP ROBUSTE - IP: 82.66.185.78 | Raison: Service externe (IP publique confirmée) | Confiance: 95% | Local: non | Valide: oui | Stratégies: Variables serveur collectées + Résolution DNS effectuée + IP externe récupérée via service tiers | Sources: SERVER_ADDR: null | REMOTE_ADDR: 127.0.0.1 | HTTP_X_FORWARDED_FOR: null | HTTP_X_REAL_IP: null | HTTP_CF_CONNECTING_IP: null
+[2025-06-25 19:19:42] [INFO] Vérification de licence pour la clé: DVEE-IUBS-2TPG-SOSV - Domaine: 127.0.0.1:8000 - IP: 82.66.185.78
+[2025-06-25 19:19:42] [INFO] Début de la vérification de licence - Clé: DVEE-IUBS-2TPG-SOSV
+[2025-06-25 19:19:42] [INFO] TRANSMISSION API - Données envoyées: {"serial_key":"DVEE-IUBS-2TPG-SOSV","domain":"127.0.0.1:8000","ip_address":"82.66.185.78","validation_mode":"domain_only"}
+[2025-06-25 19:19:42] [INFO] Réponse de l'API - Code HTTP: 200
+[2025-06-25 19:19:42] [INFO] Corps de la réponse: {"status":"success","message":"Cl\u00e9 de s\u00e9rie valide","data":{"token":"3eb0f37a6c0fd57861faed5721cb0329","project":"","expires_at":null}}
+[2025-06-25 19:19:42] [INFO] Licence valide - Token: 3eb0f37a6c...
+[2025-06-25 19:19:42] [INFO] ENV IMMÉDIAT: LICENCE_KEY = DVEE-IUBS-2TPG-SOSV
+[2025-06-25 19:19:42] [SUCCESS] SAUVEGARDE IMMÉDIATE .env réussie (tentative 1): Licence validée
+[2025-06-25 19:19:42] [INFO] BACKUP SESSION: Données sauvegardées dans R:\Adev\200  -  test\AdminLicence-4.5.1\public\install/session_backup_hcsc3m94mlr88j37gd0i4rd5nd.json
+[2025-06-25 19:19:42] [SUCCESS] Licence valide - Données sauvegardées - Passage à l'étape 2
+[2025-06-25 19:19:43] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache supprimé: services.php | ✅ Cache supprimé: packages.php | ✅ Cache Laravel ultra-nettoyé: 5 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:19:57] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-25 19:19:57] [DEBUG] Étape 2 - Vérification licence - Session license_valid: true
+[2025-06-25 19:19:57] [INFO] Étape 2 - Vérification des prérequis système démarrée
+[2025-06-25 19:19:57] [SUCCESS] Prérequis système validés - Passage à l'étape 3
+[2025-06-25 19:19:58] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-26 00:11:55] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache supprimé: routes-v7.php | ✅ Cache supprimé: services.php | ✅ Cache supprimé: packages.php | ✅ Cache supprimé: events.php | ✅ Cache Laravel ultra-nettoyé: 134 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés

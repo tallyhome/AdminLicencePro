@@ -239,7 +239,7 @@ class LicenceService
     {
         try {
             // Configuration de l'API de licence depuis les variables d'environnement
-            $apiUrl = env('LICENCE_API_URL', 'https://licence.myvcard.fr');
+            $apiUrl = env('LICENCE_API_URL', 'https://adminlicence.eu');
             $apiKey = env('LICENCE_API_KEY', '');
             $apiSecret = env('LICENCE_API_SECRET', '');
             $endpoint = env('LICENCE_API_ENDPOINT', '/api/check-serial.php');

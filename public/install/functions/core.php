@@ -138,7 +138,7 @@ function verifierLicence($cleSeriale, $domaine = null, $adresseIP = null) {
 
     // VÉRIFICATION API RÉELLE - Utilisation du même endpoint que le système principal
     // URL de l'API de vérification (utilisation de l'API check-serial pour la production)
-    $url = "https://licence.myvcard.fr/api/check-serial.php";
+    $url = "https://adminlicence.eu/api/check-serial.php";
     
     // SOLUTION ROBUSTE: Utiliser la nouvelle fonction de collecte d'IP si pas fournie
     if (!$adresseIP) {

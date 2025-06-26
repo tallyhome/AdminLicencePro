@@ -15,7 +15,7 @@ class LicenseValidator
     
     public function __construct(array $config = [])
     {
-        $this->apiUrl = $config['api_url'] ?? 'https://licence.myvcard.fr/api/ultra-simple.php';
+        $this->apiUrl = $config['api_url'] ?? 'https://adminlicence.eu/api/ultra-simple.php';
         $this->timeout = $config['timeout'] ?? 30;
         $this->retryAttempts = $config['retry_attempts'] ?? 3;
         $this->userAgent = $config['user_agent'] ?? 'AdminLicence-Installer/1.0';
