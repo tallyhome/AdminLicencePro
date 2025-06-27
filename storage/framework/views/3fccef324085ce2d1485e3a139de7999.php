@@ -1,15 +1,13 @@
-@extends('frontend.templates.modern.layout')
+<?php $__env->startSection('title', 'Guide d\'intégration API - AdminLicence'); ?>
 
-@section('title', 'Guide d\'intégration API - AdminLicence')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="bg-light min-vh-100">
     <!-- Hero Section -->
     <div class="hero-section text-center">
         <div class="container">
             <h1 class="display-4 fw-bold mb-4">Guide d'intégration API</h1>
             <p class="lead mb-4">Instructions détaillées pour intégrer l'API AdminLicence dans vos applications</p>
-            <a href="{{ route('documentation.index') }}" class="btn btn-outline-primary">
+            <a href="<?php echo e(route('documentation.index')); ?>" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Retour à la documentation
             </a>
         </div>
@@ -22,7 +20,8 @@
                 <div class="card shadow-sm">
                     <div class="card-body p-5">
                         <div class="api-docs">
-                            {!! $content !!}
+                            <?php echo $content; ?>
+
                         </div>
                     </div>
                 </div>
@@ -125,4 +124,6 @@
 }
 </style>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views/documentation/api.blade.php ENDPATH**/ ?>

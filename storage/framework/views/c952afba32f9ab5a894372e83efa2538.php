@@ -1,4 +1,4 @@
-@php
+<?php
     // S'assurer que $settings existe avec des valeurs par défaut
     $settings = $settings ?? [
         'site_title' => 'AdminLicence',
@@ -7,14 +7,14 @@
         'contact_phone' => '',
         'footer_text' => '© 2025 AdminLicence. Solution sécurisée de gestion de licences.'
     ];
-@endphp
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', ($settings['site_title'] ?? 'AdminLicence'))</title>
-    <meta name="description" content="@yield('description', $settings['site_tagline'] ?? 'Système de gestion de licences ultra-sécurisé')">
+    <title><?php echo $__env->yieldContent('title', ($settings['site_title'] ?? 'AdminLicence')); ?></title>
+    <meta name="description" content="<?php echo $__env->yieldContent('description', $settings['site_tagline'] ?? 'Système de gestion de licences ultra-sécurisé'); ?>">
     
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -147,15 +147,16 @@
         }
     </style>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="{{ route('frontend.home') }}">
+            <a class="navbar-brand fw-bold text-primary" href="<?php echo e(route('frontend.home')); ?>">
                 <i class="fas fa-shield-alt"></i>
-                {{ $settings['site_title'] ?? 'AdminLicence' }}
+                <?php echo e($settings['site_title'] ?? 'AdminLicence'); ?>
+
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -165,29 +166,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.home') }}">{{ $settings['nav_home_text'] ?? 'Accueil' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.home')); ?>"><?php echo e($settings['nav_home_text'] ?? 'Accueil'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.features') }}">{{ $settings['nav_features_text'] ?? 'Fonctionnalités' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.features')); ?>"><?php echo e($settings['nav_features_text'] ?? 'Fonctionnalités'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.pricing') }}">{{ $settings['nav_pricing_text'] ?? 'Tarifs' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.pricing')); ?>"><?php echo e($settings['nav_pricing_text'] ?? 'Tarifs'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.about') }}">{{ $settings['nav_about_text'] ?? 'À propos' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.about')); ?>"><?php echo e($settings['nav_about_text'] ?? 'À propos'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.faqs') }}">{{ $settings['nav_faq_text'] ?? 'FAQ' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.faqs')); ?>"><?php echo e($settings['nav_faq_text'] ?? 'FAQ'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.contact') }}">{{ $settings['nav_contact_text'] ?? 'Contact' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.contact')); ?>"><?php echo e($settings['nav_contact_text'] ?? 'Contact'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('frontend.support') }}">{{ $settings['nav_support_text'] ?? 'Support' }}</a>
+                        <a class="nav-link" href="<?php echo e(route('frontend.support')); ?>"><?php echo e($settings['nav_support_text'] ?? 'Support'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="{{ url('/admin') }}">
-                            <i class="fas fa-sign-in-alt"></i> {{ $settings['nav_admin_text'] ?? 'Admin' }}
+                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="<?php echo e(url('/admin')); ?>">
+                            <i class="fas fa-sign-in-alt"></i> <?php echo e($settings['nav_admin_text'] ?? 'Admin'); ?>
+
                         </a>
                     </li>
                 </ul>
@@ -197,7 +199,7 @@
 
     <!-- Content -->
     <main style="margin-top: 76px;">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
 
     <!-- Footer -->
@@ -207,47 +209,50 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
                         <i class="fas fa-shield-alt text-primary"></i>
-                        {{ $settings['site_title'] ?? 'AdminLicence' }}
+                        <?php echo e($settings['site_title'] ?? 'AdminLicence'); ?>
+
                     </h5>
-                    <p class="text-light">{{ $settings['site_tagline'] ?? 'Système de gestion de licences ultra-sécurisé' }}</p>
+                    <p class="text-light"><?php echo e($settings['site_tagline'] ?? 'Système de gestion de licences ultra-sécurisé'); ?></p>
                     <div class="security-badge">
                         <i class="fas fa-lock"></i>
-                        <span>{{ $settings['footer_security_badge_text'] ?? 'Chiffrement AES-256' }}</span>
+                        <span><?php echo e($settings['footer_security_badge_text'] ?? 'Chiffrement AES-256'); ?></span>
                     </div>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="fw-bold mb-3">{{ $settings['footer_product_title'] ?? 'Produit' }}</h6>
+                    <h6 class="fw-bold mb-3"><?php echo e($settings['footer_product_title'] ?? 'Produit'); ?></h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('frontend.home') }}" class="text-light text-decoration-none">{{ $settings['footer_product_features'] ?? 'Fonctionnalités' }}</a></li>
-                        <li><a href="{{ route('frontend.about') }}" class="text-light text-decoration-none">{{ $settings['footer_product_about'] ?? 'À propos' }}</a></li>
-                        <li><a href="{{ route('frontend.faqs') }}" class="text-light text-decoration-none">FAQ</a></li>
+                        <li><a href="<?php echo e(route('frontend.home')); ?>" class="text-light text-decoration-none"><?php echo e($settings['footer_product_features'] ?? 'Fonctionnalités'); ?></a></li>
+                        <li><a href="<?php echo e(route('frontend.about')); ?>" class="text-light text-decoration-none"><?php echo e($settings['footer_product_about'] ?? 'À propos'); ?></a></li>
+                        <li><a href="<?php echo e(route('frontend.faqs')); ?>" class="text-light text-decoration-none">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="fw-bold mb-3">{{ $settings['footer_support_title'] ?? 'Support' }}</h6>
+                    <h6 class="fw-bold mb-3"><?php echo e($settings['footer_support_title'] ?? 'Support'); ?></h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('frontend.contact') }}" class="text-light text-decoration-none">{{ $settings['footer_support_contact'] ?? 'Contact' }}</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">{{ $settings['footer_support_documentation'] ?? 'Documentation' }}</a></li>
+                        <li><a href="<?php echo e(route('frontend.contact')); ?>" class="text-light text-decoration-none"><?php echo e($settings['footer_support_contact'] ?? 'Contact'); ?></a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><?php echo e($settings['footer_support_documentation'] ?? 'Documentation'); ?></a></li>
                         <li><a href="#" class="text-light text-decoration-none">API</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-4 mb-4">
-                    <h6 class="fw-bold mb-3">{{ $settings['footer_contact_title'] ?? 'Contact' }}</h6>
-                    @if($settings['contact_email'])
+                    <h6 class="fw-bold mb-3"><?php echo e($settings['footer_contact_title'] ?? 'Contact'); ?></h6>
+                    <?php if($settings['contact_email']): ?>
                         <p class="text-light">
                             <i class="fas fa-envelope"></i>
-                            {{ $settings['contact_email'] }}
+                            <?php echo e($settings['contact_email']); ?>
+
                         </p>
-                    @endif
-                    @if($settings['contact_phone'])
+                    <?php endif; ?>
+                    <?php if($settings['contact_phone']): ?>
                         <p class="text-light">
                             <i class="fas fa-phone"></i>
-                            {{ $settings['contact_phone'] }}
+                            <?php echo e($settings['contact_phone']); ?>
+
                         </p>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
             
@@ -256,21 +261,25 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <p class="text-light mb-0">
-                        {{ $settings['footer_text'] ?? '© 2025 AdminLicence. Solution sécurisée de gestion de licences.' }}
+                        <?php echo e($settings['footer_text'] ?? '© 2025 AdminLicence. Solution sécurisée de gestion de licences.'); ?>
+
                     </p>
                     <div class="mt-2">
-                        <a href="{{ route('frontend.terms') }}" class="text-light text-decoration-none me-3 small opacity-75">
-                            {{ $settings['footer_terms_text'] ?? 'Termes et Conditions' }}
+                        <a href="<?php echo e(route('frontend.terms')); ?>" class="text-light text-decoration-none me-3 small opacity-75">
+                            <?php echo e($settings['footer_terms_text'] ?? 'Termes et Conditions'); ?>
+
                         </a>
-                        <a href="{{ route('frontend.privacy') }}" class="text-light text-decoration-none small opacity-75">
-                            {{ $settings['footer_privacy_text'] ?? 'Politique de confidentialité' }}
+                        <a href="<?php echo e(route('frontend.privacy')); ?>" class="text-light text-decoration-none small opacity-75">
+                            <?php echo e($settings['footer_privacy_text'] ?? 'Politique de confidentialité'); ?>
+
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4 text-md-end">
                     <small class="text-light opacity-75">
                         <i class="fas fa-shield-check text-success"></i>
-                        {{ $settings['footer_secure_text'] ?? 'Site sécurisé par AdminLicence' }}
+                        <?php echo e($settings['footer_secure_text'] ?? 'Site sécurisé par AdminLicence'); ?>
+
                     </small>
                 </div>
             </div>
@@ -280,13 +289,13 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    @if($isPreview ?? false)
+    <?php if($isPreview ?? false): ?>
     <div class="position-fixed top-0 start-0 w-100 bg-warning text-center py-2 text-dark fw-bold" style="z-index: 9999;">
         <i class="fas fa-eye"></i> MODE PRÉVISUALISATION - 
-        <a href="{{ url('/admin/cms') }}" class="text-dark">Retour à l'admin</a>
+        <a href="<?php echo e(url('/admin/cms')); ?>" class="text-dark">Retour à l'admin</a>
     </div>
-    @endif
+    <?php endif; ?>
 
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
-</html> 
+</html> <?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views/frontend/templates/modern/layout.blade.php ENDPATH**/ ?>

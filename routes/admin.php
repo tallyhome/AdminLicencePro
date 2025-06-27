@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\EmailVariableController;
 use App\Http\Controllers\Admin\LicenseController;
 use App\Http\Controllers\Admin\OptimizationController;
-use App\Http\Controllers\Admin\FrontendController;
+
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\CmsFeatureController;
 use App\Http\Controllers\Admin\CmsFaqController;
@@ -237,17 +237,7 @@ Route::middleware(['auth:admin', 'check.licence'])->group(function () {
     Route::put('settings/favicon', [SettingsController::class, 'updateFavicon'])->name('admin.settings.update-favicon');
     Route::put('settings/dark-mode', [SettingsController::class, 'toggleDarkMode'])->name('admin.settings.toggle-dark-mode');
     
-    // Routes pour la gestion du frontend
-    Route::prefix('settings/frontend')->name('admin.settings.frontend.')->group(function () {
-        Route::get('/', [FrontendController::class, 'index'])->name('index');
-        Route::put('/texts', [FrontendController::class, 'updateTexts'])->name('update-texts');
-        Route::put('/social', [FrontendController::class, 'updateSocial'])->name('update-social');
-        Route::put('/colors', [FrontendController::class, 'updateColors'])->name('update-colors');
-        Route::put('/image', [FrontendController::class, 'updateImage'])->name('update-image');
-        Route::put('/features', [FrontendController::class, 'updateFeatures'])->name('update-features');
-        Route::delete('/reset', [FrontendController::class, 'reset'])->name('reset');
-        Route::get('/preview', [FrontendController::class, 'preview'])->name('preview');
-    });
+
 
     // Routes pour le CMS complet
     Route::prefix('cms')->name('admin.cms.')->group(function () {

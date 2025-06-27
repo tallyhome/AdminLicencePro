@@ -30,7 +30,8 @@ Route::get('/faq', [HomeController::class, 'faqs'])->name('frontend.faqs');
 // Pages statiques avec bonnes routes
 Route::get('/features', [PagesController::class, 'features'])->name('frontend.features');
 Route::get('/support', [PagesController::class, 'support'])->name('frontend.support');
-Route::get('/cgv', [PagesController::class, 'terms'])->name('frontend.cgv');
+Route::get('/terms', [PagesController::class, 'terms'])->name('frontend.terms');
+Route::get('/cgv', [PagesController::class, 'terms'])->name('frontend.cgv'); // Alias pour compatibilité
 Route::get('/privacy', [PagesController::class, 'privacy'])->name('frontend.privacy');
 
 // Nouvelles pages CMS

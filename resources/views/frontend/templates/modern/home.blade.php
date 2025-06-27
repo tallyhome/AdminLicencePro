@@ -23,13 +23,13 @@
                     </p>
                     
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="{{ url('/admin') }}" class="btn btn-light btn-lg px-4">
+                        <a href="{{ $settings['cta_button_url'] ?? '/admin' }}" class="btn btn-light btn-lg px-4">
                             <i class="fas fa-rocket"></i>
-                            Commencer maintenant
+                            {{ $settings['hero_button_text'] ?? 'Commencer maintenant' }}
                         </a>
                         <a href="{{ route('frontend.about') }}" class="btn btn-outline-light btn-lg px-4">
                             <i class="fas fa-info-circle"></i>
-                            En savoir plus
+                            {{ $settings['hero_button_secondary_text'] ?? 'En savoir plus' }}
                         </a>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">Fonctionnalités Avancées</h2>
-                <p class="text-muted">Découvrez pourquoi AdminLicence est la solution de référence pour la sécurisation de vos licences</p>
+                <h2 class="section-title">{{ $settings['features_section_title'] ?? 'Fonctionnalités Avancées' }}</h2>
+                <p class="text-muted">{{ $settings['features_section_subtitle'] ?? 'Découvrez pourquoi AdminLicence est la solution de référence pour la sécurisation de vos licences' }}</p>
             </div>
             
             <div class="row g-4">
@@ -92,8 +92,8 @@
     <section class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">Ce que disent nos clients</h2>
-                <p class="text-muted">Découvrez les témoignages de nos utilisateurs satisfaits</p>
+                <h2 class="section-title">{{ $settings['testimonials_section_title'] ?? 'Ce que disent nos clients' }}</h2>
+                <p class="text-muted">{{ $settings['testimonials_section_subtitle'] ?? 'Découvrez les témoignages de nos utilisateurs satisfaits' }}</p>
             </div>
             
             <div class="row g-4">
@@ -148,8 +148,8 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">Questions Fréquentes</h2>
-                <p class="text-muted">Trouvez rapidement les réponses à vos questions</p>
+                <h2 class="section-title">{{ $settings['faqs_section_title'] ?? 'Questions Fréquentes' }}</h2>
+                <p class="text-muted">{{ $settings['faqs_section_subtitle'] ?? 'Trouvez rapidement les réponses à vos questions' }}</p>
             </div>
             
             <div class="row justify-content-center">
@@ -188,13 +188,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h2 class="fw-bold mb-3">Prêt à sécuriser vos licences ?</h2>
-                    <p class="lead mb-0">Rejoignez des milliers d'entreprises qui font confiance à AdminLicence pour protéger leurs logiciels.</p>
+                    <h2 class="fw-bold mb-3">{{ $settings['cta_title'] ?? 'Prêt à sécuriser vos licences ?' }}</h2>
+                    <p class="lead mb-0">{{ $settings['cta_subtitle'] ?? 'Rejoignez des milliers d\'entreprises qui font confiance à AdminLicence pour protéger leurs logiciels.' }}</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="{{ url('/admin') }}" class="btn btn-light btn-lg px-4">
+                    <a href="{{ $settings['cta_button_url'] ?? '/admin' }}" class="btn btn-light btn-lg px-4">
                         <i class="fas fa-rocket"></i>
-                        Commencer maintenant
+                        {{ $settings['cta_button_text'] ?? 'Commencer maintenant' }}
                     </a>
                 </div>
             </div>

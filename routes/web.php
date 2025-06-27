@@ -53,9 +53,7 @@ Route::middleware(['web', 'locale'])->group(function () {
     Route::post('/webhooks/stripe', [WebhookController::class, 'handleStripeWebhook']);
     Route::post('/webhooks/paypal', [WebhookController::class, 'handlePayPalWebhook']);
     
-    // Routes de documentation (publiques)
-    Route::get('/documentation', [DocumentationController::class, 'index'])->name('documentation.index');
-    Route::get('/documentation/api', [DocumentationController::class, 'apiIntegration'])->name('documentation.api');
+    // Routes de documentation (publiques) - Déplacées vers frontend.php
 
     // Subscription routes (auth required)
     Route::middleware(['auth'])->group(function () {

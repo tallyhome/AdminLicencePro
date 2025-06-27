@@ -54,3 +54,4 @@
 [2025-06-26 11:42:56] [SUCCESS] SESSIONS RÉCUPÉRÉES: Licence restaurée depuis .env: DVEE-IUBS-2TPG-SOSV
 [2025-06-26 11:42:56] [SUCCESS] SESSIONS RÉCUPÉRÉES: Config DB restaurée depuis .env
 [2025-06-26 11:42:56] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache Laravel ultra-nettoyé: 0 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés
+[2025-06-27 03:06:40] [INFO] INITIALISATION AUTO: 🧹 Nettoyage ultra-agressif des caches Laravel (cPanel optimisé)... | ✅ Cache supprimé: services.php | ✅ Cache supprimé: packages.php | ✅ Cache supprimé: events.php | ✅ Cache Laravel ultra-nettoyé: 20 fichiers supprimés | ✅ Fichier .env existe déjà | ✅ Répertoires système vérifiés

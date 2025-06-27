@@ -1,8 +1,6 @@
-@extends('frontend.templates.modern.layout')
+<?php $__env->startSection('title', 'Documentation - AdminLicence'); ?>
 
-@section('title', 'Documentation - AdminLicence')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="bg-light min-vh-100">
     <!-- Hero Section -->
     <div class="hero-section text-center">
@@ -38,7 +36,7 @@
                                 <li><i class="fas fa-check text-success me-2"></i>Gestion des erreurs</li>
                             </ul>
                         </div>
-                        <a href="{{ route('documentation.api') }}" class="btn btn-primary">
+                        <a href="<?php echo e(route('documentation.api')); ?>" class="btn btn-primary">
                             <i class="fas fa-book me-2"></i>Consulter le guide
                         </a>
                     </div>
@@ -144,7 +142,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-4 text-lg-end">
-                                <a href="{{ route('documentation.api') }}" class="btn btn-light">
+                                <a href="<?php echo e(route('documentation.api')); ?>" class="btn btn-light">
                                     <i class="fas fa-rocket me-2"></i>Commencer maintenant
                                 </a>
                             </div>
@@ -155,4 +153,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views/documentation/index.blade.php ENDPATH**/ ?>
