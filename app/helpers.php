@@ -50,3 +50,21 @@ if (!function_exists('t')) {
         }
     }
 }
+
+if (!function_exists('frontend')) {
+    /**
+     * Récupérer un paramètre du frontend
+     *
+     * @param string|null $key
+     * @param mixed $default
+     * @return mixed
+     */
+    function frontend(string $key = null, $default = null)
+    {
+        if ($key === null) {
+            return \App\Helpers\FrontendHelper::all();
+        }
+        
+        return \App\Helpers\FrontendHelper::get($key, $default);
+    }
+}

@@ -141,6 +141,22 @@ class LicenceService
         // Si la licence n'est pas encore assignée, l'assigner
         if (empty($serialKey->domain)) {
             $serialKey->addAccount($domain, $ipAddress);
+            
+            // Créer une entrée dans l'historique pour la première activation
+            $this->historyService->logAction($serialKey, 'activation', [
+                'domain' => $domain,
+                'ip_address' => $ipAddress,
+                'licence_type' => 'single',
+                'message' => 'Première activation de la licence single'
+            ]);
+        } else {
+            // Créer une entrée dans l'historique pour chaque utilisation
+            $this->historyService->logAction($serialKey, 'usage', [
+                'domain' => $domain,
+                'ip_address' => $ipAddress,
+                'licence_type' => 'single',
+                'message' => 'Utilisation de la licence single'
+            ]);
         }
 
         return [
@@ -174,6 +190,14 @@ class LicenceService
             if ($account) {
                 $account->updateLastUsed();
             }
+
+            // Créer une entrée dans l'historique pour chaque utilisation
+            $this->historyService->logAction($serialKey, 'usage', [
+                'domain' => $domain,
+                'ip_address' => $ipAddress,
+                'licence_type' => 'multi',
+                'message' => 'Utilisation de la licence multi - domaine existant'
+            ]);
 
             return [
                 'valid' => true,
@@ -211,6 +235,14 @@ class LicenceService
 
         // Ajouter le nouveau compte
         $account = $serialKey->addAccount($domain, $ipAddress);
+
+        // Créer une entrée dans l'historique pour l'ajout d'un nouveau compte
+        $this->historyService->logAction($serialKey, 'new_account', [
+            'domain' => $domain,
+            'ip_address' => $ipAddress,
+            'licence_type' => 'multi',
+            'message' => 'Ajout d\'un nouveau compte à la licence multi'
+        ]);
 
         return [
             'valid' => true,

@@ -23,6 +23,12 @@ use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\EmailVariableController;
 use App\Http\Controllers\Admin\LicenseController;
 use App\Http\Controllers\Admin\OptimizationController;
+use App\Http\Controllers\Admin\FrontendController;
+use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\CmsFeatureController;
+use App\Http\Controllers\Admin\CmsFaqController;
+use App\Http\Controllers\Admin\CmsTestimonialController;
+use App\Http\Controllers\Admin\CmsAboutController;
 use Illuminate\Support\Facades\Route;
 
 // Routes d'authentification
@@ -230,6 +236,48 @@ Route::middleware(['auth:admin', 'check.licence'])->group(function () {
     Route::put('settings/password', [SettingsController::class, 'updatePassword'])->name('admin.settings.update-password');
     Route::put('settings/favicon', [SettingsController::class, 'updateFavicon'])->name('admin.settings.update-favicon');
     Route::put('settings/dark-mode', [SettingsController::class, 'toggleDarkMode'])->name('admin.settings.toggle-dark-mode');
+    
+    // Routes pour la gestion du frontend
+    Route::prefix('settings/frontend')->name('admin.settings.frontend.')->group(function () {
+        Route::get('/', [FrontendController::class, 'index'])->name('index');
+        Route::put('/texts', [FrontendController::class, 'updateTexts'])->name('update-texts');
+        Route::put('/social', [FrontendController::class, 'updateSocial'])->name('update-social');
+        Route::put('/colors', [FrontendController::class, 'updateColors'])->name('update-colors');
+        Route::put('/image', [FrontendController::class, 'updateImage'])->name('update-image');
+        Route::put('/features', [FrontendController::class, 'updateFeatures'])->name('update-features');
+        Route::delete('/reset', [FrontendController::class, 'reset'])->name('reset');
+        Route::get('/preview', [FrontendController::class, 'preview'])->name('preview');
+    });
+
+    // Routes pour le CMS complet
+    Route::prefix('cms')->name('admin.cms.')->group(function () {
+        // Dashboard CMS
+        Route::get('/', [CmsController::class, 'index'])->name('index');
+        Route::post('/initialize', [CmsController::class, 'initialize'])->name('initialize');
+        Route::get('/settings', [CmsController::class, 'settings'])->name('settings');
+        Route::put('/settings', [CmsController::class, 'updateSettings'])->name('settings.update');
+        Route::get('/templates', [CmsController::class, 'templates'])->name('templates');
+        Route::post('/templates/switch', [CmsController::class, 'switchTemplate'])->name('templates.switch');
+        Route::post('/templates/{template}/activate', [CmsController::class, 'activateTemplate'])->name('activate-template');
+        Route::get('/preview', [CmsController::class, 'preview'])->name('preview');
+        
+        // Phase 3A & 3D - Gestion des médias et upload d'images
+        Route::post('/upload-image', [CmsController::class, 'uploadImage'])->name('upload-image');
+        Route::get('/media', [CmsController::class, 'mediaManager'])->name('media');
+        Route::delete('/media', [CmsController::class, 'deleteMedia'])->name('delete-media');
+        
+        // Gestion des fonctionnalités
+        Route::resource('features', CmsFeatureController::class);
+        
+        // Gestion des FAQs
+        Route::resource('faqs', CmsFaqController::class);
+        
+        // Gestion des témoignages
+        Route::resource('testimonials', CmsTestimonialController::class);
+        
+        // Gestion des sections À propos
+        Route::resource('about', CmsAboutController::class);
+    });
     
     // Routes pour les outils d'optimisation
     Route::get('/settings/optimization', [OptimizationController::class, 'index'])->name('admin.settings.optimization');

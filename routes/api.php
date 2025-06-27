@@ -21,13 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route de test pour vérifier que l'API fonctionne (avec rate limiting)
-Route::middleware('api.ratelimit:20,1')->get('/test', [LicenceApiController::class, 'test']);
+Route::middleware('throttle:20,1')->get('/test', [LicenceApiController::class, 'test']);
 
 // Routes pour la validation des licences - Version directe (pour compatibilité)
-Route::middleware('api.ratelimit:10,1')->post('/check-serial', [LicenceApiController::class, 'checkSerial']);
+Route::middleware('throttle:10,1')->post('/check-serial', [LicenceApiController::class, 'checkSerial']);
 
-// Route pour récupérer les traductions (avec rate limiting)
-Route::middleware('api.ratelimit:30,1')->get('/translations', [TranslationApiController::class, 'getTranslations']);
+// Route pour récupérer les traductions (SANS rate limiting pour éviter 404)
+Route::get('/translations', [TranslationApiController::class, 'getTranslations']);
 
 // Routes pour la validation des licences - Version avec préfixe v1
 Route::prefix('v1')->middleware('licence-api')->group(function () {

@@ -198,6 +198,35 @@
                 </div>
             </div>
         </div>
+
+        <!-- Gestion du Frontend -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-paint-brush"></i> Gestion du Frontend
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        Personnalisez l'apparence et le contenu de votre frontend : textes, images, couleurs et fonctionnalités.
+                    </p>
+                    
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="{{ route('admin.settings.frontend.index') }}" class="btn btn-success">
+                            <i class="fas fa-paint-brush"></i> Personnaliser le Frontend
+                        </a>
+                    </div>
+                    
+                    <div class="mt-2">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Modifiez textes, images, couleurs et sections d'affichage
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- Authentification à deux facteurs -->
         <div class="col-md-6 mb-4">

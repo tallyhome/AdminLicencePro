@@ -257,6 +257,13 @@
                     </a>
                 </li>
 
+                <!-- CMS -->
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.cms.*') ? 'active' : '' }}" href="{{ route('admin.cms.index') }}">
+                        <i class="fas fa-palette me-2"></i> CMS
+                    </a>
+                </li>
+
                 <!-- Paramètres -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#settingsSubmenu" role="button">
@@ -351,6 +358,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script src="{{ asset('js/dark-mode.js') }}"></script>
+    <!-- TinyMCE CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Auto-dismiss pour les alertes après 5 secondes
@@ -363,6 +373,85 @@
                     });
                 }, 5000); // 5000ms = 5 secondes
             }
+        });
+
+        // Configuration TinyMCE globale
+        function initTinyMCE(selector = '.wysiwyg', height = 400) {
+            if (typeof tinymce !== 'undefined') {
+                tinymce.init({
+                    selector: selector,
+                    height: height,
+                    language: 'fr_FR',
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons'
+                    ],
+                    toolbar: 'undo redo | blocks fontfamily fontsize | ' +
+                    'bold italic underline strikethrough | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | link image media table | code preview | help',
+                    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; }',
+                    images_upload_url: '{{ route("admin.cms.upload-image") }}',
+                    automatic_uploads: true,
+                    file_picker_types: 'image',
+                    file_picker_callback: function(cb, value, meta) {
+                        var input = document.createElement('input');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('accept', 'image/*');
+                        input.onchange = function() {
+                            var file = this.files[0];
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                var id = 'blobid' + (new Date()).getTime();
+                                var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                                var base64 = reader.result.split(',')[1];
+                                var blobInfo = blobCache.create(id, file, base64);
+                                blobCache.add(blobInfo);
+                                cb(blobInfo.blobUri(), { title: file.name });
+                            };
+                            reader.readAsDataURL(file);
+                        };
+                        input.click();
+                    },
+                    images_upload_handler: function (blobInfo, success, failure) {
+                        var xhr, formData;
+                        xhr = new XMLHttpRequest();
+                        xhr.withCredentials = false;
+                        xhr.open('POST', '{{ route("admin.cms.upload-image") }}');
+                        xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+                        
+                        xhr.onload = function() {
+                            var json;
+                            if (xhr.status != 200) {
+                                failure('HTTP Error: ' + xhr.status);
+                                return;
+                            }
+                            json = JSON.parse(xhr.responseText);
+                            if (!json || typeof json.location != 'string') {
+                                failure('Invalid JSON: ' + xhr.responseText);
+                                return;
+                            }
+                            success(json.location);
+                        };
+                        
+                        formData = new FormData();
+                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+                        xhr.send(formData);
+                    }
+                });
+            }
+        }
+
+        // Auto-init TinyMCE
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attendre que TinyMCE soit chargé
+            const interval = setInterval(function() {
+                if (typeof tinymce !== 'undefined') {
+                    clearInterval(interval);
+                    initTinyMCE();
+                }
+            }, 100);
         });
     </script>
     @stack('scripts')

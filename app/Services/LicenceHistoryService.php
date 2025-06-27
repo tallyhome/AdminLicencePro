@@ -26,7 +26,8 @@ class LicenceHistoryService
                 'old_status' => $serialKey->getOriginal('status'),
                 'new_status' => $status,
                 'changed_at' => now()->toDateTimeString()
-            ]
+            ],
+            'ip_address' => request()->ip()
         ]);
     }
 
@@ -43,7 +44,8 @@ class LicenceHistoryService
         LicenceHistory::create([
             'serial_key_id' => $serialKey->id,
             'action' => $action,
-            'details' => $details
+            'details' => $details,
+            'ip_address' => $details['ip_address'] ?? request()->ip()
         ]);
     }
 

@@ -54,9 +54,9 @@
                 <?php if(config('app.show_pricing', true)): ?>
                 <a href="<?php echo e(route('frontend.pricing')); ?>" class="hover:text-blue-600 font-medium"><?php echo e(__('menu.pricing')); ?></a>
                 <?php endif; ?>
-                <a href="<?php echo e(route('frontend.faq')); ?>" class="hover:text-blue-600 font-medium"><?php echo e(__('menu.faq')); ?></a>
+                <a href="<?php echo e(route('frontend.faqs')); ?>" class="hover:text-blue-600 font-medium"><?php echo e(__('menu.faq')); ?></a>
                 <a href="<?php echo e(route('frontend.support')); ?>" class="hover:text-blue-600 font-medium"><?php echo e(__('menu.support')); ?></a>
-                <a href="<?php echo e(route('direct.admin.login')); ?>" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"><?php echo e(__('menu.login')); ?></a>
+                <a href="<?php echo e(route('admin.login.form')); ?>" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"><?php echo e(__('menu.login')); ?></a>
                 <form method="POST" action="<?php echo e(route('frontend.set.locale')); ?>" class="inline-block ml-4" id="localeForm-<?php echo e(rand()); ?>">
                     <?php echo csrf_field(); ?>
                     <select name="locale" onchange="this.form.submit()" class="border rounded px-2 py-1">
