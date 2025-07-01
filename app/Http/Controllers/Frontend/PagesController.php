@@ -63,7 +63,17 @@ class PagesController extends Controller
             ->get();
         $features = CmsFeature::where('is_active', true)->take(6)->get();
         
-        return view('frontend.pages.about', compact('settings', 'template', 'page', 'aboutSections', 'features'));
+        // Déterminer le template et la vue à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        $view = "frontend.templates.{$currentTemplate}.about";
+        
+        // Fallback vers template modern si la vue n'existe pas
+        if (!view()->exists($view)) {
+            $view = 'frontend.pages.about';
+        }
+        
+        return view($view, compact('settings', 'template', 'page', 'aboutSections', 'features', 'layout'));
     }
 
     public function contact()
@@ -73,7 +83,17 @@ class PagesController extends Controller
         $page = CmsPage::where('slug', 'contact')->first();
         $faqs = CmsFaq::where('is_active', true)->featured()->take(5)->get();
         
-        return view('frontend.pages.contact', compact('settings', 'template', 'page', 'faqs'));
+        // Déterminer le template et la vue à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        $view = "frontend.templates.{$currentTemplate}.contact";
+        
+        // Fallback vers template modern si la vue n'existe pas
+        if (!view()->exists($view)) {
+            $view = 'frontend.pages.contact';
+        }
+        
+        return view($view, compact('settings', 'template', 'page', 'faqs', 'layout'));
     }
 
     public function pricing()
@@ -84,7 +104,11 @@ class PagesController extends Controller
         $features = CmsFeature::where('is_active', true)->take(6)->get();
         $testimonials = CmsTestimonial::where('is_active', true)->featured()->take(3)->get();
         
-        return view('frontend.pages.pricing', compact('settings', 'template', 'page', 'features', 'testimonials'));
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        return view('frontend.pages.pricing', compact('settings', 'template', 'page', 'features', 'testimonials', 'layout'));
     }
 
     public function privacy()
@@ -92,7 +116,12 @@ class PagesController extends Controller
         $settings = $this->getSiteSettings();
         $template = $this->getDefaultTemplate();
         $page = CmsPage::where('slug', 'privacy-policy')->first();
-        return view('frontend.pages.privacy', compact('settings', 'template', 'page'));
+        
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        return view('frontend.pages.privacy', compact('settings', 'template', 'page', 'layout'));
     }
 
     public function terms()
@@ -100,7 +129,12 @@ class PagesController extends Controller
         $settings = $this->getSiteSettings();
         $template = $this->getDefaultTemplate();
         $page = CmsPage::where('slug', 'terms-of-service')->first();
-        return view('frontend.pages.terms', compact('settings', 'template', 'page'));
+        
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        return view('frontend.pages.terms', compact('settings', 'template', 'page', 'layout'));
     }
 
     public function documentation()
@@ -110,7 +144,11 @@ class PagesController extends Controller
         $page = CmsPage::where('slug', 'documentation')->first();
         $faqs = CmsFaq::where('is_active', true)->orderBy('sort_order')->get();
         
-        return view('frontend.pages.documentation', compact('settings', 'template', 'page', 'faqs'));
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        return view('documentation.index', compact('settings', 'template', 'page', 'faqs', 'layout'));
     }
 
     public function submitContact(Request $request)
@@ -188,7 +226,17 @@ class PagesController extends Controller
         $features = CmsFeature::where('is_active', true)->orderBy('sort_order')->get();
         $testimonials = CmsTestimonial::where('is_active', true)->featured()->take(3)->get();
         
-        return view('frontend.pages.features', compact('settings', 'template', 'page', 'features', 'testimonials'));
+        // Déterminer le template et la vue à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        $view = "frontend.templates.{$currentTemplate}.features";
+        
+        // Fallback vers template modern si la vue n'existe pas
+        if (!view()->exists($view)) {
+            $view = 'frontend.pages.features';
+        }
+        
+        return view($view, compact('settings', 'template', 'page', 'features', 'testimonials', 'layout'));
     }
 
     public function demo()
@@ -233,9 +281,37 @@ class PagesController extends Controller
     public function support()
     {
         $settings = $this->getSiteSettings();
+        $template = $this->getDefaultTemplate();
         $page = CmsPage::where('slug', 'support')->first();
         $faqs = CmsFaq::where('is_active', true)->featured()->take(5)->get();
         
-        return view('frontend.pages.support', compact('settings', 'page', 'faqs'));
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        return view('frontend.pages.support', compact('settings', 'template', 'page', 'faqs', 'layout'));
+    }
+
+    public function faqs()
+    {
+        $settings = $this->getSiteSettings();
+        $template = $this->getDefaultTemplate();
+        $faqs = CmsFaq::where('is_active', true)->orderBy('sort_order')->get();
+        $categories = CmsFaq::where('is_active', true)->distinct('category')->pluck('category')->filter();
+        
+        // Déterminer le layout à utiliser
+        $currentTemplate = Setting::get('cms_current_template', 'modern');
+        $layout = "frontend.templates.{$currentTemplate}.layout";
+        
+        // Utiliser la vue faqs du template sélectionné
+        $templateName = Setting::get('cms_current_template', 'modern');
+        $view = "frontend.templates.{$templateName}.faqs";
+        
+        // Fallback vers template modern si la vue n'existe pas
+        if (!view()->exists($view)) {
+            $view = 'frontend.templates.modern.faqs';
+        }
+        
+        return view($view, compact('settings', 'template', 'faqs', 'categories', 'layout'));
     }
 } 

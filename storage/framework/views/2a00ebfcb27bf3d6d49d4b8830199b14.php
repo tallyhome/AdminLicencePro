@@ -18,8 +18,11 @@
     
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Essayer plusieurs sources pour FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Backup: Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
         :root {
@@ -44,6 +47,66 @@
 
         * {
             font-family: var(--font-primary);
+        }
+
+        /* Correction des icônes FontAwesome */
+        .fas, .far, .fab {
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: inline-block !important;
+        }
+
+        .fas {
+            font-weight: 900 !important;
+        }
+
+        .far {
+            font-weight: 400 !important;
+        }
+
+        /* Forcer l'affichage des icônes */
+        i.fas, i.far, i.fab {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+            display: inline-block !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* Styles pour les icônes dans les cercles */
+        .bg-opacity-10 {
+            --bs-bg-opacity: 0.1;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        /* Assurer que les icônes sont visibles dans tous les contextes */
+        .d-inline-flex i, .bg-opacity-10 i, .rounded-circle i {
+            display: inline-block !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+        }
+
+        /* Correction spécifique pour les icônes de contact */
+        .contact-info-professional i {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+            display: inline-block !important;
         }
 
         body {
@@ -167,9 +230,9 @@
         }
 
         .btn-secondary-professional {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            background: var(--gray-100);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
             font-weight: 600;
             padding: 12px 26px;
             border-radius: 8px;
@@ -181,10 +244,28 @@
         }
 
         .btn-secondary-professional:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: var(--accent-color);
+            border-color: var(--accent-color);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(49, 130, 206, 0.3);
+        }
+
+        /* Bouton secondaire sur fond sombre */
+        .hero-professional .btn-secondary-professional,
+        .cta-professional .btn-secondary-professional,
+        .bg-primary .btn-secondary-professional {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            color: white;
+        }
+
+        .hero-professional .btn-secondary-professional:hover,
+        .cta-professional .btn-secondary-professional:hover,
+        .bg-primary .btn-secondary-professional:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
         }
 
         /* Sections */
@@ -364,6 +445,103 @@
             padding-top: 25px;
         }
 
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #e6edf3;
+        }
+
+        body.dark-mode .navbar-professional {
+            background: linear-gradient(135deg, #161b22, #21262d);
+        }
+
+        body.dark-mode .nav-link-professional {
+            color: rgba(230, 237, 243, 0.9) !important;
+        }
+
+        body.dark-mode .nav-link-professional:hover {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .btn-admin-professional {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        body.dark-mode .card-professional {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #e6edf3;
+        }
+
+        body.dark-mode .testimonial-professional {
+            background: #21262d;
+            border-left-color: var(--accent-color);
+            border: 1px solid #30363d;
+            color: #e6edf3;
+        }
+
+        body.dark-mode .testimonial-quote {
+            color: #b3bcc8;
+        }
+
+        body.dark-mode .testimonial-avatar {
+            background: #30363d;
+            color: var(--accent-color);
+        }
+
+        body.dark-mode .faq-professional .accordion-item {
+            background: #21262d;
+            border: 1px solid #30363d;
+        }
+
+        body.dark-mode .faq-professional .accordion-button {
+            background: #21262d;
+            color: #e6edf3;
+            border: none;
+        }
+
+        body.dark-mode .faq-professional .accordion-button:not(.collapsed) {
+            background: #161b22;
+            color: var(--accent-color);
+        }
+
+        body.dark-mode .faq-professional .accordion-body {
+            background: #21262d;
+            color: #b3bcc8;
+            border-top: 1px solid #30363d;
+        }
+
+        body.dark-mode .footer-professional {
+            background: #010409;
+            border-top: 1px solid #21262d;
+        }
+
+        body.dark-mode .section-title-professional {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .section-subtitle-professional {
+            color: #b3bcc8;
+        }
+
+        /* Styles pour l'icône dark mode */
+        #darkModeToggle {
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        #darkModeToggle:hover {
+            transform: rotate(15deg);
+            color: white !important;
+        }
+        body.dark-mode #darkModeToggle {
+            color: #fbbf24 !important;
+        }
+        body.dark-mode #darkModeToggle:hover {
+            color: #fcd34d !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-professional {
@@ -418,6 +596,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-professional" href="<?php echo e(route('frontend.support')); ?>"><?php echo e($settings['nav_support_text'] ?? 'Support'); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-professional" href="#" id="darkModeToggle" title="Basculer le mode sombre" style="font-size: 1.2rem;">
+                            <i class="fas fa-moon"></i>
+                        </a>
                     </li>
                     <li class="nav-item ms-3">
                         <a class="btn btn-admin-professional" href="<?php echo e(url('/admin')); ?>">
@@ -518,6 +701,48 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle for Professional Template
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const icon = darkModeToggle.querySelector('i');
+            
+            // Vérifier le mode sombre sauvegardé
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+            // Appliquer le mode initial
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                darkModeToggle.title = 'Mode clair';
+            }
+            
+            // Gérer le clic sur l'icône
+            darkModeToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Basculer le mode
+                const isDark = body.classList.toggle('dark-mode');
+                
+                // Changer l'icône
+                if (isDark) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    this.title = 'Mode clair';
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    this.title = 'Mode sombre';
+                }
+                
+                // Sauvegarder la préférence
+                localStorage.setItem('darkMode', isDark);
+            });
+        });
+    </script>
     
     <?php if($isPreview ?? false): ?>
     <div class="position-fixed top-0 start-0 w-100 bg-warning text-center py-2 text-dark fw-bold" style="z-index: 9999;">

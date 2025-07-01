@@ -87,7 +87,9 @@
         "version": "Version",
         "toggle_navigation": "Toggle navigation",
         "created_by": "Created by",
-        "all_rights_reserved": "All rights reserved"
+        "all_rights_reserved": "All rights reserved",
+        "dark_mode": "Dark Mode",
+        "light_mode": "Light Mode"
     },
     "auth": {
         "login": "Login",

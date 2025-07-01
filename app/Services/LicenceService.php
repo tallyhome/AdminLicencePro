@@ -589,12 +589,7 @@ class LicenceService
                 'data' => null
             ];
             
-            // En environnement local, on permet quand même l'accès malgré l'erreur
-            if (env('APP_ENV') === 'local') {
-                $errorResult['valid'] = true;
-                $errorResult['status'] = 'warning';
-                $errorResult['message'] = 'Erreur de vérification en environnement local (accès autorisé): ' . $e->getMessage();
-            }
+            // 🔒 PAS DE BYPASS - Si erreur = licence invalide
             
             Cache::put($cacheKey, $errorResult, 60 * 6); // Cache 6h en cas d'erreur
             Cache::put($lastCheckKey, now()->timestamp, 60 * 24 * 7); // 7 jours
@@ -793,25 +788,8 @@ class LicenceService
             // Vérifier la validité de la licence via l'API externe
             $result = $this->validateSerialKey($licenseKey, $domain, $ipAddress);
             
-            // Si nous sommes en développement local, accepter la licence même si l'API échoue
-            if (env('APP_ENV') === 'local' && isset($result['api_error'])) {
-                Log::warning('Erreur API en environnement local, licence considérée comme valide', [
-                    'error' => $result['api_error']
-                ]);
-                return true;
-            }
-            
-            // Bypass pour les domaines de développement en environnement local
-            $isLocalEnv = (config('app.env') === 'local') || (env('APP_ENV') === 'local') || (config('app.debug') === true);
-            if ($isLocalEnv && in_array($domain, ['localhost', '127.0.0.1', 'local.test', 'local'])) {
-                Log::info('Development bypass activated in verifyInstallationLicense', [
-                    'domain' => $domain,
-                    'license_key' => substr($licenseKey, 0, 4) . '...',
-                    'app_env' => config('app.env'),
-                    'app_debug' => config('app.debug')
-                ]);
-                return true;
-            }
+            // 🔒 PAS DE BYPASS - SÉCURITÉ STRICTE
+            // La licence doit être valide, peu importe l'environnement
             
             $isValid = $result['valid'] === true;
             

@@ -1,4 +1,4 @@
-@extends('frontend.templates.modern.layout')
+@extends($layout ?? 'frontend.templates.modern.layout')
 
 @section('title', 'Support - AdminLicence')
 
@@ -20,7 +20,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-book text-primary" style="font-size: 24px;"></i>
+                            <span class="text-primary" style="font-size: 24px;">📚</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Documentation</h5>
                         <p class="card-text text-muted mb-4">
@@ -38,7 +38,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-question-circle text-success" style="font-size: 24px;"></i>
+                            <span class="text-success" style="font-size: 24px;">❓</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">FAQ</h5>
                         <p class="card-text text-muted mb-4">
@@ -56,7 +56,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-envelope text-info" style="font-size: 24px;"></i>
+                            <span class="text-info" style="font-size: 24px;">📧</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Contact Direct</h5>
                         <p class="card-text text-muted mb-4">
@@ -82,7 +82,7 @@
                     <!-- Email Support -->
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle mb-3" style="width: 48px; height: 48px;">
-                            <i class="fas fa-envelope text-primary" style="font-size: 18px;"></i>
+                            <span class="text-primary" style="font-size: 18px;">📧</span>
                         </div>
                         <h6 class="fw-semibold mb-2">Email Support</h6>
                         <p class="text-muted small mb-0">support@adminlicence.com</p>
@@ -91,7 +91,7 @@
                     <!-- Téléphone -->
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle mb-3" style="width: 48px; height: 48px;">
-                            <i class="fas fa-phone text-success" style="font-size: 18px;"></i>
+                            <span class="text-success" style="font-size: 18px;">📞</span>
                         </div>
                         <h6 class="fw-semibold mb-2">Téléphone</h6>
                         <p class="text-muted small mb-0">+33 1 23 45 67 89</p>
@@ -100,7 +100,7 @@
                     <!-- Chat en Direct -->
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10 rounded-circle mb-3" style="width: 48px; height: 48px;">
-                            <i class="fas fa-comments text-info" style="font-size: 18px;"></i>
+                            <span class="text-info" style="font-size: 18px;">💬</span>
                         </div>
                         <h6 class="fw-semibold mb-2">Chat en Direct</h6>
                         <p class="text-muted small mb-0">Lun-Ven 9h-18h</p>
@@ -109,7 +109,7 @@
                     <!-- Horaires -->
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded-circle mb-3" style="width: 48px; height: 48px;">
-                            <i class="fas fa-clock text-warning" style="font-size: 18px;"></i>
+                            <span class="text-warning" style="font-size: 18px;">🕒</span>
                         </div>
                         <h6 class="fw-semibold mb-2">Horaires</h6>
                         <p class="text-muted small mb-0">Lun-Ven 9h-18h CET</p>

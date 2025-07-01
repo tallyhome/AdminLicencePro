@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Setting;
 use App\Services\LicenceService;
 
@@ -45,16 +46,23 @@ class CheckLicence
             return $next($request);
         }
 
-        // Vérifier si la licence est valide (utiliser les settings mis à jour par le contrôleur)
-        $isValid = Setting::get('license_valid', false);
+        // Récupérer la clé de licence
         $licenseKey = env('INSTALLATION_LICENSE_KEY', '');
-
-        // Si aucune clé n'est configurée ou si la licence n'est pas valide
-        if (empty($licenseKey) || !$isValid) {
+        
+        // Vérifier si une clé de licence est configurée
+        if (empty($licenseKey)) {
             return redirect()->route('admin.settings.license')
-                ->with('error', 'Veuillez configurer et valider votre clé de licence pour accéder à l\'administration.');
+                ->with('error', 'Aucune clé de licence n\'est configurée. Veuillez configurer une licence valide pour accéder à l\'administration.');
         }
 
+        // Vérifier si la licence est valide
+        $isValid = $this->licenceService->verifyInstallationLicense(true);
+        
+        if (!$isValid) {
+            return redirect()->route('admin.settings.license')
+                ->with('error', 'Votre licence n\'est pas valide. Veuillez configurer une licence valide.');
+        }
+        
         return $next($request);
     }
 } 

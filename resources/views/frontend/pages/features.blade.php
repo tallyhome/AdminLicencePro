@@ -1,4 +1,4 @@
-@extends('frontend.templates.modern.layout')
+@extends($layout ?? 'frontend.templates.modern.layout')
 
 @section('title', 'Fonctionnalités - AdminLicence')
 
@@ -20,7 +20,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-shield-alt text-primary" style="font-size: 24px;"></i>
+                            <span class="text-primary" style="font-size: 24px;">🛡️</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Sécurité Maximale</h5>
                         <p class="card-text text-muted">
@@ -34,7 +34,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-tachometer-alt text-success" style="font-size: 24px;"></i>
+                            <span class="text-success" style="font-size: 24px;">📊</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Dashboard Intuitif</h5>
                         <p class="card-text text-muted">
@@ -48,7 +48,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-code text-info" style="font-size: 24px;"></i>
+                            <span class="text-info" style="font-size: 24px;">💻</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">API Complète</h5>
                         <p class="card-text text-muted">
@@ -62,7 +62,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-chart-line text-warning" style="font-size: 24px;"></i>
+                            <span class="text-warning" style="font-size: 24px;">📈</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Analytics Avancés</h5>
                         <p class="card-text text-muted">
@@ -76,7 +76,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-danger bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-bell text-danger" style="font-size: 24px;"></i>
+                            <span class="text-danger" style="font-size: 24px;">🔔</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Alertes Intelligentes</h5>
                         <p class="card-text text-muted">
@@ -90,7 +90,7 @@
                 <div class="card feature-card h-100 text-center">
                     <div class="card-body p-4">
                         <div class="d-inline-flex align-items-center justify-content-center bg-secondary bg-opacity-10 rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <i class="fas fa-users text-secondary" style="font-size: 24px;"></i>
+                            <span class="text-secondary" style="font-size: 24px;">👥</span>
                         </div>
                         <h5 class="card-title fw-bold mb-3">Gestion Multi-Utilisateurs</h5>
                         <p class="card-text text-muted">
@@ -114,7 +114,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -128,7 +128,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -142,7 +142,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -156,7 +156,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -170,7 +170,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -184,7 +184,7 @@
                         <div class="d-flex align-items-start">
                             <div class="flex-shrink-0 me-3">
                                 <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle" style="width: 32px; height: 32px;">
-                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                    <span class="text-white" style="font-size: 14px;">✅</span>
                                 </div>
                             </div>
                             <div>
@@ -208,37 +208,37 @@
                 <div class="row g-4 text-center">
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-laravel text-danger" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #e74c3c;">🅻</span>
                             <h6 class="mt-2 mb-0">Laravel</h6>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-php text-primary" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #0d6efd;">🐘</span>
                             <h6 class="mt-2 mb-0">PHP</h6>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-js-square text-warning" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #ffc107;">🟨</span>
                             <h6 class="mt-2 mb-0">JavaScript</h6>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-python text-success" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #198754;">🐍</span>
                             <h6 class="mt-2 mb-0">Python</h6>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-node-js text-success" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #198754;">🟢</span>
                             <h6 class="mt-2 mb-0">Node.js</h6>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
                         <div class="p-3">
-                            <i class="fab fa-docker text-info" style="font-size: 48px;"></i>
+                            <span style="font-size: 48px; color: #0dcaf0;">🐳</span>
                             <h6 class="mt-2 mb-0">Docker</h6>
                         </div>
                     </div>
@@ -256,10 +256,10 @@
                     </p>
                     <div class="d-flex gap-3 justify-content-center flex-wrap">
                         <a href="{{ route('frontend.contact') }}" class="btn btn-light btn-lg">
-                            <i class="fas fa-envelope me-2"></i>Nous Contacter
+                            <span class="me-2">📧</span>Nous Contacter
                         </a>
                         <a href="{{ route('frontend.pricing') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-tag me-2"></i>Voir les Tarifs
+                            <span class="me-2">🏷️</span>Voir les Tarifs
                         </a>
                     </div>
                 </div>

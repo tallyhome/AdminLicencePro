@@ -155,14 +155,16 @@ class HomeController extends Controller
      */
     public function about()
     {
-        $template = CmsTemplate::getDefault();
+        $templateName = Setting::get('cms_current_template', 'modern');
         $settings = $this->getSiteSettings();
         $aboutSections = CmsAboutSection::active()->ordered()->get();
 
-        $view = "frontend.templates.{$template->name}.about";
+        $view = "frontend.templates.{$templateName}.about";
         if (!view()->exists($view)) {
             $view = 'frontend.templates.modern.about';
         }
+
+        $template = (object) ['name' => $templateName];
 
         return view($view, compact('template', 'settings', 'aboutSections'));
     }
@@ -172,15 +174,17 @@ class HomeController extends Controller
      */
     public function faqs()
     {
-        $template = CmsTemplate::getDefault();
+        $templateName = Setting::get('cms_current_template', 'modern');
         $settings = $this->getSiteSettings();
         $faqs = CmsFaq::active()->ordered()->get();
         $categories = CmsFaq::active()->distinct('category')->pluck('category')->filter();
 
-        $view = "frontend.templates.{$template->name}.faqs";
+        $view = "frontend.templates.{$templateName}.faqs";
         if (!view()->exists($view)) {
             $view = 'frontend.templates.modern.faqs';
         }
+
+        $template = (object) ['name' => $templateName];
 
         return view($view, compact('template', 'settings', 'faqs', 'categories'));
     }
@@ -190,13 +194,15 @@ class HomeController extends Controller
      */
     public function contact()
     {
-        $template = CmsTemplate::getDefault();
+        $templateName = Setting::get('cms_current_template', 'modern');
         $settings = $this->getSiteSettings();
 
-        $view = "frontend.templates.{$template->name}.contact";
+        $view = "frontend.templates.{$templateName}.contact";
         if (!view()->exists($view)) {
             $view = 'frontend.templates.modern.contact';
         }
+
+        $template = (object) ['name' => $templateName];
 
         return view($view, compact('template', 'settings'));
     }

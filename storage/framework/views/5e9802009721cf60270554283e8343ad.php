@@ -33,6 +33,43 @@
             font-family: var(--font-family);
         }
 
+        /* Correction des icônes FontAwesome */
+        .fas, .far, .fab {
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .fas {
+            font-weight: 900;
+        }
+
+        .far {
+            font-weight: 400;
+        }
+
+        /* Styles pour les icônes dans les cercles */
+        .bg-opacity-10 {
+            --bs-bg-opacity: 0.1;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        /* Assurer que les icônes sont visibles */
+        .d-inline-flex i {
+            display: inline-block !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+        }
+
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
@@ -145,6 +182,99 @@
                 font-size: 2rem;
             }
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(30, 30, 30, 0.95) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .navbar .nav-link {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .navbar .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #1e3a8a, #1e293b);
+        }
+
+        body.dark-mode .feature-card {
+            background-color: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .testimonial-card {
+            background-color: #2a2a2a;
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .faq-item {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .faq-header {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .faq-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .footer {
+            background: #0d0d0d;
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .footer a {
+            color: #4e9eff !important;
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #7ab8ff !important;
+        }
+
+        body.dark-mode .btn-primary {
+            background-color: #1e3a8a;
+            border-color: #1e3a8a;
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background-color: #1e4eb8;
+            border-color: #1e4eb8;
+        }
+
+        body.dark-mode .security-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        /* Styles pour l'icône dark mode */
+        #darkModeToggle {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+        }
+        #darkModeToggle:hover {
+            transform: rotate(15deg);
+            opacity: 0.8;
+        }
+        body.dark-mode #darkModeToggle {
+            color: #fbbf24;
+        }
+        body.dark-mode #darkModeToggle:hover {
+            color: #fcd34d;
+        }
     </style>
 
     <?php echo $__env->yieldPushContent('styles'); ?>
@@ -185,6 +315,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo e(route('frontend.support')); ?>"><?php echo e($settings['nav_support_text'] ?? 'Support'); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="darkModeToggle" title="Basculer le mode sombre" style="font-size: 1.2rem;">
+                            <i class="fas fa-moon"></i>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary text-white px-3 ms-2" href="<?php echo e(url('/admin')); ?>">
@@ -288,6 +423,48 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle for Frontend
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const icon = darkModeToggle.querySelector('i');
+            
+            // Vérifier le mode sombre sauvegardé
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+            // Appliquer le mode initial
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                darkModeToggle.title = 'Mode clair';
+            }
+            
+            // Gérer le clic sur l'icône
+            darkModeToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Basculer le mode
+                const isDark = body.classList.toggle('dark-mode');
+                
+                // Changer l'icône
+                if (isDark) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    this.title = 'Mode clair';
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    this.title = 'Mode sombre';
+                }
+                
+                // Sauvegarder la préférence
+                localStorage.setItem('darkMode', isDark);
+            });
+        });
+    </script>
     
     <?php if($isPreview ?? false): ?>
     <div class="position-fixed top-0 start-0 w-100 bg-warning text-center py-2 text-dark fw-bold" style="z-index: 9999;">

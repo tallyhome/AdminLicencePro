@@ -27,9 +27,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <!-- Template Modern (par défaut) -->
+                        <!-- Template Modern -->
                         <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card template-card border-primary">
+                            <div class="card template-card {{ $currentTemplateName === 'modern' ? 'border-primary' : '' }}">
                                 <div class="template-preview">
                                     <div class="preview-header bg-primary">
                                         <div class="preview-nav">
@@ -79,16 +79,26 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <h6 class="mb-0 fw-bold">Modern</h6>
-                                        <span class="badge bg-primary">Actuel</span>
+                                        @if($currentTemplateName === 'modern')
+                                            <span class="badge bg-primary">Actuel</span>
+                                        @else
+                                            <span class="badge bg-secondary">Disponible</span>
+                                        @endif
                                     </div>
                                     <p class="text-muted small mb-3">Design moderne et épuré avec des couleurs vives et une navigation intuitive</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="{{ route('frontend.home') }}?preview=1" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <a href="{{ route('frontend.home') }}?template=modern&preview=1" target="_blank" class="btn btn-outline-primary btn-sm">
                                             <i class="fas fa-eye"></i> Prévisualiser
                                         </a>
-                                        <button class="btn btn-primary btn-sm" disabled>
-                                            <i class="fas fa-check"></i> Activé
-                                        </button>
+                                        @if($currentTemplateName === 'modern')
+                                            <button class="btn btn-primary btn-sm" disabled>
+                                                <i class="fas fa-check"></i> Activé
+                                            </button>
+                                        @else
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="activateTemplate('modern')">
+                                                <i class="fas fa-rocket"></i> Activer
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +106,7 @@
 
                         <!-- Template Professional -->
                         <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card template-card">
+                            <div class="card template-card {{ $currentTemplateName === 'professional' ? 'border-primary' : '' }}">
                                 <div class="template-preview">
                                     <div class="preview-header bg-dark">
                                         <div class="preview-nav">
@@ -146,16 +156,26 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <h6 class="mb-0 fw-bold">Professional</h6>
-                                        <span class="badge bg-success">Nouveau</span>
+                                        @if($currentTemplateName === 'professional')
+                                            <span class="badge bg-primary">Actuel</span>
+                                        @else
+                                            <span class="badge bg-success">Nouveau</span>
+                                        @endif
                                     </div>
                                     <p class="text-muted small mb-3">Design professionnel et sobre, idéal pour les entreprises avec une approche corporate</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="previewTemplate('professional')">
+                                        <a href="{{ route('frontend.home') }}?template=professional&preview=1" target="_blank" class="btn btn-outline-primary btn-sm">
                                             <i class="fas fa-eye"></i> Prévisualiser
                                         </a>
-                                        <button class="btn btn-outline-secondary btn-sm" onclick="activateTemplate('professional')">
-                                            <i class="fas fa-rocket"></i> Activer
-                                        </button>
+                                        @if($currentTemplateName === 'professional')
+                                            <button class="btn btn-primary btn-sm" disabled>
+                                                <i class="fas fa-check"></i> Activé
+                                            </button>
+                                        @else
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="activateTemplate('professional')">
+                                                <i class="fas fa-rocket"></i> Activer
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -334,6 +354,8 @@ function previewTemplate(templateName) {
 
 function activateTemplate(templateName) {
     if (confirm('Êtes-vous sûr de vouloir activer ce template ?')) {
+        console.log('Activation du template:', templateName);
+        
         // Faire une requête pour activer le template
         fetch(`{{ route('admin.cms.templates.switch') }}`, {
             method: 'POST',
@@ -345,17 +367,22 @@ function activateTemplate(templateName) {
                 template_name: templateName
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json();
+        })
         .then(data => {
+            console.log('Response data:', data);
             if (data.success) {
+                alert('Template activé avec succès !');
                 location.reload();
             } else {
-                alert('Erreur lors de l\'activation du template');
+                alert('Erreur lors de l\'activation du template: ' + (data.message || 'Erreur inconnue'));
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Erreur lors de l\'activation du template');
+            alert('Erreur lors de l\'activation du template: ' + error.message);
         });
     }
 }

@@ -25,7 +25,7 @@ Route::get('/pricing', [PagesController::class, 'pricing'])->name('frontend.pric
 
 // Anciennes routes (compatibilité)
 Route::get('/a-propos', [HomeController::class, 'about'])->name('frontend.about.old');
-Route::get('/faq', [HomeController::class, 'faqs'])->name('frontend.faqs');
+Route::get('/faq', [PagesController::class, 'faqs'])->name('frontend.faqs');
 
 // Pages statiques avec bonnes routes
 Route::get('/features', [PagesController::class, 'features'])->name('frontend.features');

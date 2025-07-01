@@ -156,6 +156,23 @@
             max-height: 600px !important;
             min-width: 400px !important;
         }
+
+        /* Styles pour l'icône dark mode */
+        #darkModeToggle {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+        #darkModeToggle:hover {
+            color: #2563eb;
+            transform: rotate(15deg);
+        }
+        .dark-mode #darkModeToggle {
+            color: #fbbf24;
+        }
+        .dark-mode #darkModeToggle:hover {
+            color: #fcd34d;
+        }
     </style>
     @stack('styles')
 </head>
@@ -302,6 +319,12 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
+                            <!-- Dark Mode Toggle -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" id="darkModeToggle" title="{{ session('dark_mode') ? t('layout.light_mode') : t('layout.dark_mode') }}" style="font-size: 1.2rem;">
+                                    <i class="fas {{ session('dark_mode') ? 'fa-sun' : 'fa-moon' }}"></i>
+                                </a>
+                            </li>
                             <!-- Language Selector -->
                             <li class="nav-item">
                                 @include('admin.layouts.partials.language-selector')
@@ -372,6 +395,57 @@
                         bsAlert.close();
                     });
                 }, 5000); // 5000ms = 5 secondes
+            }
+
+            // Dark Mode Toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Basculer immédiatement la classe pour un retour visuel instantané
+                    const isDarkMode = document.body.classList.toggle('dark-mode');
+                    
+                    // Changer l'icône
+                    const icon = this.querySelector('i');
+                    if (isDarkMode) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        this.title = '{{ t("layout.light_mode") }}';
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        this.title = '{{ t("layout.dark_mode") }}';
+                    }
+                    
+                    // Envoyer la requête AJAX pour sauvegarder l'état
+                    fetch('{{ route("admin.settings.toggle-dark-mode") }}', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            dark_mode: isDarkMode
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Dark mode toggled:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error toggling dark mode:', error);
+                        // En cas d'erreur, revenir à l'état précédent
+                        document.body.classList.toggle('dark-mode');
+                        if (isDarkMode) {
+                            icon.classList.remove('fa-sun');
+                            icon.classList.add('fa-moon');
+                        } else {
+                            icon.classList.remove('fa-moon');
+                            icon.classList.add('fa-sun');
+                        }
+                    });
+                });
             }
         });
 

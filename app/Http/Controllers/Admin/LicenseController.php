@@ -234,13 +234,23 @@ class LicenseController extends Controller
             
             // Mettre à jour les settings selon la validité
             if ($isValid) {
-                // Licence valide - les settings sont déjà mis à jour par le LicenceService
+                // ✅ Licence valide - Forcer la mise à jour des Settings
+                Setting::set('license_valid', true);
+                Setting::set('license_status', 'active');
+                Setting::set('last_license_check', now()->toDateTimeString());
+                
+                Log::info('🎉 Licence sauvegardée avec succès et validée');
                 
                 // Message flash de succès
                 return redirect()->route('admin.settings.license')
                     ->with('success', 'La clé de licence a été validée avec succès et les informations ont été envoyées au serveur distant.');
             } else {
-                // Licence invalide - les settings sont déjà mis à jour par le LicenceService
+                // ❌ Licence invalide - Forcer la mise à jour des Settings
+                Setting::set('license_valid', false);
+                Setting::set('license_status', 'invalid');
+                Setting::set('last_license_check', now()->toDateTimeString());
+                
+                Log::warning('🔒 Licence invalide sauvegardée');
                 
                 // Message flash d'erreur
                 $message = $result['message'] ?? 'Clé de licence non valide';
@@ -254,11 +264,9 @@ class LicenseController extends Controller
             // En cas d'erreur, définir la licence comme invalide
             Setting::set('license_valid', false);
             Setting::set('license_status', 'error');
+            Setting::set('last_license_check', now()->toDateTimeString());
             
-            // Mettre à jour la session
-            session(['bypass_license_check' => false]);
-            session(['license_valid' => false]);
-            session(['license_status' => 'error']);
+            Log::warning('🔒 Erreur de validation de licence');
             
             // Message flash d'erreur
             return redirect()->route('admin.settings.license')
@@ -359,7 +367,8 @@ class LicenseController extends Controller
                 Setting::set('license_status', 'invalid');
                 Setting::set('last_license_check', now()->toDateTimeString());
                 
-                // Mettre à jour la session
+                // 🔒 SÉCURITÉ: DÉSACTIVER TOUS LES BYPASS si licence invalide
+                session(['emergency_license_bypass' => false]);
                 session(['bypass_license_check' => false]);
                 session(['license_valid' => false]);
                 session(['license_status' => 'invalid']);
@@ -390,7 +399,8 @@ class LicenseController extends Controller
             Setting::set('license_valid', false);
             Setting::set('license_status', 'error');
             
-            // Mettre à jour la session
+            // 🔒 SÉCURITÉ: DÉSACTIVER TOUS LES BYPASS en cas d'erreur
+            session(['emergency_license_bypass' => false]);
             session(['bypass_license_check' => false]);
             session(['license_valid' => false]);
             session(['license_status' => 'error']);

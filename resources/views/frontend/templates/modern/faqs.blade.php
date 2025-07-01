@@ -1,4 +1,4 @@
-@extends('frontend.templates.modern.layout')
+@extends($layout ?? 'frontend.templates.modern.layout')
 
 @section('title', 'Questions Fréquentes - AdminLicence')
 

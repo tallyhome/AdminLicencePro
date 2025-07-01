@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="text-center">
-                        <i class="fas fa-shield-alt text-white" style="font-size: 8rem; opacity: 0.3;"></i>
+                        <span class="text-white" style="font-size: 8rem; opacity: 0.3;">🛡️</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,17 @@
                     <div class="col-lg-4">
                         <div class="mission-card h-100 bg-white p-4 rounded shadow-sm">
                             <div class="mission-icon mb-3">
-                                <i class="<?php echo e($section->icon ?? 'fas fa-star'); ?> text-primary fs-2"></i>
+                                <span class="text-primary" style="font-size: 3rem;">
+                                    <?php if($section->icon && str_contains($section->icon, 'shield')): ?>
+                                        🛡️
+                                    <?php elseif($section->icon && str_contains($section->icon, 'rocket')): ?>
+                                        🚀
+                                    <?php elseif($section->icon && str_contains($section->icon, 'headset')): ?>
+                                        🎧
+                                    <?php else: ?>
+                                        ⭐
+                                    <?php endif; ?>
+                                </span>
                             </div>
                             <h4 class="fw-bold mb-3"><?php echo e($section->title); ?></h4>
                             <p class="text-muted"><?php echo e($section->content); ?></p>
@@ -46,7 +56,7 @@
                     <div class="col-lg-4">
                         <div class="mission-card h-100 bg-white p-4 rounded shadow-sm">
                             <div class="mission-icon mb-3">
-                                <i class="fas fa-shield-alt text-primary fs-2"></i>
+                                <span class="text-primary" style="font-size: 3rem;">🛡️</span>
                             </div>
                             <h4 class="fw-bold mb-3">Sécurité</h4>
                             <p class="text-muted">Protection maximale de vos licences avec un chiffrement de niveau militaire.</p>
@@ -55,7 +65,7 @@
                     <div class="col-lg-4">
                         <div class="mission-card h-100 bg-white p-4 rounded shadow-sm">
                             <div class="mission-icon mb-3">
-                                <i class="fas fa-rocket text-primary fs-2"></i>
+                                <span class="text-primary" style="font-size: 3rem;">🚀</span>
                             </div>
                             <h4 class="fw-bold mb-3">Performance</h4>
                             <p class="text-muted">Des API ultra-rapides pour une validation de licences en temps réel.</p>
@@ -64,7 +74,7 @@
                     <div class="col-lg-4">
                         <div class="mission-card h-100 bg-white p-4 rounded shadow-sm">
                             <div class="mission-icon mb-3">
-                                <i class="fas fa-headset text-primary fs-2"></i>
+                                <span class="text-primary" style="font-size: 3rem;">🎧</span>
                             </div>
                             <h4 class="fw-bold mb-3">Support</h4>
                             <p class="text-muted">Une équipe dédiée pour vous accompagner à chaque étape.</p>
@@ -113,9 +123,14 @@
             <div class="text-center">
                 <h2 class="display-6 fw-bold mb-3">Prêt à nous rejoindre ?</h2>
                 <p class="lead mb-4">Découvrez comment AdminLicence peut protéger vos logiciels</p>
-                <a href="<?php echo e(route('frontend.contact')); ?>" class="btn btn-light btn-lg px-4">
-                    <i class="fas fa-phone me-2"></i>Contactez-nous
-                </a>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="<?php echo e(route('frontend.contact')); ?>" class="btn btn-light btn-lg px-4">
+                        <span class="me-2">📞</span>Contactez-nous
+                    </a>
+                    <a href="<?php echo e(route('frontend.pricing')); ?>" class="btn btn-outline-light btn-lg px-4">
+                        <span class="me-2">🏷️</span>Voir les tarifs
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -146,4 +161,4 @@
 }
 </style>
 <?php $__env->stopSection(); ?> 
-<?php echo $__env->make('frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\about.blade.php ENDPATH**/ ?>
+<?php echo $__env->make($layout ?? 'frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\about.blade.php ENDPATH**/ ?>

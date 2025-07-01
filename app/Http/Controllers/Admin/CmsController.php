@@ -189,10 +189,9 @@ class CmsController extends Controller
      */
     public function templates()
     {
-        $currentTemplate = CmsTemplate::getDefault();
-        $templates = CmsTemplate::active()->get();
-
-        return view('admin.cms.templates.index', compact('currentTemplate', 'templates'));
+        $currentTemplateName = Setting::get('cms_current_template', 'modern');
+        
+        return view('admin.cms.templates.index', compact('currentTemplateName'));
     }
 
     /**

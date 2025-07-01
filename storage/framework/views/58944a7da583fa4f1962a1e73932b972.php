@@ -208,4 +208,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\pricing.blade.php ENDPATH**/ ?>
+<?php echo $__env->make($layout ?? 'frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\pricing.blade.php ENDPATH**/ ?>

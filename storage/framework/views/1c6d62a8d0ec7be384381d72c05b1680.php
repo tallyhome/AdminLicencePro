@@ -13,8 +13,8 @@
                     <p class="lead mb-4">Notre équipe est là pour répondre à toutes vos questions et vous accompagner dans votre projet.</p>
                     <div class="contact-info">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3">
-                                <i class="fas fa-envelope text-white"></i>
+                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                <span class="text-white" style="font-size: 18px;">📧</span>
                             </div>
                             <div>
                                 <h6 class="mb-0 text-white">Email</h6>
@@ -22,8 +22,8 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3">
-                                <i class="fas fa-phone text-white"></i>
+                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                <span class="text-white" style="font-size: 18px;">📞</span>
                             </div>
                             <div>
                                 <h6 class="mb-0 text-white">Téléphone</h6>
@@ -31,8 +31,8 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3">
-                                <i class="fas fa-clock text-white"></i>
+                            <div class="bg-white bg-opacity-20 rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                <span class="text-white" style="font-size: 18px;">🕒</span>
                             </div>
                             <div>
                                 <h6 class="mb-0 text-white">Horaires</h6>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact-visual text-center">
-                        <i class="fas fa-headset text-white" style="font-size: 8rem; opacity: 0.3;"></i>
+                        <span class="text-white" style="font-size: 8rem; opacity: 0.3;">🎧</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <div class="card-body p-5">
                             <?php if(session('success')): ?>
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span class="me-2">✅</span>
                                     <?php echo e(session('success')); ?>
 
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -72,7 +72,7 @@
 
                             <?php if(session('error')): ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    <span class="me-2">❌</span>
                                     <?php echo e(session('error')); ?>
 
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -93,7 +93,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" 
                                                    id="name" name="name" placeholder="Votre nom" value="<?php echo e(old('name')); ?>" required>
-                                            <label for="name"><i class="fas fa-user me-2"></i>Nom complet *</label>
+                                            <label for="name"><span class="me-2">👤</span>Nom complet *</label>
                                             <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -117,7 +117,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" 
                                                    id="email" name="email" placeholder="votre@email.com" value="<?php echo e(old('email')); ?>" required>
-                                            <label for="email"><i class="fas fa-envelope me-2"></i>Email *</label>
+                                            <label for="email"><span class="me-2">📧</span>Email *</label>
                                             <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -141,7 +141,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" 
                                                    id="subject" name="subject" placeholder="Sujet" value="<?php echo e(old('subject')); ?>" required>
-                                            <label for="subject"><i class="fas fa-tag me-2"></i>Sujet *</label>
+                                            <label for="subject"><span class="me-2">🏷️</span>Sujet *</label>
                                             <?php $__errorArgs = ['subject'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -166,7 +166,7 @@ endif;
 unset($__errorArgs, $__bag); ?>" 
                                                       id="message" name="message" placeholder="Votre message" 
                                                       style="height: 120px;" required><?php echo e(old('message')); ?></textarea>
-                                            <label for="message"><i class="fas fa-comment me-2"></i>Message *</label>
+                                            <label for="message"><span class="me-2">💬</span>Message *</label>
                                             <?php $__errorArgs = ['message'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -183,7 +183,7 @@ unset($__errorArgs, $__bag); ?>
 
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
-                                        <i class="fas fa-paper-plane me-2"></i>
+                                        <span class="me-2">📤</span>
                                         Envoyer le message
                                     </button>
                                 </div>
@@ -207,14 +207,14 @@ unset($__errorArgs, $__bag); ?>
                 <div class="col-lg-6">
                     <div class="faq-item mb-4">
                         <h5 class="fw-bold text-primary mb-2">
-                            <i class="fas fa-question-circle me-2"></i>
+                            <span class="me-2">❓</span>
                             Comment démarrer avec AdminLicence ?
                         </h5>
                         <p class="text-muted">Inscrivez-vous pour un compte gratuit et suivez notre guide de démarrage rapide. Notre équipe peut aussi vous accompagner.</p>
                     </div>
                     <div class="faq-item mb-4">
                         <h5 class="fw-bold text-primary mb-2">
-                            <i class="fas fa-question-circle me-2"></i>
+                            <span class="me-2">❓</span>
                             Quel support proposez-vous ?
                         </h5>
                         <p class="text-muted">Support email pour tous, support prioritaire pour les plans Pro, et support dédié 24/7 pour Enterprise.</p>
@@ -223,14 +223,14 @@ unset($__errorArgs, $__bag); ?>
                 <div class="col-lg-6">
                     <div class="faq-item mb-4">
                         <h5 class="fw-bold text-primary mb-2">
-                            <i class="fas fa-question-circle me-2"></i>
+                            <span class="me-2">❓</span>
                             Puis-je essayer avant d'acheter ?
                         </h5>
                         <p class="text-muted">Oui ! Nous proposons une période d'essai gratuite de 14 jours sans engagement.</p>
                     </div>
                     <div class="faq-item mb-4">
                         <h5 class="fw-bold text-primary mb-2">
-                            <i class="fas fa-question-circle me-2"></i>
+                            <span class="me-2">❓</span>
                             Les données sont-elles sécurisées ?
                         </h5>
                         <p class="text-muted">Absolument. Nous utilisons un chiffrement 256-bit et respectons les normes de sécurité les plus strictes.</p>
@@ -238,12 +238,12 @@ unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
             
-            <div class="text-center mt-4">
-                <a href="<?php echo e(route('frontend.pricing')); ?>" class="btn btn-outline-primary me-3">
-                    <i class="fas fa-tags me-2"></i>Voir les tarifs
+                        <div class="text-center mt-4">
+                <a href="<?php echo e(route('frontend.faqs')); ?>" class="btn btn-primary me-3">
+                    <span class="me-2">❓</span>Voir toutes les FAQs
                 </a>
-                <a href="#" class="btn btn-primary">
-                    <i class="fas fa-rocket me-2"></i>Essai gratuit
+                <a href="<?php echo e(route('frontend.pricing')); ?>" class="btn btn-outline-primary">
+                    <span class="me-2">🏷️</span>Voir les tarifs
                 </a>
             </div>
         </div>
@@ -287,4 +287,4 @@ unset($__errorArgs, $__bag); ?>
 }
 </style>
 <?php $__env->stopSection(); ?> 
-<?php echo $__env->make('frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\contact.blade.php ENDPATH**/ ?>
+<?php echo $__env->make($layout ?? 'frontend.templates.modern.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\frontend\pages\contact.blade.php ENDPATH**/ ?>
