@@ -1,4 +1,4 @@
-@extends('client.layouts.app')
+@extends('layouts.client')
 
 @section('title', 'Analytics')
 
@@ -96,14 +96,15 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Validations de Licences</h6>
                     <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" 
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
                             <div class="dropdown-header">Période:</div>
-                            <a class="dropdown-item" href="#" onclick="updateChart('7days')">7 derniers jours</a>
-                            <a class="dropdown-item" href="#" onclick="updateChart('30days')">30 derniers jours</a>
-                            <a class="dropdown-item" href="#" onclick="updateChart('90days')">90 derniers jours</a>
+                            <a class="dropdown-item" href="#" onclick="updateChart('7days'); return false;">7 derniers jours</a>
+                            <a class="dropdown-item" href="#" onclick="updateChart('30days'); return false;">30 derniers jours</a>
+                            <a class="dropdown-item" href="#" onclick="updateChart('90days'); return false;">90 derniers jours</a>
                         </div>
                     </div>
                 </div>
@@ -219,10 +220,10 @@ const validationsCtx = document.getElementById('validationsChart').getContext('2
 const validationsChart = new Chart(validationsCtx, {
     type: 'line',
     data: {
-        labels: {!! json_encode($chartData['validations']['labels']) !!},
+        labels: {!! json_encode($chartData['validations']['labels'] ?? []) !!},
         datasets: [{
             label: 'Validations',
-            data: {!! json_encode($chartData['validations']['data']) !!},
+            data: {!! json_encode($chartData['validations']['data'] ?? []) !!},
             borderColor: '#4e73df',
             backgroundColor: 'rgba(78, 115, 223, 0.1)',
             borderWidth: 2,
@@ -236,25 +237,86 @@ const validationsChart = new Chart(validationsCtx, {
             y: {
                 beginAtZero: true
             }
+        },
+        plugins: {
+            legend: {
+                display: true
+            }
         }
     }
 });
 
+// Graphique des projets avec gestion des données vides
+const projectsData = {!! json_encode($chartData['projects'] ?? []) !!};
 const projectsCtx = document.getElementById('projectsChart').getContext('2d');
-const projectsChart = new Chart(projectsCtx, {
-    type: 'doughnut',
-    data: {
-        labels: {!! json_encode(array_column($chartData['projects'], 'name')) !!},
-        datasets: [{
-            data: {!! json_encode(array_column($chartData['projects'], 'value')) !!},
-            backgroundColor: {!! json_encode(array_column($chartData['projects'], 'color')) !!}
+
+let projectsChart;
+if (projectsData.length > 0) {
+    projectsChart = new Chart(projectsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: projectsData.map(p => p.name),
+            datasets: [{
+                data: projectsData.map(p => p.value),
+                backgroundColor: projectsData.map(p => p.color)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+} else {
+    // Graphique vide avec message
+    projectsChart = new Chart(projectsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Aucune donnée'],
+            datasets: [{
+                data: [1],
+                backgroundColor: ['#e3e6f0'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            elements: {
+                arc: {
+                    borderWidth: 0
+                }
+            }
+        },
+        plugins: [{
+            beforeDraw: function(chart) {
+                const ctx = chart.ctx;
+                const width = chart.width;
+                const height = chart.height;
+                
+                ctx.restore();
+                ctx.font = '16px Arial';
+                ctx.fillStyle = '#858796';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Aucune donnée disponible', width / 2, height / 2);
+                ctx.save();
+            }
         }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
+    });
+}
 
 // Fonctions d'export
 function exportData(format) {
@@ -267,11 +329,23 @@ function updateChart(period) {
     fetch(`{{ route('client.analytics.chart-data') }}?period=${period}`)
         .then(response => response.json())
         .then(data => {
-            validationsChart.data.labels = data.labels;
-            validationsChart.data.datasets[0].data = data.data;
-            validationsChart.update();
+            if (data.success) {
+                validationsChart.data.labels = data.labels;
+                validationsChart.data.datasets[0].data = data.data;
+                validationsChart.update();
+            } else {
+                console.error('Erreur lors de la mise à jour du graphique:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur de réseau:', error);
         });
 }
+
+// Initialisation Bootstrap dropdowns
+$(document).ready(function() {
+    $('.dropdown-toggle').dropdown();
+});
 </script>
 @endpush
 @endsection 

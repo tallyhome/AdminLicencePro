@@ -7,6 +7,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class ClientAuthController extends Controller
@@ -60,7 +61,14 @@ class ClientAuthController extends Controller
         // Connecter le client
         Auth::guard('client')->login($client, $request->boolean('remember'));
 
+        // Régénérer la session
         $request->session()->regenerate();
+        
+        // Stocker l'ID du client en session pour une vérification directe
+        $request->session()->put('client_id', $client->id);
+        
+        // Log pour débogage
+        Log::debug('Client connecté avec succès', ['client_id' => $client->id]);
 
         return redirect()->intended(route('client.dashboard'))
             ->with('success', 'Connexion réussie !');
@@ -73,6 +81,9 @@ class ClientAuthController extends Controller
     {
         Auth::guard('client')->logout();
 
+        // Supprimer l'ID client de la session
+        $request->session()->forget('client_id');
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

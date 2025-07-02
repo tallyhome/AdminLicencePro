@@ -41,161 +41,31 @@ class DashboardController extends Controller
             // Récupérer l'abonnement actuel
             $subscription = $tenant->subscriptions()->with('plan')->latest()->first();
             
-            // DONNÉES DE DÉMONSTRATION pour voir le dashboard complet
-            $usageStats = [
-                'projects' => [
-                    'count' => 3,
-                    'limit' => 10,
-                    'percentage' => 30,
-                    'status' => 'success'
-                ],
-                'licenses' => [
-                    'count' => 15,
-                    'limit' => 100,
-                    'percentage' => 15,
-                    'status' => 'success'
-                ],
-                'active_licenses' => 12,
-                'total_activations' => 28,
-                'storage_used' => [
-                    'used_mb' => 45.7,
-                    'used_formatted' => '45.7 MB',
-                    'limit_mb' => 1000,
-                    'percentage' => 4.6
-                ]
-            ];
+            // Récupérer les statistiques d'utilisation réelles
+            $usageStats = $this->getUsageStatistics($tenant, $subscription);
             
-            // Notifications de démonstration
-            $notifications = [
-                [
-                    'type' => 'info',
-                    'icon' => 'fas fa-key',
-                    'title' => 'Licences expirant bientôt',
-                    'message' => '2 licence(s) vont expirer dans les 30 prochains jours.',
-                    'action' => [
-                        'text' => 'Voir les licences',
-                        'url' => route('client.licenses.index')
-                    ]
-                ],
-                [
-                    'type' => 'success',
-                    'icon' => 'fas fa-chart-line',
-                    'title' => 'Performance excellente',
-                    'message' => 'Vos licences fonctionnent parfaitement ce mois-ci.',
-                    'action' => null
-                ]
-            ];
+            // Récupérer les notifications importantes
+            $notifications = $this->getImportantNotifications($tenant, $subscription);
             
-            // Données de graphiques de démonstration
-            $chartsData = [
-                'labels' => ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'],
-                'data' => [2, 5, 3, 8, 4, 6],
-                'licenses_over_time' => collect([
-                    '2024-01-01' => 2,
-                    '2024-02-01' => 5,
-                    '2024-03-01' => 3,
-                    '2024-04-01' => 8,
-                    '2024-05-01' => 4,
-                    '2024-06-01' => 6
-                ]),
-                'licenses_by_status' => collect([
-                    'active' => 12,
-                    'inactive' => 3
-                ]),
-                'activations_over_time' => collect([
-                    '2024-01-01' => 4,
-                    '2024-02-01' => 8,
-                    '2024-03-01' => 6,
-                    '2024-04-01' => 12,
-                    '2024-05-01' => 7,
-                    '2024-06-01' => 9
-                ]),
-                'period' => 30
-            ];
+            // Récupérer les données des graphiques
+            $chartsData = $this->getChartsData($tenant, $request->get('period', 30));
             
-            // Activité récente de démonstration
-            $recentActivity = collect([
-                [
-                    'type' => 'project_created',
-                    'icon' => 'fas fa-folder-plus text-primary',
-                    'title' => 'Nouveau projet créé',
-                    'description' => 'Application Mobile',
-                    'date' => now()->subDays(2),
-                    'url' => '#'
-                ],
-                [
-                    'type' => 'license_created',
-                    'icon' => 'fas fa-key text-success',
-                    'title' => 'Nouvelle licence générée',
-                    'description' => 'Site Web E-commerce',
-                    'date' => now()->subDays(1),
-                    'url' => '#'
-                ],
-                [
-                    'type' => 'activation',
-                    'icon' => 'fas fa-play text-info',
-                    'title' => 'Licence activée',
-                    'description' => 'API REST - example.com',
-                    'date' => now()->subHours(3),
-                    'url' => '#'
-                ]
-            ]);
+            // Récupérer l'activité récente
+            $recentActivity = $this->getRecentActivity($tenant);
             
-            // Projets récents de démonstration
-            $recentProjects = collect([
-                (object)[
-                    'id' => 1,
-                    'name' => 'Application Mobile',
-                    'description' => 'App iOS/Android',
-                    'status' => 'active',
-                    'created_at' => now()->subDays(5),
-                    'serialKeys' => collect([1, 2, 3]) // Simule 3 licences
-                ],
-                (object)[
-                    'id' => 2,
-                    'name' => 'Site Web E-commerce',
-                    'description' => 'Boutique en ligne',
-                    'status' => 'active',
-                    'created_at' => now()->subDays(10),
-                    'serialKeys' => collect([1, 2, 3, 4, 5]) // Simule 5 licences
-                ],
-                (object)[
-                    'id' => 3,
-                    'name' => 'API REST',
-                    'description' => 'Services web',
-                    'status' => 'active',
-                    'created_at' => now()->subDays(15),
-                    'serialKeys' => collect([1, 2, 3, 4, 5, 6, 7]) // Simule 7 licences
-                ]
-            ]);
-                
-            // Licences récentes de démonstration
-            $recentLicenses = collect([
-                (object)[
-                    'id' => 1,
-                    'serial_key' => 'DEMO-1234-ABCD-5678',
-                    'status' => 'active',
-                    'expires_at' => now()->addDays(90),
-                    'created_at' => now()->subDays(2),
-                    'project' => (object)['name' => 'Application Mobile']
-                ],
-                (object)[
-                    'id' => 2,
-                    'serial_key' => 'DEMO-5678-EFGH-9012',
-                    'status' => 'active',
-                    'expires_at' => now()->addDays(60),
-                    'created_at' => now()->subDays(1),
-                    'project' => (object)['name' => 'Site Web E-commerce']
-                ],
-                (object)[
-                    'id' => 3,
-                    'serial_key' => 'DEMO-9012-IJKL-3456',
-                    'status' => 'active',
-                    'expires_at' => now()->addDays(120),
-                    'created_at' => now()->subHours(5),
-                    'project' => (object)['name' => 'API REST']
-                ]
-            ]);
+            // Récupérer les projets récents
+            $recentProjects = $tenant->projects()
+                ->with('serialKeys')
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
+            
+            // Récupérer les licences récentes
+            $recentLicenses = $tenant->serialKeys()
+                ->with('project')
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
 
             return view('client.dashboard', compact(
                 'client',
@@ -216,7 +86,7 @@ class DashboardController extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
             
-            return $this->returnFallbackDashboard($client ?? null, 'Une erreur est survenue lors du chargement du dashboard.');
+            return $this->returnFallbackDashboard($client ?? null, 'Une erreur technique est survenue. Veuillez réessayer plus tard.');
         }
     }
 
@@ -230,14 +100,35 @@ class DashboardController extends Controller
             'tenant' => $client ? $client->tenant : null,
             'subscription' => null,
             'usageStats' => [
-                'projects' => ['count' => 0, 'limit' => 10, 'percentage' => 0, 'status' => 'success'],
-                'licenses' => ['count' => 0, 'limit' => 100, 'percentage' => 0, 'status' => 'success'],
-                'active_licenses' => 0,
-                'total_activations' => 0,
-                'storage_used' => '0 B'
+                'projects' => [
+                    'count' => 0, 
+                    'limit' => 10, 
+                    'percentage' => 0, 
+                    'status' => 'success',
+                    'text' => '0 sur 10 projets'
+                ],
+                'licenses' => [
+                    'count' => 0, 
+                    'limit' => 100, 
+                    'percentage' => 0, 
+                    'status' => 'success',
+                    'text' => '0 sur 100 licences'
+                ],
+                'active_licenses' => [
+                    'count' => 0,
+                    'text' => 'Licences actives'
+                ],
+                'total_activations' => [
+                    'count' => 0,
+                    'text' => 'Activations totales'
+                ]
             ],
             'notifications' => [],
-            'chartsData' => ['labels' => [], 'data' => []],
+            'chartsData' => [
+                'labels' => [], 
+                'data' => [],
+                'datasets' => []
+            ],
             'recentActivity' => [],
             'recentProjects' => collect(),
             'recentLicenses' => collect(),
@@ -250,46 +141,45 @@ class DashboardController extends Controller
      */
     private function getUsageStatistics($tenant, $subscription)
     {
-        try {
-            $plan = $subscription ? $subscription->plan : null;
-            
-            // Compter les ressources utilisées
-            $projectsCount = $tenant->projects()->count();
-            $licensesCount = $tenant->serialKeys()->count();
-            $activeLicensesCount = $tenant->serialKeys()->where('status', 'active')->count();
-            $totalActivations = $tenant->serialKeys()->sum('current_activations') ?? 0;
-            
-            // Limites du plan
-            $projectsLimit = $plan ? $plan->max_projects : 0;
-            $licensesLimit = $plan ? $plan->max_licenses : 0;
-            
-            return [
-                'projects' => [
-                    'count' => $projectsCount,
-                    'limit' => $projectsLimit,
-                    'percentage' => $projectsLimit > 0 ? min(100, round(($projectsCount / $projectsLimit) * 100)) : 0,
-                    'status' => $projectsLimit > 0 && $projectsCount >= $projectsLimit ? 'danger' : 'success'
-                ],
-                'licenses' => [
-                    'count' => $licensesCount,
-                    'limit' => $licensesLimit,
-                    'percentage' => $licensesLimit > 0 ? min(100, round(($licensesCount / $licensesLimit) * 100)) : 0,
-                    'status' => $licensesLimit > 0 && $licensesCount >= $licensesLimit ? 'danger' : 'success'
-                ],
-                'active_licenses' => $activeLicensesCount,
-                'total_activations' => $totalActivations,
-                'storage_used' => $this->calculateStorageUsed($tenant),
-            ];
-        } catch (\Exception $e) {
-            \Log::warning('Error getting usage statistics: ' . $e->getMessage());
-            return [
-                'projects' => ['count' => 0, 'limit' => 0, 'percentage' => 0, 'status' => 'success'],
-                'licenses' => ['count' => 0, 'limit' => 0, 'percentage' => 0, 'status' => 'success'],
-                'active_licenses' => 0,
-                'total_activations' => 0,
-                'storage_used' => '0 B',
-            ];
-        }
+        $plan = $subscription ? $subscription->plan : null;
+        
+        // Compter les projets et licences réels
+        $projectCount = $tenant->projects()->count();
+        $licenseCount = $tenant->serialKeys()->count();
+        $activeLicenseCount = $tenant->serialKeys()->where('serial_keys.status', 'active')->count();
+        $totalActivations = $tenant->serialKeys()->sum('activation_count');
+        
+        // Calculer les limites et pourcentages
+        $projectLimit = $plan ? ($plan->max_projects === -1 ? 'Illimité' : $plan->max_projects) : 0;
+        $licenseLimit = $plan ? ($plan->max_licenses === -1 ? 'Illimité' : $plan->max_licenses) : 0;
+        
+        $projectPercentage = $projectLimit !== 'Illimité' ? round(($projectCount / $projectLimit) * 100) : 0;
+        $licensePercentage = $licenseLimit !== 'Illimité' ? round(($licenseCount / $licenseLimit) * 100) : 0;
+        
+        return [
+            'projects' => [
+                'count' => $projectCount,
+                'limit' => $projectLimit,
+                'percentage' => $projectPercentage,
+                'status' => $projectPercentage < 80 ? 'success' : ($projectPercentage < 90 ? 'warning' : 'danger'),
+                'text' => $projectLimit === 'Illimité' ? 'Projets illimités' : $projectCount . ' sur ' . $projectLimit . ' projets'
+            ],
+            'licenses' => [
+                'count' => $licenseCount,
+                'limit' => $licenseLimit,
+                'percentage' => $licensePercentage,
+                'status' => $licensePercentage < 80 ? 'success' : ($licensePercentage < 90 ? 'warning' : 'danger'),
+                'text' => $licenseLimit === 'Illimité' ? 'Licences illimitées' : $licenseCount . ' sur ' . $licenseLimit . ' licences'
+            ],
+            'active_licenses' => [
+                'count' => $activeLicenseCount,
+                'text' => 'Licences actives'
+            ],
+            'total_activations' => [
+                'count' => $totalActivations,
+                'text' => 'Activations totales'
+            ]
+        ];
     }
 
     /**
@@ -297,148 +187,129 @@ class DashboardController extends Controller
      */
     private function getImportantNotifications($tenant, $subscription)
     {
-        try {
-            $notifications = [];
+        $notifications = [];
+        
+        // Vérifier les licences qui expirent bientôt
+        $expiringLicenses = $tenant->serialKeys()
+            ->where('serial_keys.status', 'active')
+            ->where('serial_keys.expires_at', '<=', now()->addDays(30))
+            ->where('serial_keys.expires_at', '>', now())
+            ->count();
             
-            // Vérifier l'expiration de l'abonnement
-            if ($subscription && $subscription->ends_at) {
-                $daysLeft = now()->diffInDays($subscription->ends_at, false);
-                
-                if ($daysLeft <= 7 && $daysLeft > 0) {
-                    $notifications[] = [
-                        'type' => 'warning',
-                        'icon' => 'fas fa-exclamation-triangle',
-                        'title' => 'Abonnement expire bientôt',
-                        'message' => "Votre abonnement expire dans {$daysLeft} jour(s). Renouvelez-le pour continuer à utiliser nos services.",
-                        'action' => [
-                            'text' => 'Renouveler',
-                            'url' => '#'
-                        ]
-                    ];
-                } elseif ($daysLeft <= 0) {
-                    $notifications[] = [
-                        'type' => 'danger',
-                        'icon' => 'fas fa-times-circle',
-                        'title' => 'Abonnement expiré',
-                        'message' => 'Votre abonnement a expiré. Renouvelez-le immédiatement pour restaurer l\'accès.',
-                        'action' => [
-                            'text' => 'Renouveler maintenant',
-                            'url' => '#'
-                        ]
-                    ];
-                }
-            }
-            
-            // Vérifier les limites du plan (version sécurisée)
-            try {
-                $usageStats = $this->tenantService->checkTenantLimits($tenant);
-                
-                if (!$usageStats['within_limits']) {
-                    $notifications[] = [
-                        'type' => 'warning',
-                        'icon' => 'fas fa-chart-line',
-                        'title' => 'Limites du plan atteintes',
-                        'message' => 'Vous avez atteint les limites de votre plan actuel. Passez à un plan supérieur pour continuer.',
-                        'action' => [
-                            'text' => 'Voir les plans',
-                            'url' => '#'
-                        ]
-                    ];
-                }
-            } catch (\Exception $e) {
-                \Log::warning('Error checking tenant limits: ' . $e->getMessage());
-            }
-            
-            // Vérifier les licences qui vont expirer
-            try {
-                $expiringLicenses = $tenant->serialKeys()
-                    ->where('expires_at', '<=', now()->addDays(30))
-                    ->where('expires_at', '>', now())
-                    ->count();
-                    
-                if ($expiringLicenses > 0) {
-                    $notifications[] = [
-                        'type' => 'info',
-                        'icon' => 'fas fa-key',
-                        'title' => 'Licences expirant bientôt',
-                        'message' => "{$expiringLicenses} licence(s) vont expirer dans les 30 prochains jours.",
-                        'action' => [
-                            'text' => 'Voir les licences',
-                            'url' => route('client.licenses.index')
-                        ]
-                    ];
-                }
-            } catch (\Exception $e) {
-                \Log::warning('Error checking expiring licenses: ' . $e->getMessage());
-            }
-            
-            return $notifications;
-        } catch (\Exception $e) {
-            \Log::warning('Error getting notifications: ' . $e->getMessage());
-            return [];
+        if ($expiringLicenses > 0) {
+            $notifications[] = [
+                'type' => 'warning',
+                'icon' => 'fas fa-exclamation-triangle',
+                'title' => $expiringLicenses . ' licence(s) vont expirer dans les 30 prochains jours',
+                'message' => 'Pensez à renouveler vos licences avant leur expiration.',
+                'action' => [
+                    'text' => 'Voir les licences',
+                    'url' => route('client.licenses.index', ['status' => 'expiring'])
+                ]
+            ];
         }
+        
+        // Vérifier les limites d'utilisation
+        if ($subscription && $subscription->plan) {
+            $projectCount = $tenant->projects()->count();
+            $licenseCount = $tenant->serialKeys()->count();
+            
+            if ($subscription->plan->max_projects !== -1 && $projectCount >= $subscription->plan->max_projects * 0.9) {
+                $notifications[] = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-circle',
+                    'title' => 'Limite de projets presque atteinte',
+                    'message' => 'Vous approchez de la limite de projets de votre plan.',
+                    'action' => [
+                        'text' => 'Changer de plan',
+                        'url' => route('client.subscription.plans')
+                    ]
+                ];
+            }
+            
+            if ($subscription->plan->max_licenses !== -1 && $licenseCount >= $subscription->plan->max_licenses * 0.9) {
+                $notifications[] = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-circle',
+                    'title' => 'Limite de licences presque atteinte',
+                    'message' => 'Vous approchez de la limite de licences de votre plan.',
+                    'action' => [
+                        'text' => 'Changer de plan',
+                        'url' => route('client.subscription.plans')
+                    ]
+                ];
+            }
+        }
+        
+        // Vérifier les licences expirées
+        $expiredLicenses = $tenant->serialKeys()
+            ->where('serial_keys.expires_at', '<', now())
+            ->count();
+            
+        if ($expiredLicenses > 0) {
+            $notifications[] = [
+                'type' => 'danger',
+                'icon' => 'fas fa-times-circle',
+                'title' => $expiredLicenses . ' licence(s) expirée(s)',
+                'message' => 'Certaines de vos licences ont expiré et ne sont plus utilisables.',
+                'action' => [
+                    'text' => 'Voir les licences',
+                    'url' => route('client.licenses.index', ['status' => 'expired'])
+                ]
+            ];
+        }
+        
+        return $notifications;
     }
 
     /**
-     * Obtenir les données pour les graphiques
+     * Obtenir les données des graphiques
      */
     private function getChartsData($tenant, $period = 30)
     {
-        try {
-            $startDate = now()->subDays($period);
+        $endDate = now();
+        $startDate = now()->subDays($period);
+        
+        // Récupérer les activations par jour
+        $activations = DB::table('serial_key_activations')
+            ->join('serial_keys', 'serial_key_activations.serial_key_id', '=', 'serial_keys.id')
+            ->where('serial_keys.tenant_id', $tenant->id)
+            ->whereBetween('serial_key_activations.created_at', [$startDate, $endDate])
+            ->groupBy(DB::raw('DATE(serial_key_activations.created_at)'))
+            ->select(
+                DB::raw('DATE(serial_key_activations.created_at) as date'),
+                DB::raw('COUNT(*) as count')
+            )
+            ->get();
             
-            // Évolution des licences créées
-            $licensesOverTime = $tenant->serialKeys()
-                ->where('created_at', '>=', $startDate)
-                ->select(
-                    DB::raw('DATE(created_at) as date'),
-                    DB::raw('COUNT(*) as count')
-                )
-                ->groupBy('date')
-                ->orderBy('date')
-                ->get()
-                ->mapWithKeys(function ($item) {
-                    return [$item->date => $item->count];
-                });
-
-            // Répartition par statut des licences
-            $licensesByStatus = $tenant->serialKeys()
-                ->select('status', DB::raw('COUNT(*) as count'))
-                ->groupBy('status')
-                ->get()
-                ->mapWithKeys(function ($item) {
-                    return [$item->status => $item->count];
-                });
-
-            // Activations par jour
-            $activationsOverTime = $tenant->serialKeys()
-                ->where('last_activation_at', '>=', $startDate)
-                ->select(
-                    DB::raw('DATE(last_activation_at) as date'),
-                    DB::raw('SUM(current_activations) as activations')
-                )
-                ->groupBy('date')
-                ->orderBy('date')
-                ->get()
-                ->mapWithKeys(function ($item) {
-                    return [$item->date => $item->activations ?? 0];
-                });
-
-            return [
-                'licenses_over_time' => $licensesOverTime,
-                'licenses_by_status' => $licensesByStatus,
-                'activations_over_time' => $activationsOverTime,
-                'period' => $period
-            ];
-        } catch (\Exception $e) {
-            \Log::warning('Error getting charts data: ' . $e->getMessage());
-            return [
-                'licenses_over_time' => collect(),
-                'licenses_by_status' => collect(),
-                'activations_over_time' => collect(),
-                'period' => $period
-            ];
+        // Créer un tableau avec toutes les dates de la période
+        $dates = collect();
+        for ($date = $startDate->copy(); $date <= $endDate; $date->addDay()) {
+            $dates->put($date->format('Y-m-d'), 0);
         }
+        
+        // Remplir avec les données réelles
+        foreach ($activations as $activation) {
+            $dates->put($activation->date, $activation->count);
+        }
+        
+        // Formater les données pour le graphique
+        return [
+            'labels' => $dates->keys()->map(function($date) {
+                return Carbon::parse($date)->format('d/m');
+            })->values(),
+            'datasets' => [
+                [
+                    'label' => 'Activations',
+                    'data' => $dates->values(),
+                    'borderColor' => '#4e73df',
+                    'backgroundColor' => 'rgba(78, 115, 223, 0.1)',
+                    'borderWidth' => 2,
+                    'fill' => true,
+                    'tension' => 0.4
+                ]
+            ]
+        ];
     }
 
     /**
@@ -446,50 +317,63 @@ class DashboardController extends Controller
      */
     private function getRecentActivity($tenant)
     {
-        try {
-            $activities = collect();
+        $activity = collect();
+        
+        // Récupérer les derniers projets créés
+        $tenant->projects()
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get()
+            ->each(function($project) use ($activity) {
+                $activity->push([
+                    'type' => 'project',
+                    'icon' => 'fas fa-folder',
+                    'color' => 'primary',
+                    'title' => $project->name,
+                    'description' => 'Nouveau projet créé',
+                    'date' => $project->created_at,
+                    'url' => route('client.projects.show', $project)
+                ]);
+            });
             
-            // Projets récents
-            $recentProjects = $tenant->projects()
-                ->latest()
-                ->take(3)
-                ->get()
-                ->map(function ($project) {
-                    return [
-                        'type' => 'project_created',
-                        'icon' => 'fas fa-folder-plus text-primary',
-                        'title' => 'Nouveau projet créé',
-                        'description' => $project->name,
-                        'date' => $project->created_at,
-                        'url' => route('client.projects.show', $project)
-                    ];
-                });
-                
-            // Licences récentes
-            $recentLicenses = $tenant->serialKeys()
-                ->latest()
-                ->take(3)
-                ->get()
-                ->map(function ($license) {
-                    return [
-                        'type' => 'license_created',
-                        'icon' => 'fas fa-key text-success',
-                        'title' => 'Nouvelle licence générée',
-                        'description' => $license->project->name ?? 'Projet inconnu',
-                        'date' => $license->created_at,
-                        'url' => route('client.licenses.show', $license)
-                    ];
-                });
-                
-            return $activities
-                ->merge($recentProjects)
-                ->merge($recentLicenses)
-                ->sortByDesc('date')
-                ->take(10);
-        } catch (\Exception $e) {
-            \Log::warning('Error getting recent activity: ' . $e->getMessage());
-            return collect();
-        }
+        // Récupérer les dernières licences créées
+        $tenant->serialKeys()
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get()
+            ->each(function($license) use ($activity) {
+                $activity->push([
+                    'type' => 'license',
+                    'icon' => 'fas fa-key',
+                    'color' => 'success',
+                    'title' => $license->serial_key,
+                    'description' => 'Nouvelle licence générée',
+                    'date' => $license->created_at,
+                    'url' => route('client.licenses.show', $license)
+                ]);
+            });
+            
+        // Récupérer les dernières activations
+        DB::table('serial_key_activations')
+            ->join('serial_keys', 'serial_key_activations.serial_key_id', '=', 'serial_keys.id')
+            ->where('serial_keys.tenant_id', $tenant->id)
+            ->orderBy('serial_key_activations.created_at', 'desc')
+            ->take(3)
+            ->get()
+            ->each(function($activation) use ($activity) {
+                $activity->push([
+                    'type' => 'activation',
+                    'icon' => 'fas fa-bolt',
+                    'color' => 'warning',
+                    'title' => 'Activation de licence',
+                    'description' => 'Depuis ' . $activation->ip_address,
+                    'date' => Carbon::parse($activation->created_at),
+                    'url' => route('client.licenses.show', $activation->serial_key_id)
+                ]);
+            });
+            
+        // Trier par date et prendre les 5 plus récents
+        return $activity->sortByDesc('date')->take(5)->values();
     }
 
     /**
@@ -537,26 +421,13 @@ class DashboardController extends Controller
     }
 
     /**
-     * API pour les données des graphiques
+     * Endpoint pour les données du graphique
      */
     public function chartData(Request $request)
     {
-        try {
-            $client = Auth::guard('client')->user();
-            $tenant = $client ? $client->tenant : null;
-            
-            if (!$tenant) {
-                return response()->json(['error' => 'Tenant not found'], 404);
-            }
-            
-            $period = $request->get('period', 30);
-            $chartsData = $this->getChartsData($tenant, $period);
-            
-            return response()->json($chartsData);
-            
-        } catch (\Exception $e) {
-            \Log::error('Chart data error: ' . $e->getMessage());
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $period = $request->get('period', 30);
+        $tenant = Auth::guard('client')->user()->tenant;
+        
+        return response()->json($this->getChartsData($tenant, $period));
     }
 } 

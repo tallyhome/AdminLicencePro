@@ -117,6 +117,39 @@ class AnalyticsController extends Controller
     }
 
     /**
+     * API pour récupérer les données des graphiques
+     */
+    public function getChartData(Request $request)
+    {
+        $client = Auth::guard('client')->user();
+        $tenant = $client->tenant;
+        $period = $request->get('period', '30days');
+
+        try {
+            // Convertir la période en nombre de jours
+            $days = match($period) {
+                '7days' => 7,
+                '30days' => 30,
+                '90days' => 90,
+                default => 30
+            };
+
+            $chartsData = $this->getChartsData($tenant, $days);
+
+            return response()->json([
+                'success' => true,
+                'labels' => array_keys($chartsData['licenses_over_time']->toArray()),
+                'data' => array_values($chartsData['licenses_over_time']->toArray())
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la récupération des données : ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Exporter les données analytics
      */
     public function export(Request $request)
@@ -149,22 +182,22 @@ class AnalyticsController extends Controller
         return [
             'total_projects' => $tenant->projects()->count(),
             'total_licenses' => $tenant->serialKeys()->count(),
-            'active_licenses' => $tenant->serialKeys()->where('status', 'active')->count(),
+            'active_licenses' => $tenant->serialKeys()->where('serial_keys.status', 'active')->count(),
             'total_activations' => $tenant->serialKeys()->sum('current_activations') ?? 0,
             'licenses_this_month' => $tenant->serialKeys()
-                ->whereMonth('created_at', now()->month)
-                ->whereYear('created_at', now()->year)
+                ->whereMonth('serial_keys.created_at', now()->month)
+                ->whereYear('serial_keys.created_at', now()->year)
                 ->count(),
             'activations_this_month' => $tenant->serialKeys()
-                ->whereMonth('last_activation_at', now()->month)
-                ->whereYear('last_activation_at', now()->year)
+                ->whereMonth('serial_keys.last_activation_at', now()->month)
+                ->whereYear('serial_keys.last_activation_at', now()->year)
                 ->sum('current_activations') ?? 0,
             'expiring_soon' => $tenant->serialKeys()
-                ->where('expires_at', '<=', now()->addDays(30))
-                ->where('expires_at', '>', now())
+                ->where('serial_keys.expires_at', '<=', now()->addDays(30))
+                ->where('serial_keys.expires_at', '>', now())
                 ->count(),
             'expired_licenses' => $tenant->serialKeys()
-                ->where('expires_at', '<', now())
+                ->where('serial_keys.expires_at', '<', now())
                 ->count(),
         ];
     }
@@ -178,9 +211,9 @@ class AnalyticsController extends Controller
 
         // Évolution des licences créées
         $licensesOverTime = $tenant->serialKeys()
-            ->where('created_at', '>=', $startDate)
+            ->where('serial_keys.created_at', '>=', $startDate)
             ->select(
-                DB::raw('DATE(created_at) as date'),
+                DB::raw('DATE(serial_keys.created_at) as date'),
                 DB::raw('COUNT(*) as count')
             )
             ->groupBy('date')
@@ -201,10 +234,10 @@ class AnalyticsController extends Controller
 
         // Évolution des activations
         $activationsOverTime = $tenant->serialKeys()
-            ->where('last_activation_at', '>=', $startDate)
-            ->whereNotNull('last_activation_at')
+            ->where('serial_keys.last_activation_at', '>=', $startDate)
+            ->whereNotNull('serial_keys.last_activation_at')
             ->select(
-                DB::raw('DATE(last_activation_at) as date'),
+                DB::raw('DATE(serial_keys.last_activation_at) as date'),
                 DB::raw('SUM(current_activations) as activations')
             )
             ->groupBy('date')
@@ -216,8 +249,8 @@ class AnalyticsController extends Controller
 
         // Répartition par statut
         $statusDistribution = $tenant->serialKeys()
-            ->select('status', DB::raw('COUNT(*) as count'))
-            ->groupBy('status')
+            ->select('serial_keys.status', DB::raw('COUNT(*) as count'))
+            ->groupBy('serial_keys.status')
             ->get()
             ->mapWithKeys(function ($item) {
                 return [$item->status => $item->count];
@@ -258,12 +291,12 @@ class AnalyticsController extends Controller
     private function getActivationsTrend($tenant, $period)
     {
         $currentPeriod = $tenant->serialKeys()
-            ->where('last_activation_at', '>=', now()->subDays($period))
+            ->where('serial_keys.last_activation_at', '>=', now()->subDays($period))
             ->sum('current_activations') ?? 0;
 
         $previousPeriod = $tenant->serialKeys()
-            ->where('last_activation_at', '>=', now()->subDays($period * 2))
-            ->where('last_activation_at', '<', now()->subDays($period))
+            ->where('serial_keys.last_activation_at', '>=', now()->subDays($period * 2))
+            ->where('serial_keys.last_activation_at', '<', now()->subDays($period))
             ->sum('current_activations') ?? 0;
 
         $percentage = $previousPeriod > 0 
@@ -284,8 +317,8 @@ class AnalyticsController extends Controller
     private function getLicenseTypeDistribution($tenant)
     {
         return $tenant->serialKeys()
-            ->select('licence_type', DB::raw('COUNT(*) as count'))
-            ->groupBy('licence_type')
+            ->select('serial_keys.licence_type', DB::raw('COUNT(*) as count'))
+            ->groupBy('serial_keys.licence_type')
             ->get()
             ->mapWithKeys(function ($item) {
                 return [$item->licence_type => $item->count];
@@ -299,9 +332,9 @@ class AnalyticsController extends Controller
     {
         return $tenant->serialKeys()
             ->with('project')
-            ->where('expires_at', '<=', now()->addDays(30))
-            ->where('expires_at', '>', now())
-            ->orderBy('expires_at')
+            ->where('serial_keys.expires_at', '<=', now()->addDays(30))
+            ->where('serial_keys.expires_at', '>', now())
+            ->orderBy('serial_keys.expires_at')
             ->limit(10)
             ->get()
             ->map(function ($license) {
@@ -320,11 +353,14 @@ class AnalyticsController extends Controller
      */
     private function getLicensesData($period)
     {
+        $client = Auth::guard('client')->user();
+        $tenant = $client->tenant;
         $startDate = now()->subDays($period);
 
-        return SerialKey::where('created_at', '>=', $startDate)
+        return $tenant->serialKeys()
+            ->where('serial_keys.created_at', '>=', $startDate)
             ->select(
-                DB::raw('DATE(created_at) as date'),
+                DB::raw('DATE(serial_keys.created_at) as date'),
                 DB::raw('COUNT(*) as count')
             )
             ->groupBy('date')
@@ -340,12 +376,15 @@ class AnalyticsController extends Controller
      */
     private function getActivationsData($period)
     {
+        $client = Auth::guard('client')->user();
+        $tenant = $client->tenant;
         $startDate = now()->subDays($period);
 
-        return SerialKey::where('last_activation_at', '>=', $startDate)
-            ->whereNotNull('last_activation_at')
+        return $tenant->serialKeys()
+            ->where('serial_keys.last_activation_at', '>=', $startDate)
+            ->whereNotNull('serial_keys.last_activation_at')
             ->select(
-                DB::raw('DATE(last_activation_at) as date'),
+                DB::raw('DATE(serial_keys.last_activation_at) as date'),
                 DB::raw('SUM(current_activations) as activations')
             )
             ->groupBy('date')
@@ -361,11 +400,14 @@ class AnalyticsController extends Controller
      */
     private function getProjectsData($period)
     {
+        $client = Auth::guard('client')->user();
+        $tenant = $client->tenant;
         $startDate = now()->subDays($period);
 
-        return Project::where('created_at', '>=', $startDate)
+        return $tenant->projects()
+            ->where('projects.created_at', '>=', $startDate)
             ->select(
-                DB::raw('DATE(created_at) as date'),
+                DB::raw('DATE(projects.created_at) as date'),
                 DB::raw('COUNT(*) as count')
             )
             ->groupBy('date')
@@ -381,26 +423,30 @@ class AnalyticsController extends Controller
      */
     private function getExportData($period)
     {
+        $client = Auth::guard('client')->user();
+        $tenant = $client->tenant;
         $startDate = now()->subDays($period);
 
         return [
-            'general_stats' => $this->getGeneralStats(),
-            'licenses' => SerialKey::with('project')
-                ->where('created_at', '>=', $startDate)
+            'general_stats' => $this->getGeneralStats($tenant),
+            'licenses' => $tenant->serialKeys()
+                ->with('project')
+                ->where('serial_keys.created_at', '>=', $startDate)
                 ->get()
                 ->map(function ($license) {
                     return [
                         'serial_key' => $license->serial_key,
                         'project' => $license->project->name ?? 'N/A',
-                        'type' => $license->licence_type,
+                        'type' => $license->licence_type ?? 'Standard',
                         'status' => $license->status,
-                        'max_activations' => $license->max_activations,
+                        'max_activations' => $license->max_activations ?? 0,
                         'current_activations' => $license->current_activations ?? 0,
                         'created_at' => $license->created_at->format('d/m/Y H:i'),
                         'expires_at' => $license->expires_at ? $license->expires_at->format('d/m/Y H:i') : 'Jamais',
                     ];
                 }),
-            'projects' => Project::withCount('serialKeys')
+            'projects' => $tenant->projects()
+                ->withCount('serialKeys')
                 ->get()
                 ->map(function ($project) {
                     return [

@@ -25,6 +25,10 @@ class RedirectIfAuthenticated
                 if ($guard === 'admin') {
                     return redirect()->route('admin.dashboard');
                 }
+                // Si l'utilisateur est authentifié en tant que client, redirigez-le vers le tableau de bord client
+                if ($guard === 'client') {
+                    return redirect()->route('client.dashboard');
+                }
                 // Pour tout autre type d'authentification, redirigez vers la page d'accueil
                 return redirect('/');
             }

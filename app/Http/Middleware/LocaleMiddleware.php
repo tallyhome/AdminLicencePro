@@ -96,10 +96,8 @@ class LocaleMiddleware
         $locale = App::getLocale();
         $this->translationService->loadJsonTranslations($locale);
         
-        // Si c'est une requête AJAX, ne pas interférer avec la réponse
-        if ($request->ajax()) {
-            return $next($request);
-        }
+
+
         
         return $next($request);
     }

@@ -253,7 +253,7 @@
                                                                name="plan_id" 
                                                                value="{{ $plan->id }}" 
                                                                id="plan_{{ $plan->id }}"
-                                                               {{ $loop->index === 1 ? 'checked' : '' }}
+                                                               {{ $plan->price == 0 ? 'checked' : '' }}
                                                                required>
                                                         <div class="flex-grow-1">
                                                             <div class="d-flex justify-content-between align-items-start">

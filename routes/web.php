@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 
+// Route de test ultra-simple sans middleware
+Route::get('/test-simple', function() {
+    return 'Cette page fonctionne correctement!';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +100,16 @@ Route::get('/login', [\App\Http\Controllers\Auth\LoginRedirectController::class,
 
 // Routes de redirection de l'ancien dashboard vers le nouveau
 Route::middleware(['web'])->group(function () {
+    // Route de test ultra-simple
+    Route::get('/test-simple', function() {
+        return 'Cette page fonctionne correctement!';
+    });
+    
+    // Route de test ultra-simple
+    Route::get('/test-simple', function() {
+        return 'Cette page fonctionne correctement!';
+    });
+    
     // Redirection générale de l'ancien dashboard
     Route::get('/dashboard', [\App\Http\Controllers\OldDashboardController::class, 'redirect'])->name('old.dashboard');
     

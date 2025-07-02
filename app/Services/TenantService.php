@@ -240,7 +240,7 @@ class TenantService
             ],
             'licenses' => [
                 'count' => $tenant->serialKeys()->count(),
-                'active' => $tenant->serialKeys()->where('status', 'active')->count(),
+                'active' => $tenant->serialKeys()->where('serial_keys.status', 'active')->count(),
                 'limit' => $plan ? $plan->max_licenses : 0,
                 'percentage' => $plan && $plan->max_licenses > 0
                     ? round(($tenant->serialKeys()->count() / $plan->max_licenses) * 100, 1)
@@ -248,7 +248,7 @@ class TenantService
             ],
             'clients' => [
                 'count' => $tenant->clients()->count(),
-                'active' => $tenant->clients()->where('status', 'active')->count(),
+                'active' => $tenant->clients()->where('clients.status', 'active')->count(),
                 'limit' => $plan ? $plan->max_clients : 0,
                 'percentage' => $plan && $plan->max_clients > 0
                     ? round(($tenant->clients()->count() / $plan->max_clients) * 100, 1)
@@ -256,8 +256,8 @@ class TenantService
             ],
             'support_tickets' => [
                 'total' => $tenant->supportTickets()->count(),
-                'open' => $tenant->supportTickets()->where('status', 'open')->count(),
-                'resolved' => $tenant->supportTickets()->where('status', 'resolved')->count(),
+                'open' => $tenant->supportTickets()->where('support_tickets.status', 'open')->count(),
+                'resolved' => $tenant->supportTickets()->where('support_tickets.status', 'resolved')->count(),
             ]
         ];
     }

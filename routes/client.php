@@ -9,8 +9,8 @@ use App\Http\Controllers\Client\AnalyticsController;
 use App\Http\Controllers\Client\SupportController;
 use App\Http\Controllers\Client\SettingsController;
 use App\Http\Controllers\Client\ApiKeyController;
+use App\Http\Middleware\ClientAuthenticate;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Client Routes
@@ -20,42 +20,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Routes publiques pour les clients
+// Routes publiques pour les clients (pas besoin de middleware web car déjà appliqué dans RouteServiceProvider)
 Route::name('client.')->group(function () {
     
     // Routes d'inscription
-    Route::get('/client/register', [ClientRegistrationController::class, 'showRegistrationForm'])
+    Route::get('/register', [ClientRegistrationController::class, 'showRegistrationForm'])
         ->name('register.form');
-    Route::post('/client/register', [ClientRegistrationController::class, 'register'])
+    Route::post('/register', [ClientRegistrationController::class, 'register'])
         ->name('register');
-    Route::post('/client/check-domain', [ClientRegistrationController::class, 'checkDomainAvailability'])
+    Route::post('/check-domain', [ClientRegistrationController::class, 'checkDomainAvailability'])
         ->name('check-domain');
 
     // Routes de connexion
-    Route::get('/client/login', [ClientAuthController::class, 'showLoginForm'])
+    Route::get('/login', [ClientAuthController::class, 'showLoginForm'])
         ->name('login.form');
-    Route::post('/client/login', [ClientAuthController::class, 'login'])
+    Route::post('/login', [ClientAuthController::class, 'login'])
         ->name('login');
-    Route::post('/client/logout', [ClientAuthController::class, 'logout'])
+    Route::post('/logout', [ClientAuthController::class, 'logout'])
         ->name('logout');
 
     // Routes de récupération de mot de passe
-    Route::get('/client/forgot-password', [ClientAuthController::class, 'showForgotPasswordForm'])
+    Route::get('/forgot-password', [ClientAuthController::class, 'showForgotPasswordForm'])
         ->name('forgot-password.form');
-    Route::post('/client/forgot-password', [ClientAuthController::class, 'sendResetLinkEmail'])
+    Route::post('/forgot-password', [ClientAuthController::class, 'sendResetLinkEmail'])
         ->name('forgot-password');
 
     // Routes protégées par authentification client
-    Route::middleware(['auth:client'])->group(function () {
+    Route::middleware([ClientAuthenticate::class])->group(function () {
         
         // Dashboard principal
-        Route::get('/client/dashboard', [DashboardController::class, 'index'])
+        Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
-        Route::get('/client/dashboard/chart-data', [DashboardController::class, 'chartData'])
+        Route::get('/dashboard/chart-data', [DashboardController::class, 'chartData'])
             ->name('dashboard.chart-data');
 
         // Routes des projets
-        Route::prefix('client/projects')->name('projects.')->group(function () {
+        Route::prefix('projects')->name('projects.')->group(function () {
             Route::get('/', [ProjectController::class, 'index'])->name('index');
             Route::get('/create', [ProjectController::class, 'create'])->name('create');
             Route::post('/', [ProjectController::class, 'store'])->name('store');
@@ -67,7 +67,7 @@ Route::name('client.')->group(function () {
         });
 
         // Routes des licences
-        Route::prefix('client/licenses')->name('licenses.')->group(function () {
+        Route::prefix('licenses')->name('licenses.')->group(function () {
             Route::get('/', [LicenseController::class, 'index'])->name('index');
             Route::get('/create', [LicenseController::class, 'create'])->name('create');
             Route::post('/', [LicenseController::class, 'store'])->name('store');
@@ -81,14 +81,15 @@ Route::name('client.')->group(function () {
         });
 
         // Routes des analytics
-        Route::prefix('client/analytics')->name('analytics.')->group(function () {
+        Route::prefix('analytics')->name('analytics.')->group(function () {
             Route::get('/', [AnalyticsController::class, 'index'])->name('index');
             Route::get('/data', [AnalyticsController::class, 'getData'])->name('data');
+            Route::get('/chart-data', [AnalyticsController::class, 'getChartData'])->name('chart-data');
             Route::get('/export', [AnalyticsController::class, 'export'])->name('export');
         });
 
         // Routes des clés API
-        Route::prefix('client/api-keys')->name('api-keys.')->group(function () {
+        Route::prefix('api-keys')->name('api-keys.')->group(function () {
             Route::get('/', [ApiKeyController::class, 'index'])->name('index');
             Route::get('/create', [ApiKeyController::class, 'create'])->name('create');
             Route::post('/', [ApiKeyController::class, 'store'])->name('store');
@@ -102,10 +103,13 @@ Route::name('client.')->group(function () {
         });
 
         // Routes du support
-        Route::prefix('client/support')->name('support.')->group(function () {
+        Route::prefix('support')->name('support.')->group(function () {
             Route::get('/', [SupportController::class, 'index'])->name('index');
             Route::get('/create', [SupportController::class, 'create'])->name('create');
             Route::post('/', [SupportController::class, 'store'])->name('store');
+            Route::get('/faq', [SupportController::class, 'faq'])->name('faq');
+            Route::get('/documentation', [SupportController::class, 'documentation'])->name('documentation');
+            Route::get('/search-faq', [SupportController::class, 'searchFaq'])->name('search-faq');
             Route::get('/{ticket}', [SupportController::class, 'show'])->name('show');
             Route::post('/{ticket}/reply', [SupportController::class, 'reply'])->name('reply');
             Route::post('/{ticket}/close', [SupportController::class, 'close'])->name('close');
@@ -113,7 +117,7 @@ Route::name('client.')->group(function () {
         });
 
         // Routes des paramètres
-        Route::prefix('client/settings')->name('settings.')->group(function () {
+        Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/', [SettingsController::class, 'index'])->name('index');
             Route::put('/profile', [SettingsController::class, 'updateProfile'])->name('update-profile');
             Route::put('/password', [SettingsController::class, 'updatePassword'])->name('update-password');
@@ -123,13 +127,13 @@ Route::name('client.')->group(function () {
         });
 
         // Routes de facturation
-        Route::prefix('client/billing')->name('billing.')->group(function () {
+        Route::prefix('billing')->name('billing.')->group(function () {
             Route::get('/', [SettingsController::class, 'billing'])->name('index');
             Route::get('/invoices', [SettingsController::class, 'invoices'])->name('invoices');
             Route::get('/invoices/{invoice}', [SettingsController::class, 'downloadInvoice'])->name('download-invoice');
             Route::get('/subscription', [SettingsController::class, 'subscription'])->name('subscription');
             Route::post('/subscription/upgrade', [SettingsController::class, 'upgradeSubscription'])->name('upgrade');
             Route::post('/subscription/cancel', [SettingsController::class, 'cancelSubscription'])->name('cancel');
-        });
+                });
     });
 }); 

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
+use App\Models\Role;
 
 class ClientRegistrationController extends Controller
 {
@@ -77,8 +78,8 @@ class ClientRegistrationController extends Controller
             // Créer l'abonnement (période d'essai si disponible)
             $subscription = $this->createSubscription($tenant, $plan);
 
-            // Configurer le tenant initial
-            $this->tenantService->setupInitialTenantData($tenant, $client);
+            // Configurer uniquement les données essentielles du tenant
+            $this->setupEssentialTenantData($tenant, $client);
 
             DB::commit();
 
@@ -232,5 +233,39 @@ class ClientRegistrationController extends Controller
             'available' => $available,
             'suggested_domain' => $available ? $domain : $this->generateTenantDomain($request->domain)
         ]);
+    }
+
+    /**
+     * Configurer uniquement les données essentielles pour un nouveau tenant
+     */
+    protected function setupEssentialTenantData(Tenant $tenant, Client $client): void
+    {
+        // Créer le rôle propriétaire s'il n'existe pas
+        $ownerRole = Role::firstOrCreate(
+            ['slug' => 'owner'],
+            [
+                'name' => 'Propriétaire',
+                'description' => 'Propriétaire du compte avec tous les accès'
+            ]
+        );
+
+        // Assigner le rôle propriétaire au client
+        $client->roles()->attach($ownerRole);
+
+        // Paramètres de base uniquement
+        $defaultSettings = [
+            'notification_preferences' => [
+                'email_notifications' => true,
+                'license_expiry_alerts' => true,
+            ],
+            'ui_preferences' => [
+                'theme' => 'light',
+                'sidebar_collapsed' => false,
+                'items_per_page' => 25,
+            ]
+        ];
+
+        $tenant->settings = $defaultSettings;
+        $tenant->save();
     }
 } 

@@ -23,10 +23,10 @@ $csrfToken = $matches[1] ?? null;
 
 if (!$csrfToken) {
     echo "Impossible de récupérer le token CSRF\n";
-    exit(1);
+    exit(1);0
 }
 
-// 2. Se connecter
+// 2. Se connecter0
 curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:8000/client/login');
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([

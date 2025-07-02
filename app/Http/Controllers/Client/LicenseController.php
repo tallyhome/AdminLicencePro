@@ -33,7 +33,7 @@ class LicenseController extends Controller
         }
 
         if ($request->has('status') && $request->status) {
-            $query->where('status', $request->status);
+            $query->where('serial_keys.status', $request->status);
         }
 
         if ($request->has('project') && $request->project) {
@@ -52,14 +52,14 @@ class LicenseController extends Controller
         // Statistiques (uniquement pour le tenant)
         $stats = [
             'total' => $tenant->serialKeys()->count(),
-            'active' => $tenant->serialKeys()->where('status', 'active')->count(),
-            'inactive' => $tenant->serialKeys()->where('status', 'inactive')->count(),
+            'active' => $tenant->serialKeys()->where('serial_keys.status', 'active')->count(),
+            'inactive' => $tenant->serialKeys()->where('serial_keys.status', 'inactive')->count(),
             'expiring' => $tenant->serialKeys()
-                ->where('expires_at', '<=', now()->addDays(30))
-                ->where('expires_at', '>', now())
+                ->where('serial_keys.expires_at', '<=', now()->addDays(30))
+                ->where('serial_keys.expires_at', '>', now())
                 ->count(),
             'expired' => $tenant->serialKeys()
-                ->where('expires_at', '<', now())
+                ->where('serial_keys.expires_at', '<', now())
                 ->count(),
         ];
 
