@@ -333,6 +333,13 @@
                             <li class="nav-item">
                                 @include('admin.layouts.partials.notifications')
                             </li>
+                            <!-- Lien vers l'espace client -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('client.login.form') }}" title="Accéder à l'espace client" target="_blank">
+                                    <i class="fas fa-users"></i>
+                                    <span class="d-none d-md-inline ms-1">Espace Client</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                     {{ Auth::guard('admin')->user()->name }}

@@ -23,6 +23,11 @@ class Authenticate extends Middleware
             return route('admin.login.form');
         }
         
+        // Si c'est une route client, rediriger vers la page de connexion client
+        if ($request->is('client*')) {
+            return route('client.login.form');
+        }
+        
         // Pour les routes frontend, ne jamais rediriger
         return null;
     }

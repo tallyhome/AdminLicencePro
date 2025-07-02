@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
@@ -15,22 +16,11 @@ class Invoice extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'tenant_id',
-        'subscription_id',
-        'provider',
-        'provider_id',
-        'number',
-        'total',
-        'currency',
+        'client_id',
+        'amount',
         'status',
-        'billing_reason',
-        'billing_details',
-        'payment_method_id',
-        'payment_method_type',
-        'paid_at',
-        'due_at',
-        'refunded_at',
-        'metadata'
+        'payment_date',
+        'description'
     ];
 
     /**
@@ -39,12 +29,8 @@ class Invoice extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'total' => 'float',
-        'billing_details' => 'array',
-        'metadata' => 'array',
-        'paid_at' => 'datetime',
-        'due_at' => 'datetime',
-        'refunded_at' => 'datetime',
+        'payment_date' => 'datetime',
+        'amount' => 'decimal:2'
     ];
 
     /**
@@ -142,5 +128,10 @@ class Invoice extends Model
     public function formattedTotal()
     {
         return number_format($this->total / 100, 2) . ' ' . strtoupper($this->currency);
+    }
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
     }
 }

@@ -342,6 +342,13 @@
                             <li class="nav-item">
                                 <?php echo $__env->make('admin.layouts.partials.notifications', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                             </li>
+                            <!-- Lien vers l'espace client -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(route('client.login.form')); ?>" title="Accéder à l'espace client" target="_blank">
+                                    <i class="fas fa-users"></i>
+                                    <span class="d-none d-md-inline ms-1">Espace Client</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                     <?php echo e(Auth::guard('admin')->user()->name); ?>

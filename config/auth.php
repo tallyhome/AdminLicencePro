@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
         ],
 
         // 'users' => [
@@ -108,6 +116,12 @@ return [
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 10,
+        ],
+        'clients' => [
+            'provider' => 'clients',
+            'table' => 'client_password_reset_tokens',
             'expire' => 60,
             'throttle' => 10,
         ],
@@ -167,6 +181,7 @@ return [
     'login_routes' => [
         'web' => 'admin.login.form',
         'admin' => 'admin.login.form',
+        'client' => 'client.login.form',
     ],
 
 ];

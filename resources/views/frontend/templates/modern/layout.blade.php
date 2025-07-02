@@ -321,7 +321,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="{{ url('/admin') }}">
+                        <a class="nav-link btn btn-outline-primary px-3 me-2" href="{{ route('client.login.form') }}">
+                            <i class="fas fa-user"></i> Espace Client
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white px-3" href="{{ url('/admin') }}">
                             <i class="fas fa-sign-in-alt"></i> {{ $settings['nav_admin_text'] ?? 'Admin' }}
                         </a>
                     </li>

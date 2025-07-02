@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Register middleware aliases
         $middleware->alias([
             'check.licence' => \App\Http\Middleware\CheckLicence::class,
+            'subscription' => \App\Http\Middleware\SubscriptionMiddleware::class,
+            'plan.limits' => \App\Http\Middleware\PlanLimitsMiddleware::class,
+            'feature.access' => \App\Http\Middleware\FeatureAccessMiddleware::class,
         ]);
         
         // Register the frontend middleware group

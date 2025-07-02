@@ -87,5 +87,6 @@ class Kernel extends HttpKernel
         'security.headers' => \App\Http\Middleware\SecurityHeaders::class,
         'force.https' => \App\Http\Middleware\ForceHttps::class,
         'check.licence' => \App\Http\Middleware\CheckLicence::class,
+        'auth.client' => \App\Http\Middleware\ClientAuthenticate::class,
     ];
 }

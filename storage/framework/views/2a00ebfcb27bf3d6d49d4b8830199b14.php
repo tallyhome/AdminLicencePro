@@ -602,7 +602,12 @@
                             <i class="fas fa-moon"></i>
                         </a>
                     </li>
-                    <li class="nav-item ms-3">
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-light" href="<?php echo e(route('client.login.form')); ?>" style="border-color: rgba(255,255,255,0.3);">
+                            <i class="fas fa-user"></i> Espace Client
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="btn btn-admin-professional" href="<?php echo e(url('/admin')); ?>">
                             <i class="fas fa-user-shield"></i> <?php echo e($settings['nav_admin_text'] ?? 'Admin'); ?>
 

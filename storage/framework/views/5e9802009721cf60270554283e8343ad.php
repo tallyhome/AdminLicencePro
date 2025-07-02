@@ -322,7 +322,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="<?php echo e(url('/admin')); ?>">
+                        <a class="nav-link btn btn-outline-primary px-3 me-2" href="<?php echo e(route('client.login.form')); ?>">
+                            <i class="fas fa-user"></i> Espace Client
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white px-3" href="<?php echo e(url('/admin')); ?>">
                             <i class="fas fa-sign-in-alt"></i> <?php echo e($settings['nav_admin_text'] ?? 'Admin'); ?>
 
                         </a>

@@ -38,8 +38,23 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return $this->shouldReturnJson($request, $exception)
-            ? response()->json(['message' => $exception->getMessage()], 401)
-            : redirect()->guest($exception->redirectTo($request) ?? '/admin/login');
+        if ($this->shouldReturnJson($request, $exception)) {
+            return response()->json(['message' => $exception->getMessage()], 401);
+        }
+
+        // Déterminer la redirection appropriée selon la route
+        $redirectTo = $exception->redirectTo($request);
+        
+        if (!$redirectTo) {
+            if ($request->is('client*')) {
+                $redirectTo = route('client.login.form');
+            } elseif ($request->is('admin*')) {
+                $redirectTo = route('admin.login.form');
+            } else {
+                $redirectTo = '/admin/login'; // Fallback par défaut
+            }
+        }
+
+        return redirect()->guest($redirectTo);
     }
 }

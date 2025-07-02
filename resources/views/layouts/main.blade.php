@@ -56,6 +56,7 @@
                 @endif
                 <a href="{{ route('frontend.faqs') }}" class="hover:text-blue-600 font-medium">{{ __('menu.faq') }}</a>
                 <a href="{{ route('frontend.support') }}" class="hover:text-blue-600 font-medium">{{ __('menu.support') }}</a>
+                <a href="{{ route('client.login.form') }}" class="hover:text-blue-600 font-medium">Espace Client</a>
                 <a href="{{ route('admin.login.form') }}" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">{{ __('menu.login') }}</a>
                 <form method="POST" action="{{ route('frontend.set.locale') }}" class="inline-block ml-4" id="localeForm-{{ rand() }}">
                     @csrf

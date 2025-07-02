@@ -15,15 +15,25 @@ class Tenant extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'licence_id',
         'name',
+        'description',
         'domain',
         'database',
         'status',
         'settings',
-        'subscription_plan',
+        'subscription_id',
         'subscription_status',
         'subscription_ends_at',
-        'trial_ends_at'
+        'trial_ends_at',
+        'serial_key_id',
+        'is_primary',
+        'licence_features',
+        'usage_stats',
+        'max_clients',
+        'max_projects',
+        'licence_mode',
+        'licence_expires_at'
     ];
 
     /**
@@ -33,8 +43,12 @@ class Tenant extends Model
      */
     protected $casts = [
         'settings' => 'array',
+        'licence_features' => 'array',
+        'usage_stats' => 'array',
         'subscription_ends_at' => 'datetime',
         'trial_ends_at' => 'datetime',
+        'licence_expires_at' => 'datetime',
+        'is_primary' => 'boolean',
     ];
 
     /**
@@ -81,7 +95,39 @@ class Tenant extends Model
      */
     public function supportTickets()
     {
-        return $this->hasManyThrough(SupportTicket::class, Client::class);
+        return $this->hasMany(SupportTicket::class);
+    }
+
+    /**
+     * Get the subscriptions associated with the tenant.
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * Get the API keys associated with the tenant.
+     */
+    public function apiKeys()
+    {
+        return $this->hasMany(ApiKey::class);
+    }
+
+    /**
+     * Get the invoices associated with the tenant.
+     */
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    /**
+     * Get the sessions associated with the tenant.
+     */
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
     }
 
     /**

@@ -49,6 +49,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
+
+            // Routes client SaaS - Correction du préfixe manquant
+            Route::middleware('web')
+                ->namespace('App\\Http\\Controllers')
+                ->group(base_path('routes/client.php'));
         });
     }
 }
