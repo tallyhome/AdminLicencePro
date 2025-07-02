@@ -1,8 +1,6 @@
-@extends('layouts.client')
+<?php $__env->startSection('title', 'Analytics'); ?>
 
-@section('title', 'Analytics')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
     <!-- En-tête de page -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -26,7 +24,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Licences Actives</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['active_licenses'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['active_licenses']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-key fa-2x text-gray-300"></i>
@@ -43,7 +41,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Validations Ce Mois</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['validations_this_month']) }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e(number_format($stats['validations_this_month'])); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check-circle fa-2x text-gray-300"></i>
@@ -60,7 +58,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Projets Actifs</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['active_projects'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['active_projects']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-folder fa-2x text-gray-300"></i>
@@ -77,7 +75,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Taux de Réussite</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['success_rate'], 1) }}%</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e(number_format($stats['success_rate'], 1)); ?>%</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-percentage fa-2x text-gray-300"></i>
@@ -127,11 +125,12 @@
                         <canvas id="projectsChart"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
-                        @foreach($chartData['projects'] as $project)
+                        <?php $__currentLoopData = $chartData['projects']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <span class="mr-2">
-                                <i class="fas fa-circle" style="color: {{ $project['color'] }}"></i> {{ $project['name'] }}
+                                <i class="fas fa-circle" style="color: <?php echo e($project['color']); ?>"></i> <?php echo e($project['name']); ?>
+
                             </span>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
@@ -146,36 +145,36 @@
                     <h6 class="m-0 font-weight-bold text-primary">Activités Récentes</h6>
                 </div>
                 <div class="card-body">
-                    @if(count($recentActivity) > 0)
-                        @foreach($recentActivity as $activity)
+                    <?php if(count($recentActivity) > 0): ?>
+                        <?php $__currentLoopData = $recentActivity; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="mr-3">
-                                    @switch($activity['type'])
-                                        @case('license_created')
+                                    <?php switch($activity['type']):
+                                        case ('license_created'): ?>
                                             <i class="fas fa-plus-circle text-success"></i>
-                                            @break
-                                        @case('license_validated')
+                                            <?php break; ?>
+                                        <?php case ('license_validated'): ?>
                                             <i class="fas fa-check-circle text-primary"></i>
-                                            @break
-                                        @case('license_expired')
+                                            <?php break; ?>
+                                        <?php case ('license_expired'): ?>
                                             <i class="fas fa-exclamation-circle text-warning"></i>
-                                            @break
-                                        @default
+                                            <?php break; ?>
+                                        <?php default: ?>
                                             <i class="fas fa-info-circle text-info"></i>
-                                    @endswitch
+                                    <?php endswitch; ?>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <div class="small text-gray-500">{{ $activity['date'] }}</div>
-                                    <div>{{ $activity['description'] }}</div>
+                                    <div class="small text-gray-500"><?php echo e($activity['date']); ?></div>
+                                    <div><?php echo e($activity['description']); ?></div>
                                 </div>
                             </div>
-                        @endforeach
-                    @else
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php else: ?>
                         <div class="text-center py-3">
                             <i class="fas fa-clock fa-2x text-gray-300 mb-2"></i>
                             <p class="text-gray-500">Aucune activité récente</p>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -187,32 +186,32 @@
                     <h6 class="m-0 font-weight-bold text-primary">Licences les Plus Utilisées</h6>
                 </div>
                 <div class="card-body">
-                    @if(count($topLicenses) > 0)
-                        @foreach($topLicenses as $license)
+                    <?php if(count($topLicenses) > 0): ?>
+                        <?php $__currentLoopData = $topLicenses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $license): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <div>
-                                    <div class="font-weight-bold">{{ $license['name'] }}</div>
-                                    <div class="small text-gray-500">{{ $license['project'] }}</div>
+                                    <div class="font-weight-bold"><?php echo e($license['name']); ?></div>
+                                    <div class="small text-gray-500"><?php echo e($license['project']); ?></div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-weight-bold text-primary">{{ number_format($license['validations']) }}</div>
+                                    <div class="font-weight-bold text-primary"><?php echo e(number_format($license['validations'])); ?></div>
                                     <div class="small text-gray-500">validations</div>
                                 </div>
                             </div>
-                        @endforeach
-                    @else
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php else: ?>
                         <div class="text-center py-3">
                             <i class="fas fa-chart-bar fa-2x text-gray-300 mb-2"></i>
                             <p class="text-gray-500">Aucune donnée disponible</p>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 // Configuration des graphiques
@@ -220,10 +219,10 @@ const validationsCtx = document.getElementById('validationsChart').getContext('2
 const validationsChart = new Chart(validationsCtx, {
     type: 'line',
     data: {
-        labels: {!! json_encode($chartData['validations']['labels'] ?? []) !!},
+        labels: <?php echo json_encode($chartData['validations']['labels'] ?? []); ?>,
         datasets: [{
             label: 'Validations',
-            data: {!! json_encode($chartData['validations']['data'] ?? []) !!},
+            data: <?php echo json_encode($chartData['validations']['data'] ?? []); ?>,
             borderColor: '#4e73df',
             backgroundColor: 'rgba(78, 115, 223, 0.1)',
             borderWidth: 2,
@@ -247,7 +246,7 @@ const validationsChart = new Chart(validationsCtx, {
 });
 
 // Graphique des projets avec gestion des données vides
-const projectsData = {!! json_encode($chartData['projects'] ?? []) !!};
+const projectsData = <?php echo json_encode($chartData['projects'] ?? []); ?>;
 const projectsCtx = document.getElementById('projectsChart').getContext('2d');
 
 let projectsChart;
@@ -379,13 +378,13 @@ if (projectsData.length > 0) {
 
 // Fonctions d'export
 function exportData(format) {
-    const url = `{{ route('client.analytics.export') }}?format=${format}`;
+    const url = `<?php echo e(route('client.analytics.export')); ?>?format=${format}`;
     window.location.href = url;
 }
 
 function updateChart(period) {
     // Mise à jour AJAX du graphique
-    fetch(`{{ route('client.analytics.chart-data') }}?period=${period}`)
+    fetch(`<?php echo e(route('client.analytics.chart-data')); ?>?period=${period}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -401,5 +400,6 @@ function updateChart(period) {
         });
 }
 </script>
-@endpush
-@endsection 
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?> 
+<?php echo $__env->make('layouts.client', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views\client\analytics\index.blade.php ENDPATH**/ ?>

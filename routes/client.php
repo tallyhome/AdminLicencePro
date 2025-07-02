@@ -107,9 +107,6 @@ Route::name('client.')->group(function () {
             Route::get('/', [SupportController::class, 'index'])->name('index');
             Route::get('/create', [SupportController::class, 'create'])->name('create');
             Route::post('/', [SupportController::class, 'store'])->name('store');
-            Route::get('/faq', [SupportController::class, 'faq'])->name('faq');
-            Route::get('/documentation', [SupportController::class, 'documentation'])->name('documentation');
-            Route::get('/search-faq', [SupportController::class, 'searchFaq'])->name('search-faq');
             Route::get('/{ticket}', [SupportController::class, 'show'])->name('show');
             Route::post('/{ticket}/reply', [SupportController::class, 'reply'])->name('reply');
             Route::post('/{ticket}/close', [SupportController::class, 'close'])->name('close');

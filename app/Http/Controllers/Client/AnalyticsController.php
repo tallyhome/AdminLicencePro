@@ -47,15 +47,16 @@ class AnalyticsController extends Controller
                 'data' => array_values($chartsData['licenses_over_time']->toArray())
             ],
             'projects' => $topProjects->take(5)->map(function($project) {
-                // DEBUG: Ajouter des valeurs de test si les activations sont à 0
+                // Utiliser le nombre de licences comme valeur si pas d'activations
                 $activations = $project['total_activations'] ?? 0;
-                if ($activations == 0) {
-                    $activations = rand(1, 50); // Valeur de test temporaire
-                }
+                $licenses = $project['total_licenses'] ?? 0;
+                
+                // Si pas d'activations mais des licences, utiliser le nombre de licences
+                $value = $activations > 0 ? $activations : $licenses;
                 
                 return [
                     'name' => $project['name'],
-                    'value' => $activations,
+                    'value' => $value,
                     'color' => '#' . substr(md5($project['name']), 0, 6)
                 ];
             })->toArray()
@@ -72,7 +73,8 @@ class AnalyticsController extends Controller
             'active_licenses' => $generalStats['active_licenses'],
             'validations_this_month' => $generalStats['activations_this_month'],
             'active_projects' => $generalStats['total_projects'],
-            'success_rate' => 95.5 // Valeur simulée
+            'success_rate' => $generalStats['active_licenses'] > 0 ? 
+                round(($generalStats['activations_this_month'] / $generalStats['active_licenses']) * 100, 1) : 0
         ];
 
         return view('client.analytics.index', compact(
