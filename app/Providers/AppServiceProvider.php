@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -38,5 +39,9 @@ class AppServiceProvider extends ServiceProvider
         
         // Définir la longueur par défaut des chaînes de caractères dans MySQL
         Schema::defaultStringLength(191);
+        
+        // Configurer la pagination pour utiliser Bootstrap 5
+        Paginator::defaultView('pagination::bootstrap-5');
+        Paginator::defaultSimpleView('pagination::simple-bootstrap-5');
     }
 }

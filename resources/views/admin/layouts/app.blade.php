@@ -173,6 +173,68 @@
         .dark-mode #darkModeToggle:hover {
             color: #fcd34d;
         }
+
+        /* Styles pour la pagination */
+        .pagination {
+            margin-bottom: 0;
+        }
+        .pagination .page-link {
+            padding: 0.5rem 0.75rem;
+            margin: 0 0.125rem;
+            border-radius: 0.25rem;
+            border: 1px solid #dee2e6;
+            color: #6c757d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pagination .page-link:hover {
+            color: #0056b3;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: #fff;
+        }
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            background-color: #fff;
+            border-color: #dee2e6;
+            opacity: 0.5;
+        }
+        /* Correction pour les icônes SVG de pagination */
+        .pagination .page-link svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+        /* Styles pour les icônes FontAwesome dans la pagination */
+        .pagination .page-link i {
+            font-size: 0.875rem;
+        }
+        /* Styles pour le mode sombre */
+        .dark-mode .pagination .page-link {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        .dark-mode .pagination .page-link:hover {
+            background-color: #4a5568;
+            border-color: #718096;
+            color: #fff;
+        }
+        .dark-mode .pagination .page-item.active .page-link {
+            background-color: #3182ce;
+            border-color: #3182ce;
+        }
+        .dark-mode .pagination .page-item.disabled .page-link {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            color: #a0aec0;
+        }
     </style>
     @stack('styles')
 </head>
