@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\SettingsController;
 use App\Http\Controllers\Client\ApiKeyController;
 use App\Http\Middleware\ClientAuthenticate;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Client Routes
@@ -61,6 +62,101 @@ Route::name('client.')->group(function () {
             ->name('dashboard');
         Route::get('/dashboard/chart-data', [DashboardController::class, 'chartData'])
             ->name('dashboard.chart-data');
+        
+        // Route de test pour déboguer le dashboard
+        Route::get('/test-dashboard', function() {
+            $client = Auth::guard('client')->user();
+            $tenant = $client->tenant;
+            
+            if (!$tenant) {
+                return response()->json(['error' => 'Aucun tenant']);
+            }
+            
+            $subscription = $tenant->subscriptions()->with('plan')->latest()->first();
+            $plan = $subscription ? $subscription->plan : null;
+            
+            $projectCount = $tenant->projects()->count();
+            $licenseCount = $tenant->serialKeys()->count();
+            
+            return response()->json([
+                'client' => $client->name,
+                'tenant' => $tenant->name,
+                'plan' => $plan ? $plan->name : 'Aucun',
+                'projects' => $projectCount,
+                'licenses' => $licenseCount,
+                'project_limit' => $plan ? $plan->max_projects : 'N/A',
+                'license_limit' => $plan ? $plan->max_licenses : 'N/A'
+            ]);
+        })->name('test-dashboard');
+
+        // Dashboard simple pour test
+        Route::get('/simple-dashboard', function() {
+            $client = Auth::guard('client')->user();
+            $tenant = $client->tenant;
+            
+            if (!$tenant) {
+                return view('client.dashboard-simple', [
+                    'error' => 'Aucun tenant associé',
+                    'usageStats' => [
+                        'projects' => ['count' => 0, 'limit' => 0, 'percentage' => 0, 'status' => 'success', 'text' => '0 sur 0 projets'],
+                        'licenses' => ['count' => 0, 'limit' => 0, 'percentage' => 0, 'status' => 'success', 'text' => '0 sur 0 licences'],
+                        'active_licenses' => ['count' => 0, 'text' => 'Licences actives'],
+                        'total_activations' => ['count' => 0, 'text' => 'Activations totales']
+                    ]
+                ]);
+            }
+            
+            $subscription = $tenant->subscriptions()->with('plan')->latest()->first();
+            $plan = $subscription ? $subscription->plan : null;
+            
+            $projectCount = $tenant->projects()->count();
+            $licenseCount = $tenant->serialKeys()->count();
+            $activeLicenseCount = $tenant->serialKeys()->where('serial_keys.status', 'active')->count();
+            $totalActivations = $tenant->serialKeys()->sum('current_activations');
+            
+            $projectLimit = $plan ? ($plan->max_projects === null ? 'Illimité' : $plan->max_projects) : 2;
+            $licenseLimit = $plan ? ($plan->max_licenses === null ? 'Illimité' : $plan->max_licenses) : 10;
+            
+            $projectPercentage = ($projectLimit !== 'Illimité' && $projectLimit > 0) ? round(($projectCount / $projectLimit) * 100) : 0;
+            $licensePercentage = ($licenseLimit !== 'Illimité' && $licenseLimit > 0) ? round(($licenseCount / $licenseLimit) * 100) : 0;
+            
+            $usageStats = [
+                'projects' => [
+                    'count' => $projectCount,
+                    'limit' => $projectLimit,
+                    'percentage' => $projectPercentage,
+                    'status' => $projectPercentage < 80 ? 'success' : ($projectPercentage < 90 ? 'warning' : 'danger'),
+                    'text' => $projectLimit === 'Illimité' ? 'Projets illimités' : $projectCount . ' sur ' . $projectLimit . ' projets'
+                ],
+                'licenses' => [
+                    'count' => $licenseCount,
+                    'limit' => $licenseLimit,
+                    'percentage' => $licensePercentage,
+                    'status' => $licensePercentage < 80 ? 'success' : ($licensePercentage < 90 ? 'warning' : 'danger'),
+                    'text' => $licenseLimit === 'Illimité' ? 'Licences illimitées' : $licenseCount . ' sur ' . $licenseLimit . ' licences'
+                ],
+                'active_licenses' => [
+                    'count' => $activeLicenseCount,
+                    'text' => 'Licences actives'
+                ],
+                'total_activations' => [
+                    'count' => $totalActivations,
+                    'text' => 'Activations totales'
+                ]
+            ];
+            
+            return view('client.dashboard', [
+                'client' => $client,
+                'tenant' => $tenant,
+                'subscription' => $subscription,
+                'usageStats' => $usageStats,
+                'notifications' => [],
+                'chartsData' => ['labels' => [], 'data' => [], 'datasets' => []],
+                'recentActivity' => [],
+                'recentProjects' => collect(),
+                'recentLicenses' => collect()
+            ]);
+        })->name('simple-dashboard');
 
         // Routes des projets
         Route::prefix('projects')->name('projects.')->group(function () {
@@ -140,6 +236,12 @@ Route::name('client.')->group(function () {
             Route::get('/subscription', [SettingsController::class, 'subscription'])->name('subscription');
             Route::post('/subscription/upgrade', [SettingsController::class, 'upgradeSubscription'])->name('upgrade');
             Route::post('/subscription/cancel', [SettingsController::class, 'cancelSubscription'])->name('cancel');
-                });
+        });
+
+        // Routes de subscription/plans
+        Route::prefix('subscription')->name('subscription.')->group(function () {
+            Route::get('/plans', [\App\Http\Controllers\SubscriptionController::class, 'plans'])->name('plans');
+            Route::get('/checkout/{planId}', [\App\Http\Controllers\SubscriptionController::class, 'checkout'])->name('checkout');
+        });
     });
 }); 

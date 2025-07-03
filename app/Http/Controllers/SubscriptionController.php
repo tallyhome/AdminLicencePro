@@ -33,8 +33,9 @@ class SubscriptionController extends Controller
      */
     public function plans()
     {
-        // Get the current tenant
-        $tenant = Auth::user()->tenant;
+        // Get the current tenant (support both client and web guards)
+        $user = Auth::guard('client')->check() ? Auth::guard('client')->user() : Auth::user();
+        $tenant = $user->tenant;
         
         // Get the current subscription if any
         $subscription = $tenant->subscriptions()->first();

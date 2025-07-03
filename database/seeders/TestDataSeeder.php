@@ -41,8 +41,6 @@ class TestDataSeeder extends Seeder
         }
 
         // Créer 5 licences de test (réparties sur les projets)
-        $statuses = ['active', 'inactive', 'expired'];
-        
         foreach ($projects as $index => $project) {
             $licensesCount = $index === 0 ? 3 : 2; // 3 licences pour le premier projet, 2 pour le second
             
@@ -50,14 +48,12 @@ class TestDataSeeder extends Seeder
                 $serialKey = SerialKey::create([
                     'project_id' => $project->id,
                     'serial_key' => 'TEST-' . strtoupper(substr(md5($project->id . $j . time()), 0, 8)),
-                    'status' => $statuses[array_rand($statuses)],
                     'expires_at' => now()->addMonths(rand(1, 12)),
                     'current_activations' => rand(0, 5),
-                    'max_activations' => rand(5, 10),
                     'created_at' => now()->subDays(rand(1, 20)),
                 ]);
                 
-                $this->command->info("Créé la licence: {$serialKey->serial_key} (Status: {$serialKey->status})");
+                $this->command->info("Créé la licence: {$serialKey->serial_key}");
             }
         }
 
