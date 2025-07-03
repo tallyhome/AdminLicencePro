@@ -59,7 +59,7 @@ class SerialKey extends Model
      */
     public function activeAccounts(): HasMany
     {
-        return $this->hasMany(LicenceAccount::class)->where('status', 'active');
+        return $this->hasMany(LicenceAccount::class)->where('licence_accounts.status', 'active');
     }
 
     /**

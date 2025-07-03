@@ -1,13 +1,11 @@
-@extends('layouts.client')
+<?php $__env->startSection('title', 'Support'); ?>
 
-@section('title', 'Support')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
     <!-- En-tête de page -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Support</h1>
-        <a href="{{ route('client.support.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="<?php echo e(route('client.support.create')); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Nouveau Ticket
         </a>
     </div>
@@ -21,7 +19,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Tickets</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['total']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
@@ -38,7 +36,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Ouverts</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['open'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['open']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-folder-open fa-2x text-gray-300"></i>
@@ -55,7 +53,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 En Cours</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['in_progress'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['in_progress']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-cog fa-2x text-gray-300"></i>
@@ -72,7 +70,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Fermés</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['closed'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo e($stats['closed']); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check-circle fa-2x text-gray-300"></i>
@@ -89,13 +87,13 @@
             <h6 class="m-0 font-weight-bold text-primary">Filtres</h6>
         </div>
         <div class="card-body">
-            <form method="GET" action="{{ route('client.support.index') }}">
+            <form method="GET" action="<?php echo e(route('client.support.index')); ?>">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search">Recherche</label>
                             <input type="text" class="form-control" id="search" name="search" 
-                                   value="{{ request('search') }}" placeholder="Sujet, description...">
+                                   value="<?php echo e(request('search')); ?>" placeholder="Sujet, description...">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -103,9 +101,9 @@
                             <label for="status">Statut</label>
                             <select class="form-control" id="status" name="status">
                                 <option value="">Tous</option>
-                                <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Ouvert</option>
-                                <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>En cours</option>
-                                <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Fermé</option>
+                                <option value="open" <?php echo e(request('status') == 'open' ? 'selected' : ''); ?>>Ouvert</option>
+                                <option value="in_progress" <?php echo e(request('status') == 'in_progress' ? 'selected' : ''); ?>>En cours</option>
+                                <option value="closed" <?php echo e(request('status') == 'closed' ? 'selected' : ''); ?>>Fermé</option>
                             </select>
                         </div>
                     </div>
@@ -114,10 +112,10 @@
                             <label for="priority">Priorité</label>
                             <select class="form-control" id="priority" name="priority">
                                 <option value="">Toutes</option>
-                                <option value="low" {{ request('priority') == 'low' ? 'selected' : '' }}>Faible</option>
-                                <option value="medium" {{ request('priority') == 'medium' ? 'selected' : '' }}>Moyenne</option>
-                                <option value="high" {{ request('priority') == 'high' ? 'selected' : '' }}>Haute</option>
-                                <option value="urgent" {{ request('priority') == 'urgent' ? 'selected' : '' }}>Urgente</option>
+                                <option value="low" <?php echo e(request('priority') == 'low' ? 'selected' : ''); ?>>Faible</option>
+                                <option value="medium" <?php echo e(request('priority') == 'medium' ? 'selected' : ''); ?>>Moyenne</option>
+                                <option value="high" <?php echo e(request('priority') == 'high' ? 'selected' : ''); ?>>Haute</option>
+                                <option value="urgent" <?php echo e(request('priority') == 'urgent' ? 'selected' : ''); ?>>Urgente</option>
                             </select>
                         </div>
                     </div>
@@ -128,7 +126,7 @@
                                 <button type="submit" class="btn btn-primary mr-2">
                                     <i class="fas fa-search"></i> Filtrer
                                 </button>
-                                <a href="{{ route('client.support.index') }}" class="btn btn-secondary">
+                                <a href="<?php echo e(route('client.support.index')); ?>" class="btn btn-secondary">
                                     <i class="fas fa-times"></i> Reset
                                 </a>
                             </div>
@@ -145,7 +143,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Mes Tickets</h6>
         </div>
         <div class="card-body">
-            @if($tickets->count() > 0)
+            <?php if($tickets->count() > 0): ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
@@ -160,68 +158,70 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tickets as $ticket)
+                            <?php $__currentLoopData = $tickets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ticket): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>
-                                        <strong>{{ $ticket->ticket_number }}</strong>
+                                        <strong><?php echo e($ticket->ticket_number); ?></strong>
                                     </td>
                                     <td>
-                                        <a href="{{ route('client.support.show', $ticket) }}" class="text-decoration-none">
-                                            {{ $ticket->subject }}
+                                        <a href="<?php echo e(route('client.support.show', $ticket)); ?>" class="text-decoration-none">
+                                            <?php echo e($ticket->subject); ?>
+
                                         </a>
-                                        @if($ticket->replies_count > 0)
-                                            <br><small class="text-muted">{{ $ticket->replies_count }} réponse(s)</small>
-                                        @endif
+                                        <?php if($ticket->replies_count > 0): ?>
+                                            <br><small class="text-muted"><?php echo e($ticket->replies_count); ?> réponse(s)</small>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
-                                        @switch($ticket->status)
-                                            @case('open')
+                                        <?php switch($ticket->status):
+                                            case ('open'): ?>
                                                 <span class="badge bg-warning">Ouvert</span>
-                                                @break
-                                            @case('in_progress')
+                                                <?php break; ?>
+                                            <?php case ('in_progress'): ?>
                                                 <span class="badge bg-info">En cours</span>
-                                                @break
-                                            @case('closed')
+                                                <?php break; ?>
+                                            <?php case ('closed'): ?>
                                                 <span class="badge bg-success">Fermé</span>
-                                                @break
-                                            @default
-                                                <span class="badge bg-secondary">{{ ucfirst($ticket->status) }}</span>
-                                        @endswitch
+                                                <?php break; ?>
+                                            <?php default: ?>
+                                                <span class="badge bg-secondary"><?php echo e(ucfirst($ticket->status)); ?></span>
+                                        <?php endswitch; ?>
                                     </td>
                                     <td>
-                                        @switch($ticket->priority)
-                                            @case('low')
+                                        <?php switch($ticket->priority):
+                                            case ('low'): ?>
                                                 <span class="badge bg-secondary">Faible</span>
-                                                @break
-                                            @case('medium')
+                                                <?php break; ?>
+                                            <?php case ('medium'): ?>
                                                 <span class="badge bg-primary">Moyenne</span>
-                                                @break
-                                            @case('high')
+                                                <?php break; ?>
+                                            <?php case ('high'): ?>
                                                 <span class="badge bg-warning">Haute</span>
-                                                @break
-                                            @case('urgent')
+                                                <?php break; ?>
+                                            <?php case ('urgent'): ?>
                                                 <span class="badge bg-danger">Urgente</span>
-                                                @break
-                                        @endswitch
+                                                <?php break; ?>
+                                        <?php endswitch; ?>
                                     </td>
                                     <td>
-                                        @switch($ticket->category)
-                                            @case('technical')
+                                        <?php switch($ticket->category):
+                                            case ('technical'): ?>
                                                 <span class="badge bg-info">Technique</span>
-                                                @break
-                                            @case('billing')
+                                                <?php break; ?>
+                                            <?php case ('billing'): ?>
                                                 <span class="badge bg-success">Facturation</span>
-                                                @break
-                                            @case('general')
+                                                <?php break; ?>
+                                            <?php case ('general'): ?>
                                                 <span class="badge bg-secondary">Général</span>
-                                                @break
-                                            @case('feature_request')
+                                                <?php break; ?>
+                                            <?php case ('feature_request'): ?>
                                                 <span class="badge bg-primary">Fonctionnalité</span>
-                                                @break
-                                        @endswitch
+                                                <?php break; ?>
+                                        <?php endswitch; ?>
                                     </td>
                                     <td>
-                                        {{ $ticket->updated_at->diffForHumans() }}
+                                        <?php echo e($ticket->updated_at->diffForHumans()); ?>
+
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -230,47 +230,48 @@
                                                 Actions
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('client.support.show', $ticket) }}">
+                                                <a class="dropdown-item" href="<?php echo e(route('client.support.show', $ticket)); ?>">
                                                     <i class="fas fa-eye"></i> Voir
                                                 </a>
-                                                @if($ticket->status !== 'closed')
-                                                    <form method="POST" action="{{ route('client.support.close', $ticket) }}" style="display: inline;">
-                                                        @csrf
+                                                <?php if($ticket->status !== 'closed'): ?>
+                                                    <form method="POST" action="<?php echo e(route('client.support.close', $ticket)); ?>" style="display: inline;">
+                                                        <?php echo csrf_field(); ?>
                                                         <button type="submit" class="dropdown-item text-success">
                                                             <i class="fas fa-check"></i> Fermer
                                                         </button>
                                                     </form>
-                                                @else
-                                                    <form method="POST" action="{{ route('client.support.reopen', $ticket) }}" style="display: inline;">
-                                                        @csrf
+                                                <?php else: ?>
+                                                    <form method="POST" action="<?php echo e(route('client.support.reopen', $ticket)); ?>" style="display: inline;">
+                                                        <?php echo csrf_field(); ?>
                                                         <button type="submit" class="dropdown-item text-warning">
                                                             <i class="fas fa-undo"></i> Rouvrir
                                                         </button>
                                                     </form>
-                                                @endif
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Pagination -->
                 <div class="d-flex justify-content-center">
-                    {{ $tickets->appends(request()->query())->links() }}
+                    <?php echo e($tickets->appends(request()->query())->links()); ?>
+
                 </div>
-            @else
+            <?php else: ?>
                 <div class="text-center py-5">
                     <i class="fas fa-ticket-alt fa-3x text-gray-300 mb-3"></i>
                     <h5 class="text-gray-600">Aucun ticket trouvé</h5>
                     <p class="text-gray-500">Créez votre premier ticket de support pour obtenir de l'aide.</p>
-                    <a href="{{ route('client.support.create') }}" class="btn btn-primary">
+                    <a href="<?php echo e(route('client.support.create')); ?>" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Créer un ticket
                     </a>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
@@ -283,11 +284,11 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group list-group-flush">
-                        <a href="{{ route('client.support.faq') }}" class="list-group-item list-group-item-action">
+                        <a href="<?php echo e(route('client.support.faq')); ?>" class="list-group-item list-group-item-action">
                             <i class="fas fa-question-circle text-primary mr-2"></i>
                             FAQ - Questions Fréquentes
                         </a>
-                        <a href="{{ route('client.support.documentation') }}" class="list-group-item list-group-item-action">
+                        <a href="<?php echo e(route('client.support.documentation')); ?>" class="list-group-item list-group-item-action">
                             <i class="fas fa-book text-info mr-2"></i>
                             Documentation
                         </a>
@@ -323,4 +324,5 @@
         </div>
     </div>
 </div>
-@endsection 
+<?php $__env->stopSection(); ?> 
+<?php echo $__env->make('layouts.client', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH R:\Adev\200  -  test\AdminLicence-4.5.1\resources\views/client/support/index.blade.php ENDPATH**/ ?>

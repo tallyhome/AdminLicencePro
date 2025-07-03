@@ -58,6 +58,9 @@ class ClientAuthController extends Controller
             ]);
         }
 
+        // Mettre à jour la dernière connexion
+        $client->update(['last_login_at' => now()]);
+
         // Connecter le client
         Auth::guard('client')->login($client, $request->boolean('remember'));
 

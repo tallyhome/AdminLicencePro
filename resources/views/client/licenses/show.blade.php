@@ -326,4 +326,4 @@ function copyToClipboard(elementId) {
     }, 2000);
 }
 </script>
-@endpush 
+@endpush

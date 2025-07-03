@@ -23,7 +23,8 @@ class Plan extends Model
         'trial_days',
         'max_licenses',
         'max_projects',
-        'max_clients'
+        'max_clients',
+        'storage_limit_mb'
     ];
 
     protected $casts = [
@@ -33,7 +34,8 @@ class Plan extends Model
         'trial_days' => 'integer',
         'max_licenses' => 'integer',
         'max_projects' => 'integer',
-        'max_clients' => 'integer'
+        'max_clients' => 'integer',
+        'storage_limit_mb' => 'integer'
     ];
 
     /**

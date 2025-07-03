@@ -107,15 +107,25 @@ class ProjectController extends Controller
             $query->latest();
         }]);
 
+        // Licences récentes (5 dernières)
+        $recentLicenses = $project->serialKeys()->latest()->limit(5)->get();
+
+        // Activations récentes (licences activées récemment ou créées récemment)
+        $recentActivations = $project->serialKeys()
+            ->orderByRaw('COALESCE(last_activation_at, created_at) DESC')
+            ->limit(5)
+            ->get();
+
         // Statistiques du projet
-        $stats = [
+        $projectStats = [
             'total_licenses' => $project->serialKeys->count(),
             'active_licenses' => $project->serialKeys->where('status', 'active')->count(),
             'inactive_licenses' => $project->serialKeys->where('status', 'inactive')->count(),
             'total_activations' => $project->serialKeys->sum('current_activations') ?? 0,
+            'recent_activations' => $project->serialKeys()->where('last_activation_at', '>=', now()->subDays(7))->count(),
         ];
 
-        return view('client.projects.show', compact('project', 'stats', 'client', 'tenant'));
+        return view('client.projects.show', compact('project', 'projectStats', 'recentLicenses', 'recentActivations', 'client', 'tenant'));
     }
 
     /**

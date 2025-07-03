@@ -11,20 +11,18 @@ class SupportTicketReply extends Model
 {
     use HasFactory;
 
+    protected $table = 'ticket_replies';
+
     protected $fillable = [
         'support_ticket_id',
-        'client_id',
-        'admin_id',
+        'user_type',
+        'user_id',
         'message',
-        'is_from_client',
-        'is_internal_note',
-        'read_at',
+        'attachments',
     ];
 
     protected $casts = [
-        'is_from_client' => 'boolean',
-        'is_internal_note' => 'boolean',
-        'read_at' => 'datetime',
+        'attachments' => 'array',
     ];
 
     /**
@@ -40,7 +38,7 @@ class SupportTicketReply extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'user_id');
     }
 
     /**
@@ -48,7 +46,7 @@ class SupportTicketReply extends Model
      */
     public function admin(): BelongsTo
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class, 'user_id');
     }
 
     /**
@@ -64,7 +62,7 @@ class SupportTicketReply extends Model
      */
     public function getAuthorAttribute()
     {
-        return $this->is_from_client ? $this->client : $this->admin;
+        return $this->user_type === 'client' ? $this->client : $this->admin;
     }
 
     /**
@@ -72,12 +70,22 @@ class SupportTicketReply extends Model
      */
     public function getAuthorNameAttribute(): string
     {
-        if ($this->is_from_client && $this->client) {
-            return $this->client->name;
+        if ($this->user_type === 'client') {
+            if (!$this->relationLoaded('client')) {
+                $this->load('client');
+            }
+            return $this->client ? $this->client->name : 'Client supprimé';
         }
 
-        if (!$this->is_from_client && $this->admin) {
-            return $this->admin->name;
+        if ($this->user_type === 'admin') {
+            if (!$this->relationLoaded('admin')) {
+                $this->load('admin');
+            }
+            return $this->admin ? $this->admin->name : 'Admin supprimé';
+        }
+
+        if ($this->user_type === 'system') {
+            return 'Système';
         }
 
         return 'Utilisateur supprimé';
@@ -88,33 +96,29 @@ class SupportTicketReply extends Model
      */
     public function getAuthorAvatarAttribute(): string
     {
-        if ($this->is_from_client && $this->client) {
-            return $this->client->avatar ?? '/images/default-avatar.png';
+        if ($this->user_type === 'client') {
+            if (!$this->relationLoaded('client')) {
+                $this->load('client');
+            }
+            return $this->client ? ($this->client->avatar ?? '/images/default-avatar.png') : '/images/default-avatar.png';
         }
 
-        if (!$this->is_from_client && $this->admin) {
-            return $this->admin->avatar ?? '/images/default-admin-avatar.png';
+        if ($this->user_type === 'admin') {
+            if (!$this->relationLoaded('admin')) {
+                $this->load('admin');
+            }
+            return $this->admin ? ($this->admin->avatar ?? '/images/default-admin-avatar.png') : '/images/default-admin-avatar.png';
         }
 
         return '/images/default-avatar.png';
     }
 
     /**
-     * Check if the reply has been read
+     * Check if the reply is from a client
      */
-    public function isRead(): bool
+    public function getIsFromClientAttribute(): bool
     {
-        return !is_null($this->read_at);
-    }
-
-    /**
-     * Mark the reply as read
-     */
-    public function markAsRead(): void
-    {
-        if (!$this->isRead()) {
-            $this->update(['read_at' => now()]);
-        }
+        return $this->user_type === 'client';
     }
 
     /**
@@ -122,7 +126,7 @@ class SupportTicketReply extends Model
      */
     public function scopeFromClient($query)
     {
-        return $query->where('is_from_client', true);
+        return $query->where('user_type', 'client');
     }
 
     /**
@@ -130,38 +134,14 @@ class SupportTicketReply extends Model
      */
     public function scopeFromAdmin($query)
     {
-        return $query->where('is_from_client', false);
+        return $query->where('user_type', 'admin');
     }
 
     /**
-     * Scope for public replies (not internal notes)
+     * Scope for system replies
      */
-    public function scopePublic($query)
+    public function scopeFromSystem($query)
     {
-        return $query->where('is_internal_note', false);
-    }
-
-    /**
-     * Scope for internal notes
-     */
-    public function scopeInternalNotes($query)
-    {
-        return $query->where('is_internal_note', true);
-    }
-
-    /**
-     * Scope for unread replies
-     */
-    public function scopeUnread($query)
-    {
-        return $query->whereNull('read_at');
-    }
-
-    /**
-     * Scope for read replies
-     */
-    public function scopeRead($query)
-    {
-        return $query->whereNotNull('read_at');
+        return $query->where('user_type', 'system');
     }
 } 

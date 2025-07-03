@@ -541,10 +541,14 @@ class SettingsController extends Controller
             return [
                 'used_mb' => 0,
                 'used_formatted' => '0 B',
-                'limit_mb' => 1000,
+                'limit_mb' => 50, // 50MB par défaut
                 'percentage' => 0
             ];
         }
+
+        // Obtenir la limite de stockage du plan actuel
+        $subscription = $tenant->subscriptions()->with('plan')->where('status', 'active')->first();
+        $storageLimit = $subscription && $subscription->plan ? $subscription->plan->storage_limit_mb : 50; // 50MB par défaut
 
         // Simulation basée sur le nombre de projets et licences
         $projectsCount = $tenant->projects()->count() ?? 0;
@@ -556,8 +560,8 @@ class SettingsController extends Controller
         return [
             'used_mb' => round($estimatedMB, 2),
             'used_formatted' => $this->formatBytes($estimatedMB * 1024 * 1024),
-            'limit_mb' => 1000, // 1GB par défaut
-            'percentage' => min(100, round(($estimatedMB / 1000) * 100, 1))
+            'limit_mb' => $storageLimit,
+            'percentage' => min(100, round(($estimatedMB / $storageLimit) * 100, 1))
         ];
     }
 

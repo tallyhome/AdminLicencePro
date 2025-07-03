@@ -117,11 +117,31 @@ class SupportTicket extends Model
     }
 
     /**
-     * Get all attachments for the support ticket
+     * Get all attachments for the support ticket (from replies)
      */
-    public function attachments(): HasMany
+    public function getAttachmentsAttribute()
     {
-        return $this->hasMany(SupportTicketAttachment::class);
+        if (!$this->relationLoaded('replies')) {
+            $this->load('replies');
+        }
+        
+        $attachments = [];
+        foreach ($this->replies as $reply) {
+            if ($reply->attachments && is_array($reply->attachments)) {
+                foreach ($reply->attachments as $attachment) {
+                    $attachments[] = (object) $attachment;
+                }
+            }
+        }
+        return collect($attachments);
+    }
+
+    /**
+     * Check if the ticket has attachments
+     */
+    public function hasAttachments(): bool
+    {
+        return $this->attachments->count() > 0;
     }
 
     /**

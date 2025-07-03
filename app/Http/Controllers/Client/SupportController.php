@@ -118,18 +118,27 @@ class SupportController extends Controller
             'status' => 'open',
         ]);
 
-        // Gérer les pièces jointes
+        // Gérer les pièces jointes seulement s'il y en a
         if ($request->hasFile('attachments')) {
+            $attachments = [];
             foreach ($request->file('attachments') as $file) {
                 $path = $file->store('support-attachments/' . $ticket->id, 'public');
                 
-                $ticket->attachments()->create([
+                $attachments[] = [
                     'filename' => $file->getClientOriginalName(),
                     'path' => $path,
                     'size' => $file->getSize(),
                     'mime_type' => $file->getMimeType(),
-                ]);
+                ];
             }
+
+            // Créer une réponse initiale seulement pour les attachments
+            $ticket->replies()->create([
+                'user_type' => 'client',
+                'user_id' => $client->id,
+                'message' => 'Pièces jointes du ticket initial',
+                'attachments' => $attachments,
+            ]);
         }
 
         return redirect()->route('client.support.show', $ticket)
@@ -148,8 +157,8 @@ class SupportController extends Controller
             abort(403);
         }
 
-        // Charger les réponses avec leurs auteurs
-        $ticket->load(['replies.admin', 'replies.client', 'attachments']);
+        // Charger les réponses
+        $ticket->load(['replies']);
 
         // Marquer le ticket comme lu par le client
         $ticket->update(['last_read_by_client_at' => now()]);
@@ -174,25 +183,28 @@ class SupportController extends Controller
             'attachments.*' => 'nullable|file|max:10240|mimes:jpg,jpeg,png,gif,pdf,txt,doc,docx,zip',
         ]);
 
-        $reply = $ticket->replies()->create([
-            'client_id' => $client->id,
-            'message' => $request->message,
-            'is_from_client' => true,
-        ]);
-
-        // Gérer les pièces jointes
+        $attachments = [];
+        
+        // Gérer les pièces jointes d'abord
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
                 $path = $file->store('support-attachments/' . $ticket->id . '/replies', 'public');
                 
-                $reply->attachments()->create([
+                $attachments[] = [
                     'filename' => $file->getClientOriginalName(),
                     'path' => $path,
                     'size' => $file->getSize(),
                     'mime_type' => $file->getMimeType(),
-                ]);
+                ];
             }
         }
+
+        $reply = $ticket->replies()->create([
+            'user_type' => 'client',
+            'user_id' => $client->id,
+            'message' => $request->message,
+            'attachments' => $attachments,
+        ]);
 
         // Mettre à jour le statut du ticket si nécessaire
         if ($ticket->status === 'closed') {
@@ -255,19 +267,49 @@ class SupportController extends Controller
     /**
      * Télécharger une pièce jointe
      */
-    public function downloadAttachment($ticketId, $attachmentId)
+    public function downloadAttachment($ticketId, $replyId, $attachmentIndex)
     {
         $client = Auth::guard('client')->user();
         
         $ticket = SupportTicket::where('tenant_id', $client->tenant_id)->findOrFail($ticketId);
-        $attachment = $ticket->attachments()->findOrFail($attachmentId);
-
-        if (!Storage::disk('public')->exists($attachment->path)) {
+        $reply = $ticket->replies()->findOrFail($replyId);
+        
+        if (!$reply->attachments || !is_array($reply->attachments) || !isset($reply->attachments[$attachmentIndex])) {
+            abort(404, 'Pièce jointe non trouvée');
+        }
+        
+        $attachment = $reply->attachments[$attachmentIndex];
+        
+        if (!Storage::disk('public')->exists($attachment['path'])) {
             abort(404, 'Fichier non trouvé');
         }
 
-        return Storage::disk('public')->download($attachment->path, $attachment->filename);
+        return Storage::disk('public')->download($attachment['path'], $attachment['filename']);
     }
 
+    /**
+     * Afficher la page FAQ
+     */
+    public function faq()
+    {
+        // Debug temporaire
+        \Log::info('FAQ method called');
+        \Log::info('Client authenticated: ' . (Auth::guard('client')->check() ? 'Yes' : 'No'));
+        if (Auth::guard('client')->check()) {
+            \Log::info('Client ID: ' . Auth::guard('client')->id());
+        }
+        
+        return view('client.support.faq');
+    }
 
+    /**
+     * Afficher la page Documentation
+     */
+    public function documentation()
+    {
+        // Debug temporaire
+        \Log::info('Documentation method called');
+        
+        return view('client.support.documentation');
+    }
 } 

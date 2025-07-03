@@ -145,16 +145,18 @@ class DashboardController extends Controller
         
         // Compter les projets et licences réels
         $projectCount = $tenant->projects()->count();
+        
+        // Pour les licences, utiliser la relation directe du tenant
         $licenseCount = $tenant->serialKeys()->count();
-        $activeLicenseCount = $tenant->serialKeys()->where('serial_keys.status', 'active')->count();
-        $totalActivations = $tenant->serialKeys()->sum('activation_count');
+        $activeLicenseCount = $tenant->serialKeys()->where('status', 'active')->count();
+        $totalActivations = $tenant->serialKeys()->sum('current_activations');
         
         // Calculer les limites et pourcentages
-        $projectLimit = $plan ? ($plan->max_projects === -1 ? 'Illimité' : $plan->max_projects) : 0;
-        $licenseLimit = $plan ? ($plan->max_licenses === -1 ? 'Illimité' : $plan->max_licenses) : 0;
+        $projectLimit = $plan ? ($plan->max_projects === null ? 'Illimité' : $plan->max_projects) : 2;
+        $licenseLimit = $plan ? ($plan->max_licenses === null ? 'Illimité' : $plan->max_licenses) : 10;
         
-        $projectPercentage = $projectLimit !== 'Illimité' ? round(($projectCount / $projectLimit) * 100) : 0;
-        $licensePercentage = $licenseLimit !== 'Illimité' ? round(($licenseCount / $licenseLimit) * 100) : 0;
+        $projectPercentage = ($projectLimit !== 'Illimité' && $projectLimit > 0) ? round(($projectCount / $projectLimit) * 100) : 0;
+        $licensePercentage = ($licenseLimit !== 'Illimité' && $licenseLimit > 0) ? round(($licenseCount / $licenseLimit) * 100) : 0;
         
         return [
             'projects' => [
@@ -430,4 +432,4 @@ class DashboardController extends Controller
         
         return response()->json($this->getChartsData($tenant, $period));
     }
-} 
+}

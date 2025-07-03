@@ -39,7 +39,7 @@ class Project extends Model
      */
     public function activeKeysCount(): int
     {
-        return $this->serialKeys()->where('status', 'active')->count();
+        return $this->serialKeys()->where('serial_keys.status', 'active')->count();
     }
     
     /**
@@ -49,7 +49,7 @@ class Project extends Model
     public function usedKeysCount(): int
     {
         return $this->serialKeys()
-            ->where('status', 'active')
+            ->where('serial_keys.status', 'active')
             ->where(function($query) {
                 $query->whereNotNull('domain')
                       ->orWhereNotNull('ip_address');
@@ -63,7 +63,7 @@ class Project extends Model
     public function availableKeysCount(): int
     {
         return $this->serialKeys()
-            ->where('status', 'active')
+            ->where('serial_keys.status', 'active')
             ->where(function($query) {
                 $query->whereNull('domain')
                       ->whereNull('ip_address');

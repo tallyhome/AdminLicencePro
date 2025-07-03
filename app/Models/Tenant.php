@@ -87,7 +87,7 @@ class Tenant extends Model
      */
     public function serialKeys()
     {
-        return $this->hasManyThrough(SerialKey::class, Project::class);
+        return $this->hasManyThrough(SerialKey::class, Project::class, 'tenant_id', 'project_id', 'id', 'id');
     }
 
     /**

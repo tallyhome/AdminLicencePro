@@ -20,6 +20,8 @@ class Client extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'company_name',
@@ -30,7 +32,8 @@ class Client extends Authenticatable
         'postal_code',
         'country',
         'tenant_id',
-        'status'
+        'status',
+        'last_login_at'
     ];
 
     /**
@@ -50,6 +53,7 @@ class Client extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime',
         'password' => 'hashed',
     ];
 

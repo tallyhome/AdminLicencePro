@@ -271,9 +271,15 @@
                                         <div>
                                             <code class="small">{{ Str::limit($license->serial_key, 12) }}</code>
                                             <br>
-                                            <small class="text-muted">{{ $license->last_activation_at->diffForHumans() }}</small>
+                                            <small class="text-muted">
+                                                @if($license->last_activation_at)
+                                                    {{ $license->last_activation_at->diffForHumans() }}
+                                                @else
+                                                    {{ $license->created_at->diffForHumans() }}
+                                                @endif
+                                            </small>
                                         </div>
-                                        <span class="badge bg-success">{{ $license->current_activations }}</span>
+                                        <span class="badge bg-success">{{ $license->current_activations ?? 0 }}</span>
                                     </div>
                                 </div>
                             @endforeach

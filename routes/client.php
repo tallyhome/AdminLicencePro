@@ -45,6 +45,14 @@ Route::name('client.')->group(function () {
     Route::post('/forgot-password', [ClientAuthController::class, 'sendResetLinkEmail'])
         ->name('forgot-password');
 
+    // Routes de test temporaires (sans authentification)
+    Route::get('/test-faq', [SupportController::class, 'faq'])->name('test.faq');
+    Route::get('/test-documentation', [SupportController::class, 'documentation'])->name('test.documentation');
+
+    // Pages d'aide (temporairement sans authentification pour debug)
+    Route::get('/support/faq', [SupportController::class, 'faq'])->name('support.faq');
+    Route::get('/support/documentation', [SupportController::class, 'documentation'])->name('support.documentation');
+
     // Routes protégées par authentification client
     Route::middleware([ClientAuthenticate::class])->group(function () {
         
@@ -111,6 +119,7 @@ Route::name('client.')->group(function () {
             Route::post('/{ticket}/reply', [SupportController::class, 'reply'])->name('reply');
             Route::post('/{ticket}/close', [SupportController::class, 'close'])->name('close');
             Route::post('/{ticket}/reopen', [SupportController::class, 'reopen'])->name('reopen');
+            Route::get('/{ticket}/reply/{reply}/attachment/{index}', [SupportController::class, 'downloadAttachment'])->name('download-attachment');
         });
 
         // Routes des paramètres
