@@ -123,6 +123,14 @@ class Tenant extends Model
     }
 
     /**
+     * Get the payment methods associated with the tenant.
+     */
+    public function paymentMethods()
+    {
+        return $this->hasMany(PaymentMethod::class);
+    }
+
+    /**
      * Get the sessions associated with the tenant.
      */
     public function sessions()

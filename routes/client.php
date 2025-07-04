@@ -238,6 +238,20 @@ Route::name('client.')->group(function () {
             Route::post('/subscription/cancel', [SettingsController::class, 'cancelSubscription'])->name('cancel');
         });
 
+        // Routes des méthodes de paiement
+        Route::prefix('payment-methods')->name('payment-methods.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Client\PaymentMethodController::class, 'index'])->name('index');
+            Route::get('/create', [\App\Http\Controllers\Client\PaymentMethodController::class, 'create'])->name('create');
+            Route::post('/', [\App\Http\Controllers\Client\PaymentMethodController::class, 'store'])->name('store');
+            Route::get('/{paymentMethod}', [\App\Http\Controllers\Client\PaymentMethodController::class, 'show'])->name('show');
+            Route::get('/{paymentMethod}/edit', [\App\Http\Controllers\Client\PaymentMethodController::class, 'edit'])->name('edit');
+            Route::put('/{paymentMethod}', [\App\Http\Controllers\Client\PaymentMethodController::class, 'update'])->name('update');
+            Route::delete('/{paymentMethod}', [\App\Http\Controllers\Client\PaymentMethodController::class, 'destroy'])->name('destroy');
+            Route::post('/{paymentMethod}/set-default', [\App\Http\Controllers\Client\PaymentMethodController::class, 'setDefault'])->name('set-default');
+            Route::post('/stripe/setup', [\App\Http\Controllers\Client\PaymentMethodController::class, 'stripeSetup'])->name('stripe.setup');
+            Route::post('/paypal/setup', [\App\Http\Controllers\Client\PaymentMethodController::class, 'paypalSetup'])->name('paypal.setup');
+        });
+
         // Routes de subscription/plans
         Route::prefix('subscription')->name('subscription.')->group(function () {
             Route::get('/plans', [\App\Http\Controllers\SubscriptionController::class, 'plans'])->name('plans');

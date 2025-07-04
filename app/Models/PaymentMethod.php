@@ -17,14 +17,13 @@ class PaymentMethod extends Model
     protected $fillable = [
         'tenant_id',
         'type',
-        'provider',
-        'provider_id',
-        'card_brand',
-        'card_last_four',
-        'paypal_email',
+        'stripe_payment_method_id',
+        'paypal_billing_agreement_id',
+        'last_four',
+        'brand',
+        'exp_month',
+        'exp_year',
         'is_default',
-        'expires_at',
-        'billing_details',
         'metadata'
     ];
 
@@ -35,23 +34,16 @@ class PaymentMethod extends Model
      */
     protected $casts = [
         'is_default' => 'boolean',
-        'expires_at' => 'datetime',
-        'billing_details' => 'array',
         'metadata' => 'array',
+        'exp_month' => 'integer',
+        'exp_year' => 'integer'
     ];
-
-    /**
-     * Payment method providers
-     */
-    const PROVIDER_STRIPE = 'stripe';
-    const PROVIDER_PAYPAL = 'paypal';
 
     /**
      * Payment method types
      */
-    const TYPE_CARD = 'card';
+    const TYPE_STRIPE = 'stripe';
     const TYPE_PAYPAL = 'paypal';
-    const TYPE_BANK_ACCOUNT = 'bank_account';
 
     /**
      * Get the tenant that owns the payment method.
@@ -74,7 +66,7 @@ class PaymentMethod extends Model
      */
     public function scopeStripe($query)
     {
-        return $query->where('provider', self::PROVIDER_STRIPE);
+        return $query->where('type', self::TYPE_STRIPE);
     }
 
     /**
@@ -82,7 +74,7 @@ class PaymentMethod extends Model
      */
     public function scopePaypal($query)
     {
-        return $query->where('provider', self::PROVIDER_PAYPAL);
+        return $query->where('type', self::TYPE_PAYPAL);
     }
 
     /**
@@ -94,11 +86,11 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Check if the payment method is a card.
+     * Check if the payment method is Stripe.
      */
-    public function isCard()
+    public function isStripe()
     {
-        return $this->type === self::TYPE_CARD;
+        return $this->type === self::TYPE_STRIPE;
     }
 
     /**
@@ -112,16 +104,51 @@ class PaymentMethod extends Model
     /**
      * Get a displayable representation of the payment method.
      */
-    public function getDisplayName()
+    public function getDisplayNameAttribute(): string
     {
-        if ($this->isCard()) {
-            return ucfirst($this->card_brand) . ' •••• ' . $this->card_last_four;
+        if ($this->isStripe()) {
+            return ucfirst($this->brand) . ' •••• ' . $this->last_four;
+        } elseif ($this->isPaypal()) {
+            return 'PayPal';
         }
         
-        if ($this->isPaypal()) {
-            return 'PayPal (' . $this->paypal_email . ')';
+        return 'Méthode de paiement';
+    }
+
+    /**
+     * Get the icon for the payment method
+     */
+    public function getIconAttribute(): string
+    {
+        if ($this->isStripe()) {
+            return 'fas fa-credit-card';
+        } elseif ($this->isPaypal()) {
+            return 'fab fa-paypal';
         }
         
-        return 'Payment Method';
+        return 'fas fa-money-bill';
+    }
+
+    /**
+     * Check if the payment method is expired
+     */
+    public function isExpired(): bool
+    {
+        if (!$this->exp_month || !$this->exp_year) {
+            return false;
+        }
+        
+        $now = now();
+        $expiry = $now->copy()->setYear($this->exp_year)->setMonth($this->exp_month)->endOfMonth();
+        
+        return $now->isAfter($expiry);
+    }
+
+    /**
+     * Scope to get payment methods by type
+     */
+    public function scopeByType($query, $type)
+    {
+        return $query->where('type', $type);
     }
 }

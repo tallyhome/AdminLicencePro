@@ -136,9 +136,9 @@
                         <a href="{{ route('client.billing.subscription') }}" class="btn btn-primary">
                             <i class="fas fa-crown me-2"></i>Gérer l'abonnement
                         </a>
-                        <button class="btn btn-success">
+                        <a href="{{ route('client.payment-methods.index') }}" class="btn btn-success">
                             <i class="fas fa-credit-card me-2"></i>Modifier le paiement
-                        </button>
+                        </a>
                         <a href="{{ route('client.billing.invoices') }}" class="btn btn-info">
                             <i class="fas fa-file-invoice me-2"></i>Toutes les factures
                         </a>

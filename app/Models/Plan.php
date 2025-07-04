@@ -18,6 +18,7 @@ class Plan extends Model
         'billing_cycle',  // monthly, yearly
         'features',       // JSON array of features
         'is_active',
+        'is_visible',
         'stripe_price_id',
         'paypal_plan_id',
         'trial_days',
@@ -30,6 +31,7 @@ class Plan extends Model
     protected $casts = [
         'features' => 'array',
         'is_active' => 'boolean',
+        'is_visible' => 'boolean',
         'price' => 'decimal:2',
         'trial_days' => 'integer',
         'max_licenses' => 'integer',

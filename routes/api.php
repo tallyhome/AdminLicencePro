@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LicenceApiController;
 use App\Http\Controllers\Api\TranslationApiController;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,10 @@ Route::prefix('v1')->middleware(['licence-api', 'jwt.auth'])->group(function () 
     // Ces routes nécessitent une authentification JWT
     Route::post('/verify-licence', [LicenceApiController::class, 'verifyLicence']);
     Route::post('/refresh-token', [LicenceApiController::class, 'refreshToken']);
+});
+
+// Routes pour les webhooks (sans middleware d'authentification)
+Route::prefix('webhooks')->group(function () {
+    Route::post('/stripe', [WebhookController::class, 'stripe'])->name('webhooks.stripe');
+    Route::post('/paypal', [WebhookController::class, 'paypal'])->name('webhooks.paypal');
 });

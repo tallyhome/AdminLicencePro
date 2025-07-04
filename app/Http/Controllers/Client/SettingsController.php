@@ -387,7 +387,7 @@ class SettingsController extends Controller
         $tenant = $client->tenant;
 
         $subscription = $tenant ? $tenant->subscriptions()->with('plan')->first() : null;
-        $plans = \App\Models\Plan::where('is_visible', true)->orderBy('price')->get();
+        $plans = \App\Models\Plan::where('is_active', true)->orderBy('price')->get();
 
         return view('client.billing.subscription', compact('client', 'tenant', 'subscription', 'plans'));
     }
